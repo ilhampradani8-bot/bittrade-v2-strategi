@@ -1,0 +1,11 @@
+# Secrets & configuration
+.env
+
+# Rust build artifacts
+rust_bot/target/
+rust_bot/bot.log
+
+# IDEs & System files
+.vscode/
+.idea/
+.DS_Store

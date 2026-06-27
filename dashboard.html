@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>BTC Trading Bot Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f111a;
+            --card-bg: #151824;
+            --border-color: #272c40;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-yellow: #d29922;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            margin: 20px;
+            line-height: 1.4;
+        }
+        h1, h2 {
+            margin: 0 0 15px 0;
+            color: var(--accent-blue);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .uptime-badge {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 5px 15px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+        }
+        .price-val {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent-blue);
+            transition: color 0.2s ease;
+        }
+        .price-val.up { color: var(--accent-green); }
+        .price-val.down { color: var(--accent-red); }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .stat-row:last-child { margin-bottom: 0; }
+        .label { color: var(--text-secondary); }
+        .value { font-weight: bold; }
+        
+        /* Process Lights Indicator CSS */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .process-card {
+            background: #1c2030;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .led-light {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #30363d;
+            margin-bottom: 8px;
+            box-shadow: inset 0 0 4px #000;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        /* LED States */
+        .led-light.active-green {
+            background-color: var(--accent-green);
+            box-shadow: 0 0 10px var(--accent-green), inset 0 0 4px #000;
+        }
+        .led-light.active-blue {
+            background-color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--accent-blue), inset 0 0 4px #000;
+        }
+        .led-light.active-red {
+            background-color: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-red), inset 0 0 4px #000;
+        }
+        .led-light.active-yellow {
+            background-color: var(--accent-yellow);
+            box-shadow: 0 0 10px var(--accent-yellow), inset 0 0 4px #000;
+        }
+        .process-name {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 15px;
+            height: 250px;
+            position: relative;
+        }
+
+        /* Tables & Lists */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background: #1c2030;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+        .text-buy { color: var(--accent-green); font-weight: bold; }
+        .text-sell { color: var(--accent-red); font-weight: bold; }
+        .text-success { color: var(--accent-green); }
+        .text-fail { color: var(--accent-red); }
+
+        .scroller {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 600px) {
+            body {
+                margin: 10px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .charts-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .chart-box {
+                height: 220px;
+            }
+            table {
+                font-size: 0.75em;
+            }
+            th, td {
+                padding: 6px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>BTC Trading Engine Real-time</h1>
+        <div style="display: flex; gap: 10px;">
+            <div class="uptime-badge">Masa Aktif Bot: <span id="uptime-counter">00:00:00</span></div>
+            <div class="uptime-badge" style="border-color: var(--accent-green); color: var(--accent-green);">Winrate Bot: <span id="winrate-counter">0.0%</span></div>
+        </div>
+    </div>
+
+    <!-- Info Cards Row -->
+    <div class="grid-2">
+        <!-- Card 1: Harga Real-time -->
+        <div class="card">
+            <h2>Pasar Real-time</h2>
+            <div style="margin-bottom: 15px;">
+                <div class="label">Harga BTC/USDT</div>
+                <div class="price-val" id="btc-price">$-</div>
+            </div>
+            <div class="stat-row">
+                <span class="label">Volatilitas (StdDev)</span>
+                <span class="value" id="market-volatility">$-</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">State Regime</span>
+                <span class="value" id="market-regime">$-</span>
+            </div>
+        </div>
+
+        <!-- Card 2: Saldo & Perkembangan -->
+        <div class="card">
+            <h2>Akun & Saldo</h2>
+            <div class="stat-row">
+                <span class="label">Capital Awal (Starting Capital)</span>
+                <span class="value">$1,000.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Sisa Capital (simulated_balance)</span>
+                <span class="value" id="usdt-balance">$1,000.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Saldo Aset BTC (btc_balance)</span>
+                <span class="value" id="btc-balance">0.0000 BTC</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Nilai BTC Saat Ini (btc_value)</span>
+                <span class="value" id="btc-value-display">$0.00</span>
+            </div>
+            <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
+                <span class="label">Total Capital Saat Ini (total_value)</span>
+                <span class="value" id="total-equity-val">$1,000.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Profit / Rugi (P&L)</span>
+                <span class="value" id="pnl-value">$0.00 (0.00%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Status Lights -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h2 style="font-size: 1.1em;">Monitor Alur Proses Sistem (Real-time Pipeline)</h2>
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="led-light" id="led-ws"></div>
+                <div class="process-name">WebSocket Feed</div>
+            </div>
+            <div class="process-card">
+                <div class="led-light" id="led-ai"></div>
+                <div class="process-name">AI Pattern</div>
+            </div>
+            <div class="process-card">
+                <div class="led-light" id="led-conclude"></div>
+                <div class="process-name">Conclude Engine</div>
+            </div>
+            <div class="process-card">
+                <div class="led-light" id="led-validate"></div>
+                <div class="process-name">Risk Validator</div>
+            </div>
+            <div class="process-card">
+                <div class="led-light" id="led-executor"></div>
+                <div class="process-name">Order Executor</div>
+            </div>
+            <div class="process-card">
+                <div class="led-light" id="led-corrector"></div>
+                <div class="process-name">Error Corrector</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Regime Mode Card -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h2>Status Regime Tren Pasar (Market Regime Mode)</h2>
+        <div style="display: flex; gap: 40px; align-items: center; justify-content: center; padding: 10px; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="led-light" id="led-regime-bullish"></div>
+                <span style="font-weight: bold; color: var(--accent-green); font-size: 0.95em;">BULLISH (Trending Up)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="led-light" id="led-regime-sideways"></div>
+                <span style="font-weight: bold; color: var(--accent-yellow); font-size: 0.95em;">SIDEWAYS (Ranging)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="led-light" id="led-regime-bearish"></div>
+                <span style="font-weight: bold; color: var(--accent-red); font-size: 0.95em;">BEARISH (Trending Down)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-container">
+        <div class="chart-box">
+            <h2>Harga Real-time BTC (BTC/USD)</h2>
+            <div style="height: 190px;"><canvas id="priceChart"></canvas></div>
+        </div>
+        <div class="chart-box">
+            <h2>Perkembangan Aset (Total Equity USDT)</h2>
+            <div style="height: 190px;"><canvas id="balanceChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Tables Row (Stacked Full Width) -->
+    <!-- Table 1: History -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h2>Riwayat Eksekusi (bot_trading_history)</h2>
+        <div class="scroller">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Waktu (timestamp)</th>
+                        <th>Aksi (action)</th>
+                        <th>Harga (price)</th>
+                        <th>Jumlah & Nilai Transaksi (amount & USD value)</th>
+                        <th>Catatan / Detail Fee / P&L (notes)</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 2: Corrections -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h2>Koreksi & Kegagalan Sistem (bot_corrections)</h2>
+        <div class="scroller">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Waktu (timestamp)</th>
+                        <th>Jenis Error (error_type)</th>
+                        <th>Alasan (reason)</th>
+                    </tr>
+                </thead>
+                <tbody id="corrections-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let lastPrice = 0;
+        let botStartTime = null;
+
+        // Chart Harga
+        const ctxPrice = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctxPrice, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    borderColor: '#58a6ff',
+                    borderWidth: 1.5,
+                    data: [],
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { color: '#8b949e' }, grid: { color: '#272c40' } },
+                    y: { ticks: { color: '#8b949e' }, grid: { color: '#272c40' } }
+                }
+            }
+        });
+
+        // Chart Modal
+        const ctxBalance = document.getElementById('balanceChart').getContext('2d');
+        const balanceChart = new Chart(ctxBalance, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    borderColor: '#3fb950',
+                    borderWidth: 1.5,
+                    data: [],
+                    fill: false,
+                    tension: 0.1,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { color: '#8b949e' }, grid: { color: '#272c40' } },
+                    y: { ticks: { color: '#8b949e' }, grid: { color: '#272c40' } }
+                }
+            }
+        });
+
+        const fmtUSD = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+
+        function updateUptime() {
+            if (!botStartTime) return;
+            const diffMs = new Date() - botStartTime;
+            const diffSecs = Math.floor(diffMs / 1000);
+            const hrs = String(Math.floor(diffSecs / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((diffSecs % 3600) / 60)).padStart(2, '0');
+            const secs = String(diffSecs % 60).padStart(2, '0');
+            document.getElementById('uptime-counter').innerText = `${hrs}:${mins}:${secs}`;
+        }
+
+        async function fetchStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const data = await res.json();
+
+                // Simpan Start Time untuk Uptime
+                if (!botStartTime) {
+                    botStartTime = new Date(data.start_time);
+                }
+
+                // Update Balances
+                const usdt = data.simulated_balance;
+                const btc = data.btc_balance;
+                const price = data.current_btc_price;
+                const btcValue = btc * price;
+                const totalEquity = usdt + btcValue;
+                
+                document.getElementById('usdt-balance').innerText = fmtUSD(usdt);
+                document.getElementById('btc-balance').innerText = btc.toFixed(6) + " BTC";
+                document.getElementById('btc-value-display').innerText = fmtUSD(btcValue);
+                document.getElementById('total-equity-val').innerText = fmtUSD(totalEquity);
+                
+                // Update Winrate
+                document.getElementById('winrate-counter').innerText = data.winrate.toFixed(1) + '%';
+
+                // Update Market Regime & Volatility
+                const regime = data.market_regime || 'SIDEWAYS';
+                document.getElementById('market-regime').innerText = regime;
+                document.getElementById('market-volatility').innerText = fmtUSD(data.market_volatility);
+                
+                turnOffLED('led-regime-bullish');
+                turnOffLED('led-regime-sideways');
+                turnOffLED('led-regime-bearish');
+                if (regime === 'BULLISH') {
+                    triggerLED('led-regime-bullish', 'active-green');
+                } else if (regime === 'SIDEWAYS') {
+                    triggerLED('led-regime-sideways', 'active-yellow');
+                } else if (regime === 'BEARISH') {
+                    triggerLED('led-regime-bearish', 'active-red');
+                }
+
+                // Update LEDs from API indicators (100% Real-time & accurate!)
+                if (data.ws_active) triggerLED('led-ws', 'active-green'); else turnOffLED('led-ws');
+                if (data.conclude_active) triggerLED('led-conclude', 'active-blue'); else turnOffLED('led-conclude');
+                if (data.validate_active) triggerLED('led-validate', 'active-green'); else turnOffLED('led-validate');
+                if (data.executor_active) triggerLED('led-executor', 'active-green'); else turnOffLED('led-executor');
+                if (data.corrector_active) triggerLED('led-corrector', 'active-red'); else turnOffLED('led-corrector');
+                // AI LED
+                if (data.conclude_active) triggerLED('led-ai', 'active-blue'); else turnOffLED('led-ai');
+
+                // Profit / Loss (P&L) dari $1000 modal awal
+                const pnlAbsolute = totalEquity - 1000.0;
+                const pnlPercentage = (pnlAbsolute / 1000.0) * 100.0;
+                const pnlEl = document.getElementById('pnl-value');
+                // Format + / - with dollar sign directly
+                const prefix = pnlAbsolute >= 0 ? '+$' : '-$';
+                pnlEl.innerText = `${prefix}${Math.abs(pnlAbsolute).toFixed(2)} (${pnlPercentage.toFixed(2)}%)`;
+                pnlEl.style.color = pnlAbsolute >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+
+                // Update Price & Flashing Effect
+                const priceEl = document.getElementById('btc-price');
+                if (price > 0) {
+                    priceEl.innerText = fmtUSD(price);
+                    
+                    if (lastPrice > 0) {
+                        if (price > lastPrice) {
+                            priceEl.className = "price-val up";
+                        } else if (price < lastPrice) {
+                            priceEl.className = "price-val down";
+                        }
+                    }
+                    lastPrice = price;
+
+                    // Plot ke chart harga
+                    const timeStr = new Date().toLocaleTimeString('id-ID');
+                    if (priceChart.data.labels.length === 0 || priceChart.data.datasets[0].data[priceChart.data.datasets[0].data.length - 1] !== price) {
+                        priceChart.data.labels.push(timeStr);
+                        priceChart.data.datasets[0].data.push(price);
+                        if (priceChart.data.labels.length > 25) {
+                            priceChart.data.labels.shift();
+                            priceChart.data.datasets[0].data.shift();
+                        }
+                        priceChart.update();
+                    }
+                } else {
+                    turnOffLED('led-ws');
+                }
+            } catch (e) {
+                turnOffLED('led-ws');
+            }
+        }
+
+        async function fetchLogsAndSystemState() {
+            // LED status diatur secara real-time langsung dari payload status API
+        }
+
+        async function fetchHistory() {
+            try {
+                const res = await fetch('/api/history');
+                const list = await res.json();
+                document.getElementById('history-body').innerHTML = list.map(item => {
+                    const actClass = item.action === 'BUY' ? 'text-buy' : 'text-sell';
+                    const time = new Date(item.timestamp).toLocaleTimeString('id-ID');
+                    const notesVal = item.notes || '-';
+                    let formattedNotes = notesVal;
+                    if (notesVal.includes('P&L: +')) {
+                        formattedNotes = notesVal.replace(/(P&L:\s*\+\$[0-9.-]+)/g, '<span class="text-buy" style="font-weight: bold;">$1</span>');
+                    } else if (notesVal.includes('P&L: -')) {
+                        formattedNotes = notesVal.replace(/(P&L:\s*-\$[0-9.-]+)/g, '<span class="text-sell" style="font-weight: bold;">$1</span>');
+                    }
+                    return `
+                        <tr>
+                            <td>${time}</td>
+                            <td class="${actClass}">${item.action}</td>
+                            <td>${fmtUSD(item.price)}</td>
+                            <td>${item.amount.toFixed(6)} BTC (${fmtUSD(item.amount * item.price)})</td>
+                            <td>${formattedNotes}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {}
+        }
+
+        async function fetchCorrections() {
+            try {
+                const res = await fetch('/api/corrections');
+                const list = await res.json();
+                document.getElementById('corrections-body').innerHTML = list.map(item => {
+                    const time = new Date(item.timestamp).toLocaleTimeString('id-ID');
+                    return `
+                        <tr>
+                            <td>${time}</td>
+                            <td class="text-fail">${item.error_type}</td>
+                            <td>${item.reason}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {}
+        }
+
+        async function fetchBalanceHistory() {
+            try {
+                const res = await fetch('/api/balance_history');
+                const list = await res.json();
+                
+                balanceChart.data.labels = list.map(item => new Date(item.timestamp).toLocaleTimeString('id-ID'));
+                balanceChart.data.datasets[0].data = list.map(item => item.total_value);
+                balanceChart.update();
+            } catch (e) {}
+        }
+
+        // Helper LEDs
+        function triggerLED(id, activeClass) {
+            const el = document.getElementById(id);
+            el.className = "led-light " + activeClass;
+        }
+
+        function turnOffLED(id) {
+            const el = document.getElementById(id);
+            el.className = "led-light";
+        }
+
+        // Interval
+        setInterval(fetchStatus, 1000); // 1 detik harga & status
+        setInterval(fetchLogsAndSystemState, 2000); // 2 detik status alur log
+        setInterval(fetchHistory, 10000);
+        setInterval(fetchCorrections, 10000);
+        setInterval(fetchBalanceHistory, 10000);
+        setInterval(updateUptime, 1000); // 1 detik uptime
+
+        // Init
+        fetchStatus();
+        fetchLogsAndSystemState();
+        fetchHistory();
+        fetchCorrections();
+        fetchBalanceHistory();
+    </script>
+</body>
+</html>
