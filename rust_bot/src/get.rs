@@ -5,7 +5,7 @@ use crate::AppState;
 use crate::corrector;
 
 pub async fn start_price_listener(state: AppState) {
-    let url = "wss://stream.binance.com:9443/ws/btcusdt@miniTicker";
+    let url = "wss://stream.binance.com:9443/stream?streams=btcusdt@ticker/ethusdt@ticker/bnbusdt@ticker/solusdt@ticker/xrpusdt@ticker/btcusdt@bookTicker";
     
     loop {
         match connect_async(url).await {
@@ -16,11 +16,44 @@ pub async fn start_price_listener(state: AppState) {
                     match msg {
                         Ok(Message::Text(text)) => {
                             if let Ok(json) = serde_json::from_str::<Value>(&text) {
-                                if let Some(price_str) = json["c"].as_str() {
-                                    if let Ok(price) = price_str.parse::<f64>() {
-                                        let mut price_lock = state.current_btc_price.write().await;
-                                        *price_lock = price;
-                                        *state.last_ws_activity.write().await = chrono::Utc::now();
+                                if let (Some(stream), Some(data)) = (json.get("stream"), json.get("data")) {
+                                    let stream_name = stream.as_str().unwrap_or("");
+                                    
+                                    // FASE 5.0a: Parsing Order Book Ticker
+                                    if stream_name == "btcusdt@bookTicker" {
+                                        if let (Some(b_str), Some(a_str)) = (data.get("B").and_then(|x| x.as_str()), data.get("A").and_then(|x| x.as_str())) {
+                                            if let (Ok(b_qty), Ok(a_qty)) = (b_str.parse::<f64>(), a_str.parse::<f64>()) {
+                                                let total = b_qty + a_qty;
+                                                if total > 0.0 {
+                                                    *state.order_book_imbalance.write().await = b_qty / total;
+                                                }
+                                            }
+                                        }
+                                    } 
+                                    // Default: Parsing Price Ticker
+                                    else if let Some(price_str) = data.get("c").and_then(|c| c.as_str()) {
+                                        if let Ok(price) = price_str.parse::<f64>() {
+                                            if stream_name == "btcusdt@ticker" {
+                                                *state.current_btc_price.write().await = price;
+                                                let mut hwm = state.high_water_mark.write().await;
+                                                if price > *hwm && *hwm > 0.0 {
+                                                    *hwm = price;
+                                                    let db_clone = state.db.clone();
+                                                    tokio::spawn(async move {
+                                                        let _ = sqlx::query("UPDATE bot_active_positions SET high_water_mark = $1 WHERE high_water_mark < $1").bind(price).execute(&db_clone).await;
+                                                    });
+                                                }
+                                            } else if stream_name == "ethusdt@ticker" {
+                                                *state.current_eth_price.write().await = price;
+                                            } else if stream_name == "bnbusdt@ticker" {
+                                                *state.current_bnb_price.write().await = price;
+                                            } else if stream_name == "solusdt@ticker" {
+                                                *state.current_sol_price.write().await = price;
+                                            } else if stream_name == "xrpusdt@ticker" {
+                                                *state.current_xrp_price.write().await = price;
+                                            }
+                                            *state.last_ws_activity.write().await = chrono::Utc::now();
+                                        }
                                     }
                                 }
                             }
@@ -50,17 +83,14 @@ pub async fn start_price_listener(state: AppState) {
 }
 
 // Fungsi untuk sync historical data (kline/candle 1 menit) dari Binance ke PostgreSQL
-pub async fn sync_klines(db: &sqlx::PgPool, limit: i32) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let url = format!("https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit={}", limit);
+pub async fn sync_klines(db: &sqlx::PgPool, symbol: &str, limit: i32) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    let url = format!("https://api.binance.com/api/v3/klines?symbol={}&interval=1m&limit={}", symbol, limit);
     let resp = reqwest::get(&url).await?.json::<Vec<Vec<serde_json::Value>>>().await?;
     
     for kline in resp {
         if kline.len() >= 6 {
             let open_time_ms = kline[0].as_i64().ok_or("Gagal parse open_time")?;
-            let open_time = chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(
-                chrono::NaiveDateTime::from_timestamp_millis(open_time_ms).ok_or("Invalid timestamp")?,
-                chrono::Utc
-            );
+            let open_time = chrono::DateTime::from_timestamp_millis(open_time_ms).ok_or("Invalid timestamp")?;
             
             let open_price = kline[1].as_str().ok_or("Gagal parse open_price")?.parse::<f64>()?;
             let high_price = kline[2].as_str().ok_or("Gagal parse high_price")?.parse::<f64>()?;

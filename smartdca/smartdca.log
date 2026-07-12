@@ -1,0 +1,2211 @@
+nohup: ignoring input
+Menghubungkan ke database PostgreSQL...
+Menganalisa data crash recovery...
+[CRASH RECOVERY] Saldo terpulihkan: $700.00 USDT, 0.000000 BTC
+[CRASH RECOVERY] Siklus Aktif: #1 | Layer terisi: 0/3 | High Water Mark: $0.00
+Web Dashboard SmartDCA berjalan di http://localhost:8088
+Buka http://<IP_VPS>:8088 di browser Anda.
+[2026-07-01 18:25:01] Terhubung ke Binance WebSocket untuk harga real-time BTC/USDT
+[2026-07-01 18:25:04] Siklus Menit Baru. Harga BTC Terakhir: $58711.35
+[2026-07-01 18:25:04] Keputusan analis: Wait
+[2026-07-01 18:26:04] Siklus Menit Baru. Harga BTC Terakhir: $58727.24
+[2026-07-01 18:26:04] Keputusan analis: Wait
+[2026-07-01 18:27:04] Siklus Menit Baru. Harga BTC Terakhir: $58718.01
+[2026-07-01 18:27:04] Keputusan analis: Wait
+[2026-07-01 18:28:04] Siklus Menit Baru. Harga BTC Terakhir: $58714.89
+[2026-07-01 18:28:04] Keputusan analis: Wait
+[2026-07-01 18:29:05] Siklus Menit Baru. Harga BTC Terakhir: $58694.01
+[2026-07-01 18:29:05] Keputusan analis: Wait
+[2026-07-01 18:30:05] Siklus Menit Baru. Harga BTC Terakhir: $58680.00
+[2026-07-01 18:30:05] Keputusan analis: Wait
+[2026-07-01 18:31:05] Siklus Menit Baru. Harga BTC Terakhir: $58733.99
+[2026-07-01 18:31:05] Keputusan analis: Wait
+[2026-07-01 18:32:06] Siklus Menit Baru. Harga BTC Terakhir: $58723.39
+[2026-07-01 18:32:06] Keputusan analis: Wait
+[2026-07-01 18:33:06] Siklus Menit Baru. Harga BTC Terakhir: $58700.01
+[2026-07-01 18:33:06] Keputusan analis: Wait
+[2026-07-01 18:34:06] Siklus Menit Baru. Harga BTC Terakhir: $58648.00
+[2026-07-01 18:34:06] Keputusan analis: Wait
+[2026-07-01 18:35:06] Siklus Menit Baru. Harga BTC Terakhir: $58664.66
+[2026-07-01 18:35:06] Keputusan analis: Wait
+[2026-07-01 18:36:07] Siklus Menit Baru. Harga BTC Terakhir: $58719.41
+[2026-07-01 18:36:07] Keputusan analis: Wait
+[2026-07-01 18:37:07] Siklus Menit Baru. Harga BTC Terakhir: $58706.00
+[2026-07-01 18:37:07] Keputusan analis: Wait
+[2026-07-01 18:38:07] Siklus Menit Baru. Harga BTC Terakhir: $58711.99
+[2026-07-01 18:38:07] Keputusan analis: Wait
+[2026-07-01 18:39:07] Siklus Menit Baru. Harga BTC Terakhir: $58670.01
+[2026-07-01 18:39:07] Keputusan analis: Wait
+[2026-07-01 18:40:07] Siklus Menit Baru. Harga BTC Terakhir: $58663.05
+[2026-07-01 18:40:07] Keputusan analis: Wait
+[2026-07-01 18:41:08] Siklus Menit Baru. Harga BTC Terakhir: $58670.00
+[2026-07-01 18:41:08] Keputusan analis: Wait
+[2026-07-01 18:42:08] Siklus Menit Baru. Harga BTC Terakhir: $58632.27
+[2026-07-01 18:42:08] Keputusan analis: Wait
+[2026-07-01 18:43:08] Siklus Menit Baru. Harga BTC Terakhir: $58654.59
+[2026-07-01 18:43:08] Keputusan analis: Wait
+[2026-07-01 18:44:08] Siklus Menit Baru. Harga BTC Terakhir: $58667.99
+[2026-07-01 18:44:08] Keputusan analis: Wait
+[2026-07-01 18:45:08] Siklus Menit Baru. Harga BTC Terakhir: $58699.87
+[2026-07-01 18:45:08] Keputusan analis: Wait
+[2026-07-01 18:46:09] Siklus Menit Baru. Harga BTC Terakhir: $58684.01
+[2026-07-01 18:46:09] Keputusan analis: Wait
+[2026-07-01 18:47:09] Siklus Menit Baru. Harga BTC Terakhir: $58695.16
+[2026-07-01 18:47:09] Keputusan analis: Wait
+[2026-07-01 18:48:09] Siklus Menit Baru. Harga BTC Terakhir: $58680.00
+[2026-07-01 18:48:09] Keputusan analis: Wait
+[2026-07-01 18:49:09] Siklus Menit Baru. Harga BTC Terakhir: $58645.45
+[2026-07-01 18:49:09] Keputusan analis: Wait
+[2026-07-01 18:50:09] Siklus Menit Baru. Harga BTC Terakhir: $58649.94
+[2026-07-01 18:50:09] Keputusan analis: Wait
+[2026-07-01 18:51:10] Siklus Menit Baru. Harga BTC Terakhir: $58640.01
+[2026-07-01 18:51:10] Keputusan analis: Wait
+[2026-07-01 18:52:10] Siklus Menit Baru. Harga BTC Terakhir: $58628.00
+[2026-07-01 18:52:10] Keputusan analis: Wait
+[2026-07-01 18:53:10] Siklus Menit Baru. Harga BTC Terakhir: $58603.20
+[2026-07-01 18:53:10] Keputusan analis: Wait
+[2026-07-01 18:54:10] Siklus Menit Baru. Harga BTC Terakhir: $58589.80
+[2026-07-01 18:54:10] Keputusan analis: Wait
+[2026-07-01 18:55:11] Siklus Menit Baru. Harga BTC Terakhir: $58584.00
+[2026-07-01 18:55:11] Keputusan analis: Wait
+[2026-07-01 18:56:11] Siklus Menit Baru. Harga BTC Terakhir: $58584.02
+[2026-07-01 18:56:11] Keputusan analis: Wait
+[2026-07-01 18:57:11] Siklus Menit Baru. Harga BTC Terakhir: $58576.00
+[2026-07-01 18:57:11] Keputusan analis: Wait
+[2026-07-01 18:58:11] Siklus Menit Baru. Harga BTC Terakhir: $58607.99
+[2026-07-01 18:58:11] Keputusan analis: Wait
+[2026-07-01 18:59:12] Siklus Menit Baru. Harga BTC Terakhir: $58622.04
+[2026-07-01 18:59:12] Keputusan analis: Wait
+[2026-07-01 19:00:12] Siklus Menit Baru. Harga BTC Terakhir: $58647.65
+[2026-07-01 19:00:12] Keputusan analis: Wait
+[2026-07-01 19:01:12] Siklus Menit Baru. Harga BTC Terakhir: $58609.15
+[2026-07-01 19:01:12] Keputusan analis: Wait
+[2026-07-01 19:02:12] Siklus Menit Baru. Harga BTC Terakhir: $58595.99
+[2026-07-01 19:02:12] Keputusan analis: Wait
+[2026-07-01 19:03:13] Siklus Menit Baru. Harga BTC Terakhir: $58538.00
+[2026-07-01 19:03:13] Keputusan analis: Wait
+[2026-07-01 19:04:13] Siklus Menit Baru. Harga BTC Terakhir: $58544.01
+[2026-07-01 19:04:13] Keputusan analis: Wait
+[2026-07-01 19:05:13] Siklus Menit Baru. Harga BTC Terakhir: $58536.38
+[2026-07-01 19:05:13] Keputusan analis: Wait
+[2026-07-01 19:06:13] Siklus Menit Baru. Harga BTC Terakhir: $58541.99
+[2026-07-01 19:06:13] Keputusan analis: Wait
+[2026-07-01 19:07:14] Siklus Menit Baru. Harga BTC Terakhir: $58538.00
+[2026-07-01 19:07:14] Keputusan analis: Wait
+[2026-07-01 19:08:14] Siklus Menit Baru. Harga BTC Terakhir: $58491.27
+[2026-07-01 19:08:14] Keputusan analis: Wait
+[2026-07-01 19:09:14] Siklus Menit Baru. Harga BTC Terakhir: $58518.68
+[2026-07-01 19:09:14] Keputusan analis: Wait
+[2026-07-01 19:10:14] Siklus Menit Baru. Harga BTC Terakhir: $58591.65
+[2026-07-01 19:10:14] Keputusan analis: Wait
+[2026-07-01 19:11:14] Siklus Menit Baru. Harga BTC Terakhir: $58562.43
+[2026-07-01 19:11:14] Keputusan analis: Wait
+[2026-07-01 19:12:15] Siklus Menit Baru. Harga BTC Terakhir: $58444.00
+[2026-07-01 19:12:15] Keputusan analis: Wait
+[2026-07-01 19:13:15] Siklus Menit Baru. Harga BTC Terakhir: $58430.09
+[2026-07-01 19:13:15] Keputusan analis: Wait
+[2026-07-01 19:14:15] Siklus Menit Baru. Harga BTC Terakhir: $58434.00
+[2026-07-01 19:14:15] Keputusan analis: Wait
+[2026-07-01 19:15:15] Siklus Menit Baru. Harga BTC Terakhir: $58502.00
+[2026-07-01 19:15:15] Keputusan analis: Wait
+[2026-07-01 19:16:16] Siklus Menit Baru. Harga BTC Terakhir: $58536.01
+[2026-07-01 19:16:16] Keputusan analis: Wait
+[2026-07-01 19:17:16] Siklus Menit Baru. Harga BTC Terakhir: $58536.40
+[2026-07-01 19:17:16] Keputusan analis: Wait
+[2026-07-01 19:18:16] Siklus Menit Baru. Harga BTC Terakhir: $58486.88
+[2026-07-01 19:18:16] Keputusan analis: Wait
+[2026-07-01 19:19:16] Siklus Menit Baru. Harga BTC Terakhir: $58528.00
+[2026-07-01 19:19:16] Keputusan analis: Wait
+[2026-07-01 19:20:16] Siklus Menit Baru. Harga BTC Terakhir: $58532.00
+[2026-07-01 19:20:16] Keputusan analis: Wait
+[2026-07-01 19:21:17] Siklus Menit Baru. Harga BTC Terakhir: $58506.37
+[2026-07-01 19:21:17] Keputusan analis: Wait
+[2026-07-01 19:22:17] Siklus Menit Baru. Harga BTC Terakhir: $58482.81
+[2026-07-01 19:22:17] Keputusan analis: Wait
+[2026-07-01 19:23:17] Siklus Menit Baru. Harga BTC Terakhir: $58523.87
+[2026-07-01 19:23:17] Keputusan analis: Wait
+[2026-07-01 19:24:17] Siklus Menit Baru. Harga BTC Terakhir: $58496.01
+[2026-07-01 19:24:17] Keputusan analis: Wait
+[2026-07-01 19:25:17] Siklus Menit Baru. Harga BTC Terakhir: $58541.38
+[2026-07-01 19:25:17] Keputusan analis: Wait
+[2026-07-01 19:26:18] Siklus Menit Baru. Harga BTC Terakhir: $58529.16
+[2026-07-01 19:26:18] Keputusan analis: Wait
+[2026-07-01 19:27:18] Siklus Menit Baru. Harga BTC Terakhir: $58554.01
+[2026-07-01 19:27:18] Keputusan analis: Wait
+[2026-07-01 19:28:18] Siklus Menit Baru. Harga BTC Terakhir: $58592.00
+[2026-07-01 19:28:18] Keputusan analis: Wait
+[2026-07-01 19:29:18] Siklus Menit Baru. Harga BTC Terakhir: $58566.01
+[2026-07-01 19:29:18] Keputusan analis: Wait
+[2026-07-01 19:30:18] Siklus Menit Baru. Harga BTC Terakhir: $58526.01
+[2026-07-01 19:30:18] Keputusan analis: Wait
+[2026-07-01 19:31:18] Siklus Menit Baru. Harga BTC Terakhir: $58513.80
+[2026-07-01 19:31:18] Keputusan analis: Wait
+[2026-07-01 19:32:19] Siklus Menit Baru. Harga BTC Terakhir: $58516.28
+[2026-07-01 19:32:19] Keputusan analis: Wait
+[2026-07-01 19:33:19] Siklus Menit Baru. Harga BTC Terakhir: $58516.00
+[2026-07-01 19:33:19] Keputusan analis: Wait
+[2026-07-01 19:34:19] Siklus Menit Baru. Harga BTC Terakhir: $58544.20
+[2026-07-01 19:34:19] Keputusan analis: Wait
+[2026-07-01 19:35:19] Siklus Menit Baru. Harga BTC Terakhir: $58462.00
+[2026-07-01 19:35:19] Keputusan analis: Wait
+[2026-07-01 19:36:19] Siklus Menit Baru. Harga BTC Terakhir: $58454.00
+[2026-07-01 19:36:19] Keputusan analis: Wait
+[2026-07-01 19:37:20] Siklus Menit Baru. Harga BTC Terakhir: $58415.51
+[2026-07-01 19:37:20] Keputusan analis: Wait
+[2026-07-01 19:38:20] Siklus Menit Baru. Harga BTC Terakhir: $58428.01
+[2026-07-01 19:38:20] Keputusan analis: Wait
+[2026-07-01 19:39:20] Siklus Menit Baru. Harga BTC Terakhir: $58411.37
+[2026-07-01 19:39:20] Keputusan analis: Wait
+[2026-07-01 19:40:20] Siklus Menit Baru. Harga BTC Terakhir: $58385.66
+[2026-07-01 19:40:20] Keputusan analis: Wait
+[2026-07-01 19:41:20] Siklus Menit Baru. Harga BTC Terakhir: $58447.52
+[2026-07-01 19:41:20] Keputusan analis: Wait
+[2026-07-01 19:42:21] Siklus Menit Baru. Harga BTC Terakhir: $58448.16
+[2026-07-01 19:42:21] Keputusan analis: Wait
+[2026-07-01 19:43:21] Siklus Menit Baru. Harga BTC Terakhir: $58377.13
+[2026-07-01 19:43:21] Keputusan analis: Wait
+[2026-07-01 19:44:21] Siklus Menit Baru. Harga BTC Terakhir: $58400.01
+[2026-07-01 19:44:21] Keputusan analis: Wait
+[2026-07-01 19:45:21] Siklus Menit Baru. Harga BTC Terakhir: $58390.34
+[2026-07-01 19:45:21] Keputusan analis: Wait
+[2026-07-01 19:46:21] Siklus Menit Baru. Harga BTC Terakhir: $58403.46
+[2026-07-01 19:46:21] Keputusan analis: Wait
+[2026-07-01 19:47:22] Siklus Menit Baru. Harga BTC Terakhir: $58384.13
+[2026-07-01 19:47:22] Keputusan analis: Wait
+[2026-07-01 19:48:22] Siklus Menit Baru. Harga BTC Terakhir: $58363.99
+[2026-07-01 19:48:22] Keputusan analis: Wait
+[2026-07-01 19:49:22] Siklus Menit Baru. Harga BTC Terakhir: $58359.78
+[2026-07-01 19:49:22] Keputusan analis: Wait
+[2026-07-01 19:50:22] Siklus Menit Baru. Harga BTC Terakhir: $58402.00
+[2026-07-01 19:50:22] Keputusan analis: Wait
+[2026-07-01 19:51:22] Siklus Menit Baru. Harga BTC Terakhir: $58392.16
+[2026-07-01 19:51:22] Keputusan analis: Wait
+[2026-07-01 19:52:22] Siklus Menit Baru. Harga BTC Terakhir: $58359.21
+[2026-07-01 19:52:22] Keputusan analis: Wait
+[2026-07-01 19:53:23] Siklus Menit Baru. Harga BTC Terakhir: $58404.84
+[2026-07-01 19:53:23] Keputusan analis: Wait
+[2026-07-01 19:54:23] Siklus Menit Baru. Harga BTC Terakhir: $58415.46
+[2026-07-01 19:54:23] Keputusan analis: Wait
+[2026-07-01 19:55:23] Siklus Menit Baru. Harga BTC Terakhir: $58445.03
+[2026-07-01 19:55:23] Keputusan analis: Wait
+[2026-07-01 19:56:23] Siklus Menit Baru. Harga BTC Terakhir: $58508.79
+[2026-07-01 19:56:23] Keputusan analis: Wait
+[2026-07-01 19:57:23] Siklus Menit Baru. Harga BTC Terakhir: $58496.01
+[2026-07-01 19:57:23] Keputusan analis: Wait
+[2026-07-01 19:58:24] Siklus Menit Baru. Harga BTC Terakhir: $58520.01
+[2026-07-01 19:58:24] Keputusan analis: Wait
+[2026-07-01 19:59:24] Siklus Menit Baru. Harga BTC Terakhir: $58518.58
+[2026-07-01 19:59:24] Keputusan analis: Wait
+[2026-07-01 20:00:24] Siklus Menit Baru. Harga BTC Terakhir: $58582.00
+[2026-07-01 20:00:24] Keputusan analis: Wait
+[2026-07-01 20:01:24] Siklus Menit Baru. Harga BTC Terakhir: $58662.00
+[2026-07-01 20:01:24] Keputusan analis: Wait
+[2026-07-01 20:02:24] Siklus Menit Baru. Harga BTC Terakhir: $58727.46
+[2026-07-01 20:02:24] Keputusan analis: Wait
+[2026-07-01 20:03:24] Siklus Menit Baru. Harga BTC Terakhir: $58767.01
+[2026-07-01 20:03:24] Keputusan analis: Wait
+[2026-07-01 20:04:25] Siklus Menit Baru. Harga BTC Terakhir: $58664.82
+[2026-07-01 20:04:25] Keputusan analis: Wait
+[2026-07-01 20:05:25] Siklus Menit Baru. Harga BTC Terakhir: $58651.99
+[2026-07-01 20:05:25] Keputusan analis: Wait
+[2026-07-01 20:06:25] Siklus Menit Baru. Harga BTC Terakhir: $58663.03
+[2026-07-01 20:06:25] Keputusan analis: Wait
+[2026-07-01 20:07:25] Siklus Menit Baru. Harga BTC Terakhir: $58635.82
+[2026-07-01 20:07:25] Keputusan analis: Wait
+[2026-07-01 20:08:25] Siklus Menit Baru. Harga BTC Terakhir: $58635.99
+[2026-07-01 20:08:25] Keputusan analis: Wait
+[2026-07-01 20:09:25] Siklus Menit Baru. Harga BTC Terakhir: $58639.74
+[2026-07-01 20:09:25] Keputusan analis: Wait
+[2026-07-01 20:10:26] Siklus Menit Baru. Harga BTC Terakhir: $58651.99
+[2026-07-01 20:10:26] Keputusan analis: Wait
+[2026-07-01 20:11:26] Siklus Menit Baru. Harga BTC Terakhir: $58658.05
+[2026-07-01 20:11:26] Keputusan analis: Wait
+[2026-07-01 20:12:26] Siklus Menit Baru. Harga BTC Terakhir: $58706.01
+[2026-07-01 20:12:26] Keputusan analis: Wait
+[2026-07-01 20:13:26] Siklus Menit Baru. Harga BTC Terakhir: $58698.00
+[2026-07-01 20:13:26] Keputusan analis: Wait
+[2026-07-01 20:14:26] Siklus Menit Baru. Harga BTC Terakhir: $58666.92
+[2026-07-01 20:14:26] Keputusan analis: Wait
+[2026-07-01 20:15:27] Siklus Menit Baru. Harga BTC Terakhir: $58683.99
+[2026-07-01 20:15:27] Keputusan analis: Wait
+[2026-07-01 20:16:27] Siklus Menit Baru. Harga BTC Terakhir: $58680.00
+[2026-07-01 20:16:27] Keputusan analis: Wait
+[2026-07-01 20:17:27] Siklus Menit Baru. Harga BTC Terakhir: $58722.00
+[2026-07-01 20:17:27] Keputusan analis: Wait
+[2026-07-01 20:18:27] Siklus Menit Baru. Harga BTC Terakhir: $58732.01
+[2026-07-01 20:18:27] Keputusan analis: Wait
+[2026-07-01 20:19:27] Siklus Menit Baru. Harga BTC Terakhir: $58683.48
+[2026-07-01 20:19:27] Keputusan analis: Wait
+[2026-07-01 20:20:27] Siklus Menit Baru. Harga BTC Terakhir: $58686.00
+[2026-07-01 20:20:27] Keputusan analis: Wait
+[2026-07-01 20:21:28] Siklus Menit Baru. Harga BTC Terakhir: $58748.66
+[2026-07-01 20:21:28] Keputusan analis: Wait
+[2026-07-01 20:22:28] Siklus Menit Baru. Harga BTC Terakhir: $58836.01
+[2026-07-01 20:22:28] Keputusan analis: Wait
+[2026-07-01 20:23:28] Siklus Menit Baru. Harga BTC Terakhir: $58878.01
+[2026-07-01 20:23:28] Keputusan analis: Wait
+[2026-07-01 20:24:28] Siklus Menit Baru. Harga BTC Terakhir: $58842.61
+[2026-07-01 20:24:28] Keputusan analis: Wait
+[2026-07-01 20:25:28] Siklus Menit Baru. Harga BTC Terakhir: $58790.00
+[2026-07-01 20:25:28] Keputusan analis: Wait
+[2026-07-01 20:26:28] Siklus Menit Baru. Harga BTC Terakhir: $58770.00
+[2026-07-01 20:26:28] Keputusan analis: Wait
+[2026-07-01 20:27:29] Siklus Menit Baru. Harga BTC Terakhir: $58788.01
+[2026-07-01 20:27:29] Keputusan analis: Wait
+[2026-07-01 20:28:29] Siklus Menit Baru. Harga BTC Terakhir: $58786.01
+[2026-07-01 20:28:29] Keputusan analis: Wait
+[2026-07-01 20:29:29] Siklus Menit Baru. Harga BTC Terakhir: $58770.01
+[2026-07-01 20:29:29] Keputusan analis: Wait
+[2026-07-01 20:30:29] Siklus Menit Baru. Harga BTC Terakhir: $58611.99
+[2026-07-01 20:30:29] Keputusan analis: Wait
+[2026-07-01 20:31:29] Siklus Menit Baru. Harga BTC Terakhir: $58750.00
+[2026-07-01 20:31:29] Keputusan analis: Wait
+[2026-07-01 20:32:30] Siklus Menit Baru. Harga BTC Terakhir: $58850.01
+[2026-07-01 20:32:30] Keputusan analis: Wait
+[2026-07-01 20:33:30] Siklus Menit Baru. Harga BTC Terakhir: $58758.00
+[2026-07-01 20:33:30] Keputusan analis: Wait
+[2026-07-01 20:34:30] Siklus Menit Baru. Harga BTC Terakhir: $58772.00
+[2026-07-01 20:34:30] Keputusan analis: Wait
+[2026-07-01 20:35:30] Siklus Menit Baru. Harga BTC Terakhir: $58801.18
+[2026-07-01 20:35:30] Keputusan analis: Wait
+[2026-07-01 20:36:30] Siklus Menit Baru. Harga BTC Terakhir: $58802.01
+[2026-07-01 20:36:30] Keputusan analis: Wait
+[2026-07-01 20:37:30] Siklus Menit Baru. Harga BTC Terakhir: $58906.27
+[2026-07-01 20:37:30] Keputusan analis: Wait
+[2026-07-01 20:38:31] Siklus Menit Baru. Harga BTC Terakhir: $58901.12
+[2026-07-01 20:38:31] Keputusan analis: Wait
+[2026-07-01 20:39:31] Siklus Menit Baru. Harga BTC Terakhir: $58856.40
+[2026-07-01 20:39:31] Keputusan analis: Wait
+[2026-07-01 20:40:31] Siklus Menit Baru. Harga BTC Terakhir: $58973.47
+[2026-07-01 20:40:31] Keputusan analis: Wait
+[2026-07-01 20:41:31] Siklus Menit Baru. Harga BTC Terakhir: $59060.01
+[2026-07-01 20:41:31] Keputusan analis: Wait
+[2026-07-01 20:42:31] Siklus Menit Baru. Harga BTC Terakhir: $58998.00
+[2026-07-01 20:42:31] Keputusan analis: Wait
+[2026-07-01 20:43:31] Siklus Menit Baru. Harga BTC Terakhir: $58952.00
+[2026-07-01 20:43:31] Keputusan analis: Wait
+[2026-07-01 20:44:32] Siklus Menit Baru. Harga BTC Terakhir: $59018.30
+[2026-07-01 20:44:32] Keputusan analis: Wait
+[2026-07-01 20:45:32] Siklus Menit Baru. Harga BTC Terakhir: $59029.99
+[2026-07-01 20:45:32] Keputusan analis: Wait
+[2026-07-01 20:46:32] Siklus Menit Baru. Harga BTC Terakhir: $59152.00
+[2026-07-01 20:46:32] Keputusan analis: Wait
+[2026-07-01 20:47:32] Siklus Menit Baru. Harga BTC Terakhir: $59249.98
+[2026-07-01 20:47:32] Keputusan analis: Wait
+[2026-07-01 20:48:32] Siklus Menit Baru. Harga BTC Terakhir: $59357.99
+[2026-07-01 20:48:32] Keputusan analis: Wait
+[2026-07-01 20:49:32] Siklus Menit Baru. Harga BTC Terakhir: $59365.98
+[2026-07-01 20:49:32] Keputusan analis: Wait
+[2026-07-01 20:50:33] Siklus Menit Baru. Harga BTC Terakhir: $59321.55
+[2026-07-01 20:50:33] Keputusan analis: Wait
+[2026-07-01 20:51:33] Siklus Menit Baru. Harga BTC Terakhir: $59360.00
+[2026-07-01 20:51:33] Keputusan analis: Wait
+[2026-07-01 20:52:33] Siklus Menit Baru. Harga BTC Terakhir: $59415.99
+[2026-07-01 20:52:33] Keputusan analis: Wait
+[2026-07-01 20:53:33] Siklus Menit Baru. Harga BTC Terakhir: $59431.97
+[2026-07-01 20:53:33] Keputusan analis: Wait
+[2026-07-01 20:54:33] Siklus Menit Baru. Harga BTC Terakhir: $59376.00
+[2026-07-01 20:54:33] Keputusan analis: Wait
+[2026-07-01 20:55:33] Siklus Menit Baru. Harga BTC Terakhir: $59419.99
+[2026-07-01 20:55:33] Keputusan analis: Wait
+[2026-07-01 20:56:34] Siklus Menit Baru. Harga BTC Terakhir: $59344.01
+[2026-07-01 20:56:34] Keputusan analis: Wait
+[2026-07-01 20:57:34] Siklus Menit Baru. Harga BTC Terakhir: $59331.99
+[2026-07-01 20:57:34] Keputusan analis: Wait
+[2026-07-01 20:58:34] Siklus Menit Baru. Harga BTC Terakhir: $59396.00
+[2026-07-01 20:58:34] Keputusan analis: Wait
+[2026-07-01 20:59:34] Siklus Menit Baru. Harga BTC Terakhir: $59421.99
+[2026-07-01 20:59:34] Keputusan analis: Wait
+[2026-07-01 21:00:34] Siklus Menit Baru. Harga BTC Terakhir: $59378.00
+[2026-07-01 21:00:34] Keputusan analis: Wait
+[2026-07-01 21:01:34] Siklus Menit Baru. Harga BTC Terakhir: $59323.99
+[2026-07-01 21:01:34] Keputusan analis: Wait
+[2026-07-01 21:02:35] Siklus Menit Baru. Harga BTC Terakhir: $59297.99
+[2026-07-01 21:02:35] Keputusan analis: Wait
+[2026-07-01 21:03:35] Siklus Menit Baru. Harga BTC Terakhir: $59375.99
+[2026-07-01 21:03:35] Keputusan analis: Wait
+[2026-07-01 21:04:35] Siklus Menit Baru. Harga BTC Terakhir: $59432.04
+[2026-07-01 21:04:35] Keputusan analis: Wait
+[2026-07-01 21:05:35] Siklus Menit Baru. Harga BTC Terakhir: $59343.99
+[2026-07-01 21:05:35] Keputusan analis: Wait
+[2026-07-01 21:06:35] Siklus Menit Baru. Harga BTC Terakhir: $59366.00
+[2026-07-01 21:06:35] Keputusan analis: Wait
+[2026-07-01 21:07:35] Siklus Menit Baru. Harga BTC Terakhir: $59336.22
+[2026-07-01 21:07:35] Keputusan analis: Wait
+[2026-07-01 21:08:36] Siklus Menit Baru. Harga BTC Terakhir: $59449.99
+[2026-07-01 21:08:36] Keputusan analis: Wait
+[2026-07-01 21:09:36] Siklus Menit Baru. Harga BTC Terakhir: $59450.45
+[2026-07-01 21:09:36] Keputusan analis: Wait
+[2026-07-01 21:10:36] Siklus Menit Baru. Harga BTC Terakhir: $59615.99
+[2026-07-01 21:10:36] Keputusan analis: Wait
+[2026-07-01 21:11:36] Siklus Menit Baru. Harga BTC Terakhir: $59724.97
+[2026-07-01 21:11:36] Keputusan analis: Wait
+[2026-07-01 21:12:36] Siklus Menit Baru. Harga BTC Terakhir: $59783.52
+[2026-07-01 21:12:36] Keputusan analis: Wait
+[2026-07-01 21:13:37] Siklus Menit Baru. Harga BTC Terakhir: $59914.52
+[2026-07-01 21:13:37] Keputusan analis: Wait
+[2026-07-01 21:14:37] Siklus Menit Baru. Harga BTC Terakhir: $59958.00
+[2026-07-01 21:14:37] Keputusan analis: Wait
+[2026-07-01 21:15:37] Siklus Menit Baru. Harga BTC Terakhir: $59964.31
+[2026-07-01 21:15:37] Keputusan analis: Wait
+[2026-07-01 21:16:37] Siklus Menit Baru. Harga BTC Terakhir: $59888.01
+[2026-07-01 21:16:37] Keputusan analis: Wait
+[2026-07-01 21:17:37] Siklus Menit Baru. Harga BTC Terakhir: $59978.00
+[2026-07-01 21:17:37] Keputusan analis: Wait
+[2026-07-01 21:18:37] Siklus Menit Baru. Harga BTC Terakhir: $60073.51
+[2026-07-01 21:18:37] Keputusan analis: Wait
+[2026-07-01 21:19:38] Siklus Menit Baru. Harga BTC Terakhir: $60003.12
+[2026-07-01 21:19:38] Keputusan analis: Wait
+[2026-07-01 21:20:38] Siklus Menit Baru. Harga BTC Terakhir: $60084.49
+[2026-07-01 21:20:38] Keputusan analis: Wait
+[2026-07-01 21:21:38] Siklus Menit Baru. Harga BTC Terakhir: $60042.01
+[2026-07-01 21:21:38] Keputusan analis: Wait
+[2026-07-01 21:22:38] Siklus Menit Baru. Harga BTC Terakhir: $60006.00
+[2026-07-01 21:22:38] Keputusan analis: Wait
+[2026-07-01 21:23:38] Siklus Menit Baru. Harga BTC Terakhir: $59960.00
+[2026-07-01 21:23:38] Keputusan analis: Wait
+[2026-07-01 21:24:38] Siklus Menit Baru. Harga BTC Terakhir: $59921.18
+[2026-07-01 21:24:38] Keputusan analis: Wait
+[2026-07-01 21:25:39] Siklus Menit Baru. Harga BTC Terakhir: $59931.15
+[2026-07-01 21:25:39] Keputusan analis: Wait
+[2026-07-01 21:26:39] Siklus Menit Baru. Harga BTC Terakhir: $59912.95
+[2026-07-01 21:26:39] Keputusan analis: Wait
+[2026-07-01 21:27:39] Siklus Menit Baru. Harga BTC Terakhir: $59836.99
+[2026-07-01 21:27:39] Keputusan analis: Wait
+[2026-07-01 21:28:39] Siklus Menit Baru. Harga BTC Terakhir: $59827.53
+[2026-07-01 21:28:39] Keputusan analis: Wait
+[2026-07-01 21:29:39] Siklus Menit Baru. Harga BTC Terakhir: $59776.64
+[2026-07-01 21:29:39] Keputusan analis: Wait
+[2026-07-01 21:30:39] Siklus Menit Baru. Harga BTC Terakhir: $59775.95
+[2026-07-01 21:30:39] Keputusan analis: Wait
+[2026-07-01 21:31:40] Siklus Menit Baru. Harga BTC Terakhir: $59690.00
+[2026-07-01 21:31:40] Keputusan analis: Wait
+[2026-07-01 21:32:40] Siklus Menit Baru. Harga BTC Terakhir: $59702.00
+[2026-07-01 21:32:40] Keputusan analis: Wait
+[2026-07-01 21:33:40] Siklus Menit Baru. Harga BTC Terakhir: $59656.51
+[2026-07-01 21:33:40] Keputusan analis: Wait
+[2026-07-01 21:34:40] Siklus Menit Baru. Harga BTC Terakhir: $59609.56
+[2026-07-01 21:34:40] Keputusan analis: Wait
+[2026-07-01 21:35:40] Siklus Menit Baru. Harga BTC Terakhir: $59618.11
+[2026-07-01 21:35:40] Keputusan analis: Wait
+[2026-07-01 21:36:41] Siklus Menit Baru. Harga BTC Terakhir: $59600.00
+[2026-07-01 21:36:41] Keputusan analis: Wait
+[2026-07-01 21:37:41] Siklus Menit Baru. Harga BTC Terakhir: $59598.85
+[2026-07-01 21:37:41] Keputusan analis: Wait
+[2026-07-01 21:38:41] Siklus Menit Baru. Harga BTC Terakhir: $59680.18
+[2026-07-01 21:38:41] Keputusan analis: Wait
+[2026-07-01 21:39:41] Siklus Menit Baru. Harga BTC Terakhir: $59713.08
+[2026-07-01 21:39:41] Keputusan analis: Wait
+[2026-07-01 21:40:41] Siklus Menit Baru. Harga BTC Terakhir: $59646.01
+[2026-07-01 21:40:41] Keputusan analis: Wait
+[2026-07-01 21:41:41] Siklus Menit Baru. Harga BTC Terakhir: $59653.07
+[2026-07-01 21:41:41] Keputusan analis: Wait
+[2026-07-01 21:42:41] Siklus Menit Baru. Harga BTC Terakhir: $59652.01
+[2026-07-01 21:42:41] Keputusan analis: Wait
+[2026-07-01 21:43:42] Siklus Menit Baru. Harga BTC Terakhir: $59668.00
+[2026-07-01 21:43:42] Keputusan analis: Wait
+[2026-07-01 21:44:42] Siklus Menit Baru. Harga BTC Terakhir: $59610.34
+[2026-07-01 21:44:42] Keputusan analis: Wait
+[2026-07-01 21:45:42] Siklus Menit Baru. Harga BTC Terakhir: $59562.04
+[2026-07-01 21:45:42] Keputusan analis: Wait
+[2026-07-01 21:46:42] Siklus Menit Baru. Harga BTC Terakhir: $59440.00
+[2026-07-01 21:46:42] Keputusan analis: Wait
+[2026-07-01 21:47:42] Siklus Menit Baru. Harga BTC Terakhir: $59528.72
+[2026-07-01 21:47:42] Keputusan analis: Wait
+[2026-07-01 21:48:42] Siklus Menit Baru. Harga BTC Terakhir: $59632.00
+[2026-07-01 21:48:42] Keputusan analis: Wait
+[2026-07-01 21:49:43] Siklus Menit Baru. Harga BTC Terakhir: $59616.00
+[2026-07-01 21:49:43] Keputusan analis: Wait
+[2026-07-01 21:50:43] Siklus Menit Baru. Harga BTC Terakhir: $59590.52
+[2026-07-01 21:50:43] Keputusan analis: Wait
+[2026-07-01 21:51:43] Siklus Menit Baru. Harga BTC Terakhir: $59689.27
+[2026-07-01 21:51:43] Keputusan analis: Wait
+[2026-07-01 21:52:43] Siklus Menit Baru. Harga BTC Terakhir: $59707.44
+[2026-07-01 21:52:43] Keputusan analis: Wait
+[2026-07-01 21:53:43] Siklus Menit Baru. Harga BTC Terakhir: $59751.99
+[2026-07-01 21:53:43] Keputusan analis: Wait
+[2026-07-01 21:54:43] Siklus Menit Baru. Harga BTC Terakhir: $59685.96
+[2026-07-01 21:54:43] Keputusan analis: Wait
+[2026-07-01 21:55:44] Siklus Menit Baru. Harga BTC Terakhir: $59566.95
+[2026-07-01 21:55:44] Keputusan analis: Wait
+[2026-07-01 21:56:44] Siklus Menit Baru. Harga BTC Terakhir: $59599.99
+[2026-07-01 21:56:44] Keputusan analis: Wait
+[2026-07-01 21:57:44] Siklus Menit Baru. Harga BTC Terakhir: $59548.00
+[2026-07-01 21:57:44] Keputusan analis: Wait
+[2026-07-01 21:58:44] Siklus Menit Baru. Harga BTC Terakhir: $59518.00
+[2026-07-01 21:58:44] Keputusan analis: Wait
+[2026-07-01 21:59:44] Siklus Menit Baru. Harga BTC Terakhir: $59520.98
+[2026-07-01 21:59:44] Keputusan analis: Wait
+[2026-07-01 22:00:44] Siklus Menit Baru. Harga BTC Terakhir: $59537.02
+[2026-07-01 22:00:44] Keputusan analis: Wait
+[2026-07-01 22:01:45] Siklus Menit Baru. Harga BTC Terakhir: $59587.61
+[2026-07-01 22:01:45] Keputusan analis: Wait
+[2026-07-01 22:02:45] Siklus Menit Baru. Harga BTC Terakhir: $59620.00
+[2026-07-01 22:02:45] Keputusan analis: Wait
+[2026-07-01 22:03:45] Siklus Menit Baru. Harga BTC Terakhir: $59720.01
+[2026-07-01 22:03:45] Keputusan analis: Wait
+[2026-07-01 22:04:45] Siklus Menit Baru. Harga BTC Terakhir: $59729.99
+[2026-07-01 22:04:45] Keputusan analis: Wait
+[2026-07-01 22:05:45] Siklus Menit Baru. Harga BTC Terakhir: $59862.00
+[2026-07-01 22:05:45] Keputusan analis: Wait
+[2026-07-01 22:06:45] Siklus Menit Baru. Harga BTC Terakhir: $59957.99
+[2026-07-01 22:06:45] Keputusan analis: Wait
+[2026-07-01 22:07:45] Siklus Menit Baru. Harga BTC Terakhir: $59927.91
+[2026-07-01 22:07:45] Keputusan analis: Wait
+[2026-07-01 22:08:46] Siklus Menit Baru. Harga BTC Terakhir: $59809.20
+[2026-07-01 22:08:46] Keputusan analis: Wait
+[2026-07-01 22:09:46] Siklus Menit Baru. Harga BTC Terakhir: $59797.82
+[2026-07-01 22:09:46] Keputusan analis: Wait
+[2026-07-01 22:10:46] Siklus Menit Baru. Harga BTC Terakhir: $59824.00
+[2026-07-01 22:10:46] Keputusan analis: Wait
+[2026-07-01 22:11:46] Siklus Menit Baru. Harga BTC Terakhir: $59864.00
+[2026-07-01 22:11:46] Keputusan analis: Wait
+[2026-07-01 22:12:46] Siklus Menit Baru. Harga BTC Terakhir: $59917.99
+[2026-07-01 22:12:46] Keputusan analis: Wait
+[2026-07-01 22:13:47] Siklus Menit Baru. Harga BTC Terakhir: $59940.00
+[2026-07-01 22:13:47] Keputusan analis: Wait
+[2026-07-01 22:14:47] Siklus Menit Baru. Harga BTC Terakhir: $59914.92
+[2026-07-01 22:14:47] Keputusan analis: Wait
+[2026-07-01 22:15:47] Siklus Menit Baru. Harga BTC Terakhir: $59900.01
+[2026-07-01 22:15:47] Keputusan analis: Wait
+[2026-07-01 22:16:47] Siklus Menit Baru. Harga BTC Terakhir: $59888.01
+[2026-07-01 22:16:47] Keputusan analis: Wait
+[2026-07-01 22:17:47] Siklus Menit Baru. Harga BTC Terakhir: $59882.09
+[2026-07-01 22:17:47] Keputusan analis: Wait
+[2026-07-01 22:18:47] Siklus Menit Baru. Harga BTC Terakhir: $59864.00
+[2026-07-01 22:18:47] Keputusan analis: Wait
+[2026-07-01 22:19:48] Siklus Menit Baru. Harga BTC Terakhir: $59891.99
+[2026-07-01 22:19:48] Keputusan analis: Wait
+[2026-07-01 22:20:48] Siklus Menit Baru. Harga BTC Terakhir: $59958.00
+[2026-07-01 22:20:48] Keputusan analis: Wait
+[2026-07-01 22:21:48] Siklus Menit Baru. Harga BTC Terakhir: $60058.01
+[2026-07-01 22:21:48] Keputusan analis: Wait
+[2026-07-01 22:22:48] Siklus Menit Baru. Harga BTC Terakhir: $60180.51
+[2026-07-01 22:22:48] Keputusan analis: Wait
+[2026-07-01 22:23:48] Siklus Menit Baru. Harga BTC Terakhir: $60479.99
+[2026-07-01 22:23:48] Keputusan analis: Wait
+[2026-07-01 22:24:48] Siklus Menit Baru. Harga BTC Terakhir: $60445.15
+[2026-07-01 22:24:48] Keputusan analis: Wait
+[2026-07-01 22:25:49] Siklus Menit Baru. Harga BTC Terakhir: $60387.99
+[2026-07-01 22:25:49] Keputusan analis: Wait
+[2026-07-01 22:26:49] Siklus Menit Baru. Harga BTC Terakhir: $60369.90
+[2026-07-01 22:26:49] Keputusan analis: Wait
+[2026-07-01 22:27:49] Siklus Menit Baru. Harga BTC Terakhir: $60385.01
+[2026-07-01 22:27:49] Keputusan analis: Wait
+[2026-07-01 22:28:49] Siklus Menit Baru. Harga BTC Terakhir: $60354.01
+[2026-07-01 22:28:49] Keputusan analis: Wait
+[2026-07-01 22:29:49] Siklus Menit Baru. Harga BTC Terakhir: $60302.01
+[2026-07-01 22:29:49] Keputusan analis: Wait
+[2026-07-01 22:30:49] Siklus Menit Baru. Harga BTC Terakhir: $60327.93
+[2026-07-01 22:30:49] Keputusan analis: Wait
+[2026-07-01 22:31:50] Siklus Menit Baru. Harga BTC Terakhir: $60339.30
+[2026-07-01 22:31:50] Keputusan analis: Wait
+[2026-07-01 22:32:50] Siklus Menit Baru. Harga BTC Terakhir: $60268.01
+[2026-07-01 22:32:50] Keputusan analis: Wait
+[2026-07-01 22:33:50] Siklus Menit Baru. Harga BTC Terakhir: $60279.99
+[2026-07-01 22:33:50] Keputusan analis: Wait
+[2026-07-01 22:34:50] Siklus Menit Baru. Harga BTC Terakhir: $60265.99
+[2026-07-01 22:34:50] Keputusan analis: Wait
+[2026-07-01 22:35:50] Siklus Menit Baru. Harga BTC Terakhir: $60244.40
+[2026-07-01 22:35:50] Keputusan analis: Wait
+[2026-07-01 22:36:50] Siklus Menit Baru. Harga BTC Terakhir: $60266.00
+[2026-07-01 22:36:50] Keputusan analis: Wait
+[2026-07-01 22:37:51] Siklus Menit Baru. Harga BTC Terakhir: $60220.01
+[2026-07-01 22:37:51] Keputusan analis: Wait
+[2026-07-01 22:38:51] Siklus Menit Baru. Harga BTC Terakhir: $60159.40
+[2026-07-01 22:38:51] Keputusan analis: Wait
+[2026-07-01 22:39:51] Siklus Menit Baru. Harga BTC Terakhir: $60168.02
+[2026-07-01 22:39:51] Keputusan analis: Wait
+[2026-07-01 22:40:51] Siklus Menit Baru. Harga BTC Terakhir: $60182.01
+[2026-07-01 22:40:51] Keputusan analis: Wait
+[2026-07-01 22:41:51] Siklus Menit Baru. Harga BTC Terakhir: $60212.04
+[2026-07-01 22:41:51] Keputusan analis: Wait
+[2026-07-01 22:42:52] Siklus Menit Baru. Harga BTC Terakhir: $60230.00
+[2026-07-01 22:42:52] Keputusan analis: Wait
+[2026-07-01 22:43:52] Siklus Menit Baru. Harga BTC Terakhir: $60244.01
+[2026-07-01 22:43:52] Keputusan analis: Wait
+[2026-07-01 22:44:52] Siklus Menit Baru. Harga BTC Terakhir: $60230.02
+[2026-07-01 22:44:52] Keputusan analis: Wait
+[2026-07-01 22:45:52] Siklus Menit Baru. Harga BTC Terakhir: $60192.01
+[2026-07-01 22:45:52] Keputusan analis: Wait
+[2026-07-01 22:46:52] Siklus Menit Baru. Harga BTC Terakhir: $60194.71
+[2026-07-01 22:46:52] Keputusan analis: Wait
+[2026-07-01 22:47:52] Siklus Menit Baru. Harga BTC Terakhir: $60233.99
+[2026-07-01 22:47:52] Keputusan analis: Wait
+[2026-07-01 22:48:53] Siklus Menit Baru. Harga BTC Terakhir: $60176.07
+[2026-07-01 22:48:53] Keputusan analis: Wait
+[2026-07-01 22:49:53] Siklus Menit Baru. Harga BTC Terakhir: $60130.83
+[2026-07-01 22:49:53] Keputusan analis: Wait
+[2026-07-01 22:50:53] Siklus Menit Baru. Harga BTC Terakhir: $60086.36
+[2026-07-01 22:50:53] Keputusan analis: Wait
+[2026-07-01 22:51:53] Siklus Menit Baru. Harga BTC Terakhir: $60084.01
+[2026-07-01 22:51:53] Keputusan analis: Wait
+[2026-07-01 22:52:53] Siklus Menit Baru. Harga BTC Terakhir: $60127.15
+[2026-07-01 22:52:53] Keputusan analis: Wait
+[2026-07-01 22:53:53] Siklus Menit Baru. Harga BTC Terakhir: $60151.54
+[2026-07-01 22:53:53] Keputusan analis: Wait
+[2026-07-01 22:54:54] Siklus Menit Baru. Harga BTC Terakhir: $60106.00
+[2026-07-01 22:54:54] Keputusan analis: Wait
+[2026-07-01 22:55:54] Siklus Menit Baru. Harga BTC Terakhir: $60099.99
+[2026-07-01 22:55:54] Keputusan analis: Wait
+[2026-07-01 22:56:54] Siklus Menit Baru. Harga BTC Terakhir: $60108.88
+[2026-07-01 22:56:54] Keputusan analis: Wait
+[2026-07-01 22:57:54] Siklus Menit Baru. Harga BTC Terakhir: $60132.01
+[2026-07-01 22:57:54] Keputusan analis: Wait
+[2026-07-01 22:58:54] Siklus Menit Baru. Harga BTC Terakhir: $60136.00
+[2026-07-01 22:58:54] Keputusan analis: Wait
+[2026-07-01 22:59:54] Siklus Menit Baru. Harga BTC Terakhir: $60146.57
+[2026-07-01 22:59:54] Keputusan analis: Wait
+[2026-07-01 23:00:55] Siklus Menit Baru. Harga BTC Terakhir: $60128.01
+[2026-07-01 23:00:55] Keputusan analis: Wait
+[2026-07-01 23:01:55] Siklus Menit Baru. Harga BTC Terakhir: $60110.00
+[2026-07-01 23:01:55] Keputusan analis: Wait
+[2026-07-01 23:02:55] Siklus Menit Baru. Harga BTC Terakhir: $60134.99
+[2026-07-01 23:02:55] Keputusan analis: Wait
+[2026-07-01 23:03:55] Siklus Menit Baru. Harga BTC Terakhir: $60170.00
+[2026-07-01 23:03:55] Keputusan analis: Wait
+[2026-07-01 23:04:55] Siklus Menit Baru. Harga BTC Terakhir: $60140.00
+[2026-07-01 23:04:55] Keputusan analis: Wait
+[2026-07-01 23:05:56] Siklus Menit Baru. Harga BTC Terakhir: $60119.40
+[2026-07-01 23:05:56] Keputusan analis: Wait
+[2026-07-01 23:06:56] Siklus Menit Baru. Harga BTC Terakhir: $60171.16
+[2026-07-01 23:06:56] Keputusan analis: Wait
+[2026-07-01 23:07:56] Siklus Menit Baru. Harga BTC Terakhir: $60213.99
+[2026-07-01 23:07:56] Keputusan analis: Wait
+[2026-07-01 23:08:56] Siklus Menit Baru. Harga BTC Terakhir: $60213.99
+[2026-07-01 23:08:56] Keputusan analis: Wait
+[2026-07-01 23:09:56] Siklus Menit Baru. Harga BTC Terakhir: $60150.00
+[2026-07-01 23:09:56] Keputusan analis: Wait
+[2026-07-01 23:10:56] Siklus Menit Baru. Harga BTC Terakhir: $60129.99
+[2026-07-01 23:10:56] Keputusan analis: Wait
+[2026-07-01 23:11:57] Siklus Menit Baru. Harga BTC Terakhir: $60130.01
+[2026-07-01 23:11:57] Keputusan analis: Wait
+[2026-07-01 23:12:57] Siklus Menit Baru. Harga BTC Terakhir: $60130.01
+[2026-07-01 23:12:57] Keputusan analis: Wait
+[2026-07-01 23:13:57] Siklus Menit Baru. Harga BTC Terakhir: $60150.00
+[2026-07-01 23:13:57] Keputusan analis: Wait
+[2026-07-01 23:14:57] Siklus Menit Baru. Harga BTC Terakhir: $60132.00
+[2026-07-01 23:14:57] Keputusan analis: Wait
+[2026-07-01 23:15:57] Siklus Menit Baru. Harga BTC Terakhir: $60145.00
+[2026-07-01 23:15:57] Keputusan analis: Wait
+[2026-07-01 23:16:57] Siklus Menit Baru. Harga BTC Terakhir: $60096.76
+[2026-07-01 23:16:57] Keputusan analis: Wait
+[2026-07-01 23:17:58] Siklus Menit Baru. Harga BTC Terakhir: $60142.01
+[2026-07-01 23:17:58] Keputusan analis: Wait
+[2026-07-01 23:18:58] Siklus Menit Baru. Harga BTC Terakhir: $60110.00
+[2026-07-01 23:18:58] Keputusan analis: Wait
+[2026-07-01 23:19:58] Siklus Menit Baru. Harga BTC Terakhir: $60117.99
+[2026-07-01 23:19:58] Keputusan analis: Wait
+[2026-07-01 23:20:58] Siklus Menit Baru. Harga BTC Terakhir: $60081.41
+[2026-07-01 23:20:58] Keputusan analis: Wait
+[2026-07-01 23:21:58] Siklus Menit Baru. Harga BTC Terakhir: $60022.00
+[2026-07-01 23:21:58] Keputusan analis: Wait
+[2026-07-01 23:22:58] Siklus Menit Baru. Harga BTC Terakhir: $59956.00
+[2026-07-01 23:22:58] Keputusan analis: Wait
+[2026-07-01 23:23:59] Siklus Menit Baru. Harga BTC Terakhir: $60006.32
+[2026-07-01 23:23:59] Keputusan analis: Wait
+[2026-07-01 23:24:59] Siklus Menit Baru. Harga BTC Terakhir: $60000.01
+[2026-07-01 23:24:59] Keputusan analis: Wait
+[2026-07-01 23:25:59] Siklus Menit Baru. Harga BTC Terakhir: $60056.97
+[2026-07-01 23:25:59] Keputusan analis: Wait
+[2026-07-01 23:26:59] Siklus Menit Baru. Harga BTC Terakhir: $60089.99
+[2026-07-01 23:26:59] Keputusan analis: Wait
+[2026-07-01 23:27:59] Siklus Menit Baru. Harga BTC Terakhir: $60164.00
+[2026-07-01 23:27:59] Keputusan analis: Wait
+[2026-07-01 23:29:00] Siklus Menit Baru. Harga BTC Terakhir: $60176.01
+[2026-07-01 23:29:00] Keputusan analis: Wait
+[2026-07-01 23:30:00] Siklus Menit Baru. Harga BTC Terakhir: $60144.01
+[2026-07-01 23:30:00] Keputusan analis: Wait
+[2026-07-01 23:31:00] Siklus Menit Baru. Harga BTC Terakhir: $60136.00
+[2026-07-01 23:31:00] Keputusan analis: Wait
+[2026-07-01 23:32:00] Siklus Menit Baru. Harga BTC Terakhir: $60144.99
+[2026-07-01 23:32:00] Keputusan analis: Wait
+[2026-07-01 23:33:00] Siklus Menit Baru. Harga BTC Terakhir: $60125.68
+[2026-07-01 23:33:00] Keputusan analis: Wait
+[2026-07-01 23:34:01] Siklus Menit Baru. Harga BTC Terakhir: $60088.01
+[2026-07-01 23:34:01] Keputusan analis: Wait
+[2026-07-01 23:35:01] Siklus Menit Baru. Harga BTC Terakhir: $60090.01
+[2026-07-01 23:35:01] Keputusan analis: Wait
+[2026-07-01 23:36:02] Siklus Menit Baru. Harga BTC Terakhir: $60082.01
+[2026-07-01 23:36:02] Keputusan analis: Wait
+[2026-07-01 23:37:02] Siklus Menit Baru. Harga BTC Terakhir: $60060.39
+[2026-07-01 23:37:02] Keputusan analis: Wait
+[2026-07-01 23:38:02] Siklus Menit Baru. Harga BTC Terakhir: $60049.99
+[2026-07-01 23:38:02] Keputusan analis: Wait
+[2026-07-01 23:39:02] Siklus Menit Baru. Harga BTC Terakhir: $60048.55
+[2026-07-01 23:39:02] Keputusan analis: Wait
+[2026-07-01 23:40:03] Siklus Menit Baru. Harga BTC Terakhir: $60029.21
+[2026-07-01 23:40:03] Keputusan analis: Wait
+[2026-07-01 23:41:03] Siklus Menit Baru. Harga BTC Terakhir: $60050.00
+[2026-07-01 23:41:03] Keputusan analis: Wait
+[2026-07-01 23:42:03] Siklus Menit Baru. Harga BTC Terakhir: $60024.89
+[2026-07-01 23:42:03] Keputusan analis: Wait
+[2026-07-01 23:43:03] Siklus Menit Baru. Harga BTC Terakhir: $60037.99
+[2026-07-01 23:43:03] Keputusan analis: Wait
+[2026-07-01 23:44:03] Siklus Menit Baru. Harga BTC Terakhir: $60036.53
+[2026-07-01 23:44:03] Keputusan analis: Wait
+[2026-07-01 23:45:04] Siklus Menit Baru. Harga BTC Terakhir: $60052.40
+[2026-07-01 23:45:04] Keputusan analis: Wait
+[2026-07-01 23:46:04] Siklus Menit Baru. Harga BTC Terakhir: $60046.00
+[2026-07-01 23:46:04] Keputusan analis: Wait
+[2026-07-01 23:47:04] Siklus Menit Baru. Harga BTC Terakhir: $60060.45
+[2026-07-01 23:47:04] Keputusan analis: Wait
+[2026-07-01 23:48:04] Siklus Menit Baru. Harga BTC Terakhir: $60069.72
+[2026-07-01 23:48:04] Keputusan analis: Wait
+[2026-07-01 23:49:05] Siklus Menit Baru. Harga BTC Terakhir: $60040.00
+[2026-07-01 23:49:05] Keputusan analis: Wait
+[2026-07-01 23:50:05] Siklus Menit Baru. Harga BTC Terakhir: $59989.00
+[2026-07-01 23:50:05] Keputusan analis: Wait
+[2026-07-01 23:51:05] Siklus Menit Baru. Harga BTC Terakhir: $60007.99
+[2026-07-01 23:51:05] Keputusan analis: Wait
+[2026-07-01 23:52:05] Siklus Menit Baru. Harga BTC Terakhir: $59969.57
+[2026-07-01 23:52:05] Keputusan analis: Wait
+[2026-07-01 23:53:05] Siklus Menit Baru. Harga BTC Terakhir: $59932.56
+[2026-07-01 23:53:05] Keputusan analis: Wait
+[2026-07-01 23:54:06] Siklus Menit Baru. Harga BTC Terakhir: $59929.71
+[2026-07-01 23:54:06] Keputusan analis: Wait
+[2026-07-01 23:55:06] Siklus Menit Baru. Harga BTC Terakhir: $59919.26
+[2026-07-01 23:55:06] Keputusan analis: Wait
+[2026-07-01 23:56:06] Siklus Menit Baru. Harga BTC Terakhir: $59878.17
+[2026-07-01 23:56:06] Keputusan analis: Wait
+[2026-07-01 23:57:06] Siklus Menit Baru. Harga BTC Terakhir: $59879.57
+[2026-07-01 23:57:06] Keputusan analis: Wait
+[2026-07-01 23:58:07] Siklus Menit Baru. Harga BTC Terakhir: $59896.00
+[2026-07-01 23:58:07] Keputusan analis: Wait
+[2026-07-01 23:59:07] Siklus Menit Baru. Harga BTC Terakhir: $59910.68
+[2026-07-01 23:59:07] Keputusan analis: Wait
+[2026-07-02 00:00:07] Siklus Menit Baru. Harga BTC Terakhir: $59930.01
+[2026-07-02 00:00:07] Keputusan analis: Wait
+[2026-07-02 00:01:07] Siklus Menit Baru. Harga BTC Terakhir: $59908.00
+[2026-07-02 00:01:07] Keputusan analis: Wait
+[2026-07-02 00:02:07] Siklus Menit Baru. Harga BTC Terakhir: $59902.00
+[2026-07-02 00:02:07] Keputusan analis: Wait
+[2026-07-02 00:03:08] Siklus Menit Baru. Harga BTC Terakhir: $59876.00
+[2026-07-02 00:03:08] Keputusan analis: Wait
+[2026-07-02 00:04:08] Siklus Menit Baru. Harga BTC Terakhir: $59800.01
+[2026-07-02 00:04:08] Keputusan analis: Wait
+[2026-07-02 00:05:08] Siklus Menit Baru. Harga BTC Terakhir: $59814.01
+[2026-07-02 00:05:08] Keputusan analis: Wait
+[2026-07-02 00:06:08] Siklus Menit Baru. Harga BTC Terakhir: $59800.00
+[2026-07-02 00:06:08] Keputusan analis: Wait
+[2026-07-02 00:07:09] Siklus Menit Baru. Harga BTC Terakhir: $59815.99
+[2026-07-02 00:07:09] Keputusan analis: Wait
+[2026-07-02 00:08:09] Siklus Menit Baru. Harga BTC Terakhir: $59826.64
+[2026-07-02 00:08:09] Keputusan analis: Wait
+[2026-07-02 00:09:09] Siklus Menit Baru. Harga BTC Terakhir: $59870.03
+[2026-07-02 00:09:09] Keputusan analis: Wait
+[2026-07-02 00:10:09] Siklus Menit Baru. Harga BTC Terakhir: $59860.01
+[2026-07-02 00:10:09] Keputusan analis: Wait
+[2026-07-02 00:11:09] Siklus Menit Baru. Harga BTC Terakhir: $59846.37
+[2026-07-02 00:11:09] Keputusan analis: Wait
+[2026-07-02 00:12:10] Siklus Menit Baru. Harga BTC Terakhir: $59863.65
+[2026-07-02 00:12:10] Keputusan analis: Wait
+[2026-07-02 00:13:10] Siklus Menit Baru. Harga BTC Terakhir: $59908.83
+[2026-07-02 00:13:10] Keputusan analis: Wait
+[2026-07-02 00:14:10] Siklus Menit Baru. Harga BTC Terakhir: $59882.00
+[2026-07-02 00:14:10] Keputusan analis: Wait
+[2026-07-02 00:15:10] Siklus Menit Baru. Harga BTC Terakhir: $59904.54
+[2026-07-02 00:15:10] Keputusan analis: Wait
+[2026-07-02 00:16:10] Siklus Menit Baru. Harga BTC Terakhir: $59955.81
+[2026-07-02 00:16:10] Keputusan analis: Wait
+[2026-07-02 00:17:11] Siklus Menit Baru. Harga BTC Terakhir: $59930.22
+[2026-07-02 00:17:11] Keputusan analis: Wait
+[2026-07-02 00:18:11] Siklus Menit Baru. Harga BTC Terakhir: $59925.52
+[2026-07-02 00:18:11] Keputusan analis: Wait
+[2026-07-02 00:19:11] Siklus Menit Baru. Harga BTC Terakhir: $59952.51
+[2026-07-02 00:19:11] Keputusan analis: Wait
+[2026-07-02 00:20:11] Siklus Menit Baru. Harga BTC Terakhir: $60030.00
+[2026-07-02 00:20:11] Keputusan analis: Wait
+[2026-07-02 00:21:12] Siklus Menit Baru. Harga BTC Terakhir: $60082.61
+[2026-07-02 00:21:12] Keputusan analis: Wait
+[2026-07-02 00:22:12] Siklus Menit Baru. Harga BTC Terakhir: $60085.99
+[2026-07-02 00:22:12] Keputusan analis: Wait
+[2026-07-02 00:23:12] Siklus Menit Baru. Harga BTC Terakhir: $60114.05
+[2026-07-02 00:23:12] Keputusan analis: Wait
+[2026-07-02 00:24:12] Siklus Menit Baru. Harga BTC Terakhir: $60130.01
+[2026-07-02 00:24:12] Keputusan analis: Wait
+[2026-07-02 00:25:12] Siklus Menit Baru. Harga BTC Terakhir: $60165.98
+[2026-07-02 00:25:12] Keputusan analis: Wait
+[2026-07-02 00:26:12] Siklus Menit Baru. Harga BTC Terakhir: $60190.59
+[2026-07-02 00:26:12] Keputusan analis: Wait
+[2026-07-02 00:27:13] Siklus Menit Baru. Harga BTC Terakhir: $60158.01
+[2026-07-02 00:27:13] Keputusan analis: Wait
+[2026-07-02 00:28:13] Siklus Menit Baru. Harga BTC Terakhir: $60156.03
+[2026-07-02 00:28:13] Keputusan analis: Wait
+[2026-07-02 00:29:13] Siklus Menit Baru. Harga BTC Terakhir: $60149.32
+[2026-07-02 00:29:13] Keputusan analis: Wait
+[2026-07-02 00:30:13] Siklus Menit Baru. Harga BTC Terakhir: $60138.01
+[2026-07-02 00:30:13] Keputusan analis: Wait
+[2026-07-02 00:31:13] Siklus Menit Baru. Harga BTC Terakhir: $60150.94
+[2026-07-02 00:31:13] Keputusan analis: Wait
+[2026-07-02 00:32:14] Siklus Menit Baru. Harga BTC Terakhir: $60100.00
+[2026-07-02 00:32:14] Keputusan analis: Wait
+[2026-07-02 00:33:14] Siklus Menit Baru. Harga BTC Terakhir: $60100.35
+[2026-07-02 00:33:14] Keputusan analis: Wait
+[2026-07-02 00:34:14] Siklus Menit Baru. Harga BTC Terakhir: $60119.39
+[2026-07-02 00:34:14] Keputusan analis: Wait
+[2026-07-02 00:35:14] Siklus Menit Baru. Harga BTC Terakhir: $60126.01
+[2026-07-02 00:35:14] Keputusan analis: Wait
+[2026-07-02 00:36:15] Siklus Menit Baru. Harga BTC Terakhir: $60166.03
+[2026-07-02 00:36:15] Keputusan analis: Wait
+[2026-07-02 00:37:15] Siklus Menit Baru. Harga BTC Terakhir: $60239.83
+[2026-07-02 00:37:15] Keputusan analis: Wait
+[2026-07-02 00:38:15] Siklus Menit Baru. Harga BTC Terakhir: $60234.87
+[2026-07-02 00:38:15] Keputusan analis: Wait
+[2026-07-02 00:39:15] Siklus Menit Baru. Harga BTC Terakhir: $60213.27
+[2026-07-02 00:39:15] Keputusan analis: Wait
+[2026-07-02 00:40:15] Siklus Menit Baru. Harga BTC Terakhir: $60190.60
+[2026-07-02 00:40:15] Keputusan analis: Wait
+[2026-07-02 00:41:16] Siklus Menit Baru. Harga BTC Terakhir: $60159.86
+[2026-07-02 00:41:16] Keputusan analis: Wait
+[2026-07-02 00:42:16] Siklus Menit Baru. Harga BTC Terakhir: $60167.99
+[2026-07-02 00:42:16] Keputusan analis: Wait
+[2026-07-02 00:43:16] Siklus Menit Baru. Harga BTC Terakhir: $60152.00
+[2026-07-02 00:43:16] Keputusan analis: Wait
+[2026-07-02 00:44:16] Siklus Menit Baru. Harga BTC Terakhir: $60159.93
+[2026-07-02 00:44:16] Keputusan analis: Wait
+[2026-07-02 00:45:16] Siklus Menit Baru. Harga BTC Terakhir: $60152.01
+[2026-07-02 00:45:16] Keputusan analis: Wait
+[2026-07-02 00:46:17] Siklus Menit Baru. Harga BTC Terakhir: $60190.59
+[2026-07-02 00:46:17] Keputusan analis: Wait
+[2026-07-02 00:47:17] Siklus Menit Baru. Harga BTC Terakhir: $60189.72
+[2026-07-02 00:47:17] Keputusan analis: Wait
+[2026-07-02 00:48:17] Siklus Menit Baru. Harga BTC Terakhir: $60187.08
+[2026-07-02 00:48:17] Keputusan analis: Wait
+[2026-07-02 00:49:17] Siklus Menit Baru. Harga BTC Terakhir: $60204.94
+[2026-07-02 00:49:17] Keputusan analis: Wait
+[2026-07-02 00:50:17] Siklus Menit Baru. Harga BTC Terakhir: $60170.96
+[2026-07-02 00:50:17] Keputusan analis: Wait
+[2026-07-02 00:51:17] Siklus Menit Baru. Harga BTC Terakhir: $60203.99
+[2026-07-02 00:51:17] Keputusan analis: Wait
+[2026-07-02 00:52:18] Siklus Menit Baru. Harga BTC Terakhir: $60186.01
+[2026-07-02 00:52:18] Keputusan analis: Wait
+[2026-07-02 00:53:18] Siklus Menit Baru. Harga BTC Terakhir: $60220.00
+[2026-07-02 00:53:18] Keputusan analis: Wait
+[2026-07-02 00:54:18] Siklus Menit Baru. Harga BTC Terakhir: $60227.90
+[2026-07-02 00:54:18] Keputusan analis: Wait
+[2026-07-02 00:55:18] Siklus Menit Baru. Harga BTC Terakhir: $60202.97
+[2026-07-02 00:55:18] Keputusan analis: Wait
+[2026-07-02 00:56:18] Siklus Menit Baru. Harga BTC Terakhir: $60196.01
+[2026-07-02 00:56:18] Keputusan analis: Wait
+[2026-07-02 00:57:19] Siklus Menit Baru. Harga BTC Terakhir: $60206.31
+[2026-07-02 00:57:19] Keputusan analis: Wait
+[2026-07-02 00:58:19] Siklus Menit Baru. Harga BTC Terakhir: $60219.66
+[2026-07-02 00:58:19] Keputusan analis: Wait
+[2026-07-02 00:59:19] Siklus Menit Baru. Harga BTC Terakhir: $60172.00
+[2026-07-02 00:59:19] Keputusan analis: Wait
+[2026-07-02 01:00:19] Siklus Menit Baru. Harga BTC Terakhir: $60183.99
+[2026-07-02 01:00:19] Keputusan analis: Wait
+[2026-07-02 01:01:19] Siklus Menit Baru. Harga BTC Terakhir: $60178.01
+[2026-07-02 01:01:19] Keputusan analis: Wait
+[2026-07-02 01:02:20] Siklus Menit Baru. Harga BTC Terakhir: $60174.01
+[2026-07-02 01:02:20] Keputusan analis: Wait
+[2026-07-02 01:03:20] Siklus Menit Baru. Harga BTC Terakhir: $60153.56
+[2026-07-02 01:03:20] Keputusan analis: Wait
+[2026-07-02 01:04:20] Siklus Menit Baru. Harga BTC Terakhir: $60162.00
+[2026-07-02 01:04:20] Keputusan analis: Wait
+[2026-07-02 01:05:20] Siklus Menit Baru. Harga BTC Terakhir: $60192.00
+[2026-07-02 01:05:20] Keputusan analis: Wait
+[2026-07-02 01:06:20] Siklus Menit Baru. Harga BTC Terakhir: $60162.01
+[2026-07-02 01:06:20] Keputusan analis: Wait
+[2026-07-02 01:07:20] Siklus Menit Baru. Harga BTC Terakhir: $60111.82
+[2026-07-02 01:07:20] Keputusan analis: Wait
+[2026-07-02 01:08:21] Siklus Menit Baru. Harga BTC Terakhir: $60085.95
+[2026-07-02 01:08:21] Keputusan analis: Wait
+[2026-07-02 01:09:21] Siklus Menit Baru. Harga BTC Terakhir: $60100.01
+[2026-07-02 01:09:21] Keputusan analis: Wait
+[2026-07-02 01:10:21] Siklus Menit Baru. Harga BTC Terakhir: $60074.00
+[2026-07-02 01:10:21] Keputusan analis: Wait
+[2026-07-02 01:11:21] Siklus Menit Baru. Harga BTC Terakhir: $60039.99
+[2026-07-02 01:11:21] Keputusan analis: Wait
+[2026-07-02 01:12:21] Siklus Menit Baru. Harga BTC Terakhir: $60028.00
+[2026-07-02 01:12:21] Keputusan analis: Wait
+[2026-07-02 01:13:21] Siklus Menit Baru. Harga BTC Terakhir: $60036.00
+[2026-07-02 01:13:21] Keputusan analis: Wait
+[2026-07-02 01:14:22] Siklus Menit Baru. Harga BTC Terakhir: $60068.00
+[2026-07-02 01:14:22] Keputusan analis: Wait
+[2026-07-02 01:15:22] Siklus Menit Baru. Harga BTC Terakhir: $60050.00
+[2026-07-02 01:15:22] Keputusan analis: Wait
+[2026-07-02 01:16:22] Siklus Menit Baru. Harga BTC Terakhir: $60051.41
+[2026-07-02 01:16:22] Keputusan analis: Wait
+[2026-07-02 01:17:22] Siklus Menit Baru. Harga BTC Terakhir: $60131.01
+[2026-07-02 01:17:22] Keputusan analis: Wait
+[2026-07-02 01:18:22] Siklus Menit Baru. Harga BTC Terakhir: $60114.25
+[2026-07-02 01:18:22] Keputusan analis: Wait
+[2026-07-02 01:19:22] Siklus Menit Baru. Harga BTC Terakhir: $60169.99
+[2026-07-02 01:19:22] Keputusan analis: Wait
+[2026-07-02 01:20:23] Siklus Menit Baru. Harga BTC Terakhir: $60142.00
+[2026-07-02 01:20:23] Keputusan analis: Wait
+[2026-07-02 01:21:23] Siklus Menit Baru. Harga BTC Terakhir: $60118.05
+[2026-07-02 01:21:23] Keputusan analis: Wait
+[2026-07-02 01:22:23] Siklus Menit Baru. Harga BTC Terakhir: $60142.01
+[2026-07-02 01:22:23] Keputusan analis: Wait
+[2026-07-02 01:23:23] Siklus Menit Baru. Harga BTC Terakhir: $60147.71
+[2026-07-02 01:23:23] Keputusan analis: Wait
+[2026-07-02 01:24:23] Siklus Menit Baru. Harga BTC Terakhir: $60119.65
+[2026-07-02 01:24:23] Keputusan analis: Wait
+[2026-07-02 01:25:23] Siklus Menit Baru. Harga BTC Terakhir: $60128.49
+[2026-07-02 01:25:24] Keputusan analis: Wait
+[2026-07-02 01:26:24] Siklus Menit Baru. Harga BTC Terakhir: $60134.22
+[2026-07-02 01:26:24] Keputusan analis: Wait
+[2026-07-02 01:27:24] Siklus Menit Baru. Harga BTC Terakhir: $60138.00
+[2026-07-02 01:27:24] Keputusan analis: Wait
+[2026-07-02 01:28:24] Siklus Menit Baru. Harga BTC Terakhir: $60145.15
+[2026-07-02 01:28:24] Keputusan analis: Wait
+[2026-07-02 01:29:24] Siklus Menit Baru. Harga BTC Terakhir: $60142.56
+[2026-07-02 01:29:24] Keputusan analis: Wait
+[2026-07-02 01:30:24] Siklus Menit Baru. Harga BTC Terakhir: $60120.01
+[2026-07-02 01:30:24] Keputusan analis: Wait
+[2026-07-02 01:31:25] Siklus Menit Baru. Harga BTC Terakhir: $60095.99
+[2026-07-02 01:31:25] Keputusan analis: Wait
+[2026-07-02 01:32:25] Siklus Menit Baru. Harga BTC Terakhir: $60150.50
+[2026-07-02 01:32:25] Keputusan analis: Wait
+[2026-07-02 01:33:25] Siklus Menit Baru. Harga BTC Terakhir: $60172.00
+[2026-07-02 01:33:25] Keputusan analis: Wait
+[2026-07-02 01:34:25] Siklus Menit Baru. Harga BTC Terakhir: $60178.00
+[2026-07-02 01:34:25] Keputusan analis: Wait
+[2026-07-02 01:35:25] Siklus Menit Baru. Harga BTC Terakhir: $60216.22
+[2026-07-02 01:35:25] Keputusan analis: Wait
+[2026-07-02 01:36:25] Siklus Menit Baru. Harga BTC Terakhir: $60215.65
+[2026-07-02 01:36:25] Keputusan analis: Wait
+[2026-07-02 01:37:26] Siklus Menit Baru. Harga BTC Terakhir: $60226.00
+[2026-07-02 01:37:26] Keputusan analis: Wait
+[2026-07-02 01:38:26] Siklus Menit Baru. Harga BTC Terakhir: $60213.80
+[2026-07-02 01:38:26] Keputusan analis: Wait
+[2026-07-02 01:39:26] Siklus Menit Baru. Harga BTC Terakhir: $60222.00
+[2026-07-02 01:39:26] Keputusan analis: Wait
+[2026-07-02 01:40:26] Siklus Menit Baru. Harga BTC Terakhir: $60222.46
+[2026-07-02 01:40:26] Keputusan analis: Wait
+[2026-07-02 01:41:26] Siklus Menit Baru. Harga BTC Terakhir: $60224.35
+[2026-07-02 01:41:26] Keputusan analis: Wait
+[2026-07-02 01:42:27] Siklus Menit Baru. Harga BTC Terakhir: $60229.02
+[2026-07-02 01:42:27] Keputusan analis: Wait
+[2026-07-02 01:43:27] Siklus Menit Baru. Harga BTC Terakhir: $60205.99
+[2026-07-02 01:43:27] Keputusan analis: Wait
+[2026-07-02 01:44:27] Siklus Menit Baru. Harga BTC Terakhir: $60212.00
+[2026-07-02 01:44:27] Keputusan analis: Wait
+[2026-07-02 01:45:27] Siklus Menit Baru. Harga BTC Terakhir: $60204.86
+[2026-07-02 01:45:27] Keputusan analis: Wait
+[2026-07-02 01:46:27] Siklus Menit Baru. Harga BTC Terakhir: $60197.42
+[2026-07-02 01:46:27] Keputusan analis: Wait
+[2026-07-02 01:47:27] Siklus Menit Baru. Harga BTC Terakhir: $60159.27
+[2026-07-02 01:47:27] Keputusan analis: Wait
+[2026-07-02 01:48:28] Siklus Menit Baru. Harga BTC Terakhir: $60195.55
+[2026-07-02 01:48:28] Keputusan analis: Wait
+[2026-07-02 01:49:28] Siklus Menit Baru. Harga BTC Terakhir: $60222.00
+[2026-07-02 01:49:28] Keputusan analis: Wait
+[2026-07-02 01:50:28] Siklus Menit Baru. Harga BTC Terakhir: $60261.99
+[2026-07-02 01:50:28] Keputusan analis: Wait
+[2026-07-02 01:51:28] Siklus Menit Baru. Harga BTC Terakhir: $60255.81
+[2026-07-02 01:51:28] Keputusan analis: Wait
+[2026-07-02 01:52:28] Siklus Menit Baru. Harga BTC Terakhir: $60232.90
+[2026-07-02 01:52:28] Keputusan analis: Wait
+[2026-07-02 01:53:28] Siklus Menit Baru. Harga BTC Terakhir: $60170.63
+[2026-07-02 01:53:28] Keputusan analis: Wait
+[2026-07-02 01:54:29] Siklus Menit Baru. Harga BTC Terakhir: $60128.01
+[2026-07-02 01:54:29] Keputusan analis: Wait
+[2026-07-02 01:55:29] Siklus Menit Baru. Harga BTC Terakhir: $60141.54
+[2026-07-02 01:55:29] Keputusan analis: Wait
+[2026-07-02 01:56:29] Siklus Menit Baru. Harga BTC Terakhir: $60143.98
+[2026-07-02 01:56:29] Keputusan analis: Wait
+[2026-07-02 01:57:29] Siklus Menit Baru. Harga BTC Terakhir: $60135.13
+[2026-07-02 01:57:29] Keputusan analis: Wait
+[2026-07-02 01:58:29] Siklus Menit Baru. Harga BTC Terakhir: $60147.95
+[2026-07-02 01:58:29] Keputusan analis: Wait
+[2026-07-02 01:59:29] Siklus Menit Baru. Harga BTC Terakhir: $60174.00
+[2026-07-02 01:59:29] Keputusan analis: Wait
+[2026-07-02 02:00:30] Siklus Menit Baru. Harga BTC Terakhir: $60182.00
+[2026-07-02 02:00:30] Keputusan analis: Wait
+[2026-07-02 02:01:30] Siklus Menit Baru. Harga BTC Terakhir: $60190.00
+[2026-07-02 02:01:30] Keputusan analis: Wait
+[2026-07-02 02:02:30] Siklus Menit Baru. Harga BTC Terakhir: $60284.00
+[2026-07-02 02:02:30] Keputusan analis: Wait
+[2026-07-02 02:03:30] Siklus Menit Baru. Harga BTC Terakhir: $60276.01
+[2026-07-02 02:03:30] Keputusan analis: Wait
+[2026-07-02 02:04:30] Siklus Menit Baru. Harga BTC Terakhir: $60250.01
+[2026-07-02 02:04:30] Keputusan analis: Wait
+[2026-07-02 02:05:30] Siklus Menit Baru. Harga BTC Terakhir: $60274.01
+[2026-07-02 02:05:30] Keputusan analis: Wait
+[2026-07-02 02:06:31] Siklus Menit Baru. Harga BTC Terakhir: $60265.91
+[2026-07-02 02:06:31] Keputusan analis: Wait
+[2026-07-02 02:07:31] Siklus Menit Baru. Harga BTC Terakhir: $60228.00
+[2026-07-02 02:07:31] Keputusan analis: Wait
+[2026-07-02 02:08:31] Siklus Menit Baru. Harga BTC Terakhir: $60236.00
+[2026-07-02 02:08:31] Keputusan analis: Wait
+[2026-07-02 02:09:31] Siklus Menit Baru. Harga BTC Terakhir: $60261.79
+[2026-07-02 02:09:31] Keputusan analis: Wait
+[2026-07-02 02:10:31] Siklus Menit Baru. Harga BTC Terakhir: $60270.01
+[2026-07-02 02:10:31] Keputusan analis: Wait
+[2026-07-02 02:11:31] Siklus Menit Baru. Harga BTC Terakhir: $60272.88
+[2026-07-02 02:11:31] Keputusan analis: Wait
+[2026-07-02 02:12:32] Siklus Menit Baru. Harga BTC Terakhir: $60264.00
+[2026-07-02 02:12:32] Keputusan analis: Wait
+[2026-07-02 02:13:32] Siklus Menit Baru. Harga BTC Terakhir: $60269.99
+[2026-07-02 02:13:32] Keputusan analis: Wait
+[2026-07-02 02:14:32] Siklus Menit Baru. Harga BTC Terakhir: $60279.99
+[2026-07-02 02:14:32] Keputusan analis: Wait
+[2026-07-02 02:15:32] Siklus Menit Baru. Harga BTC Terakhir: $60283.52
+[2026-07-02 02:15:32] Keputusan analis: Wait
+[2026-07-02 02:16:32] Siklus Menit Baru. Harga BTC Terakhir: $60298.00
+[2026-07-02 02:16:32] Keputusan analis: Wait
+[2026-07-02 02:17:32] Siklus Menit Baru. Harga BTC Terakhir: $60330.00
+[2026-07-02 02:17:32] Keputusan analis: Wait
+[2026-07-02 02:18:33] Siklus Menit Baru. Harga BTC Terakhir: $60284.20
+[2026-07-02 02:18:33] Keputusan analis: Wait
+[2026-07-02 02:19:33] Siklus Menit Baru. Harga BTC Terakhir: $60253.99
+[2026-07-02 02:19:33] Keputusan analis: Wait
+[2026-07-02 02:20:33] Siklus Menit Baru. Harga BTC Terakhir: $60226.21
+[2026-07-02 02:20:33] Keputusan analis: Wait
+[2026-07-02 02:21:33] Siklus Menit Baru. Harga BTC Terakhir: $60235.15
+[2026-07-02 02:21:33] Keputusan analis: Wait
+[2026-07-02 02:22:33] Siklus Menit Baru. Harga BTC Terakhir: $60240.00
+[2026-07-02 02:22:33] Keputusan analis: Wait
+[2026-07-02 02:23:33] Siklus Menit Baru. Harga BTC Terakhir: $60269.78
+[2026-07-02 02:23:33] Keputusan analis: Wait
+[2026-07-02 02:24:33] Siklus Menit Baru. Harga BTC Terakhir: $60264.01
+[2026-07-02 02:24:33] Keputusan analis: Wait
+[2026-07-02 02:25:34] Siklus Menit Baru. Harga BTC Terakhir: $60230.69
+[2026-07-02 02:25:34] Keputusan analis: Wait
+[2026-07-02 02:26:34] Siklus Menit Baru. Harga BTC Terakhir: $60138.01
+[2026-07-02 02:26:34] Keputusan analis: Wait
+[2026-07-02 02:27:34] Siklus Menit Baru. Harga BTC Terakhir: $60152.29
+[2026-07-02 02:27:34] Keputusan analis: Wait
+[2026-07-02 02:28:34] Siklus Menit Baru. Harga BTC Terakhir: $60168.93
+[2026-07-02 02:28:34] Keputusan analis: Wait
+[2026-07-02 02:29:34] Siklus Menit Baru. Harga BTC Terakhir: $60153.55
+[2026-07-02 02:29:34] Keputusan analis: Wait
+[2026-07-02 02:30:34] Siklus Menit Baru. Harga BTC Terakhir: $60166.00
+[2026-07-02 02:30:34] Keputusan analis: Wait
+[2026-07-02 02:31:35] Siklus Menit Baru. Harga BTC Terakhir: $60190.60
+[2026-07-02 02:31:35] Keputusan analis: Wait
+[2026-07-02 02:32:35] Siklus Menit Baru. Harga BTC Terakhir: $60192.01
+[2026-07-02 02:32:35] Keputusan analis: Wait
+[2026-07-02 02:33:35] Siklus Menit Baru. Harga BTC Terakhir: $60226.15
+[2026-07-02 02:33:35] Keputusan analis: Wait
+[2026-07-02 02:34:35] Siklus Menit Baru. Harga BTC Terakhir: $60243.99
+[2026-07-02 02:34:35] Keputusan analis: Wait
+[2026-07-02 02:35:35] Siklus Menit Baru. Harga BTC Terakhir: $60222.01
+[2026-07-02 02:35:35] Keputusan analis: Wait
+[2026-07-02 02:36:36] Siklus Menit Baru. Harga BTC Terakhir: $60207.55
+[2026-07-02 02:36:36] Keputusan analis: Wait
+[2026-07-02 02:37:36] Siklus Menit Baru. Harga BTC Terakhir: $60220.47
+[2026-07-02 02:37:36] Keputusan analis: Wait
+[2026-07-02 02:38:36] Siklus Menit Baru. Harga BTC Terakhir: $60229.65
+[2026-07-02 02:38:36] Keputusan analis: Wait
+[2026-07-02 02:39:36] Siklus Menit Baru. Harga BTC Terakhir: $60225.44
+[2026-07-02 02:39:36] Keputusan analis: Wait
+[2026-07-02 02:40:36] Siklus Menit Baru. Harga BTC Terakhir: $60199.86
+[2026-07-02 02:40:36] Keputusan analis: Wait
+[2026-07-02 02:41:36] Siklus Menit Baru. Harga BTC Terakhir: $60174.22
+[2026-07-02 02:41:36] Keputusan analis: Wait
+[2026-07-02 02:42:37] Siklus Menit Baru. Harga BTC Terakhir: $60165.91
+[2026-07-02 02:42:37] Keputusan analis: Wait
+[2026-07-02 02:43:37] Siklus Menit Baru. Harga BTC Terakhir: $60151.82
+[2026-07-02 02:43:37] Keputusan analis: Wait
+[2026-07-02 02:44:37] Siklus Menit Baru. Harga BTC Terakhir: $60213.99
+[2026-07-02 02:44:37] Keputusan analis: Wait
+[2026-07-02 02:45:37] Siklus Menit Baru. Harga BTC Terakhir: $60174.00
+[2026-07-02 02:45:37] Keputusan analis: Wait
+[2026-07-02 02:46:37] Siklus Menit Baru. Harga BTC Terakhir: $60140.73
+[2026-07-02 02:46:37] Keputusan analis: Wait
+[2026-07-02 02:47:37] Siklus Menit Baru. Harga BTC Terakhir: $60165.31
+[2026-07-02 02:47:37] Keputusan analis: Wait
+[2026-07-02 02:48:38] Siklus Menit Baru. Harga BTC Terakhir: $60179.99
+[2026-07-02 02:48:38] Keputusan analis: Wait
+[2026-07-02 02:49:38] Siklus Menit Baru. Harga BTC Terakhir: $60127.99
+[2026-07-02 02:49:38] Keputusan analis: Wait
+[2026-07-02 02:50:38] Siklus Menit Baru. Harga BTC Terakhir: $60163.77
+[2026-07-02 02:50:38] Keputusan analis: Wait
+[2026-07-02 02:51:38] Siklus Menit Baru. Harga BTC Terakhir: $60163.28
+[2026-07-02 02:51:38] Keputusan analis: Wait
+[2026-07-02 02:52:38] Siklus Menit Baru. Harga BTC Terakhir: $60117.09
+[2026-07-02 02:52:38] Keputusan analis: Wait
+[2026-07-02 02:53:38] Siklus Menit Baru. Harga BTC Terakhir: $60140.80
+[2026-07-02 02:53:38] Keputusan analis: Wait
+[2026-07-02 02:54:39] Siklus Menit Baru. Harga BTC Terakhir: $60135.17
+[2026-07-02 02:54:39] Keputusan analis: Wait
+[2026-07-02 02:55:39] Siklus Menit Baru. Harga BTC Terakhir: $60090.00
+[2026-07-02 02:55:39] Keputusan analis: Wait
+[2026-07-02 02:56:39] Siklus Menit Baru. Harga BTC Terakhir: $60062.66
+[2026-07-02 02:56:39] Keputusan analis: Wait
+[2026-07-02 02:57:39] Siklus Menit Baru. Harga BTC Terakhir: $60041.99
+[2026-07-02 02:57:39] Keputusan analis: Wait
+[2026-07-02 02:58:39] Siklus Menit Baru. Harga BTC Terakhir: $60000.00
+[2026-07-02 02:58:39] Keputusan analis: Wait
+[2026-07-02 02:59:39] Siklus Menit Baru. Harga BTC Terakhir: $60031.02
+[2026-07-02 02:59:39] Keputusan analis: Wait
+[2026-07-02 03:00:40] Siklus Menit Baru. Harga BTC Terakhir: $60018.01
+[2026-07-02 03:00:40] Keputusan analis: Wait
+[2026-07-02 03:01:40] Siklus Menit Baru. Harga BTC Terakhir: $59963.25
+[2026-07-02 03:01:40] Keputusan analis: Wait
+[2026-07-02 03:02:40] Siklus Menit Baru. Harga BTC Terakhir: $59940.00
+[2026-07-02 03:02:40] Keputusan analis: Wait
+[2026-07-02 03:03:40] Siklus Menit Baru. Harga BTC Terakhir: $59961.17
+[2026-07-02 03:03:40] Keputusan analis: Wait
+[2026-07-02 03:04:40] Siklus Menit Baru. Harga BTC Terakhir: $59930.69
+[2026-07-02 03:04:40] Keputusan analis: Wait
+[2026-07-02 03:05:40] Siklus Menit Baru. Harga BTC Terakhir: $59909.88
+[2026-07-02 03:05:40] Keputusan analis: Wait
+[2026-07-02 03:06:41] Siklus Menit Baru. Harga BTC Terakhir: $59972.00
+[2026-07-02 03:06:41] Keputusan analis: Wait
+[2026-07-02 03:07:41] Siklus Menit Baru. Harga BTC Terakhir: $59980.99
+[2026-07-02 03:07:41] Keputusan analis: Wait
+[2026-07-02 03:08:41] Siklus Menit Baru. Harga BTC Terakhir: $59997.99
+[2026-07-02 03:08:41] Keputusan analis: Wait
+[2026-07-02 03:09:41] Siklus Menit Baru. Harga BTC Terakhir: $59956.01
+[2026-07-02 03:09:41] Keputusan analis: Wait
+[2026-07-02 03:10:41] Siklus Menit Baru. Harga BTC Terakhir: $59936.00
+[2026-07-02 03:10:41] Keputusan analis: Wait
+[2026-07-02 03:11:41] Siklus Menit Baru. Harga BTC Terakhir: $59928.01
+[2026-07-02 03:11:41] Keputusan analis: Wait
+[2026-07-02 03:12:42] Siklus Menit Baru. Harga BTC Terakhir: $59935.06
+[2026-07-02 03:12:42] Keputusan analis: Wait
+[2026-07-02 03:13:42] Siklus Menit Baru. Harga BTC Terakhir: $59992.00
+[2026-07-02 03:13:42] Keputusan analis: Wait
+[2026-07-02 03:14:42] Siklus Menit Baru. Harga BTC Terakhir: $60006.00
+[2026-07-02 03:14:42] Keputusan analis: Wait
+[2026-07-02 03:15:42] Siklus Menit Baru. Harga BTC Terakhir: $59954.00
+[2026-07-02 03:15:42] Keputusan analis: Wait
+[2026-07-02 03:16:42] Siklus Menit Baru. Harga BTC Terakhir: $59973.87
+[2026-07-02 03:16:42] Keputusan analis: Wait
+[2026-07-02 03:17:42] Siklus Menit Baru. Harga BTC Terakhir: $59954.01
+[2026-07-02 03:17:42] Keputusan analis: Wait
+[2026-07-02 03:18:43] Siklus Menit Baru. Harga BTC Terakhir: $59905.89
+[2026-07-02 03:18:43] Keputusan analis: Wait
+[2026-07-02 03:19:43] Siklus Menit Baru. Harga BTC Terakhir: $59882.00
+[2026-07-02 03:19:43] Keputusan analis: Wait
+[2026-07-02 03:20:43] Siklus Menit Baru. Harga BTC Terakhir: $59891.81
+[2026-07-02 03:20:43] Keputusan analis: Wait
+[2026-07-02 03:21:43] Siklus Menit Baru. Harga BTC Terakhir: $59928.00
+[2026-07-02 03:21:43] Keputusan analis: Wait
+[2026-07-02 03:22:43] Siklus Menit Baru. Harga BTC Terakhir: $59972.00
+[2026-07-02 03:22:43] Keputusan analis: Wait
+[2026-07-02 03:23:43] Siklus Menit Baru. Harga BTC Terakhir: $59950.82
+[2026-07-02 03:23:43] Keputusan analis: Wait
+[2026-07-02 03:24:44] Siklus Menit Baru. Harga BTC Terakhir: $59978.00
+[2026-07-02 03:24:44] Keputusan analis: Wait
+[2026-07-02 03:25:44] Siklus Menit Baru. Harga BTC Terakhir: $60000.00
+[2026-07-02 03:25:44] Keputusan analis: Wait
+[2026-07-02 03:26:44] Siklus Menit Baru. Harga BTC Terakhir: $59994.01
+[2026-07-02 03:26:44] Keputusan analis: Wait
+[2026-07-02 03:27:44] Siklus Menit Baru. Harga BTC Terakhir: $59992.41
+[2026-07-02 03:27:44] Keputusan analis: Wait
+[2026-07-02 03:28:44] Siklus Menit Baru. Harga BTC Terakhir: $59980.99
+[2026-07-02 03:28:44] Keputusan analis: Wait
+[2026-07-02 03:29:44] Siklus Menit Baru. Harga BTC Terakhir: $59970.01
+[2026-07-02 03:29:44] Keputusan analis: Wait
+[2026-07-02 03:30:45] Siklus Menit Baru. Harga BTC Terakhir: $59973.45
+[2026-07-02 03:30:45] Keputusan analis: Wait
+[2026-07-02 03:31:45] Siklus Menit Baru. Harga BTC Terakhir: $60004.00
+[2026-07-02 03:31:45] Keputusan analis: Wait
+[2026-07-02 03:32:45] Siklus Menit Baru. Harga BTC Terakhir: $60049.99
+[2026-07-02 03:32:45] Keputusan analis: Wait
+[2026-07-02 03:33:45] Siklus Menit Baru. Harga BTC Terakhir: $60026.01
+[2026-07-02 03:33:45] Keputusan analis: Wait
+[2026-07-02 03:34:45] Siklus Menit Baru. Harga BTC Terakhir: $60019.41
+[2026-07-02 03:34:45] Keputusan analis: Wait
+[2026-07-02 03:35:45] Siklus Menit Baru. Harga BTC Terakhir: $59997.74
+[2026-07-02 03:35:45] Keputusan analis: Wait
+[2026-07-02 03:36:46] Siklus Menit Baru. Harga BTC Terakhir: $59968.00
+[2026-07-02 03:36:46] Keputusan analis: Wait
+[2026-07-02 03:37:46] Siklus Menit Baru. Harga BTC Terakhir: $60008.45
+[2026-07-02 03:37:46] Keputusan analis: Wait
+[2026-07-02 03:38:46] Siklus Menit Baru. Harga BTC Terakhir: $60011.78
+[2026-07-02 03:38:46] Keputusan analis: Wait
+[2026-07-02 03:39:46] Siklus Menit Baru. Harga BTC Terakhir: $60021.00
+[2026-07-02 03:39:46] Keputusan analis: Wait
+[2026-07-02 03:40:46] Siklus Menit Baru. Harga BTC Terakhir: $60058.68
+[2026-07-02 03:40:46] Keputusan analis: Wait
+[2026-07-02 03:41:46] Siklus Menit Baru. Harga BTC Terakhir: $60032.00
+[2026-07-02 03:41:46] Keputusan analis: Wait
+[2026-07-02 03:42:47] Siklus Menit Baru. Harga BTC Terakhir: $60016.10
+[2026-07-02 03:42:47] Keputusan analis: Wait
+[2026-07-02 03:43:47] Siklus Menit Baru. Harga BTC Terakhir: $60039.90
+[2026-07-02 03:43:47] Keputusan analis: Wait
+[2026-07-02 03:44:47] Siklus Menit Baru. Harga BTC Terakhir: $60043.40
+[2026-07-02 03:44:47] Keputusan analis: Wait
+[2026-07-02 03:45:47] Siklus Menit Baru. Harga BTC Terakhir: $60055.24
+[2026-07-02 03:45:47] Keputusan analis: Wait
+[2026-07-02 03:46:47] Siklus Menit Baru. Harga BTC Terakhir: $60048.00
+[2026-07-02 03:46:47] Keputusan analis: Wait
+[2026-07-02 03:47:48] Siklus Menit Baru. Harga BTC Terakhir: $60049.31
+[2026-07-02 03:47:48] Keputusan analis: Wait
+[2026-07-02 03:48:48] Siklus Menit Baru. Harga BTC Terakhir: $60086.75
+[2026-07-02 03:48:48] Keputusan analis: Wait
+[2026-07-02 03:49:48] Siklus Menit Baru. Harga BTC Terakhir: $60174.01
+[2026-07-02 03:49:48] Keputusan analis: Wait
+[2026-07-02 03:50:48] Siklus Menit Baru. Harga BTC Terakhir: $60134.00
+[2026-07-02 03:50:48] Keputusan analis: Wait
+[2026-07-02 03:51:48] Siklus Menit Baru. Harga BTC Terakhir: $60129.86
+[2026-07-02 03:51:48] Keputusan analis: Wait
+[2026-07-02 03:52:48] Siklus Menit Baru. Harga BTC Terakhir: $60137.94
+[2026-07-02 03:52:48] Keputusan analis: Wait
+[2026-07-02 03:53:49] Siklus Menit Baru. Harga BTC Terakhir: $60116.01
+[2026-07-02 03:53:49] Keputusan analis: Wait
+[2026-07-02 03:54:49] Siklus Menit Baru. Harga BTC Terakhir: $60123.66
+[2026-07-02 03:54:49] Keputusan analis: Wait
+[2026-07-02 03:55:49] Siklus Menit Baru. Harga BTC Terakhir: $60119.30
+[2026-07-02 03:55:49] Keputusan analis: Wait
+[2026-07-02 03:56:49] Siklus Menit Baru. Harga BTC Terakhir: $60134.00
+[2026-07-02 03:56:49] Keputusan analis: Wait
+[2026-07-02 03:57:49] Siklus Menit Baru. Harga BTC Terakhir: $60124.01
+[2026-07-02 03:57:49] Keputusan analis: Wait
+[2026-07-02 03:58:49] Siklus Menit Baru. Harga BTC Terakhir: $60122.01
+[2026-07-02 03:58:49] Keputusan analis: Wait
+[2026-07-02 03:59:50] Siklus Menit Baru. Harga BTC Terakhir: $60126.01
+[2026-07-02 03:59:50] Keputusan analis: Wait
+[2026-07-02 04:00:50] Siklus Menit Baru. Harga BTC Terakhir: $60136.81
+[2026-07-02 04:00:50] Keputusan analis: Wait
+[2026-07-02 04:01:50] Siklus Menit Baru. Harga BTC Terakhir: $60124.90
+[2026-07-02 04:01:50] Keputusan analis: Wait
+[2026-07-02 04:02:50] Siklus Menit Baru. Harga BTC Terakhir: $60142.00
+[2026-07-02 04:02:50] Keputusan analis: Wait
+[2026-07-02 04:03:50] Siklus Menit Baru. Harga BTC Terakhir: $60142.01
+[2026-07-02 04:03:50] Keputusan analis: Wait
+[2026-07-02 04:04:50] Siklus Menit Baru. Harga BTC Terakhir: $60169.99
+[2026-07-02 04:04:50] Keputusan analis: Wait
+[2026-07-02 04:05:51] Siklus Menit Baru. Harga BTC Terakhir: $60257.99
+[2026-07-02 04:05:51] Keputusan analis: Wait
+[2026-07-02 04:06:51] Siklus Menit Baru. Harga BTC Terakhir: $60245.99
+[2026-07-02 04:06:51] Keputusan analis: Wait
+[2026-07-02 04:07:51] Siklus Menit Baru. Harga BTC Terakhir: $60223.65
+[2026-07-02 04:07:51] Keputusan analis: Wait
+[2026-07-02 04:08:51] Siklus Menit Baru. Harga BTC Terakhir: $60246.00
+[2026-07-02 04:08:51] Keputusan analis: Wait
+[2026-07-02 04:09:51] Siklus Menit Baru. Harga BTC Terakhir: $60251.10
+[2026-07-02 04:09:51] Keputusan analis: Wait
+[2026-07-02 04:10:51] Siklus Menit Baru. Harga BTC Terakhir: $60276.59
+[2026-07-02 04:10:51] Keputusan analis: Wait
+[2026-07-02 04:11:52] Siklus Menit Baru. Harga BTC Terakhir: $60371.02
+[2026-07-02 04:11:52] Keputusan analis: Wait
+[2026-07-02 04:12:52] Siklus Menit Baru. Harga BTC Terakhir: $60440.00
+[2026-07-02 04:12:52] Keputusan analis: Wait
+[2026-07-02 04:13:52] Siklus Menit Baru. Harga BTC Terakhir: $60378.88
+[2026-07-02 04:13:52] Keputusan analis: Wait
+[2026-07-02 04:14:52] Siklus Menit Baru. Harga BTC Terakhir: $60447.22
+[2026-07-02 04:14:52] Keputusan analis: Wait
+[2026-07-02 04:15:52] Siklus Menit Baru. Harga BTC Terakhir: $60386.00
+[2026-07-02 04:15:52] Keputusan analis: Wait
+[2026-07-02 04:16:52] Siklus Menit Baru. Harga BTC Terakhir: $60360.00
+[2026-07-02 04:16:52] Keputusan analis: Wait
+[2026-07-02 04:17:53] Siklus Menit Baru. Harga BTC Terakhir: $60484.01
+[2026-07-02 04:17:53] Keputusan analis: Wait
+[2026-07-02 04:18:53] Siklus Menit Baru. Harga BTC Terakhir: $60440.21
+[2026-07-02 04:18:53] Keputusan analis: Wait
+[2026-07-02 04:19:53] Siklus Menit Baru. Harga BTC Terakhir: $60494.00
+[2026-07-02 04:19:53] Keputusan analis: Wait
+[2026-07-02 04:20:53] Siklus Menit Baru. Harga BTC Terakhir: $60468.96
+[2026-07-02 04:20:53] Keputusan analis: Wait
+[2026-07-02 04:21:53] Siklus Menit Baru. Harga BTC Terakhir: $60504.42
+[2026-07-02 04:21:53] Keputusan analis: Wait
+[2026-07-02 04:22:53] Siklus Menit Baru. Harga BTC Terakhir: $60520.90
+[2026-07-02 04:22:53] Keputusan analis: Wait
+[2026-07-02 04:23:54] Siklus Menit Baru. Harga BTC Terakhir: $60436.43
+[2026-07-02 04:23:54] Keputusan analis: Wait
+[2026-07-02 04:24:54] Siklus Menit Baru. Harga BTC Terakhir: $60405.44
+[2026-07-02 04:24:54] Keputusan analis: Wait
+[2026-07-02 04:25:54] Siklus Menit Baru. Harga BTC Terakhir: $60451.36
+[2026-07-02 04:25:54] Keputusan analis: Wait
+[2026-07-02 04:26:54] Siklus Menit Baru. Harga BTC Terakhir: $60450.01
+[2026-07-02 04:26:54] Keputusan analis: Wait
+[2026-07-02 04:27:54] Siklus Menit Baru. Harga BTC Terakhir: $60466.14
+[2026-07-02 04:27:54] Keputusan analis: Wait
+[2026-07-02 04:28:54] Siklus Menit Baru. Harga BTC Terakhir: $60584.01
+[2026-07-02 04:28:54] Keputusan analis: Wait
+[2026-07-02 04:29:55] Siklus Menit Baru. Harga BTC Terakhir: $60518.01
+[2026-07-02 04:29:55] Keputusan analis: Wait
+[2026-07-02 04:30:55] Siklus Menit Baru. Harga BTC Terakhir: $60600.99
+[2026-07-02 04:30:55] Keputusan analis: Wait
+[2026-07-02 04:31:55] Siklus Menit Baru. Harga BTC Terakhir: $60619.27
+[2026-07-02 04:31:55] Keputusan analis: Wait
+[2026-07-02 04:32:55] Siklus Menit Baru. Harga BTC Terakhir: $60665.99
+[2026-07-02 04:32:55] Keputusan analis: Wait
+[2026-07-02 04:33:55] Siklus Menit Baru. Harga BTC Terakhir: $60713.29
+[2026-07-02 04:33:55] Keputusan analis: Wait
+[2026-07-02 04:34:55] Siklus Menit Baru. Harga BTC Terakhir: $60707.63
+[2026-07-02 04:34:55] Keputusan analis: Wait
+[2026-07-02 04:35:56] Siklus Menit Baru. Harga BTC Terakhir: $60710.20
+[2026-07-02 04:35:56] Keputusan analis: Wait
+[2026-07-02 04:36:56] Siklus Menit Baru. Harga BTC Terakhir: $60709.45
+[2026-07-02 04:36:56] Keputusan analis: Wait
+[2026-07-02 04:37:56] Siklus Menit Baru. Harga BTC Terakhir: $60717.92
+[2026-07-02 04:37:56] Keputusan analis: Wait
+[2026-07-02 04:38:56] Siklus Menit Baru. Harga BTC Terakhir: $60770.01
+[2026-07-02 04:38:56] Keputusan analis: Wait
+[2026-07-02 04:39:56] Siklus Menit Baru. Harga BTC Terakhir: $60695.68
+[2026-07-02 04:39:56] Keputusan analis: Wait
+[2026-07-02 04:40:56] Siklus Menit Baru. Harga BTC Terakhir: $60813.88
+[2026-07-02 04:40:56] Keputusan analis: Wait
+[2026-07-02 04:41:57] Siklus Menit Baru. Harga BTC Terakhir: $60812.00
+[2026-07-02 04:41:57] Keputusan analis: Wait
+[2026-07-02 04:42:57] Siklus Menit Baru. Harga BTC Terakhir: $60811.75
+[2026-07-02 04:42:57] Keputusan analis: Wait
+[2026-07-02 04:43:57] Siklus Menit Baru. Harga BTC Terakhir: $60819.99
+[2026-07-02 04:43:57] Keputusan analis: Wait
+[2026-07-02 04:44:57] Siklus Menit Baru. Harga BTC Terakhir: $60815.00
+[2026-07-02 04:44:57] Keputusan analis: Wait
+[2026-07-02 04:45:57] Siklus Menit Baru. Harga BTC Terakhir: $60812.00
+[2026-07-02 04:45:57] Keputusan analis: Wait
+[2026-07-02 04:46:57] Siklus Menit Baru. Harga BTC Terakhir: $60816.00
+[2026-07-02 04:46:57] Keputusan analis: Wait
+[2026-07-02 04:47:58] Siklus Menit Baru. Harga BTC Terakhir: $60813.60
+[2026-07-02 04:47:58] Keputusan analis: Wait
+[2026-07-02 04:48:58] Siklus Menit Baru. Harga BTC Terakhir: $60813.61
+[2026-07-02 04:48:58] Keputusan analis: Wait
+[2026-07-02 04:49:58] Siklus Menit Baru. Harga BTC Terakhir: $60824.49
+[2026-07-02 04:49:58] Keputusan analis: Wait
+[2026-07-02 04:50:58] Siklus Menit Baru. Harga BTC Terakhir: $60815.99
+[2026-07-02 04:50:58] Keputusan analis: Wait
+[2026-07-02 04:51:58] Siklus Menit Baru. Harga BTC Terakhir: $60818.64
+[2026-07-02 04:51:58] Keputusan analis: Wait
+[2026-07-02 04:52:59] Siklus Menit Baru. Harga BTC Terakhir: $60846.95
+[2026-07-02 04:52:59] Keputusan analis: Wait
+[2026-07-02 04:53:59] Siklus Menit Baru. Harga BTC Terakhir: $60819.20
+[2026-07-02 04:53:59] Keputusan analis: Wait
+[2026-07-02 04:54:59] Siklus Menit Baru. Harga BTC Terakhir: $60784.73
+[2026-07-02 04:54:59] Keputusan analis: Wait
+[2026-07-02 04:55:59] Siklus Menit Baru. Harga BTC Terakhir: $60820.94
+[2026-07-02 04:55:59] Keputusan analis: Wait
+[2026-07-02 04:56:59] Siklus Menit Baru. Harga BTC Terakhir: $60820.14
+[2026-07-02 04:56:59] Keputusan analis: Wait
+[2026-07-02 04:57:59] Siklus Menit Baru. Harga BTC Terakhir: $60807.47
+[2026-07-02 04:57:59] Keputusan analis: Wait
+[2026-07-02 04:58:59] Siklus Menit Baru. Harga BTC Terakhir: $60818.00
+[2026-07-02 04:58:59] Keputusan analis: Wait
+[2026-07-02 05:00:00] Siklus Menit Baru. Harga BTC Terakhir: $60815.99
+[2026-07-02 05:00:00] Keputusan analis: Wait
+[2026-07-02 05:01:00] Siklus Menit Baru. Harga BTC Terakhir: $60814.00
+[2026-07-02 05:01:00] Keputusan analis: Wait
+[2026-07-02 05:02:00] Siklus Menit Baru. Harga BTC Terakhir: $60816.00
+[2026-07-02 05:02:00] Keputusan analis: Wait
+[2026-07-02 05:03:00] Siklus Menit Baru. Harga BTC Terakhir: $60812.00
+[2026-07-02 05:03:00] Keputusan analis: Wait
+[2026-07-02 05:04:00] Siklus Menit Baru. Harga BTC Terakhir: $60802.92
+[2026-07-02 05:04:00] Keputusan analis: Wait
+[2026-07-02 05:05:01] Siklus Menit Baru. Harga BTC Terakhir: $60821.95
+[2026-07-02 05:05:01] Keputusan analis: Wait
+[2026-07-02 05:06:01] Siklus Menit Baru. Harga BTC Terakhir: $60813.13
+[2026-07-02 05:06:01] Keputusan analis: Wait
+[2026-07-02 05:07:01] Siklus Menit Baru. Harga BTC Terakhir: $60816.54
+[2026-07-02 05:07:01] Keputusan analis: Wait
+[2026-07-02 05:08:02] Siklus Menit Baru. Harga BTC Terakhir: $60821.52
+[2026-07-02 05:08:02] Keputusan analis: Wait
+[2026-07-02 05:09:02] Siklus Menit Baru. Harga BTC Terakhir: $60821.53
+[2026-07-02 05:09:02] Keputusan analis: Wait
+[2026-07-02 05:10:02] Siklus Menit Baru. Harga BTC Terakhir: $60821.27
+[2026-07-02 05:10:02] Keputusan analis: Wait
+[2026-07-02 05:11:03] Siklus Menit Baru. Harga BTC Terakhir: $60821.27
+[2026-07-02 05:11:03] Keputusan analis: Wait
+[2026-07-02 05:12:03] Siklus Menit Baru. Harga BTC Terakhir: $60820.37
+[2026-07-02 05:12:03] Keputusan analis: Wait
+[2026-07-02 05:13:03] Siklus Menit Baru. Harga BTC Terakhir: $60823.99
+[2026-07-02 05:13:03] Keputusan analis: Wait
+[2026-07-02 05:14:03] Siklus Menit Baru. Harga BTC Terakhir: $60817.50
+[2026-07-02 05:14:03] Keputusan analis: Wait
+[2026-07-02 05:15:04] Siklus Menit Baru. Harga BTC Terakhir: $60810.01
+[2026-07-02 05:15:04] Keputusan analis: Wait
+[2026-07-02 05:16:04] Siklus Menit Baru. Harga BTC Terakhir: $60820.06
+[2026-07-02 05:16:04] Keputusan analis: Wait
+[2026-07-02 05:17:04] Siklus Menit Baru. Harga BTC Terakhir: $60830.00
+[2026-07-02 05:17:04] Keputusan analis: Wait
+[2026-07-02 05:18:04] Siklus Menit Baru. Harga BTC Terakhir: $60830.01
+[2026-07-02 05:18:04] Keputusan analis: Wait
+[2026-07-02 05:19:04] Siklus Menit Baru. Harga BTC Terakhir: $60840.00
+[2026-07-02 05:19:04] Keputusan analis: Wait
+[2026-07-02 05:20:05] Siklus Menit Baru. Harga BTC Terakhir: $60820.47
+[2026-07-02 05:20:05] Keputusan analis: Wait
+[2026-07-02 05:21:05] Siklus Menit Baru. Harga BTC Terakhir: $60833.17
+[2026-07-02 05:21:05] Keputusan analis: Wait
+[2026-07-02 05:22:05] Siklus Menit Baru. Harga BTC Terakhir: $61060.70
+[2026-07-02 05:22:05] Keputusan analis: Wait
+[2026-07-02 05:23:05] Siklus Menit Baru. Harga BTC Terakhir: $61150.00
+[2026-07-02 05:23:05] Keputusan analis: Wait
+[2026-07-02 05:24:05] Siklus Menit Baru. Harga BTC Terakhir: $60985.07
+[2026-07-02 05:24:05] Keputusan analis: Wait
+[2026-07-02 05:25:05] Siklus Menit Baru. Harga BTC Terakhir: $60990.00
+[2026-07-02 05:25:05] Keputusan analis: Wait
+[2026-07-02 05:26:06] Siklus Menit Baru. Harga BTC Terakhir: $60855.83
+[2026-07-02 05:26:06] Keputusan analis: Wait
+[2026-07-02 05:27:06] Siklus Menit Baru. Harga BTC Terakhir: $60838.20
+[2026-07-02 05:27:06] Keputusan analis: Wait
+[2026-07-02 05:28:06] Siklus Menit Baru. Harga BTC Terakhir: $60736.00
+[2026-07-02 05:28:06] Keputusan analis: Wait
+[2026-07-02 05:29:06] Siklus Menit Baru. Harga BTC Terakhir: $60702.01
+[2026-07-02 05:29:06] Keputusan analis: Wait
+[2026-07-02 05:30:06] Siklus Menit Baru. Harga BTC Terakhir: $60664.88
+[2026-07-02 05:30:06] Keputusan analis: Wait
+[2026-07-02 05:31:07] Siklus Menit Baru. Harga BTC Terakhir: $60581.60
+[2026-07-02 05:31:07] Keputusan analis: Wait
+[2026-07-02 05:32:07] Siklus Menit Baru. Harga BTC Terakhir: $60499.99
+[2026-07-02 05:32:07] Keputusan analis: Wait
+[2026-07-02 05:33:07] Siklus Menit Baru. Harga BTC Terakhir: $60531.27
+[2026-07-02 05:33:07] Keputusan analis: Wait
+[2026-07-02 05:34:07] Siklus Menit Baru. Harga BTC Terakhir: $60537.48
+[2026-07-02 05:34:07] Keputusan analis: Wait
+[2026-07-02 05:35:07] Siklus Menit Baru. Harga BTC Terakhir: $60486.01
+[2026-07-02 05:35:07] Keputusan analis: Wait
+[2026-07-02 05:36:08] Siklus Menit Baru. Harga BTC Terakhir: $60532.01
+[2026-07-02 05:36:08] Keputusan analis: Wait
+[2026-07-02 05:37:08] Siklus Menit Baru. Harga BTC Terakhir: $60478.00
+[2026-07-02 05:37:08] Keputusan analis: Wait
+[2026-07-02 05:38:08] Siklus Menit Baru. Harga BTC Terakhir: $60500.01
+[2026-07-02 05:38:08] Keputusan analis: Wait
+[2026-07-02 05:39:08] Siklus Menit Baru. Harga BTC Terakhir: $60527.81
+[2026-07-02 05:39:08] Keputusan analis: Wait
+[2026-07-02 05:40:08] Siklus Menit Baru. Harga BTC Terakhir: $60547.17
+[2026-07-02 05:40:08] Keputusan analis: Wait
+[2026-07-02 05:41:08] Siklus Menit Baru. Harga BTC Terakhir: $60481.99
+[2026-07-02 05:41:08] Keputusan analis: Wait
+[2026-07-02 05:42:09] Siklus Menit Baru. Harga BTC Terakhir: $60544.01
+[2026-07-02 05:42:09] Keputusan analis: Wait
+[2026-07-02 05:43:09] Siklus Menit Baru. Harga BTC Terakhir: $60555.99
+[2026-07-02 05:43:09] Keputusan analis: Wait
+[2026-07-02 05:44:09] Siklus Menit Baru. Harga BTC Terakhir: $60480.00
+[2026-07-02 05:44:09] Keputusan analis: Wait
+[2026-07-02 05:45:09] Siklus Menit Baru. Harga BTC Terakhir: $60475.20
+[2026-07-02 05:45:09] Keputusan analis: Wait
+[2026-07-02 05:46:09] Siklus Menit Baru. Harga BTC Terakhir: $60443.99
+[2026-07-02 05:46:09] Keputusan analis: Wait
+[2026-07-02 05:47:10] Siklus Menit Baru. Harga BTC Terakhir: $60426.70
+[2026-07-02 05:47:10] Keputusan analis: Wait
+[2026-07-02 05:48:10] Siklus Menit Baru. Harga BTC Terakhir: $60472.01
+[2026-07-02 05:48:10] Keputusan analis: Wait
+[2026-07-02 05:49:10] Siklus Menit Baru. Harga BTC Terakhir: $60482.01
+[2026-07-02 05:49:10] Keputusan analis: Wait
+[2026-07-02 05:50:10] Siklus Menit Baru. Harga BTC Terakhir: $60460.95
+[2026-07-02 05:50:10] Keputusan analis: Wait
+[2026-07-02 05:51:10] Siklus Menit Baru. Harga BTC Terakhir: $60360.00
+[2026-07-02 05:51:10] Keputusan analis: Wait
+[2026-07-02 05:52:11] Siklus Menit Baru. Harga BTC Terakhir: $60428.09
+[2026-07-02 05:52:11] Keputusan analis: Wait
+[2026-07-02 05:53:11] Siklus Menit Baru. Harga BTC Terakhir: $60449.99
+[2026-07-02 05:53:11] Keputusan analis: Wait
+[2026-07-02 05:54:11] Siklus Menit Baru. Harga BTC Terakhir: $60435.53
+[2026-07-02 05:54:11] Keputusan analis: Wait
+[2026-07-02 05:55:11] Siklus Menit Baru. Harga BTC Terakhir: $60449.01
+[2026-07-02 05:55:11] Keputusan analis: Wait
+[2026-07-02 05:56:11] Siklus Menit Baru. Harga BTC Terakhir: $60442.01
+[2026-07-02 05:56:11] Keputusan analis: Wait
+[2026-07-02 05:57:11] Siklus Menit Baru. Harga BTC Terakhir: $60450.86
+[2026-07-02 05:57:11] Keputusan analis: Wait
+[2026-07-02 05:58:12] Siklus Menit Baru. Harga BTC Terakhir: $60450.85
+[2026-07-02 05:58:12] Keputusan analis: Wait
+[2026-07-02 05:59:12] Siklus Menit Baru. Harga BTC Terakhir: $60482.00
+[2026-07-02 05:59:12] Keputusan analis: Wait
+[2026-07-02 06:00:12] Siklus Menit Baru. Harga BTC Terakhir: $60448.02
+[2026-07-02 06:00:12] Keputusan analis: Wait
+[2026-07-02 06:01:12] Siklus Menit Baru. Harga BTC Terakhir: $60347.86
+[2026-07-02 06:01:12] Keputusan analis: Wait
+[2026-07-02 06:02:12] Siklus Menit Baru. Harga BTC Terakhir: $60338.99
+[2026-07-02 06:02:12] Keputusan analis: Wait
+[2026-07-02 06:03:13] Siklus Menit Baru. Harga BTC Terakhir: $60340.94
+[2026-07-02 06:03:13] Keputusan analis: Wait
+[2026-07-02 06:04:13] Siklus Menit Baru. Harga BTC Terakhir: $60331.55
+[2026-07-02 06:04:13] Keputusan analis: Wait
+[2026-07-02 06:05:13] Siklus Menit Baru. Harga BTC Terakhir: $60327.99
+[2026-07-02 06:05:13] Keputusan analis: Wait
+[2026-07-02 06:06:13] Siklus Menit Baru. Harga BTC Terakhir: $60310.13
+[2026-07-02 06:06:13] Keputusan analis: Wait
+[2026-07-02 06:07:13] Siklus Menit Baru. Harga BTC Terakhir: $60328.22
+[2026-07-02 06:07:13] Keputusan analis: Wait
+[2026-07-02 06:08:13] Siklus Menit Baru. Harga BTC Terakhir: $60313.96
+[2026-07-02 06:08:13] Keputusan analis: Wait
+[2026-07-02 06:09:14] Siklus Menit Baru. Harga BTC Terakhir: $60337.96
+[2026-07-02 06:09:14] Keputusan analis: Wait
+[2026-07-02 06:10:14] Siklus Menit Baru. Harga BTC Terakhir: $60351.99
+[2026-07-02 06:10:14] Keputusan analis: Wait
+[2026-07-02 06:11:14] Siklus Menit Baru. Harga BTC Terakhir: $60296.01
+[2026-07-02 06:11:14] Keputusan analis: Wait
+[2026-07-02 06:12:14] Siklus Menit Baru. Harga BTC Terakhir: $60294.12
+[2026-07-02 06:12:14] Keputusan analis: Wait
+[2026-07-02 06:13:14] Siklus Menit Baru. Harga BTC Terakhir: $60252.40
+[2026-07-02 06:13:14] Keputusan analis: Wait
+[2026-07-02 06:14:14] Siklus Menit Baru. Harga BTC Terakhir: $60234.29
+[2026-07-02 06:14:14] Keputusan analis: Wait
+[2026-07-02 06:15:15] Siklus Menit Baru. Harga BTC Terakhir: $60246.17
+[2026-07-02 06:15:15] Keputusan analis: Wait
+[2026-07-02 06:16:15] Siklus Menit Baru. Harga BTC Terakhir: $60274.55
+[2026-07-02 06:16:15] Keputusan analis: Wait
+[2026-07-02 06:17:15] Siklus Menit Baru. Harga BTC Terakhir: $60278.01
+[2026-07-02 06:17:15] Keputusan analis: Wait
+[2026-07-02 06:18:15] Siklus Menit Baru. Harga BTC Terakhir: $60291.99
+[2026-07-02 06:18:15] Keputusan analis: Wait
+[2026-07-02 06:19:15] Siklus Menit Baru. Harga BTC Terakhir: $60333.34
+[2026-07-02 06:19:15] Keputusan analis: Wait
+[2026-07-02 06:20:15] Siklus Menit Baru. Harga BTC Terakhir: $60329.02
+[2026-07-02 06:20:15] Keputusan analis: Wait
+[2026-07-02 06:21:16] Siklus Menit Baru. Harga BTC Terakhir: $60292.01
+[2026-07-02 06:21:16] Keputusan analis: Wait
+[2026-07-02 06:22:16] Siklus Menit Baru. Harga BTC Terakhir: $60284.15
+[2026-07-02 06:22:16] Keputusan analis: Wait
+[2026-07-02 06:23:16] Siklus Menit Baru. Harga BTC Terakhir: $60291.17
+[2026-07-02 06:23:16] Keputusan analis: Wait
+[2026-07-02 06:24:16] Siklus Menit Baru. Harga BTC Terakhir: $60218.93
+[2026-07-02 06:24:16] Keputusan analis: Wait
+[2026-07-02 06:25:16] Siklus Menit Baru. Harga BTC Terakhir: $60227.99
+[2026-07-02 06:25:16] Keputusan analis: Wait
+[2026-07-02 06:26:17] Siklus Menit Baru. Harga BTC Terakhir: $60235.99
+[2026-07-02 06:26:17] Keputusan analis: Wait
+[2026-07-02 06:27:17] Siklus Menit Baru. Harga BTC Terakhir: $60226.04
+[2026-07-02 06:27:17] Keputusan analis: Wait
+[2026-07-02 06:28:17] Siklus Menit Baru. Harga BTC Terakhir: $60217.59
+[2026-07-02 06:28:17] Keputusan analis: Wait
+[2026-07-02 06:29:17] Siklus Menit Baru. Harga BTC Terakhir: $60220.01
+[2026-07-02 06:29:17] Keputusan analis: Wait
+[2026-07-02 06:30:17] Siklus Menit Baru. Harga BTC Terakhir: $60221.34
+[2026-07-02 06:30:17] Keputusan analis: Wait
+[2026-07-02 06:31:17] Siklus Menit Baru. Harga BTC Terakhir: $60260.00
+[2026-07-02 06:31:17] Keputusan analis: Wait
+[2026-07-02 06:32:18] Siklus Menit Baru. Harga BTC Terakhir: $60222.01
+[2026-07-02 06:32:18] Keputusan analis: Wait
+[2026-07-02 06:33:18] Siklus Menit Baru. Harga BTC Terakhir: $60210.47
+[2026-07-02 06:33:18] Keputusan analis: Wait
+[2026-07-02 06:34:18] Siklus Menit Baru. Harga BTC Terakhir: $60238.01
+[2026-07-02 06:34:18] Keputusan analis: Wait
+[2026-07-02 06:35:18] Siklus Menit Baru. Harga BTC Terakhir: $60185.13
+[2026-07-02 06:35:18] Keputusan analis: Wait
+[2026-07-02 06:36:18] Siklus Menit Baru. Harga BTC Terakhir: $60067.01
+[2026-07-02 06:36:18] Keputusan analis: Buy { layer: 1, usdt_to_spend: 140.0, reason: "[SmartDCA] Layer 1 — Drop -2.07% (RSI: 28.6)" }
+[2026-07-02 06:36:18] Mengeksekusi transaksi...
+[2026-07-02 06:36:18] [SmartDCA] BUY Layer 1 @ $60067.01 | 0.002328 BTC | Spent: $140.00 | Reason: [SmartDCA] Layer 1 — Drop -2.07% (RSI: 28.6)
+[2026-07-02 06:36:18] Eksekusi sukses. Saldo: $560.00, BTC: 0.002328
+[2026-07-02 06:37:18] Siklus Menit Baru. Harga BTC Terakhir: $60068.00
+[2026-07-02 06:37:18] Keputusan analis: Wait
+[2026-07-02 06:38:18] Siklus Menit Baru. Harga BTC Terakhir: $60136.00
+[2026-07-02 06:38:18] Keputusan analis: Wait
+[2026-07-02 06:39:19] Siklus Menit Baru. Harga BTC Terakhir: $60134.01
+[2026-07-02 06:39:19] Keputusan analis: Wait
+[2026-07-02 06:40:19] Siklus Menit Baru. Harga BTC Terakhir: $60150.00
+[2026-07-02 06:40:19] Keputusan analis: Wait
+[2026-07-02 06:41:19] Siklus Menit Baru. Harga BTC Terakhir: $60108.00
+[2026-07-02 06:41:19] Keputusan analis: Wait
+[2026-07-02 06:42:19] Siklus Menit Baru. Harga BTC Terakhir: $60146.99
+[2026-07-02 06:42:19] Keputusan analis: Wait
+[2026-07-02 06:43:19] Siklus Menit Baru. Harga BTC Terakhir: $60190.01
+[2026-07-02 06:43:19] Keputusan analis: Wait
+[2026-07-02 06:44:20] Siklus Menit Baru. Harga BTC Terakhir: $60164.01
+[2026-07-02 06:44:20] Keputusan analis: Wait
+[2026-07-02 06:45:20] Siklus Menit Baru. Harga BTC Terakhir: $60149.66
+[2026-07-02 06:45:20] Keputusan analis: Wait
+[2026-07-02 06:46:20] Siklus Menit Baru. Harga BTC Terakhir: $60090.00
+[2026-07-02 06:46:20] Keputusan analis: Wait
+[2026-07-02 06:47:20] Siklus Menit Baru. Harga BTC Terakhir: $60058.67
+[2026-07-02 06:47:20] Keputusan analis: Wait
+[2026-07-02 06:48:20] Siklus Menit Baru. Harga BTC Terakhir: $60092.00
+[2026-07-02 06:48:20] Keputusan analis: Wait
+[2026-07-02 06:49:20] Siklus Menit Baru. Harga BTC Terakhir: $60029.99
+[2026-07-02 06:49:20] Keputusan analis: Wait
+[2026-07-02 06:50:21] Siklus Menit Baru. Harga BTC Terakhir: $60041.99
+[2026-07-02 06:50:21] Keputusan analis: Wait
+[2026-07-02 06:51:21] Siklus Menit Baru. Harga BTC Terakhir: $60026.00
+[2026-07-02 06:51:21] Keputusan analis: Wait
+[2026-07-02 06:52:21] Siklus Menit Baru. Harga BTC Terakhir: $59995.59
+[2026-07-02 06:52:21] Keputusan analis: Wait
+[2026-07-02 06:53:21] Siklus Menit Baru. Harga BTC Terakhir: $60026.01
+[2026-07-02 06:53:21] Keputusan analis: Wait
+[2026-07-02 06:54:21] Siklus Menit Baru. Harga BTC Terakhir: $60068.54
+[2026-07-02 06:54:21] Keputusan analis: Wait
+[2026-07-02 06:55:21] Siklus Menit Baru. Harga BTC Terakhir: $60092.00
+[2026-07-02 06:55:21] Keputusan analis: Wait
+[2026-07-02 06:56:22] Siklus Menit Baru. Harga BTC Terakhir: $60070.07
+[2026-07-02 06:56:22] Keputusan analis: Wait
+[2026-07-02 06:57:22] Siklus Menit Baru. Harga BTC Terakhir: $60065.25
+[2026-07-02 06:57:22] Keputusan analis: Wait
+[2026-07-02 06:58:22] Siklus Menit Baru. Harga BTC Terakhir: $60060.27
+[2026-07-02 06:58:22] Keputusan analis: Wait
+[2026-07-02 06:59:22] Siklus Menit Baru. Harga BTC Terakhir: $60018.01
+[2026-07-02 06:59:22] Keputusan analis: Wait
+[2026-07-02 07:00:22] Siklus Menit Baru. Harga BTC Terakhir: $60026.00
+[2026-07-02 07:00:22] Keputusan analis: Wait
+[2026-07-02 07:01:23] Siklus Menit Baru. Harga BTC Terakhir: $59944.60
+[2026-07-02 07:01:23] Keputusan analis: Wait
+[2026-07-02 07:02:23] Siklus Menit Baru. Harga BTC Terakhir: $59931.96
+[2026-07-02 07:02:23] Keputusan analis: Wait
+[2026-07-02 07:03:23] Siklus Menit Baru. Harga BTC Terakhir: $59914.01
+[2026-07-02 07:03:23] Keputusan analis: Wait
+[2026-07-02 07:04:23] Siklus Menit Baru. Harga BTC Terakhir: $59958.80
+[2026-07-02 07:04:23] Keputusan analis: Wait
+[2026-07-02 07:05:23] Siklus Menit Baru. Harga BTC Terakhir: $59970.00
+[2026-07-02 07:05:23] Keputusan analis: Wait
+[2026-07-02 07:06:23] Siklus Menit Baru. Harga BTC Terakhir: $59974.70
+[2026-07-02 07:06:23] Keputusan analis: Wait
+[2026-07-02 07:07:24] Siklus Menit Baru. Harga BTC Terakhir: $59919.99
+[2026-07-02 07:07:24] Keputusan analis: Wait
+[2026-07-02 07:08:24] Siklus Menit Baru. Harga BTC Terakhir: $59932.00
+[2026-07-02 07:08:24] Keputusan analis: Wait
+[2026-07-02 07:09:24] Siklus Menit Baru. Harga BTC Terakhir: $59950.01
+[2026-07-02 07:09:24] Keputusan analis: Wait
+[2026-07-02 07:10:24] Siklus Menit Baru. Harga BTC Terakhir: $59959.99
+[2026-07-02 07:10:24] Keputusan analis: Wait
+[2026-07-02 07:11:24] Siklus Menit Baru. Harga BTC Terakhir: $59962.48
+[2026-07-02 07:11:24] Keputusan analis: Wait
+[2026-07-02 07:12:25] Siklus Menit Baru. Harga BTC Terakhir: $59947.99
+[2026-07-02 07:12:25] Keputusan analis: Wait
+[2026-07-02 07:13:25] Siklus Menit Baru. Harga BTC Terakhir: $59973.53
+[2026-07-02 07:13:25] Keputusan analis: Wait
+[2026-07-02 07:14:25] Siklus Menit Baru. Harga BTC Terakhir: $59970.00
+[2026-07-02 07:14:25] Keputusan analis: Wait
+[2026-07-02 07:15:25] Siklus Menit Baru. Harga BTC Terakhir: $59954.69
+[2026-07-02 07:15:25] Keputusan analis: Wait
+[2026-07-02 07:16:25] Siklus Menit Baru. Harga BTC Terakhir: $59942.01
+[2026-07-02 07:16:25] Keputusan analis: Wait
+[2026-07-02 07:17:25] Siklus Menit Baru. Harga BTC Terakhir: $59894.07
+[2026-07-02 07:17:25] Keputusan analis: Wait
+[2026-07-02 07:18:26] Siklus Menit Baru. Harga BTC Terakhir: $59812.82
+[2026-07-02 07:18:26] Keputusan analis: Wait
+[2026-07-02 07:19:26] Siklus Menit Baru. Harga BTC Terakhir: $59812.62
+[2026-07-02 07:19:26] Keputusan analis: Wait
+[2026-07-02 07:20:26] Siklus Menit Baru. Harga BTC Terakhir: $59769.77
+[2026-07-02 07:20:26] Keputusan analis: Wait
+[2026-07-02 07:21:26] Siklus Menit Baru. Harga BTC Terakhir: $59787.99
+[2026-07-02 07:21:26] Keputusan analis: Wait
+[2026-07-02 07:22:26] Siklus Menit Baru. Harga BTC Terakhir: $59850.84
+[2026-07-02 07:22:26] Keputusan analis: Wait
+[2026-07-02 07:23:27] Siklus Menit Baru. Harga BTC Terakhir: $59852.01
+[2026-07-02 07:23:27] Keputusan analis: Wait
+[2026-07-02 07:24:27] Siklus Menit Baru. Harga BTC Terakhir: $59873.99
+[2026-07-02 07:24:27] Keputusan analis: Wait
+[2026-07-02 07:25:27] Siklus Menit Baru. Harga BTC Terakhir: $59845.99
+[2026-07-02 07:25:27] Keputusan analis: Wait
+[2026-07-02 07:26:27] Siklus Menit Baru. Harga BTC Terakhir: $59821.40
+[2026-07-02 07:26:27] Keputusan analis: Wait
+[2026-07-02 07:27:27] Siklus Menit Baru. Harga BTC Terakhir: $59804.01
+[2026-07-02 07:27:27] Keputusan analis: Wait
+[2026-07-02 07:28:27] Siklus Menit Baru. Harga BTC Terakhir: $59779.58
+[2026-07-02 07:28:27] Keputusan analis: Wait
+[2026-07-02 07:29:28] Siklus Menit Baru. Harga BTC Terakhir: $59794.00
+[2026-07-02 07:29:28] Keputusan analis: Wait
+[2026-07-02 07:30:28] Siklus Menit Baru. Harga BTC Terakhir: $59733.41
+[2026-07-02 07:30:28] Keputusan analis: Wait
+[2026-07-02 07:31:28] Siklus Menit Baru. Harga BTC Terakhir: $59725.99
+[2026-07-02 07:31:28] Keputusan analis: Wait
+[2026-07-02 07:32:28] Siklus Menit Baru. Harga BTC Terakhir: $59725.00
+[2026-07-02 07:32:28] Keputusan analis: Wait
+[2026-07-02 07:33:28] Siklus Menit Baru. Harga BTC Terakhir: $59716.83
+[2026-07-02 07:33:28] Keputusan analis: Wait
+[2026-07-02 07:34:29] Siklus Menit Baru. Harga BTC Terakhir: $59690.00
+[2026-07-02 07:34:29] Keputusan analis: Wait
+[2026-07-02 07:35:29] Siklus Menit Baru. Harga BTC Terakhir: $59686.00
+[2026-07-02 07:35:29] Keputusan analis: Wait
+[2026-07-02 07:36:29] Siklus Menit Baru. Harga BTC Terakhir: $59726.00
+[2026-07-02 07:36:29] Keputusan analis: Wait
+[2026-07-02 07:37:29] Siklus Menit Baru. Harga BTC Terakhir: $59708.00
+[2026-07-02 07:37:29] Keputusan analis: Wait
+[2026-07-02 07:38:29] Siklus Menit Baru. Harga BTC Terakhir: $59666.56
+[2026-07-02 07:38:29] Keputusan analis: Wait
+[2026-07-02 07:39:29] Siklus Menit Baru. Harga BTC Terakhir: $59657.99
+[2026-07-02 07:39:29] Keputusan analis: Wait
+[2026-07-02 07:40:30] Siklus Menit Baru. Harga BTC Terakhir: $59646.00
+[2026-07-02 07:40:30] Keputusan analis: Wait
+[2026-07-02 07:41:30] Siklus Menit Baru. Harga BTC Terakhir: $59645.21
+[2026-07-02 07:41:30] Keputusan analis: Wait
+[2026-07-02 07:42:30] Siklus Menit Baru. Harga BTC Terakhir: $59643.99
+[2026-07-02 07:42:30] Keputusan analis: Wait
+[2026-07-02 07:43:30] Siklus Menit Baru. Harga BTC Terakhir: $59589.61
+[2026-07-02 07:43:30] Keputusan analis: Wait
+[2026-07-02 07:44:30] Siklus Menit Baru. Harga BTC Terakhir: $59610.00
+[2026-07-02 07:44:30] Keputusan analis: Wait
+[2026-07-02 07:45:30] Siklus Menit Baru. Harga BTC Terakhir: $59665.70
+[2026-07-02 07:45:30] Keputusan analis: Wait
+[2026-07-02 07:46:31] Siklus Menit Baru. Harga BTC Terakhir: $59657.99
+[2026-07-02 07:46:31] Keputusan analis: Wait
+[2026-07-02 07:47:31] Siklus Menit Baru. Harga BTC Terakhir: $59689.98
+[2026-07-02 07:47:31] Keputusan analis: Wait
+[2026-07-02 07:48:31] Siklus Menit Baru. Harga BTC Terakhir: $59683.06
+[2026-07-02 07:48:31] Keputusan analis: Wait
+[2026-07-02 07:49:31] Siklus Menit Baru. Harga BTC Terakhir: $59738.00
+[2026-07-02 07:49:31] Keputusan analis: Wait
+[2026-07-02 07:50:32] Siklus Menit Baru. Harga BTC Terakhir: $59820.02
+[2026-07-02 07:50:32] Keputusan analis: Wait
+[2026-07-02 07:51:32] Siklus Menit Baru. Harga BTC Terakhir: $59808.92
+[2026-07-02 07:51:32] Keputusan analis: Wait
+[2026-07-02 07:52:32] Siklus Menit Baru. Harga BTC Terakhir: $59792.32
+[2026-07-02 07:52:32] Keputusan analis: Wait
+[2026-07-02 07:53:32] Siklus Menit Baru. Harga BTC Terakhir: $59768.00
+[2026-07-02 07:53:32] Keputusan analis: Wait
+[2026-07-02 07:54:32] Siklus Menit Baru. Harga BTC Terakhir: $59760.01
+[2026-07-02 07:54:32] Keputusan analis: Wait
+[2026-07-02 07:55:32] Siklus Menit Baru. Harga BTC Terakhir: $59739.69
+[2026-07-02 07:55:32] Keputusan analis: Wait
+[2026-07-02 07:56:33] Siklus Menit Baru. Harga BTC Terakhir: $59712.01
+[2026-07-02 07:56:33] Keputusan analis: Wait
+[2026-07-02 07:57:33] Siklus Menit Baru. Harga BTC Terakhir: $59716.00
+[2026-07-02 07:57:33] Keputusan analis: Wait
+[2026-07-02 07:58:33] Siklus Menit Baru. Harga BTC Terakhir: $59713.84
+[2026-07-02 07:58:33] Keputusan analis: Wait
+[2026-07-02 07:59:33] Siklus Menit Baru. Harga BTC Terakhir: $59730.00
+[2026-07-02 07:59:33] Keputusan analis: Wait
+[2026-07-02 08:00:33] Siklus Menit Baru. Harga BTC Terakhir: $59747.62
+[2026-07-02 08:00:33] Keputusan analis: Wait
+[2026-07-02 08:01:33] Siklus Menit Baru. Harga BTC Terakhir: $59752.94
+[2026-07-02 08:01:33] Keputusan analis: Wait
+[2026-07-02 08:02:34] Siklus Menit Baru. Harga BTC Terakhir: $59776.00
+[2026-07-02 08:02:34] Keputusan analis: Wait
+[2026-07-02 08:03:34] Siklus Menit Baru. Harga BTC Terakhir: $59784.84
+[2026-07-02 08:03:34] Keputusan analis: Wait
+[2026-07-02 08:04:34] Siklus Menit Baru. Harga BTC Terakhir: $59750.01
+[2026-07-02 08:04:34] Keputusan analis: Wait
+[2026-07-02 08:05:34] Siklus Menit Baru. Harga BTC Terakhir: $59750.00
+[2026-07-02 08:05:34] Keputusan analis: Wait
+[2026-07-02 08:06:34] Siklus Menit Baru. Harga BTC Terakhir: $59760.00
+[2026-07-02 08:06:34] Keputusan analis: Wait
+[2026-07-02 08:07:34] Siklus Menit Baru. Harga BTC Terakhir: $59753.99
+[2026-07-02 08:07:34] Keputusan analis: Wait
+[2026-07-02 08:08:35] Siklus Menit Baru. Harga BTC Terakhir: $59754.00
+[2026-07-02 08:08:35] Keputusan analis: Wait
+[2026-07-02 08:09:35] Siklus Menit Baru. Harga BTC Terakhir: $59808.01
+[2026-07-02 08:09:35] Keputusan analis: Wait
+[2026-07-02 08:10:35] Siklus Menit Baru. Harga BTC Terakhir: $59823.79
+[2026-07-02 08:10:35] Keputusan analis: Wait
+[2026-07-02 08:11:35] Siklus Menit Baru. Harga BTC Terakhir: $59790.01
+[2026-07-02 08:11:35] Keputusan analis: Wait
+[2026-07-02 08:12:35] Siklus Menit Baru. Harga BTC Terakhir: $59824.00
+[2026-07-02 08:12:35] Keputusan analis: Wait
+[2026-07-02 08:13:35] Siklus Menit Baru. Harga BTC Terakhir: $59910.01
+[2026-07-02 08:13:35] Keputusan analis: Wait
+[2026-07-02 08:14:35] Siklus Menit Baru. Harga BTC Terakhir: $59920.00
+[2026-07-02 08:14:35] Keputusan analis: Wait
+[2026-07-02 08:15:36] Siklus Menit Baru. Harga BTC Terakhir: $59932.01
+[2026-07-02 08:15:36] Keputusan analis: Wait
+[2026-07-02 08:16:36] Siklus Menit Baru. Harga BTC Terakhir: $59936.01
+[2026-07-02 08:16:36] Keputusan analis: Wait
+[2026-07-02 08:17:36] Siklus Menit Baru. Harga BTC Terakhir: $59855.57
+[2026-07-02 08:17:36] Keputusan analis: Wait
+[2026-07-02 08:18:36] Siklus Menit Baru. Harga BTC Terakhir: $59895.09
+[2026-07-02 08:18:36] Keputusan analis: Wait
+[2026-07-02 08:19:36] Siklus Menit Baru. Harga BTC Terakhir: $59957.99
+[2026-07-02 08:19:36] Keputusan analis: Wait
+[2026-07-02 08:20:36] Siklus Menit Baru. Harga BTC Terakhir: $59986.29
+[2026-07-02 08:20:36] Keputusan analis: Wait
+[2026-07-02 08:21:37] Siklus Menit Baru. Harga BTC Terakhir: $59948.00
+[2026-07-02 08:21:37] Keputusan analis: Wait
+[2026-07-02 08:22:37] Siklus Menit Baru. Harga BTC Terakhir: $59906.06
+[2026-07-02 08:22:37] Keputusan analis: Wait
+[2026-07-02 08:23:37] Siklus Menit Baru. Harga BTC Terakhir: $59939.03
+[2026-07-02 08:23:37] Keputusan analis: Wait
+[2026-07-02 08:24:37] Siklus Menit Baru. Harga BTC Terakhir: $59955.99
+[2026-07-02 08:24:37] Keputusan analis: Wait
+[2026-07-02 08:25:37] Siklus Menit Baru. Harga BTC Terakhir: $60017.74
+[2026-07-02 08:25:37] Keputusan analis: Wait
+[2026-07-02 08:26:37] Siklus Menit Baru. Harga BTC Terakhir: $60000.06
+[2026-07-02 08:26:37] Keputusan analis: Wait
+[2026-07-02 08:27:38] Siklus Menit Baru. Harga BTC Terakhir: $59982.06
+[2026-07-02 08:27:38] Keputusan analis: Wait
+[2026-07-02 08:28:38] Siklus Menit Baru. Harga BTC Terakhir: $59985.22
+[2026-07-02 08:28:38] Keputusan analis: Wait
+[2026-07-02 08:29:38] Siklus Menit Baru. Harga BTC Terakhir: $60007.62
+[2026-07-02 08:29:38] Keputusan analis: Wait
+[2026-07-02 08:30:38] Siklus Menit Baru. Harga BTC Terakhir: $60138.65
+[2026-07-02 08:30:38] Keputusan analis: Wait
+[2026-07-02 08:31:38] Siklus Menit Baru. Harga BTC Terakhir: $60156.43
+[2026-07-02 08:31:38] Keputusan analis: Wait
+[2026-07-02 08:32:38] Siklus Menit Baru. Harga BTC Terakhir: $60160.02
+[2026-07-02 08:32:38] Keputusan analis: Wait
+[2026-07-02 08:33:38] Siklus Menit Baru. Harga BTC Terakhir: $60179.36
+[2026-07-02 08:33:38] Keputusan analis: Wait
+[2026-07-02 08:34:39] Siklus Menit Baru. Harga BTC Terakhir: $60143.33
+[2026-07-02 08:34:39] Keputusan analis: Wait
+[2026-07-02 08:35:39] Siklus Menit Baru. Harga BTC Terakhir: $60134.97
+[2026-07-02 08:35:39] Keputusan analis: Wait
+[2026-07-02 08:36:39] Siklus Menit Baru. Harga BTC Terakhir: $60163.99
+[2026-07-02 08:36:39] Keputusan analis: Wait
+[2026-07-02 08:37:39] Siklus Menit Baru. Harga BTC Terakhir: $60166.16
+[2026-07-02 08:37:39] Keputusan analis: Wait
+[2026-07-02 08:38:39] Siklus Menit Baru. Harga BTC Terakhir: $60158.00
+[2026-07-02 08:38:39] Keputusan analis: Wait
+[2026-07-02 08:39:39] Siklus Menit Baru. Harga BTC Terakhir: $60185.55
+[2026-07-02 08:39:39] Keputusan analis: Wait
+[2026-07-02 08:40:40] Siklus Menit Baru. Harga BTC Terakhir: $60308.32
+[2026-07-02 08:40:40] Keputusan analis: Wait
+[2026-07-02 08:41:40] Siklus Menit Baru. Harga BTC Terakhir: $60225.98
+[2026-07-02 08:41:40] Keputusan analis: Wait
+[2026-07-02 08:42:40] Siklus Menit Baru. Harga BTC Terakhir: $60193.86
+[2026-07-02 08:42:40] Keputusan analis: Wait
+[2026-07-02 08:43:40] Siklus Menit Baru. Harga BTC Terakhir: $60204.00
+[2026-07-02 08:43:40] Keputusan analis: Wait
+[2026-07-02 08:44:40] Siklus Menit Baru. Harga BTC Terakhir: $60200.00
+[2026-07-02 08:44:40] Keputusan analis: Wait
+[2026-07-02 08:45:40] Siklus Menit Baru. Harga BTC Terakhir: $60188.00
+[2026-07-02 08:45:40] Keputusan analis: Wait
+[2026-07-02 08:46:41] Siklus Menit Baru. Harga BTC Terakhir: $60222.52
+[2026-07-02 08:46:41] Keputusan analis: Wait
+[2026-07-02 08:47:41] Siklus Menit Baru. Harga BTC Terakhir: $60314.00
+[2026-07-02 08:47:41] Keputusan analis: Wait
+[2026-07-02 08:48:41] Siklus Menit Baru. Harga BTC Terakhir: $60296.00
+[2026-07-02 08:48:41] Keputusan analis: Wait
+[2026-07-02 08:49:41] Siklus Menit Baru. Harga BTC Terakhir: $60236.01
+[2026-07-02 08:49:41] Keputusan analis: Wait
+[2026-07-02 08:50:41] Siklus Menit Baru. Harga BTC Terakhir: $60115.08
+[2026-07-02 08:50:41] Keputusan analis: Wait
+[2026-07-02 08:51:41] Siklus Menit Baru. Harga BTC Terakhir: $60090.00
+[2026-07-02 08:51:41] Keputusan analis: Wait
+[2026-07-02 08:52:42] Siklus Menit Baru. Harga BTC Terakhir: $60109.20
+[2026-07-02 08:52:42] Keputusan analis: Wait
+[2026-07-02 08:53:42] Siklus Menit Baru. Harga BTC Terakhir: $60108.00
+[2026-07-02 08:53:42] Keputusan analis: Wait
+[2026-07-02 08:54:42] Siklus Menit Baru. Harga BTC Terakhir: $60123.01
+[2026-07-02 08:54:42] Keputusan analis: Wait
+[2026-07-02 08:55:42] Siklus Menit Baru. Harga BTC Terakhir: $60123.12
+[2026-07-02 08:55:42] Keputusan analis: Wait
+[2026-07-02 08:56:42] Siklus Menit Baru. Harga BTC Terakhir: $60125.99
+[2026-07-02 08:56:42] Keputusan analis: Wait
+[2026-07-02 08:57:42] Siklus Menit Baru. Harga BTC Terakhir: $60121.08
+[2026-07-02 08:57:42] Keputusan analis: Wait
+[2026-07-02 08:58:43] Siklus Menit Baru. Harga BTC Terakhir: $60150.51
+[2026-07-02 08:58:43] Keputusan analis: Wait
+[2026-07-02 08:59:43] Siklus Menit Baru. Harga BTC Terakhir: $60173.99
+[2026-07-02 08:59:43] Keputusan analis: Wait
+[2026-07-02 09:00:43] Siklus Menit Baru. Harga BTC Terakhir: $60146.00
+[2026-07-02 09:00:43] Keputusan analis: Wait
+[2026-07-02 09:01:43] Siklus Menit Baru. Harga BTC Terakhir: $60142.00
+[2026-07-02 09:01:43] Keputusan analis: Wait
+[2026-07-02 09:02:43] Siklus Menit Baru. Harga BTC Terakhir: $60150.00
+[2026-07-02 09:02:43] Keputusan analis: Wait
+[2026-07-02 09:03:43] Siklus Menit Baru. Harga BTC Terakhir: $60140.56
+[2026-07-02 09:03:43] Keputusan analis: Wait
+[2026-07-02 09:04:44] Siklus Menit Baru. Harga BTC Terakhir: $60175.93
+[2026-07-02 09:04:44] Keputusan analis: Wait
+[2026-07-02 09:05:44] Siklus Menit Baru. Harga BTC Terakhir: $60178.00
+[2026-07-02 09:05:44] Keputusan analis: Wait
+[2026-07-02 09:06:44] Siklus Menit Baru. Harga BTC Terakhir: $60162.01
+[2026-07-02 09:06:44] Keputusan analis: Wait
+[2026-07-02 09:07:44] Siklus Menit Baru. Harga BTC Terakhir: $60116.01
+[2026-07-02 09:07:44] Keputusan analis: Wait
+[2026-07-02 09:08:44] Siklus Menit Baru. Harga BTC Terakhir: $60137.09
+[2026-07-02 09:08:44] Keputusan analis: Wait
+[2026-07-02 09:09:44] Siklus Menit Baru. Harga BTC Terakhir: $60114.00
+[2026-07-02 09:09:44] Keputusan analis: Wait
+[2026-07-02 09:10:45] Siklus Menit Baru. Harga BTC Terakhir: $60015.68
+[2026-07-02 09:10:45] Keputusan analis: Wait
+[2026-07-02 09:11:45] Siklus Menit Baru. Harga BTC Terakhir: $60040.00
+[2026-07-02 09:11:45] Keputusan analis: Wait
+[2026-07-02 09:12:45] Siklus Menit Baru. Harga BTC Terakhir: $60090.00
+[2026-07-02 09:12:45] Keputusan analis: Wait
+[2026-07-02 09:13:45] Siklus Menit Baru. Harga BTC Terakhir: $60134.01
+[2026-07-02 09:13:45] Keputusan analis: Wait
+[2026-07-02 09:14:45] Siklus Menit Baru. Harga BTC Terakhir: $60138.00
+[2026-07-02 09:14:45] Keputusan analis: Wait
+[2026-07-02 09:15:45] Siklus Menit Baru. Harga BTC Terakhir: $60210.00
+[2026-07-02 09:15:45] Keputusan analis: Wait
+[2026-07-02 09:16:45] Siklus Menit Baru. Harga BTC Terakhir: $60185.49
+[2026-07-02 09:16:45] Keputusan analis: Wait
+[2026-07-02 09:17:46] Siklus Menit Baru. Harga BTC Terakhir: $60203.99
+[2026-07-02 09:17:46] Keputusan analis: Wait
+[2026-07-02 09:18:46] Siklus Menit Baru. Harga BTC Terakhir: $60196.20
+[2026-07-02 09:18:46] Keputusan analis: Wait
+[2026-07-02 09:19:46] Siklus Menit Baru. Harga BTC Terakhir: $60190.60
+[2026-07-02 09:19:46] Keputusan analis: Wait
+[2026-07-02 09:20:46] Siklus Menit Baru. Harga BTC Terakhir: $60212.83
+[2026-07-02 09:20:46] Keputusan analis: Wait
+[2026-07-02 09:21:46] Siklus Menit Baru. Harga BTC Terakhir: $60176.01
+[2026-07-02 09:21:46] Keputusan analis: Wait
+[2026-07-02 09:22:47] Siklus Menit Baru. Harga BTC Terakhir: $60171.85
+[2026-07-02 09:22:47] Keputusan analis: Wait
+[2026-07-02 09:23:47] Siklus Menit Baru. Harga BTC Terakhir: $60182.40
+[2026-07-02 09:23:47] Keputusan analis: Wait
+[2026-07-02 09:24:47] Siklus Menit Baru. Harga BTC Terakhir: $60177.69
+[2026-07-02 09:24:47] Keputusan analis: Wait
+[2026-07-02 09:25:47] Siklus Menit Baru. Harga BTC Terakhir: $60183.56
+[2026-07-02 09:25:47] Keputusan analis: Wait
+[2026-07-02 09:26:47] Siklus Menit Baru. Harga BTC Terakhir: $60202.20
+[2026-07-02 09:26:47] Keputusan analis: Wait
+[2026-07-02 09:27:47] Siklus Menit Baru. Harga BTC Terakhir: $60212.17
+[2026-07-02 09:27:47] Keputusan analis: Wait
+[2026-07-02 09:28:48] Siklus Menit Baru. Harga BTC Terakhir: $60198.89
+[2026-07-02 09:28:48] Keputusan analis: Wait
+[2026-07-02 09:29:48] Siklus Menit Baru. Harga BTC Terakhir: $60205.56
+[2026-07-02 09:29:48] Keputusan analis: Wait
+[2026-07-02 09:30:48] Siklus Menit Baru. Harga BTC Terakhir: $60196.00
+[2026-07-02 09:30:48] Keputusan analis: Wait
+[2026-07-02 09:31:48] Siklus Menit Baru. Harga BTC Terakhir: $60209.26
+[2026-07-02 09:31:48] Keputusan analis: Wait
+[2026-07-02 09:32:48] Siklus Menit Baru. Harga BTC Terakhir: $60289.99
+[2026-07-02 09:32:48] Keputusan analis: Wait
+[2026-07-02 09:33:48] Siklus Menit Baru. Harga BTC Terakhir: $60254.00
+[2026-07-02 09:33:48] Keputusan analis: Wait
+[2026-07-02 09:34:49] Siklus Menit Baru. Harga BTC Terakhir: $60273.38
+[2026-07-02 09:34:49] Keputusan analis: Wait
+[2026-07-02 09:35:49] Siklus Menit Baru. Harga BTC Terakhir: $60304.00
+[2026-07-02 09:35:49] Keputusan analis: Wait
+[2026-07-02 09:36:49] Siklus Menit Baru. Harga BTC Terakhir: $60304.93
+[2026-07-02 09:36:49] Keputusan analis: Wait
+[2026-07-02 09:37:49] Siklus Menit Baru. Harga BTC Terakhir: $60324.44
+[2026-07-02 09:37:49] Keputusan analis: Wait
+[2026-07-02 09:38:49] Siklus Menit Baru. Harga BTC Terakhir: $60404.00
+[2026-07-02 09:38:49] Keputusan analis: Wait
+[2026-07-02 09:39:50] Siklus Menit Baru. Harga BTC Terakhir: $60373.99
+[2026-07-02 09:39:50] Keputusan analis: Wait
+[2026-07-02 09:40:50] Siklus Menit Baru. Harga BTC Terakhir: $60364.21
+[2026-07-02 09:40:50] Keputusan analis: Wait
+[2026-07-02 09:41:50] Siklus Menit Baru. Harga BTC Terakhir: $60391.51
+[2026-07-02 09:41:50] Keputusan analis: Wait
+[2026-07-02 09:42:50] Siklus Menit Baru. Harga BTC Terakhir: $60406.76
+[2026-07-02 09:42:50] Keputusan analis: Wait
+[2026-07-02 09:43:50] Siklus Menit Baru. Harga BTC Terakhir: $60391.11
+[2026-07-02 09:43:50] Keputusan analis: Wait
+[2026-07-02 09:44:50] Siklus Menit Baru. Harga BTC Terakhir: $60407.01
+[2026-07-02 09:44:50] Keputusan analis: Wait
+[2026-07-02 09:45:51] Siklus Menit Baru. Harga BTC Terakhir: $60417.95
+[2026-07-02 09:45:51] Keputusan analis: Wait
+[2026-07-02 09:46:51] Siklus Menit Baru. Harga BTC Terakhir: $60441.76
+[2026-07-02 09:46:51] Keputusan analis: Wait
+[2026-07-02 09:47:51] Siklus Menit Baru. Harga BTC Terakhir: $60480.32
+[2026-07-02 09:47:51] Keputusan analis: Wait
+[2026-07-02 09:48:51] Siklus Menit Baru. Harga BTC Terakhir: $60440.00
+[2026-07-02 09:48:51] Keputusan analis: Wait
+[2026-07-02 09:49:51] Siklus Menit Baru. Harga BTC Terakhir: $60401.41
+[2026-07-02 09:49:51] Keputusan analis: Wait
+[2026-07-02 09:50:51] Siklus Menit Baru. Harga BTC Terakhir: $60385.72
+[2026-07-02 09:50:51] Keputusan analis: Wait
+[2026-07-02 09:51:52] Siklus Menit Baru. Harga BTC Terakhir: $60376.00
+[2026-07-02 09:51:52] Keputusan analis: Wait
+[2026-07-02 09:52:52] Siklus Menit Baru. Harga BTC Terakhir: $60375.99
+[2026-07-02 09:52:52] Keputusan analis: Wait
+[2026-07-02 09:53:52] Siklus Menit Baru. Harga BTC Terakhir: $60360.01
+[2026-07-02 09:53:52] Keputusan analis: Wait
+[2026-07-02 09:54:52] Siklus Menit Baru. Harga BTC Terakhir: $60400.00
+[2026-07-02 09:54:52] Keputusan analis: Wait
+[2026-07-02 09:55:52] Siklus Menit Baru. Harga BTC Terakhir: $60407.99
+[2026-07-02 09:55:52] Keputusan analis: Wait
+[2026-07-02 09:56:52] Siklus Menit Baru. Harga BTC Terakhir: $60435.99
+[2026-07-02 09:56:52] Keputusan analis: Wait
+[2026-07-02 09:57:53] Siklus Menit Baru. Harga BTC Terakhir: $60461.99
+[2026-07-02 09:57:53] Keputusan analis: Wait
+[2026-07-02 09:58:53] Siklus Menit Baru. Harga BTC Terakhir: $60462.79
+[2026-07-02 09:58:53] Keputusan analis: Wait
+[2026-07-02 09:59:53] Siklus Menit Baru. Harga BTC Terakhir: $60423.11
+[2026-07-02 09:59:53] Keputusan analis: Wait
+[2026-07-02 10:00:53] Siklus Menit Baru. Harga BTC Terakhir: $60434.00
+[2026-07-02 10:00:53] Keputusan analis: Wait
+[2026-07-02 10:01:53] Siklus Menit Baru. Harga BTC Terakhir: $60432.00
+[2026-07-02 10:01:53] Keputusan analis: Wait
+[2026-07-02 10:02:53] Siklus Menit Baru. Harga BTC Terakhir: $60437.25
+[2026-07-02 10:02:53] Keputusan analis: Wait
+[2026-07-02 10:03:54] Siklus Menit Baru. Harga BTC Terakhir: $60396.40
+[2026-07-02 10:03:54] Keputusan analis: Wait
+[2026-07-02 10:04:54] Siklus Menit Baru. Harga BTC Terakhir: $60421.27
+[2026-07-02 10:04:54] Keputusan analis: Wait
+[2026-07-02 10:05:54] Siklus Menit Baru. Harga BTC Terakhir: $60466.00
+[2026-07-02 10:05:54] Keputusan analis: Wait
+[2026-07-02 10:06:54] Siklus Menit Baru. Harga BTC Terakhir: $60449.95
+[2026-07-02 10:06:54] Keputusan analis: Wait
+[2026-07-02 10:07:54] Siklus Menit Baru. Harga BTC Terakhir: $60470.04
+[2026-07-02 10:07:54] Keputusan analis: Wait
+[2026-07-02 10:08:54] Siklus Menit Baru. Harga BTC Terakhir: $60472.00
+[2026-07-02 10:08:54] Keputusan analis: Wait
+[2026-07-02 10:09:55] Siklus Menit Baru. Harga BTC Terakhir: $60418.18
+[2026-07-02 10:09:55] Keputusan analis: Wait
+[2026-07-02 10:10:55] Siklus Menit Baru. Harga BTC Terakhir: $60424.16
+[2026-07-02 10:10:55] Keputusan analis: Wait
+[2026-07-02 10:11:55] Siklus Menit Baru. Harga BTC Terakhir: $60433.99
+[2026-07-02 10:11:55] Keputusan analis: Wait
+[2026-07-02 10:12:55] Siklus Menit Baru. Harga BTC Terakhir: $60438.53
+[2026-07-02 10:12:55] Keputusan analis: Wait
+[2026-07-02 10:13:55] Siklus Menit Baru. Harga BTC Terakhir: $60473.99
+[2026-07-02 10:13:55] Keputusan analis: Wait
+[2026-07-02 10:14:55] Siklus Menit Baru. Harga BTC Terakhir: $60478.88
+[2026-07-02 10:14:56] Keputusan analis: Wait
+[2026-07-02 10:15:56] Siklus Menit Baru. Harga BTC Terakhir: $60488.09
+[2026-07-02 10:15:56] Keputusan analis: Wait
+[2026-07-02 10:16:56] Siklus Menit Baru. Harga BTC Terakhir: $60442.01
+[2026-07-02 10:16:56] Keputusan analis: Wait
+[2026-07-02 10:17:56] Siklus Menit Baru. Harga BTC Terakhir: $60422.01
+[2026-07-02 10:17:56] Keputusan analis: Wait
+[2026-07-02 10:18:56] Siklus Menit Baru. Harga BTC Terakhir: $60392.01
+[2026-07-02 10:18:56] Keputusan analis: Wait
+[2026-07-02 10:19:56] Siklus Menit Baru. Harga BTC Terakhir: $60362.47
+[2026-07-02 10:19:56] Keputusan analis: Wait
+[2026-07-02 10:20:57] Siklus Menit Baru. Harga BTC Terakhir: $60365.10
+[2026-07-02 10:20:57] Keputusan analis: Wait
+[2026-07-02 10:21:57] Siklus Menit Baru. Harga BTC Terakhir: $60325.99
+[2026-07-02 10:21:57] Keputusan analis: Wait
+[2026-07-02 10:22:57] Siklus Menit Baru. Harga BTC Terakhir: $60353.85
+[2026-07-02 10:22:57] Keputusan analis: Wait
+[2026-07-02 10:23:57] Siklus Menit Baru. Harga BTC Terakhir: $60335.20
+[2026-07-02 10:23:57] Keputusan analis: Wait
+[2026-07-02 10:24:57] Siklus Menit Baru. Harga BTC Terakhir: $60351.71
+[2026-07-02 10:24:57] Keputusan analis: Wait
+[2026-07-02 10:25:57] Siklus Menit Baru. Harga BTC Terakhir: $60365.54
+[2026-07-02 10:25:57] Keputusan analis: Wait
+[2026-07-02 10:26:58] Siklus Menit Baru. Harga BTC Terakhir: $60375.93
+[2026-07-02 10:26:58] Keputusan analis: Wait
+[2026-07-02 10:27:58] Siklus Menit Baru. Harga BTC Terakhir: $60687.39
+[2026-07-02 10:27:58] Keputusan analis: Wait
+[2026-07-02 10:28:58] Siklus Menit Baru. Harga BTC Terakhir: $60586.01
+[2026-07-02 10:28:58] Keputusan analis: Wait
+[2026-07-02 10:29:58] Siklus Menit Baru. Harga BTC Terakhir: $60558.00
+[2026-07-02 10:29:58] Keputusan analis: Wait
+[2026-07-02 10:30:58] Siklus Menit Baru. Harga BTC Terakhir: $60503.54
+[2026-07-02 10:30:58] Keputusan analis: Wait
+[2026-07-02 10:31:59] Siklus Menit Baru. Harga BTC Terakhir: $60538.70
+[2026-07-02 10:31:59] Keputusan analis: Wait
+[2026-07-02 10:32:59] Siklus Menit Baru. Harga BTC Terakhir: $60537.11
+[2026-07-02 10:32:59] Keputusan analis: Wait
+[2026-07-02 10:33:59] Siklus Menit Baru. Harga BTC Terakhir: $60567.91
+[2026-07-02 10:33:59] Keputusan analis: Wait
+[2026-07-02 10:34:59] Siklus Menit Baru. Harga BTC Terakhir: $60622.00
+[2026-07-02 10:34:59] Keputusan analis: Wait
+[2026-07-02 10:35:59] Siklus Menit Baru. Harga BTC Terakhir: $60609.80
+[2026-07-02 10:35:59] Keputusan analis: Wait
+[2026-07-02 10:36:59] Siklus Menit Baru. Harga BTC Terakhir: $60606.00
+[2026-07-02 10:36:59] Keputusan analis: Wait
+[2026-07-02 10:38:00] Siklus Menit Baru. Harga BTC Terakhir: $60586.64
+[2026-07-02 10:38:00] Keputusan analis: Wait
+[2026-07-02 10:39:00] Siklus Menit Baru. Harga BTC Terakhir: $60752.91
+[2026-07-02 10:39:00] Keputusan analis: Wait
+[2026-07-02 10:40:00] Siklus Menit Baru. Harga BTC Terakhir: $60796.40
+[2026-07-02 10:40:00] Keputusan analis: Wait
+[2026-07-02 10:41:00] Siklus Menit Baru. Harga BTC Terakhir: $60759.08
+[2026-07-02 10:41:00] Keputusan analis: Wait
+[2026-07-02 10:42:00] Siklus Menit Baru. Harga BTC Terakhir: $60749.99
+[2026-07-02 10:42:00] Keputusan analis: Wait
+[2026-07-02 10:43:01] Siklus Menit Baru. Harga BTC Terakhir: $60766.99
+[2026-07-02 10:43:01] Keputusan analis: Wait
+[2026-07-02 10:44:01] Siklus Menit Baru. Harga BTC Terakhir: $60792.00
+[2026-07-02 10:44:01] Keputusan analis: Wait
+[2026-07-02 10:45:02] Siklus Menit Baru. Harga BTC Terakhir: $60812.45
+[2026-07-02 10:45:02] Keputusan analis: Wait
+[2026-07-02 10:46:02] Siklus Menit Baru. Harga BTC Terakhir: $60765.77
+[2026-07-02 10:46:02] Keputusan analis: Wait
+[2026-07-02 10:47:02] Siklus Menit Baru. Harga BTC Terakhir: $60770.42
+[2026-07-02 10:47:02] Keputusan analis: Wait
+[2026-07-02 10:48:02] Siklus Menit Baru. Harga BTC Terakhir: $60782.00
+[2026-07-02 10:48:02] Keputusan analis: Wait
+[2026-07-02 10:49:03] Siklus Menit Baru. Harga BTC Terakhir: $60754.00
+[2026-07-02 10:49:03] Keputusan analis: Wait
+[2026-07-02 10:50:03] Siklus Menit Baru. Harga BTC Terakhir: $60938.63
+[2026-07-02 10:50:03] Keputusan analis: Wait
+[2026-07-02 10:51:03] Siklus Menit Baru. Harga BTC Terakhir: $60886.02
+[2026-07-02 10:51:03] Keputusan analis: Wait
+[2026-07-02 10:52:03] Siklus Menit Baru. Harga BTC Terakhir: $60875.99
+[2026-07-02 10:52:03] Keputusan analis: Wait
+[2026-07-02 10:53:04] Siklus Menit Baru. Harga BTC Terakhir: $60998.01
+[2026-07-02 10:53:04] Keputusan analis: Wait
+[2026-07-02 10:54:04] Siklus Menit Baru. Harga BTC Terakhir: $60971.97
+[2026-07-02 10:54:04] Keputusan analis: Wait
+[2026-07-02 10:55:04] Siklus Menit Baru. Harga BTC Terakhir: $60975.99
+[2026-07-02 10:55:04] Keputusan analis: Wait
+[2026-07-02 10:56:04] Siklus Menit Baru. Harga BTC Terakhir: $61025.99
+[2026-07-02 10:56:04] Keputusan analis: Wait
+[2026-07-02 10:57:04] Siklus Menit Baru. Harga BTC Terakhir: $61030.01
+[2026-07-02 10:57:04] Keputusan analis: Wait
+[2026-07-02 10:58:05] Siklus Menit Baru. Harga BTC Terakhir: $61058.00
+[2026-07-02 10:58:05] Keputusan analis: Wait
+[2026-07-02 10:59:05] Siklus Menit Baru. Harga BTC Terakhir: $61042.32
+[2026-07-02 10:59:05] Keputusan analis: Wait
+[2026-07-02 11:00:06] Siklus Menit Baru. Harga BTC Terakhir: $61057.99
+[2026-07-02 11:00:06] Keputusan analis: Wait
+[2026-07-02 11:01:06] Siklus Menit Baru. Harga BTC Terakhir: $60936.00
+[2026-07-02 11:01:06] Keputusan analis: Wait
+[2026-07-02 11:02:06] Siklus Menit Baru. Harga BTC Terakhir: $60968.00
+[2026-07-02 11:02:06] Keputusan analis: Wait
+[2026-07-02 11:03:06] Siklus Menit Baru. Harga BTC Terakhir: $60997.03
+[2026-07-02 11:03:06] Keputusan analis: Wait
+[2026-07-02 11:04:07] Siklus Menit Baru. Harga BTC Terakhir: $60982.01
+[2026-07-02 11:04:07] Keputusan analis: Wait
+[2026-07-02 11:05:07] Siklus Menit Baru. Harga BTC Terakhir: $60994.00
+[2026-07-02 11:05:07] Keputusan analis: Wait
+[2026-07-02 11:06:07] Siklus Menit Baru. Harga BTC Terakhir: $60952.01
+[2026-07-02 11:06:07] Keputusan analis: Wait
+[2026-07-02 11:07:07] Siklus Menit Baru. Harga BTC Terakhir: $60939.33
+[2026-07-02 11:07:07] Keputusan analis: Wait
+[2026-07-02 11:08:07] Siklus Menit Baru. Harga BTC Terakhir: $60910.00
+[2026-07-02 11:08:07] Keputusan analis: Wait
+[2026-07-02 11:09:08] Siklus Menit Baru. Harga BTC Terakhir: $60891.34
+[2026-07-02 11:09:08] Keputusan analis: Wait
+[2026-07-02 11:10:08] Siklus Menit Baru. Harga BTC Terakhir: $60898.92
+[2026-07-02 11:10:08] Keputusan analis: Wait
+[2026-07-02 11:11:08] Siklus Menit Baru. Harga BTC Terakhir: $60923.75
+[2026-07-02 11:11:08] Keputusan analis: Wait
+[2026-07-02 11:12:08] Siklus Menit Baru. Harga BTC Terakhir: $60924.01
+[2026-07-02 11:12:08] Keputusan analis: Wait
+[2026-07-02 11:13:08] Siklus Menit Baru. Harga BTC Terakhir: $60936.00
+[2026-07-02 11:13:09] Keputusan analis: Wait
+[2026-07-02 11:14:09] Siklus Menit Baru. Harga BTC Terakhir: $60952.01
+[2026-07-02 11:14:09] Keputusan analis: Wait
+[2026-07-02 11:15:09] Siklus Menit Baru. Harga BTC Terakhir: $60939.13
+[2026-07-02 11:15:09] Keputusan analis: Wait
+[2026-07-02 11:16:09] Siklus Menit Baru. Harga BTC Terakhir: $60902.00
+[2026-07-02 11:16:09] Keputusan analis: Wait
+[2026-07-02 11:17:09] Siklus Menit Baru. Harga BTC Terakhir: $60954.78
+[2026-07-02 11:17:09] Keputusan analis: Wait
+[2026-07-02 11:18:09] Siklus Menit Baru. Harga BTC Terakhir: $60951.96
+[2026-07-02 11:18:09] Keputusan analis: Wait
+[2026-07-02 11:19:10] Siklus Menit Baru. Harga BTC Terakhir: $60902.01
+[2026-07-02 11:19:10] Keputusan analis: Wait
+[2026-07-02 11:20:10] Siklus Menit Baru. Harga BTC Terakhir: $60907.98
+[2026-07-02 11:20:10] Keputusan analis: Wait
+[2026-07-02 11:21:10] Siklus Menit Baru. Harga BTC Terakhir: $60926.00
+[2026-07-02 11:21:10] Keputusan analis: Wait
+[2026-07-02 11:22:10] Siklus Menit Baru. Harga BTC Terakhir: $60922.78
+[2026-07-02 11:22:10] Keputusan analis: Wait
+[2026-07-02 11:23:10] Siklus Menit Baru. Harga BTC Terakhir: $60875.02
+[2026-07-02 11:23:10] Keputusan analis: Wait
+[2026-07-02 11:24:11] Siklus Menit Baru. Harga BTC Terakhir: $60866.00
+[2026-07-02 11:24:11] Keputusan analis: Wait
+[2026-07-02 11:25:11] Siklus Menit Baru. Harga BTC Terakhir: $60869.99
+[2026-07-02 11:25:11] Keputusan analis: Wait
+[2026-07-02 11:26:11] Siklus Menit Baru. Harga BTC Terakhir: $60872.00
+[2026-07-02 11:26:11] Keputusan analis: Wait
+[2026-07-02 11:27:11] Siklus Menit Baru. Harga BTC Terakhir: $60853.24
+[2026-07-02 11:27:11] Keputusan analis: Wait
+[2026-07-02 11:28:11] Siklus Menit Baru. Harga BTC Terakhir: $60824.27
+[2026-07-02 11:28:11] Keputusan analis: Wait
+[2026-07-02 11:29:12] Siklus Menit Baru. Harga BTC Terakhir: $60819.99
+[2026-07-02 11:29:12] Keputusan analis: Wait
+[2026-07-02 11:30:12] Siklus Menit Baru. Harga BTC Terakhir: $60815.75
+[2026-07-02 11:30:12] Keputusan analis: Wait
+[2026-07-02 11:31:12] Siklus Menit Baru. Harga BTC Terakhir: $60818.00
+[2026-07-02 11:31:12] Keputusan analis: Wait
+[2026-07-02 11:32:12] Siklus Menit Baru. Harga BTC Terakhir: $60759.08
+[2026-07-02 11:32:12] Keputusan analis: Wait
+[2026-07-02 11:33:12] Siklus Menit Baru. Harga BTC Terakhir: $60777.34
+[2026-07-02 11:33:12] Keputusan analis: Wait
+[2026-07-02 11:34:13] Siklus Menit Baru. Harga BTC Terakhir: $60764.11
+[2026-07-02 11:34:13] Keputusan analis: Wait
+[2026-07-02 11:35:13] Siklus Menit Baru. Harga BTC Terakhir: $60754.40
+[2026-07-02 11:35:13] Keputusan analis: Wait
+[2026-07-02 11:36:13] Siklus Menit Baru. Harga BTC Terakhir: $60766.35
+[2026-07-02 11:36:13] Keputusan analis: Wait
+[2026-07-02 11:37:13] Siklus Menit Baru. Harga BTC Terakhir: $60743.01
+[2026-07-02 11:37:13] Keputusan analis: Wait
+[2026-07-02 11:38:14] Siklus Menit Baru. Harga BTC Terakhir: $60794.01
+[2026-07-02 11:38:14] Keputusan analis: Wait
+[2026-07-02 11:39:14] Siklus Menit Baru. Harga BTC Terakhir: $60804.56
+[2026-07-02 11:39:14] Keputusan analis: Wait
+[2026-07-02 11:40:14] Siklus Menit Baru. Harga BTC Terakhir: $60818.00
+[2026-07-02 11:40:14] Keputusan analis: Wait
+[2026-07-02 11:41:14] Siklus Menit Baru. Harga BTC Terakhir: $60777.47
+[2026-07-02 11:41:14] Keputusan analis: Wait
+[2026-07-02 11:42:14] Siklus Menit Baru. Harga BTC Terakhir: $60775.56
+[2026-07-02 11:42:14] Keputusan analis: Wait
+[2026-07-02 11:43:15] Siklus Menit Baru. Harga BTC Terakhir: $60775.00
+[2026-07-02 11:43:15] Keputusan analis: Wait
+[2026-07-02 11:44:15] Siklus Menit Baru. Harga BTC Terakhir: $60734.54
+[2026-07-02 11:44:15] Keputusan analis: Wait
+[2026-07-02 11:45:15] Siklus Menit Baru. Harga BTC Terakhir: $60748.02
+[2026-07-02 11:45:15] Keputusan analis: Wait
+[2026-07-02 11:46:15] Siklus Menit Baru. Harga BTC Terakhir: $60765.99
+[2026-07-02 11:46:15] Keputusan analis: Wait
+[2026-07-02 11:47:15] Siklus Menit Baru. Harga BTC Terakhir: $60790.00
+[2026-07-02 11:47:15] Keputusan analis: Wait
+[2026-07-02 11:48:16] Siklus Menit Baru. Harga BTC Terakhir: $60761.31
+[2026-07-02 11:48:16] Keputusan analis: Wait
+[2026-07-02 11:49:16] Siklus Menit Baru. Harga BTC Terakhir: $60783.33
+[2026-07-02 11:49:16] Keputusan analis: Wait
+[2026-07-02 11:50:16] Siklus Menit Baru. Harga BTC Terakhir: $60768.00
+[2026-07-02 11:50:16] Keputusan analis: Wait
+[2026-07-02 11:51:16] Siklus Menit Baru. Harga BTC Terakhir: $60789.99
+[2026-07-02 11:51:16] Keputusan analis: Wait
+[2026-07-02 11:52:16] Siklus Menit Baru. Harga BTC Terakhir: $60816.82
+[2026-07-02 11:52:16] Keputusan analis: Wait
+[2026-07-02 11:53:17] Siklus Menit Baru. Harga BTC Terakhir: $60830.00
+[2026-07-02 11:53:17] Keputusan analis: Wait
+[2026-07-02 11:54:17] Siklus Menit Baru. Harga BTC Terakhir: $60875.74
+[2026-07-02 11:54:17] Keputusan analis: Wait
+[2026-07-02 11:55:17] Siklus Menit Baru. Harga BTC Terakhir: $60849.65
+[2026-07-02 11:55:17] Keputusan analis: Wait
+[2026-07-02 11:56:17] Siklus Menit Baru. Harga BTC Terakhir: $60823.09
+[2026-07-02 11:56:17] Keputusan analis: Wait
+[2026-07-02 11:57:17] Siklus Menit Baru. Harga BTC Terakhir: $60812.69
+[2026-07-02 11:57:17] Keputusan analis: Wait
+[2026-07-02 11:58:17] Siklus Menit Baru. Harga BTC Terakhir: $60794.00
+[2026-07-02 11:58:17] Keputusan analis: Wait
+[2026-07-02 11:59:18] Siklus Menit Baru. Harga BTC Terakhir: $60800.07
+[2026-07-02 11:59:18] Keputusan analis: Wait
+[2026-07-02 12:00:18] Siklus Menit Baru. Harga BTC Terakhir: $60762.50
+[2026-07-02 12:00:18] Keputusan analis: Wait
+[2026-07-02 12:01:18] Siklus Menit Baru. Harga BTC Terakhir: $60702.15
+[2026-07-02 12:01:18] Keputusan analis: Wait
+[2026-07-02 12:02:18] Siklus Menit Baru. Harga BTC Terakhir: $60702.00
+[2026-07-02 12:02:18] Keputusan analis: Wait
+[2026-07-02 12:03:18] Siklus Menit Baru. Harga BTC Terakhir: $60665.99
+[2026-07-02 12:03:18] Keputusan analis: Wait
+[2026-07-02 12:04:19] Siklus Menit Baru. Harga BTC Terakhir: $60690.01
+[2026-07-02 12:04:19] Keputusan analis: Wait
+[2026-07-02 12:05:19] Siklus Menit Baru. Harga BTC Terakhir: $60702.91
+[2026-07-02 12:05:19] Keputusan analis: Wait
+[2026-07-02 12:06:19] Siklus Menit Baru. Harga BTC Terakhir: $60719.99
+[2026-07-02 12:06:19] Keputusan analis: Wait
+[2026-07-02 12:07:19] Siklus Menit Baru. Harga BTC Terakhir: $60744.26
+[2026-07-02 12:07:19] Keputusan analis: Wait
+[2026-07-02 12:08:19] Siklus Menit Baru. Harga BTC Terakhir: $60752.01
+[2026-07-02 12:08:19] Keputusan analis: Wait
+[2026-07-02 12:09:19] Siklus Menit Baru. Harga BTC Terakhir: $60820.00
+[2026-07-02 12:09:19] Keputusan analis: Wait
+[2026-07-02 12:10:20] Siklus Menit Baru. Harga BTC Terakhir: $60837.99
+[2026-07-02 12:10:20] Keputusan analis: Wait
+[2026-07-02 12:11:20] Siklus Menit Baru. Harga BTC Terakhir: $60826.00
+[2026-07-02 12:11:20] Keputusan analis: Wait
+[2026-07-02 12:12:20] Siklus Menit Baru. Harga BTC Terakhir: $60839.99
+[2026-07-02 12:12:20] Keputusan analis: Wait
+[2026-07-02 12:13:20] Siklus Menit Baru. Harga BTC Terakhir: $60822.33
+[2026-07-02 12:13:20] Keputusan analis: Wait
+[2026-07-02 12:14:20] Siklus Menit Baru. Harga BTC Terakhir: $60832.00
+[2026-07-02 12:14:20] Keputusan analis: Wait
+[2026-07-02 12:15:20] Siklus Menit Baru. Harga BTC Terakhir: $60794.91
+[2026-07-02 12:15:21] Keputusan analis: Wait
+[2026-07-02 12:16:21] Siklus Menit Baru. Harga BTC Terakhir: $60837.55
+[2026-07-02 12:16:21] Keputusan analis: Wait
+[2026-07-02 12:17:21] Siklus Menit Baru. Harga BTC Terakhir: $60826.01
+[2026-07-02 12:17:21] Keputusan analis: Wait
+[2026-07-02 12:18:21] Siklus Menit Baru. Harga BTC Terakhir: $60846.00
+[2026-07-02 12:18:21] Keputusan analis: Wait
+[2026-07-02 12:19:21] Siklus Menit Baru. Harga BTC Terakhir: $60840.00
+[2026-07-02 12:19:21] Keputusan analis: Wait
+[2026-07-02 12:20:21] Siklus Menit Baru. Harga BTC Terakhir: $60843.45
+[2026-07-02 12:20:21] Keputusan analis: Wait
+[2026-07-02 12:21:22] Siklus Menit Baru. Harga BTC Terakhir: $60832.14
+[2026-07-02 12:21:22] Keputusan analis: Wait
+[2026-07-02 12:22:22] Siklus Menit Baru. Harga BTC Terakhir: $60826.00
+[2026-07-02 12:22:22] Keputusan analis: Wait
+[2026-07-02 12:23:22] Siklus Menit Baru. Harga BTC Terakhir: $60812.01
+[2026-07-02 12:23:22] Keputusan analis: Wait
+[2026-07-02 12:24:22] Siklus Menit Baru. Harga BTC Terakhir: $60816.00
+[2026-07-02 12:24:22] Keputusan analis: Wait
+[2026-07-02 12:25:22] Siklus Menit Baru. Harga BTC Terakhir: $60790.74
+[2026-07-02 12:25:22] Keputusan analis: Wait
+[2026-07-02 12:26:22] Siklus Menit Baru. Harga BTC Terakhir: $60759.16
+[2026-07-02 12:26:22] Keputusan analis: Wait
+[2026-07-02 12:27:23] Siklus Menit Baru. Harga BTC Terakhir: $60733.81
+[2026-07-02 12:27:23] Keputusan analis: Wait
+[2026-07-02 12:28:23] Siklus Menit Baru. Harga BTC Terakhir: $60746.01
+[2026-07-02 12:28:23] Keputusan analis: Wait
+[2026-07-02 12:29:23] Siklus Menit Baru. Harga BTC Terakhir: $60742.92
+[2026-07-02 12:29:23] Keputusan analis: Wait
+[2026-07-02 12:30:23] Siklus Menit Baru. Harga BTC Terakhir: $60749.28
+[2026-07-02 12:30:23] Keputusan analis: Wait
+[2026-07-02 12:31:23] Siklus Menit Baru. Harga BTC Terakhir: $60764.00
+[2026-07-02 12:31:23] Keputusan analis: Wait
+[2026-07-02 12:32:24] Siklus Menit Baru. Harga BTC Terakhir: $60768.00
+[2026-07-02 12:32:24] Keputusan analis: Wait
+[2026-07-02 12:33:24] Siklus Menit Baru. Harga BTC Terakhir: $60756.01
+[2026-07-02 12:33:24] Keputusan analis: Wait
+[2026-07-02 12:34:24] Siklus Menit Baru. Harga BTC Terakhir: $60764.00
+[2026-07-02 12:34:24] Keputusan analis: Wait
+[2026-07-02 12:35:24] Siklus Menit Baru. Harga BTC Terakhir: $60807.69
+[2026-07-02 12:35:24] Keputusan analis: Wait
+[2026-07-02 12:36:24] Siklus Menit Baru. Harga BTC Terakhir: $60853.32
+[2026-07-02 12:36:24] Keputusan analis: Wait
+[2026-07-02 12:37:24] Siklus Menit Baru. Harga BTC Terakhir: $60814.01
+[2026-07-02 12:37:24] Keputusan analis: Wait
+[2026-07-02 12:38:25] Siklus Menit Baru. Harga BTC Terakhir: $60744.01
+[2026-07-02 12:38:25] Keputusan analis: Wait
+[2026-07-02 12:39:25] Siklus Menit Baru. Harga BTC Terakhir: $60658.14
+[2026-07-02 12:39:25] Keputusan analis: Wait
+[2026-07-02 12:40:25] Siklus Menit Baru. Harga BTC Terakhir: $60613.40
+[2026-07-02 12:40:25] Keputusan analis: Wait
+[2026-07-02 12:41:25] Siklus Menit Baru. Harga BTC Terakhir: $60654.95
+[2026-07-02 12:41:25] Keputusan analis: Wait
+[2026-07-02 12:42:25] Siklus Menit Baru. Harga BTC Terakhir: $60630.00
+[2026-07-02 12:42:25] Keputusan analis: Wait
+[2026-07-02 12:43:26] Siklus Menit Baru. Harga BTC Terakhir: $60623.99
+[2026-07-02 12:43:26] Keputusan analis: Wait
+[2026-07-02 12:44:26] Siklus Menit Baru. Harga BTC Terakhir: $60634.00
+[2026-07-02 12:44:26] Keputusan analis: Wait
+[2026-07-02 12:45:26] Siklus Menit Baru. Harga BTC Terakhir: $60633.40
+[2026-07-02 12:45:26] Keputusan analis: Wait
+[2026-07-02 12:46:26] Siklus Menit Baru. Harga BTC Terakhir: $60599.13
+[2026-07-02 12:46:26] Keputusan analis: Wait
+[2026-07-02 12:47:26] Siklus Menit Baru. Harga BTC Terakhir: $60581.12
+[2026-07-02 12:47:26] Keputusan analis: Wait

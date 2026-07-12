@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  botStatus?: string;
+}
+
+const {
+  title = "BitTrade Q-Lab | Quantitative Trading System",
+  description = "Institutional-grade algorithmic trading and statistical arbitrage engines built on asynchronous Rust and multi-currency co-integration analysis.",
+  botStatus = "SYSTEM ACTIVE"
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <!-- SEO & OpenGraph Meta Tags -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="BitTrade Q-Grade Laboratory" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <meta name="generator" content={Astro.generator} />
+</head>
+<body>
+  <div class="app-wrapper">
+    <Sidebar />
+    <div class="main-area">
+      <Header title={title} botStatus={botStatus} />
+      <main class="content-container" id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </div>
+</body>
+</html>

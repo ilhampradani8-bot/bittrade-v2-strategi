@@ -1,0 +1,59 @@
+---
+export interface Props {
+  title?: string;
+  botStatus?: string;
+}
+
+const { title = "BitTrade Q-Lab Engine", botStatus = "SYSTEM ACTIVE" } = Astro.props;
+---
+
+<header class="top-header">
+  <div class="header-left">
+    <button class="burger-btn" id="sidebar-toggle" aria-label="Toggle Navigation Sidebar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    <span class="header-brand" style="font-weight: 700; font-family: 'Inter', sans-serif; font-size: 0.95em; color: var(--text-muted); letter-spacing: 0.5px;">BitTrade Q-Lab</span>
+  </div>
+  
+  <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+    <button onclick="window.print()" style="background: var(--paper-bg, #fff); border: 1px solid var(--border-color, #e2e8f0); padding: 6px 12px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85em; font-weight: bold; color: var(--text-primary, #333); border-radius: 6px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      Cetak PDF
+    </button>
+    <div style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.85em; font-weight: 600; color: var(--accent-green);">
+      <span class="status-dot"></span>
+      <span>{botStatus}</span>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Sidebar Burger Button Toggle Logic
+  const toggleBtn = document.getElementById('sidebar-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.innerWidth > 1024) {
+        sidebar.classList.toggle('collapsed');
+      } else {
+        sidebar.classList.toggle('open');
+      }
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (window.innerWidth <= 1024) {
+        if (sidebar.classList.contains('open') && !sidebar.contains(target) && target !== toggleBtn && !toggleBtn.contains(target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  }
+</script>

@@ -1,0 +1,5 @@
+/root/bittrade-v2-strategi/statARB/target/debug/deps/sync_wrapper-071ebc3300926aab.d: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sync_wrapper-1.0.2/src/lib.rs
+
+/root/bittrade-v2-strategi/statARB/target/debug/deps/libsync_wrapper-071ebc3300926aab.rmeta: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sync_wrapper-1.0.2/src/lib.rs
+
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sync_wrapper-1.0.2/src/lib.rs:

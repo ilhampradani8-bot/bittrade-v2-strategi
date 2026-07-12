@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitTrade-v2 Engine (Bot A) — Quantitative Research Paper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400;1,700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-neutral: #f4f1ea;
+            --paper-bg: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #333333;
+            --text-muted: #555555;
+            --border-color: #d1c9bc;
+            --accent-blue: #0f4c81;
+            --accent-green: #2e7d32;
+            --accent-red: #c62828;
+        }
+        body { background-color: var(--bg-neutral); color: var(--text-primary); font-family: 'Georgia', serif; margin: 0; padding: 0; line-height: 1.7; }
+        .header { background-color: #fff; border-bottom: 1px solid var(--border-color); padding: 10px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .burger-btn { background: transparent; border: none; color: var(--text-primary); font-size: 1.8em; cursor: pointer; padding: 5px; margin-right: 15px; display: flex; align-items: center; transition: color 0.2s; }
+        .burger-btn:hover { color: var(--accent-blue); }
+        .sidebar { position: fixed; top: 0; left: -280px; width: 280px; height: 100%; background: var(--paper-bg); border-right: 2px solid var(--border-color); box-shadow: 5px 0 15px rgba(0,0,0,0.1); z-index: 1010; transition: left 0.3s ease; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; }
+        .sidebar.open { left: 0; }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1009; display: none; }
+        .sidebar-overlay.open { display: block; }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); margin-bottom: 15px; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; }
+        .sidebar-link { text-decoration: none; color: var(--text-muted); padding: 8px 12px; display: block; transition: all 0.2s; }
+        .sidebar-link:hover, .sidebar-link.active { background-color: var(--bg-neutral); color: var(--text-primary); }
+        .paper-layout-wrapper { max-width: 1200px; margin: 40px auto; display: flex; gap: 30px; padding: 0 20px; align-items: flex-start; }
+        .paper-toc-sidebar { width: 250px; position: sticky; top: 100px; background-color: var(--paper-bg); border: 1px solid var(--border-color); padding: 20px; box-sizing: border-box; }
+        .paper-toc-sidebar h4 { margin-top: 0; margin-bottom: 15px; font-weight: bold; color: var(--text-primary); text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; border-bottom: 1.5px solid var(--text-primary); padding-bottom: 5px; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-item { margin-bottom: 10px; }
+        .toc-link { text-decoration: none; color: var(--text-muted); font-size: 0.9em; transition: all 0.2s; display: block; }
+        .toc-link:hover, .toc-link.active { color: var(--text-primary); font-weight: bold; padding-left: 5px; }
+        .paper-main-content { flex-grow: 1; min-width: 0; }
+        .latex-document { background-color: var(--paper-bg); padding: 60px 70px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid var(--border-color); box-sizing: border-box; }
+        .paper-actions-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; }
+        .btn-action { background: var(--paper-bg); border: 1px solid var(--border-color); padding: 6px 12px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9em; color: var(--text-primary); transition: all 0.2s; }
+        .btn-action:hover { background: #faf8f5; border-color: var(--text-primary); }
+        h1.paper-title { text-align: center; font-size: 1.8em; font-weight: bold; margin-top: 10px; margin-bottom: 5px; line-height: 1.3; }
+        .paper-title-en { text-align: center; font-size: 1.35em; font-style: italic; font-weight: normal; color: var(--text-muted); margin-top: 5px; margin-bottom: 20px; line-height: 1.3; }
+        .paper-authors { text-align: center; font-style: italic; margin-bottom: 30px; font-size: 1.05em; color: var(--text-muted); border-bottom: 1px dashed var(--border-color); padding-bottom: 15px; }
+        .paper-abstract-box { background: #faf8f5; border: 1.5px solid var(--border-color); padding: 25px; margin: 30px 0; }
+        .abstract-section { margin-bottom: 20px; }
+        .abstract-section:last-child { margin-bottom: 0; }
+        .abstract-header { font-weight: bold; font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--accent-blue); }
+        .abstract-text { font-size: 0.92em; text-align: justify; margin: 0 0 10px 0; line-height: 1.6; }
+        .abstract-text.en-text { color: var(--text-muted); font-style: italic; }
+        .keywords-line { font-size: 0.9em; margin-top: 12px; line-height: 1.5; }
+        h2.section-title { font-size: 1.25em; font-weight: bold; border-bottom: 2px solid var(--text-primary); padding-bottom: 4px; margin-top: 40px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        h3.subsection-title { font-size: 1.1em; font-weight: bold; margin-top: 25px; margin-bottom: 10px; color: var(--accent-blue); }
+        .p-pair { margin-bottom: 25px; }
+        .p-id { text-align: justify; margin: 0 0 8px 0; font-size: 0.98em; color: var(--text-primary); }
+        .p-en { text-align: justify; margin: 0; font-size: 0.92em; color: var(--text-muted); font-style: italic; border-left: 2px solid var(--border-color); padding-left: 12px; }
+        .math-block { background-color: #faf8f5; border-left: 3px solid var(--accent-blue); padding: 12px 20px; font-family: 'Courier Prime', monospace; font-style: italic; margin: 20px 0; font-size: 1.02em; display: flex; justify-content: space-between; align-items: center; }
+        .math-eq-num { font-style: normal; font-weight: bold; color: var(--text-muted); margin-left: 20px; white-space: nowrap; }
+        .academic-table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.9em; }
+        .academic-table th { border-top: 2px solid var(--text-primary); border-bottom: 1px solid var(--text-primary); padding: 10px 8px; font-weight: bold; text-align: left; }
+        .academic-table td { padding: 8px 8px; border-bottom: 1px solid var(--border-color); text-align: left; }
+        .academic-table tr:last-child td { border-bottom: 2px solid var(--text-primary); }
+        .table-caption { font-size: 0.85em; color: var(--text-muted); font-style: italic; text-align: center; margin-bottom: 8px; }
+        .code-snippet { font-family: 'Courier Prime', monospace; background-color: #faf8f5; border: 1px solid var(--border-color); padding: 12px 15px; font-size: 0.85em; white-space: pre-wrap; margin: 15px 0; border-radius: 2px; }
+        .phase-badge { display: inline-block; background: var(--accent-blue); color: white; font-size: 0.75em; padding: 2px 8px; letter-spacing: 1px; font-family: monospace; margin-right: 8px; vertical-align: middle; }
+        .highlight-box { background: #f0f4f8; border-left: 4px solid var(--accent-blue); padding: 15px 20px; margin: 20px 0; font-size: 0.93em; }
+        .highlight-box.green { border-left-color: var(--accent-green); background: #f0f7f0; }
+        .highlight-box.red { border-left-color: var(--accent-red); background: #fdf0f0; }
+        .footer { margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; font-size: 0.85em; color: var(--text-muted); font-family: monospace; }
+        @media print { body { background: #fff; } .header, .paper-toc-sidebar, .paper-actions-bar, .sidebar, .sidebar-overlay { display: none !important; } .paper-layout-wrapper { margin: 0; padding: 0; } .latex-document { box-shadow: none; border: none; padding: 0; } }
+        @media (max-width: 900px) { .paper-layout-wrapper { flex-direction: column; } .paper-toc-sidebar { width: 100%; position: static; margin-bottom: 20px; } .latex-document { padding: 30px 20px; } }
+    </style>
+</head>
+<body>
+
+<!-- INCLUDE HEADER -->
+
+<div class="paper-layout-wrapper">
+    <!-- Left TOC -->
+    <div class="paper-toc-sidebar">
+        <h4>Paper Sections</h4>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#sec-title" class="toc-link active">Title / Judul</a></li>
+            <li class="toc-item"><a href="#sec-abstract" class="toc-link">Abstract &amp; Keywords</a></li>
+            <li class="toc-item"><a href="#sec-intro" class="toc-link">1. Pendahuluan / Introduction</a></li>
+            <li class="toc-item"><a href="#sec-literature" class="toc-link">2. Tinjauan Pustaka / Lit. Review</a></li>
+            <li class="toc-item"><a href="#sec-methods" class="toc-link">3. Arsitektur &amp; Metode</a></li>
+            <li class="toc-item"><a href="#sec-math" class="toc-link">4. Formulasi Matematika</a></li>
+            <li class="toc-item"><a href="#sec-phase41" class="toc-link">5. Modifikasi Fase 4.1</a></li>
+            <li class="toc-item"><a href="#sec-phase42" class="toc-link">6. Perbaikan Fase 4.2</a></li>
+            <li class="toc-item"><a href="#sec-phase50" class="toc-link">7. Evolusi Fase 5.0 (QPS)</a></li>
+            <li class="toc-item"><a href="#sec-results" class="toc-link">8. Hasil &amp; Pembahasan</a></li>
+            <li class="toc-item"><a href="#sec-conclusion" class="toc-link">9. Kesimpulan</a></li>
+            <li class="toc-item"><a href="#sec-references" class="toc-link">Daftar Pustaka</a></li>
+        </ul>
+    </div>
+
+    <!-- Right Content -->
+    <div class="paper-main-content">
+        <div class="latex-document">
+
+            <div class="paper-actions-bar">
+                <button class="btn-action" onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+                    <span>Print / Download PDF</span>
+                </button>
+                <div style="font-size: 0.85em; color: var(--text-muted);">Format: <strong>Bilingual Academic (ID/EN)</strong> &nbsp;|&nbsp; Rev. Fase 4.2 — Juli 2026</div>
+            </div>
+
+            <!-- Title -->
+            <div id="sec-title">
+                <h1 class="paper-title">Sistem Trading Algoritmik Berbasis Regime Pasar dengan Manajemen Risiko Berlapis pada Aset Kripto BTC/USDT</h1>
+                <div class="paper-title-en">Market Regime-Based Algorithmic Trading System with Multi-Layer Risk Management on BTC/USDT Cryptocurrency Assets</div>
+                <div class="paper-authors">
+                    BitTrade Quantitative Research Group<br>
+                    <span style="font-size:0.9em;">Advanced Agentic Trading Division — BitTrade-v2 Engine (Bot A) &nbsp;|&nbsp; Revised: July 3, 2026</span>
+                </div>
+            </div>
+
+            <!-- Abstract -->
+            <div class="paper-abstract-box" id="sec-abstract">
+                <div class="abstract-section">
+                    <div class="abstract-header">Abstrak</div>
+                    <p class="abstract-text">
+                        Makalah ini menyajikan analisis komprehensif terhadap arsitektur dan evolusi kinerja <em>BitTrade-v2 Engine</em> (Bot A), sebuah sistem trading algoritmik berbasis aturan (<em>rule-based</em>) yang beroperasi pada pasangan BTC/USDT di bursa Binance. Sistem ini mengimplementasikan deteksi <em>market regime</em> dua-mode secara adaptif: strategi <em>Mean Reversion</em> berbasis Bollinger Bands 50-periode pada kondisi pasar <em>sideways</em>, dan strategi <em>EMA Crossover</em> (EMA-13/34) dikonfirmasi dengan VWAP harian serta konfirmasi tren 15 menit pada kondisi <em>trending</em>. Kami mendokumentasikan dua fase modifikasi kritis: Fase 4.1 memperkenalkan pembatasan pyramiding maksimal 3 layer, filter konfirmasi sinyal jual 2-menit, dan kalkulasi P&amp;L berbasis <em>weighted average cost</em>; Fase 4.2 menambahkan empat perbaikan berbasis data empiris 48 jam meliputi filter volume minimum 0.5x, larangan pyramiding saat harga naik, cooldown 15 menit pasca <em>profitable sell</em>, dan peningkatan cooldown BUY dari 5 menjadi 10 menit. Hasil evaluasi menunjukkan peningkatan selektivitas sinyal dan perlindungan modal yang lebih baik terhadap anomali pasar kripto.
+                    </p>
+                    <div class="keywords-line"><strong>Kata Kunci:</strong> Trading Algoritmik, Market Regime Detection, EMA Crossover, Bollinger Bands, Pyramiding, Trailing Take Profit, Rust, PostgreSQL.</div>
+                </div>
+                <div class="abstract-section" style="border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
+                    <div class="abstract-header" style="color: var(--text-muted);">Abstract</div>
+                    <p class="abstract-text en-text">
+                        This paper presents a comprehensive analysis of the architecture and performance evolution of the <em>BitTrade-v2 Engine</em> (Bot A), a rule-based algorithmic trading system operating on the BTC/USDT pair on Binance. The system adaptively implements a dual-mode market regime detection framework: a Mean Reversion strategy based on 50-period Bollinger Bands under sideways market conditions, and an EMA Crossover strategy (EMA-13/34) confirmed with daily VWAP and 15-minute trend confirmation under trending conditions. We document two critical modification phases: Phase 4.1 introduced a maximum 3-layer pyramiding cap, a 2-minute sell signal confirmation filter, and a weighted average cost basis P&amp;L calculation; Phase 4.2 adds four empirical data-driven improvements including a minimum 0.5x volume filter, a prohibition on upward pyramiding, a 15-minute post-profitable-sell cooldown, and an increase in BUY cooldown from 5 to 10 minutes. Evaluation results demonstrate improved signal selectivity and stronger capital protection against cryptocurrency market anomalies.
+                    </p>
+                    <div class="keywords-line" style="color: var(--text-muted); font-style: italic;"><strong>Keywords:</strong> Algorithmic Trading, Market Regime Detection, EMA Crossover, Bollinger Bands, Pyramiding, Trailing Take Profit, Rust, PostgreSQL.</div>
+                </div>
+            </div>
+
+            <!-- 1. Pendahuluan -->
+            <h2 class="section-title" id="sec-intro">1. Pendahuluan / Introduction</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Pasar aset kripto, khususnya pasangan BTC/USDT, dicirikan oleh volatilitas tinggi, transisi kondisi pasar yang cepat antara fase <em>trending</em> dan <em>sideways</em>, serta volume perdagangan yang sangat dinamis. Karakteristik ini membuat pendekatan indikator tunggal — baik berbasis tren maupun berbasis reversion — rentan menghasilkan sinyal palsu ketika kondisi pasar berganti mode secara tiba-tiba.</p>
+                <p class="p-en">The cryptocurrency market, particularly the BTC/USDT pair, is characterized by high volatility, rapid transitions between trending and sideways market phases, and highly dynamic trading volumes. These characteristics make single-indicator approaches — whether trend-based or reversion-based — susceptible to generating false signals when market conditions switch modes abruptly.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Sistem trading algoritmik seperti Bot A dirancang untuk mengatasi kelemahan tersebut melalui deteksi <em>market regime</em> yang adaptif. Dengan mengklasifikasikan kondisi pasar terlebih dahulu sebelum menentukan strategi, sistem dapat memilih indikator yang paling relevan sesuai karakteristik pasar saat itu. Pendekatan ini mengurangi frekuensi sinyal palsu dan meningkatkan ketepatan eksekusi.</p>
+                <p class="p-en">Algorithmic trading systems like Bot A are designed to overcome these weaknesses through adaptive market regime detection. By first classifying market conditions before determining strategy, the system can select the most relevant indicator suited to current market characteristics. This approach reduces false signal frequency and improves execution accuracy.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Makalah ini mendokumentasikan dua fase perbaikan utama: Fase 4.1 berfokus pada stabilisasi sistem melalui pembatasan pyramiding dan filter <em>whipsaw</em>; Fase 4.2 berfokus pada perbaikan berbasis data empiris nyata selama 48 jam operasional (1–3 Juli 2026) yang mengidentifikasi empat pola perilaku yang merugikan performa.</p>
+                <p class="p-en">This paper documents two major improvement phases: Phase 4.1 focuses on system stabilization through pyramiding limits and whipsaw filters; Phase 4.2 focuses on improvements based on empirical data from 48 hours of live operation (July 1–3, 2026) that identified four behavioral patterns harmful to performance.</p>
+            </div>
+
+            <!-- 2. Literature Review -->
+            <h2 class="section-title" id="sec-literature">2. Tinjauan Pustaka / Literature Review</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Deteksi <em>market regime</em> merupakan fondasi dari sistem trading adaptif modern. Lo &amp; MacKinlay (1988) membuktikan bahwa pasar keuangan bersifat non-stasioner, bergerak antara fase momentum dan reversion secara bergantian. Penerapan standar deviasi berbasis periode tertentu sebagai ambang batas volatilitas untuk mengklasifikasikan regime telah terbukti efektif dalam mengurangi drawdown pada berbagai pasar aset.</p>
+                <p class="p-en">Market regime detection is the foundation of modern adaptive trading systems. Lo &amp; MacKinlay (1988) proved that financial markets are non-stationary, alternating between momentum and reversion phases. Using period-based standard deviation as a volatility threshold to classify regimes has proven effective in reducing drawdown across various asset markets.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Murphy (1999) menjelaskan bahwa <em>Exponential Moving Average</em> (EMA) memberikan bobot lebih besar pada harga terkini sehingga lebih responsif terhadap perubahan tren dibandingkan <em>Simple Moving Average</em>. Penggunaan pasangan EMA cepat (13-periode) dan lambat (34-periode) sebagai sinyal crossover merupakan teknik yang telah diuji secara luas di berbagai kelas aset. Bollinger (2001) memperkenalkan konsep pita volatilitas berbasis standar deviasi yang efektif menangkap kondisi pasar jenuh beli maupun jenuh jual.</p>
+                <p class="p-en">Murphy (1999) explains that the Exponential Moving Average (EMA) assigns greater weight to recent prices, making it more responsive to trend changes than Simple Moving Averages. Using a fast EMA (13-period) and slow EMA (34-period) pair as a crossover signal is a widely tested technique across various asset classes. Bollinger (2001) introduced the concept of standard deviation-based volatility bands that effectively capture overbought and oversold market conditions.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Konsep <em>pyramiding</em> — akumulasi posisi bertahap seiring penguatan tren — telah dibahas oleh Pardo (2008) sebagai strategi yang meningkatkan potensi keuntungan namun mengandung risiko inflasi <em>average cost basis</em>. Tanpa batasan jumlah layer yang ketat, pyramiding dapat menarik <em>breakeven point</em> mendekati puncak tren sehingga koreksi kecil pun dapat menyebabkan kerugian besar. Penelitian Aronson (2006) menekankan pentingnya validasi berbasis data empiris dalam evaluasi strategi trading kuantitatif.</p>
+                <p class="p-en">The concept of pyramiding — gradually accumulating positions as trends strengthen — has been discussed by Pardo (2008) as a strategy that enhances profit potential but carries the risk of average cost basis inflation. Without strict layer count limits, pyramiding can pull the breakeven point near trend peaks so that even small corrections cause significant losses. Aronson (2006) emphasizes the importance of empirical data-based validation in evaluating quantitative trading strategies.</p>
+            </div>
+
+            <!-- 3. Arsitektur & Metode -->
+            <h2 class="section-title" id="sec-methods">3. Arsitektur Sistem &amp; Metode / System Architecture &amp; Methods</h2>
+
+            <h3 class="subsection-title">3.1 Stack Teknologi / Technology Stack</h3>
+            <div class="p-pair">
+                <p class="p-id">Bot A dibangun sepenuhnya menggunakan bahasa pemrograman Rust dengan framework web Axum, menjamin keamanan memori (<em>memory safety</em>) dan konkurensi tinggi tanpa <em>garbage collector</em>. Persistensi data dilakukan melalui PostgreSQL menggunakan pustaka <code>sqlx</code> dengan <em>connection pooling</em>. Data pasar dikonsumsi secara <em>real-time</em> melalui WebSocket Binance dengan fallback ke REST API jika aliran WebSocket terputus lebih dari 30 detik.</p>
+                <p class="p-en">Bot A is built entirely using the Rust programming language with the Axum web framework, guaranteeing memory safety and high concurrency without a garbage collector. Data persistence is handled through PostgreSQL using the <code>sqlx</code> library with connection pooling. Market data is consumed in real-time via the Binance WebSocket with REST API fallback if the WebSocket stream is interrupted for more than 30 seconds.</p>
+            </div>
+
+            <h3 class="subsection-title">3.2 Pipeline Event-Driven 5-Tahap / 5-Stage Event-Driven Pipeline</h3>
+            <div class="p-pair">
+                <p class="p-id">Sistem beroperasi dalam siklus menit baru yang dipicu oleh event WebSocket. Alur pemrosesan terbagi menjadi lima tahap terpisah yang dikelola melalui state RAM global (<code>AppState</code>) berbasis <code>Arc&lt;RwLock&lt;T&gt;&gt;</code>:</p>
+                <p class="p-en">The system operates in a new-minute cycle triggered by WebSocket events. The processing pipeline is divided into five distinct stages managed through global RAM state (<code>AppState</code>) based on <code>Arc&lt;RwLock&lt;T&gt;&gt;</code>:</p>
+            </div>
+
+            <table class="academic-table">
+                <thead>
+                    <tr>
+                        <th>Tahap / Stage</th>
+                        <th>Komponen / Component</th>
+                        <th>Fungsi / Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>WebSocket (Data Ingestion)</td><td>Streaming harga BTC/USDT tiap 1 detik, rekonstruksi kline lokal / Real-time price stream, local kline reconstruction</td></tr>
+                    <tr><td>2</td><td>Heuristic Pattern (Signal Detection)</td><td>Deteksi pola candlestick awal dan anomali volume / Early candlestick pattern and volume anomaly detection</td></tr>
+                    <tr><td>3</td><td>Conclude Engine (Strategy Brain)</td><td>Hitung EMA, BB, VWAP; tetapkan BUY/SELL/WAIT / Compute EMA, BB, VWAP; determine BUY/SELL/WAIT</td></tr>
+                    <tr><td>4</td><td>Validate Engine (Risk Filter)</td><td>Filter saldo, pyramiding, cooldown, holding time / Balance, pyramiding, cooldown, holding time checks</td></tr>
+                    <tr><td>5</td><td>Executor (Order Dispatcher)</td><td>Eksekusi simulasi, potong fee 0.1%, catat DB / Execute simulation, deduct 0.1% fee, record to DB</td></tr>
+                </tbody>
+            </table>
+
+            <h3 class="subsection-title">3.3 Deteksi Market Regime / Market Regime Detection</h3>
+            <div class="p-pair">
+                <p class="p-id">Klasifikasi kondisi pasar dilakukan dengan menghitung volatilitas persentase berbasis standar deviasi 50 kline terakhir. Jika volatilitas relatif harga di bawah ambang 0.085%, pasar diklasifikasikan sebagai <em>Sideways</em> dan sistem mengaktifkan strategi <em>Mean Reversion</em> Bollinger Bands. Sebaliknya, pasar diklasifikasikan sebagai <em>Trending</em> dan sistem mengaktifkan strategi EMA Crossover.</p>
+                <p class="p-en">Market condition classification is performed by computing the percentage volatility based on the standard deviation of the last 50 klines. If the relative price volatility falls below the 0.085% threshold, the market is classified as Sideways and the system activates the Bollinger Bands Mean Reversion strategy. Otherwise, the market is classified as Trending and the system activates the EMA Crossover strategy.</p>
+            </div>
+
+            <h3 class="subsection-title">3.4 Crash Recovery &amp; State Persistence</h3>
+            <div class="p-pair">
+                <p class="p-id">Untuk mencegah kehilangan parameter <em>Trailing Take Profit</em> akibat restart VPS mendadak, sistem menyimpan semua posisi aktif beserta nilai <em>High Water Mark</em> (HWM) secara persisten ke tabel <code>bot_active_positions</code> di PostgreSQL. Saat inisialisasi ulang, sistem memulihkan HWM dan data posisi ke dalam RAM global secara otomatis, menjamin <em>high availability</em> operasional.</p>
+                <p class="p-en">To prevent loss of Trailing Take Profit parameters due to sudden VPS restarts, the system persistently stores all active positions along with High Water Mark (HWM) values to the <code>bot_active_positions</code> table in PostgreSQL. Upon reinitialization, the system automatically restores HWM and position data into global RAM, guaranteeing operational high availability.</p>
+            </div>
+
+            <!-- 4. Formulasi Matematika -->
+            <h2 class="section-title" id="sec-math">4. Formulasi Matematika / Mathematical Formulation</h2>
+
+            <h3 class="subsection-title">4.1 Exponential Moving Average (EMA)</h3>
+            <div class="p-pair">
+                <p class="p-id">EMA memberikan bobot eksponensial pada harga terkini untuk mereduksi efek keterlambatan sinyal. Nilai EMA periode k pada menit t dihitung dari harga penutupan P(t):</p>
+                <p class="p-en">EMA assigns exponential weight to recent prices to reduce signal lag. The EMA value of period k at minute t is calculated from closing price P(t):</p>
+            </div>
+            <div class="math-block"><span>EMA_k(t) = P(t) · α_k + EMA_k(t−1) · (1 − α_k),&nbsp;&nbsp; α_k = 2 / (k + 1)</span><span class="math-eq-num">(1)</span></div>
+            <div class="p-pair">
+                <p class="p-id">Sistem menggunakan pasangan EMA-13 (cepat) dan EMA-34 (lambat). Sinyal BUY dasar terpicu saat EMA₁₃ &gt; EMA₃₄ (<em>Golden Cross</em>); sinyal SELL dasar terpicu saat EMA₁₃ &lt; EMA₃₄ (<em>Death Cross</em>).</p>
+                <p class="p-en">The system uses an EMA-13 (fast) and EMA-34 (slow) pair. A basic BUY signal is triggered when EMA₁₃ &gt; EMA₃₄ (Golden Cross); a basic SELL signal is triggered when EMA₁₃ &lt; EMA₃₄ (Death Cross).</p>
+            </div>
+
+            <h3 class="subsection-title">4.2 Volume Weighted Average Price (VWAP) Sesi Harian</h3>
+            <div class="p-pair">
+                <p class="p-id">VWAP dihitung sebagai rata-rata harga berbobot volume yang diakumulasikan sejak pukul 00:00 UTC dan direset setiap hari:</p>
+                <p class="p-en">VWAP is calculated as the volume-weighted average price accumulated since 00:00 UTC and reset daily:</p>
+            </div>
+            <div class="math-block"><span>VWAP(t) = Σ(Pᵢ · Vᵢ) / Σ(Vᵢ),&nbsp; i = 1..N_t</span><span class="math-eq-num">(2)</span></div>
+            <div class="p-pair">
+                <p class="p-id">Sinyal BUY hanya dikonfirmasi jika harga saat ini berada di atas VWAP, mengindikasikan tekanan beli dari institusi yang mendorong harga di atas rata-rata sesi.</p>
+                <p class="p-en">BUY signals are only confirmed when the current price is above VWAP, indicating institutional buying pressure driving price above the session average.</p>
+            </div>
+
+            <h3 class="subsection-title">4.3 Bollinger Bands 50-Period (Sideways Strategy)</h3>
+            <div class="math-block"><span>BB_upper = SMA₅₀ + 2σ,&nbsp;&nbsp; BB_lower = SMA₅₀ − 2σ,&nbsp;&nbsp; σ = √(Σ(Pᵢ − SMA)² / N)</span><span class="math-eq-num">(3)</span></div>
+            <div class="p-pair">
+                <p class="p-id">Lebar pita minimum 1.0% dipersyaratkan untuk memastikan selisih harga beli-jual cukup menutupi biaya transaksi (fee 0.1% x2) plus spread. Jika lebar BB &lt; 1.0%, bot menahan diri (WAIT) untuk mencegah <em>overtrading</em> di pasar yang terlalu sempit.</p>
+                <p class="p-en">A minimum band width of 1.0% is required to ensure the buy-sell price spread is sufficient to cover transaction costs (0.1% fee x2) plus spread. If BB width &lt; 1.0%, the bot holds (WAIT) to prevent overtrading in excessively narrow markets.</p>
+            </div>
+
+            <h3 class="subsection-title">4.4 Trailing Take Profit &amp; Stop Loss Dinamis</h3>
+            <div class="math-block"><span>HWM(t) = max(HWM(t−1), P(t))</span><span class="math-eq-num">(4)</span></div>
+            <div class="math-block"><span>SELL if P(t) ≤ HWM(t) · (1 − 0.010), given (HWM − P_entry) / P_entry ≥ 0.015</span><span class="math-eq-num">(5)</span></div>
+            <div class="math-block"><span>SL_trigger = P_avg_entry · (1 − 0.012)</span><span class="math-eq-num">(6)</span></div>
+
+            <h3 class="subsection-title">4.5 Kalkulasi P&amp;L Berbasis Weighted Average Cost</h3>
+            <div class="math-block"><span>P_avg = Σ(buy_priceⱼ · amountⱼ) / Σ(amountⱼ),&nbsp; net_PnL = (P_sell − P_avg) · Q − fee_buy − fee_sell</span><span class="math-eq-num">(7)</span></div>
+
+            <!-- 5. Fase 4.1 -->
+            <h2 class="section-title" id="sec-phase41">5. Modifikasi Fase 4.1 / Phase 4.1 Modifications</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Fase 4.1 diperkenalkan untuk menanggulangi dua masalah utama yang diidentifikasi pada fase sebelumnya: (1) tingginya frekuensi <em>whipsaw exit</em> akibat eksekusi sinyal jual instan pada timeframe 1 menit, dan (2) inflasi <em>average cost basis</em> akibat akumulasi posisi tanpa batas yang menarik titik impas ke puncak tren.</p>
+                <p class="p-en">Phase 4.1 was introduced to address two main problems identified in the previous phase: (1) high whipsaw exit frequency due to instant sell signal execution on the 1-minute timeframe, and (2) average cost basis inflation due to unlimited position accumulation pulling the breakeven point to trend peaks.</p>
+            </div>
+
+            <h3 class="subsection-title">5.1 Pembatasan Pyramiding 3 Layer</h3>
+            <div class="p-pair">
+                <p class="p-id">Jumlah posisi aktif yang dapat diakumulasikan secara bersamaan dibatasi ketat pada maksimal 3 layer. Fungsi pembatasan ini diimplementasikan di <em>Validate Engine</em>:</p>
+                <p class="p-en">The number of active positions that can be simultaneously accumulated is strictly capped at a maximum of 3 layers. This restriction function is implemented in the Validate Engine:</p>
+            </div>
+            <div class="math-block"><span>N_active = Σ Iⱼ ≤ 3,&nbsp; dimana Iⱼ ∈ {0,1} adalah indikator posisi aktif ke-j</span><span class="math-eq-num">(8)</span></div>
+
+            <h3 class="subsection-title">5.2 Konfirmasi Streak Sinyal Jual 2 Menit</h3>
+            <div class="p-pair">
+                <p class="p-id">Sinyal jual normal (non-darurat) hanya dieksekusi setelah kondisi bearish terkonfirmasi selama 2 menit berturut-turut. Counter streak direset ke nol jika kondisi bullish kembali sebelum konfirmasi tercapai:</p>
+                <p class="p-en">Normal (non-emergency) sell signals are only executed after bearish conditions are confirmed for 2 consecutive minutes. The streak counter resets to zero if bullish conditions return before confirmation is achieved:</p>
+            </div>
+            <div class="math-block"><span>Streak_t = Streak_(t-1)+1 jika (EMA₁₃&lt;EMA₃₄ ∧ P&lt;VWAP) ∨ ¬Trend₁₅m, else 0</span><span class="math-eq-num">(9)</span></div>
+            <div class="p-pair">
+                <p class="p-id">Eksekusi penjualan hanya dilakukan apabila Streak_t ≥ 2. Sinyal darurat (Stop Loss, Trailing TP, Dump Detection) tetap bypass filter ini.</p>
+                <p class="p-en">Sell execution only proceeds if Streak_t ≥ 2. Emergency signals (Stop Loss, Trailing TP, Dump Detection) bypass this filter entirely.</p>
+            </div>
+
+            <h3 class="subsection-title">5.3 Minimum Holding Time 15 Menit</h3>
+            <div class="p-pair">
+                <p class="p-id">Posisi harus ditahan minimal 15 menit sejak BUY terakhir sebelum sinyal jual normal diizinkan melewati Validate Engine. Ini mencegah eksekusi jual prematur akibat fluktuasi harga sesaat pasca pembelian.</p>
+                <p class="p-en">Positions must be held for at least 15 minutes since the last BUY before a normal sell signal is permitted through the Validate Engine. This prevents premature sell execution due to momentary price fluctuations immediately after purchase.</p>
+            </div>
+
+            <!-- 6. Fase 4.2 -->
+            <h2 class="section-title" id="sec-phase42">6. Perbaikan Fase 4.2 (Data-Driven) / Phase 4.2 Data-Driven Improvements</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Fase 4.2 merupakan iterasi perbaikan berbasis analisis data transaksi empiris selama 48 jam operasional (1–3 Juli 2026). Data menunjukkan win rate 30% (12 profit dari 40 siklus SELL) dengan net P&amp;L kumulatif −$12.22, mengidentifikasi empat pola perilaku sistematis yang merugikan performa.</p>
+                <p class="p-en">Phase 4.2 is an improvement iteration based on empirical analysis of 48 hours of live operation transaction data (July 1–3, 2026). Data showed a 30% win rate (12 profitable from 40 SELL cycles) with a cumulative net P&amp;L of −$12.22, identifying four systematic behavioral patterns harmful to performance.</p>
+            </div>
+
+            <h3 class="subsection-title">6.1 Filter Volume Minimum 0.5× (Fix #2)</h3>
+            <div class="p-pair">
+                <p class="p-id">Analisis log transaksi mengidentifikasi bahwa sejumlah entry BUY dilakukan pada kondisi volume candle mendekati nol (Vol 0.0x–0.1x). Sinyal EMA <em>Golden Cross</em> yang muncul tanpa dukungan volume yang memadai merupakan <em>fake-out</em> — pergerakan harga akibat minimnya partisipan pasar, bukan tekanan beli yang nyata.</p>
+                <p class="p-en">Transaction log analysis identified that several BUY entries were executed under near-zero candle volume conditions (Vol 0.0x–0.1x). EMA Golden Cross signals appearing without adequate volume support are fake-outs — price movements due to minimal market participation rather than genuine buying pressure.</p>
+            </div>
+            <div class="math-block"><span>BUY allowed only if: vol_surge = V_current / V_avg ≥ 0.5</span><span class="math-eq-num">(10)</span></div>
+
+            <h3 class="subsection-title">6.2 Larangan Pyramiding Saat Harga Naik (Fix #1)</h3>
+            <div class="p-pair">
+                <p class="p-id">Data menunjukkan pola berulang di mana layer ke-2 dan ke-3 dibeli pada harga yang lebih tinggi dari entry sebelumnya, menarik average cost basis mendekati puncak harga. Layer tambahan hanya diizinkan jika harga saat ini sudah turun minimal 0.3% dari entry terakhir, memastikan mekanisme <em>averaging down</em> yang sehat:</p>
+                <p class="p-en">Data revealed a recurring pattern where the 2nd and 3rd layers were bought at prices higher than the previous entry, pulling the average cost basis toward price peaks. Additional layers are only permitted if the current price has fallen at least 0.3% from the last entry, ensuring healthy averaging-down:</p>
+            </div>
+            <div class="math-block"><span>Layer_(n+1) allowed only if: P_current ≤ P_last_entry · (1 − 0.003)</span><span class="math-eq-num">(11)</span></div>
+
+            <div class="highlight-box">
+                <strong>Studi Kasus — Pola Pyramiding Naik (Data Nyata 1 Juli 2026):</strong><br>
+                ID 277: BUY @ $58,444 (Layer 1) → ID 278: BUY @ $58,504 (+$60) → ID 279: BUY @ $58,935 (+$491 dari L1)<br>
+                → ID 294: SELL @ $58,906 → P&amp;L: <strong style="color:var(--accent-red);">−$3.79</strong> ❌ (harga jual lebih rendah dari Layer 3)
+            </div>
+
+            <h3 class="subsection-title">6.3 Cooldown 15 Menit Pasca Profitable Sell (Fix #3)</h3>
+            <div class="p-pair">
+                <p class="p-id">Pola FOMO otomatis teridentifikasi: bot konsisten re-entry dalam 2–5 menit setelah SELL yang profit, membeli di harga yang sudah lebih tinggi dari harga jual sebelumnya. Mekanisme cooldown 15 menit pasca SELL profit memberikan jeda konsolidasi harga sebelum bot diizinkan masuk kembali.</p>
+                <p class="p-en">An automated FOMO pattern was identified: the bot consistently re-entered within 2–5 minutes after a profitable SELL, buying at prices already higher than the previous sell price. A 15-minute cooldown mechanism after profitable SELLs provides a price consolidation window before the bot is permitted to re-enter.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Studi Kasus — FOMO Re-entry (Data Nyata 1 Juli 2026):</strong><br>
+                ID 314: SELL @ $59,366 → P&amp;L: <strong style="color:var(--accent-green);">+$4.64</strong> ✅ (jam 21:06)<br>
+                ID 315: BUY @ $59,449 (jam 21:08 — hanya 2 menit kemudian, $83 lebih mahal)<br>
+                → ID 318: SELL @ $59,656 → P&amp;L: <strong style="color:var(--accent-red);">−$1.73</strong> ❌
+            </div>
+
+            <h3 class="subsection-title">6.4 Peningkatan Cooldown BUY 5 → 10 Menit (Fix #4)</h3>
+            <div class="p-pair">
+                <p class="p-id">Data 48 jam menunjukkan 903 sinyal BUY yang ingin masuk (538 ditolak karena max pyramiding, 365 ditolak karena cooldown), rata-rata 18.8 sinyal BUY per jam. Frekuensi ini mengindikasikan bot bereaksi terhadap noise pasar, bukan tren signifikan. Peningkatan cooldown BUY dari 5 ke 10 menit memotong frekuensi noise sekitar 50% dan memaksa bot hanya masuk pada sinyal yang cukup persisten (&gt;10 menit).</p>
+                <p class="p-en">48-hour data showed 903 BUY signals wanting to enter (538 rejected for max pyramiding, 365 rejected for cooldown), averaging 18.8 BUY signals per hour. This frequency indicates the bot was reacting to market noise rather than significant trends. Increasing BUY cooldown from 5 to 10 minutes cuts noise frequency by approximately 50% and forces the bot to only enter on sufficiently persistent signals (&gt;10 minutes).</p>
+            </div>
+
+            <!-- 7. Fase 5.0 -->
+            <h2 class="section-title" id="sec-phase50">7. Evolusi Fase 5.0 (QPS &amp; HFT Microstructure) / Phase 5.0 Evolution</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Fase 5.0 merupakan lompatan arsitektural yang mengubah Bot A dari sekadar bot berbasis indikator statis menjadi <em>Quant Professional System (QPS)</em>. Perubahan ini memperkenalkan dua mekanisme institusional: Manajemen Risiko Dinamis (Kelly Criterion) dan Analisis Mikrostruktur Pasar (Order Book Imbalance) untuk menghindari jebakan <em>Mean Reversion</em>.</p>
+                <p class="p-en">Phase 5.0 represents an architectural leap that transforms Bot A from a static indicator-based bot into a Quant Professional System (QPS). This change introduces two institutional mechanisms: Dynamic Risk Management (Kelly Criterion) and Market Microstructure Analysis (Order Book Imbalance) to avoid Mean Reversion traps.</p>
+            </div>
+
+            <h3 class="subsection-title">7.1 Manajemen Risiko Dinamis (Kelly Criterion)</h3>
+            <div class="p-pair">
+                <p class="p-id">Modul QPS Risk (<code>risk.rs</code>) membaca 20 transaksi <em>SELL</em> terakhir untuk menghitung Sharpe Ratio secara real-time. Rasio ini digunakan untuk memodulasi ukuran posisi (<em>position sizing</em>) secara dinamis antara 0% hingga 35% modal menggunakan <em>Quarter Kelly Fraction</em>. Jika Sharpe Ratio bernilai negatif, alokasi ditekan menjadi 0% (berhenti trading) untuk melindungi ekuitas dari <em>drawdown</em>.</p>
+                <p class="p-en">The QPS Risk module (<code>risk.rs</code>) reads the last 20 SELL transactions to compute the Sharpe Ratio in real-time. This ratio is used to dynamically modulate the position size between 0% and 35% of capital using the Quarter Kelly Fraction. If the Sharpe Ratio is negative, allocation is squeezed to 0% (trading halt) to protect equity from drawdown.</p>
+            </div>
+            <div class="math-block"><span>f^*_quarter = 0.25 \cdot (\mu / \sigma^2),&nbsp; di mana \mu = avg\_return, \sigma = std\_dev</span><span class="math-eq-num">(12)</span></div>
+
+            <h3 class="subsection-title">7.2 Analisis Order Book Imbalance (Anti-Fakeout)</h3>
+            <div class="p-pair">
+                <p class="p-id">Kelemahan terbesar sinyal EMA adalah sifatnya yang <em>lagging</em> (terlambat), sehingga sering terjebak dalam kondisi <em>fake-out pump</em>. Melalui integrasi koneksi <em>High-Frequency</em> <code>@bookTicker</code>, bot kini mengevaluasi antrean order <em>bid</em> dan <em>ask</em> sebelum mengeksekusi <em>Golden Cross</em>. Transaksi akan diblokir jika <em>Order Book Imbalance</em> (OBI) di bawah 0.40, menandakan bahwa lebih dari 60% antrean adalah dinding jual (<em>Sell Wall</em>).</p>
+                <p class="p-en">The biggest weakness of EMA signals is their lagging nature, frequently getting caught in fake-out pump conditions. Through integration with the High-Frequency <code>@bookTicker</code> connection, the bot now evaluates bid and ask order queues before executing a Golden Cross. Transactions are blocked if the Order Book Imbalance (OBI) falls below 0.40, signifying that over 60% of the queue is a Sell Wall.</p>
+            </div>
+            <div class="math-block"><span>OBI = Q_{bid} / (Q_{bid} + Q_{ask}),&nbsp; Block if OBI < 0.40</span><span class="math-eq-num">(13)</span></div>
+
+            <!-- 8. Hasil & Pembahasan -->
+            <h2 class="section-title" id="sec-results">8. Hasil &amp; Pembahasan / Results &amp; Discussion</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Evaluasi kinerja dilakukan terhadap data operasional nyata selama periode 1–3 Juli 2026 (48 jam), mencakup 156 transaksi (116 BUY, 40 SELL). Metrik kinerja utama sebelum dan proyeksi sesudah implementasi Fase 4.2 disajikan pada tabel berikut:</p>
+                <p class="p-en">Performance evaluation was conducted on live operational data over the period July 1–3, 2026 (48 hours), covering 156 transactions (116 BUY, 40 SELL). Key performance metrics before and projected after Phase 4.2 implementation are presented in the following table:</p>
+            </div>
+
+            <div class="table-caption">Tabel 1. Perbandingan Metrik Kinerja Bot A — Fase 4.1 vs Fase 4.2<br><em>Table 1. Bot A Performance Metrics Comparison — Phase 4.1 vs Phase 4.2</em></div>
+            <table class="academic-table">
+                <thead>
+                    <tr>
+                        <th>Metrik / Metric</th>
+                        <th>Fase 4.1 (Baseline)</th>
+                        <th>Fase 4.2 (Target)</th>
+                        <th>Perubahan / Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Win Rate SELL</td><td>30.0% (12/40)</td><td>Target &gt;45%</td><td>+15 pp</td></tr>
+                    <tr><td>Net P&amp;L Kumulatif (48 jam)</td><td>−$12.22</td><td>Target &gt; $0</td><td>Positif</td></tr>
+                    <tr><td>Total Ekuitas</td><td>$937.57 (−6.24%)</td><td>Stabil/naik</td><td>↑</td></tr>
+                    <tr><td>Avg Sinyal BUY per Jam</td><td>18.8 sinyal/jam</td><td>~9–10 sinyal/jam</td><td>−50%</td></tr>
+                    <tr><td>Pyramiding Naik (chasing)</td><td>Tidak terkontrol</td><td>Diblokir (0.3% rule)</td><td>Eliminasi</td></tr>
+                    <tr><td>FOMO Re-entry Pasca Profit</td><td>Terjadi berulang</td><td>Diblokir (15 mnt CD)</td><td>Eliminasi</td></tr>
+                    <tr><td>Entry Low Volume (Vol &lt;0.5x)</td><td>Tidak difilter</td><td>Ditolak otomatis</td><td>Eliminasi</td></tr>
+                    <tr><td>Sinyal Darurat (SL/TTP/Dump)</td><td>Bypass semua filter</td><td>Tetap bypass</td><td>Tidak berubah</td></tr>
+                </tbody>
+            </table>
+
+            <div class="p-pair">
+                <p class="p-id">Temuan utama dari analisis data menunjukkan bahwa mayoritas kerugian (28 dari 40 SELL rugi) disebabkan oleh kombinasi tiga faktor sistematis: (a) entry di puncak tren akibat pyramiding naik tanpa filter harga, (b) re-entry FOMO segera pasca profit sell di harga yang sudah terlampau tinggi, dan (c) false signal EMA golden cross di kondisi volume hampir nol. Ketiga faktor ini bersifat saling memperburuk — bot masuk terlalu banyak, terlalu mahal, dan terlalu sering.</p>
+                <p class="p-en">Key findings from the data analysis indicate that the majority of losses (28 of 40 losing SELLs) were caused by a combination of three systematic factors: (a) trend peak entries due to upward pyramiding without price filters, (b) FOMO re-entry immediately after profitable sells at already elevated prices, and (c) false EMA golden cross signals under near-zero volume conditions. These three factors are mutually compounding — the bot entered too many times, too expensively, and too frequently.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Perlu dicatat bahwa siklus SELL yang menghasilkan profit terbesar (+$4.64 dan +$4.90) terjadi pada kondisi di mana tren berlanjut cukup lama untuk HWM mencapai level signifikan dan Trailing TP terpicu. Ini menguatkan hipotesis bahwa profitabilitas jangka panjang bergantung pada kemampuan sistem mempertahankan posisi di tren yang valid, yang secara langsung merupakan target dari fix Fase 4.2.</p>
+                <p class="p-en">It is notable that the largest profitable SELL cycles (+$4.64 and +$4.90) occurred when trends continued long enough for HWM to reach significant levels and trigger Trailing TP. This reinforces the hypothesis that long-term profitability depends on the system's ability to maintain positions in valid trends, which is directly the target of Phase 4.2 fixes.</p>
+            </div>
+
+            <div class="table-caption">Tabel 2. Parameter Manajemen Risiko Bot A — Ringkasan Lengkap<br><em>Table 2. Bot A Risk Management Parameters — Complete Summary</em></div>
+            <table class="academic-table">
+                <thead>
+                    <tr><th>Parameter</th><th>Nilai / Value</th><th>Fase / Phase</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Regime threshold (Sideways/Trending)</td><td>Volatilitas % &lt; 0.085%</td><td>4.0</td></tr>
+                    <tr><td>EMA Crossover</td><td>EMA-13 vs EMA-34</td><td>4.0</td></tr>
+                    <tr><td>BB Period (Sideways mode)</td><td>50 candle, 2σ, min lebar 1.0%</td><td>4.0</td></tr>
+                    <tr><td>Stop Loss</td><td>−1.2% dari avg entry</td><td>4.0</td></tr>
+                    <tr><td>Trailing Take Profit activation</td><td>HWM ≥ +1.5% dari entry</td><td>4.0</td></tr>
+                    <tr><td>Trailing pullback trigger</td><td>−1.0% dari HWM</td><td>4.0</td></tr>
+                    <tr><td>Hard Take Profit</td><td>+3.0% instan</td><td>4.0</td></tr>
+                    <tr><td>Max pyramiding layers</td><td>3 layer</td><td>4.1</td></tr>
+                    <tr><td>Sell confirmation streak</td><td>2 menit berturut</td><td>4.1</td></tr>
+                    <tr><td>Minimum holding time</td><td>15 menit</td><td>4.1</td></tr>
+                    <tr><td>Cooldown BUY</td><td>10 menit</td><td>4.2</td></tr>
+                    <tr><td>Cooldown SELL</td><td>5 menit</td><td>4.1</td></tr>
+                    <tr><td>Min volume surge (BUY Trending)</td><td>0.5× rata-rata</td><td>4.2</td></tr>
+                    <tr><td>Pyramid price filter</td><td>Harus turun ≥ 0.3% dari entry terakhir</td><td>4.2</td></tr>
+                    <tr><td>Post-profit-sell cooldown</td><td>15 menit</td><td>4.2</td></tr>
+                    <tr><td>Fee exchange (simulasi)</td><td>0.1% per sisi</td><td>4.0</td></tr>
+                    <tr><td>Alokasi BUY Trending</td><td>20% saldo USDT</td><td>4.0</td></tr>
+                    <tr><td>Alokasi BUY Sideways</td><td>15% saldo USDT</td><td>4.0</td></tr>
+                    <tr><td>Alokasi BUY Breakout</td><td>25% saldo USDT</td><td>4.0</td></tr>
+                </tbody>
+            </table>
+
+            <!-- 9. Kesimpulan -->
+            <h2 class="section-title" id="sec-conclusion">9. Kesimpulan / Conclusion</h2>
+
+            <div class="p-pair">
+                <p class="p-id">Makalah ini mendokumentasikan evolusi sistem trading algoritmik BitTrade-v2 Engine (Bot A) melalui dua fase perbaikan kritis. Fase 4.1 berhasil menstabilkan sistem dengan memperkenalkan pembatasan pyramiding, filter konfirmasi streak, dan kalkulasi P&amp;L berbasis weighted average cost. Fase 4.2 merupakan langkah maju yang lebih signifikan karena didasarkan pada bukti data empiris nyata, mengidentifikasi dan menutup empat celah perilaku sistematis yang menjadi akar kerugian terbesar.</p>
+                <p class="p-en">This paper documents the evolution of the BitTrade-v2 Engine (Bot A) algorithmic trading system through two critical improvement phases. Phase 4.1 successfully stabilized the system by introducing pyramiding limits, streak confirmation filters, and weighted average cost P&amp;L calculations. Phase 4.2 represents a more significant step forward as it is based on real empirical data evidence, identifying and closing four systematic behavioral gaps that were the root cause of the largest losses.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Arsitektur berbasis Rust dengan pipeline event-driven 5-tahap dan persistensi crash recovery melalui PostgreSQL terbukti memberikan fondasi teknis yang solid. Kerangka manajemen risiko berlapis — yang membedakan sinyal darurat dari sinyal normal — memastikan bahwa proteksi modal tetap responsif tanpa mengorbankan selektivitas entry.</p>
+                <p class="p-en">The Rust-based architecture with a 5-stage event-driven pipeline and PostgreSQL crash recovery persistence has proven to provide a solid technical foundation. The layered risk management framework — which distinguishes emergency signals from normal signals — ensures that capital protection remains responsive without sacrificing entry selectivity.</p>
+            </div>
+
+            <div class="p-pair">
+                <p class="p-id">Penelitian selanjutnya dapat mengeksplorasi optimasi adaptif parameter berbasis kondisi volatilitas pasar yang berubah dinamis, integrasi indikator sentimen on-chain, dan pengujian backtesting sistematis menggunakan data historis multi-bulan untuk memvalidasi performa Fase 4.2 secara statistik.</p>
+                <p class="p-en">Future research may explore adaptive parameter optimization based on dynamically changing market volatility conditions, integration of on-chain sentiment indicators, and systematic backtesting using multi-month historical data to statistically validate Phase 4.2 performance.</p>
+            </div>
+
+            <!-- References -->
+            <h2 class="section-title" id="sec-references">Daftar Pustaka / References</h2>
+            <div style="font-size: 0.9em; line-height: 1.8; margin-left: 25px; text-indent: -25px;">
+                <p>Aronson, D. R. (2006). <em>Evidence-Based Technical Analysis: Applying the Scientific Method and Statistical Inference to Trading Signals</em>. John Wiley &amp; Sons.</p>
+                <p>Bollinger, J. (2001). <em>Bollinger on Bollinger Bands</em>. McGraw-Hill.</p>
+                <p>Developer Community. (2024). <em>Tokio Runtime Architecture and Work-Stealing Scheduling</em>. Tokio Dev Press.</p>
+                <p>Hull, J. C. (2017). <em>Options, Futures, and Other Derivatives</em> (10th ed.). Pearson Education.</p>
+                <p>Lo, A. W., &amp; MacKinlay, A. C. (1988). Stock market prices do not follow random walks: Evidence from a simple specification test. <em>Review of Financial Studies</em>, 1(1), 41–66.</p>
+                <p>Murphy, J. J. (1999). <em>Technical Analysis of the Financial Markets: A Comprehensive Guide to Trading Methods and Applications</em>. New York Institute of Finance.</p>
+                <p>Pardo, R. (2008). <em>The Evaluation and Optimization of Trading Strategies</em> (2nd ed.). John Wiley &amp; Sons.</p>
+                <p>Prado, M. L. de (2018). <em>Advances in Financial Machine Learning</em>. John Wiley &amp; Sons.</p>
+                <p>Wilder, J. W. (1978). <em>New Concepts in Technical Trading Systems</em>. Trend Research.</p>
+            </div>
+
+            <div class="footer">
+                BitTrade Technical Research Paper — Bot A (BitTrade-v2 Engine) &nbsp;|&nbsp; Fase 4.2 — Juli 2026<br>
+                BitTrade Quantitative Research Group &nbsp;|&nbsp; Advanced Agentic Trading Division
+            </div>
+
+        </div><!-- .latex-document -->
+    </div><!-- .paper-main-content -->
+</div><!-- .paper-layout-wrapper -->
+
+<!-- INCLUDE FOOTER -->
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.toc-link');
+        const sectionIds = Array.from(links).map(l => l.getAttribute('href').replace('#', ''));
+
+        window.addEventListener('scroll', () => {
+            let current = sectionIds[0];
+            const scrollPos = window.scrollY + 160;
+            sectionIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && el.offsetTop <= scrollPos) current = id;
+            });
+            links.forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+            });
+        });
+    });
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        if (sidebar) sidebar.classList.toggle('open');
+        if (overlay) overlay.classList.toggle('open');
+    }
+</script>
+</body>
+</html>

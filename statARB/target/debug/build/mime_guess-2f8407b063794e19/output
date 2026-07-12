@@ -1,0 +1,1 @@
+cargo:rustc-env=MIME_TYPES_GENERATED_PATH=/root/bittrade-v2-strategi/statARB/target/debug/build/mime_guess-2f8407b063794e19/out/mime_types_generated.rs

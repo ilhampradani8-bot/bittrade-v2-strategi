@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDCA Bot - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e5dfd3;
+            --card-bg: #faf8f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5a5a5a;
+            --border-color: #1a1a1a;
+            --accent-blue: #0f4c81;
+            --accent-red: #b91c1c;
+            --accent-green: #15803d;
+            --accent-gold: #b45309;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 30px;
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+
+        /* Reusable layout styles from Bot A */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .burger-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px 12px;
+            margin-right: 15px;
+        }
+
+        .uptime-badge {
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            font-size: 0.85em;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 260px;
+            height: 100%;
+            background-color: var(--card-bg);
+            border-right: 2px solid var(--border-color);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .sidebar.active {
+            left: 0;
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        .sidebar-overlay.active {
+            display: block;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-item {
+            margin-bottom: 12px;
+        }
+        .sidebar-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 1px solid transparent;
+        }
+        .sidebar-link.active {
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+            background-color: #f3efe6;
+        }
+
+        /* Grid metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .metric-card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            background-color: #fcfbfa;
+            position: relative;
+        }
+
+        .metric-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .metric-subtext {
+            font-size: 0.8em;
+            margin-top: 5px;
+            color: var(--text-secondary);
+            font-family: monospace;
+        }
+
+        /* Active position layout */
+        .main-panel-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .main-panel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-box {
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            background-color: #fcfbfa;
+        }
+
+        .panel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* Indicators section */
+        .indicator-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .indicator-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            font-size: 0.85em;
+            font-family: monospace;
+            background: #faf8f5;
+        }
+
+        .led-light {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            border: 1px solid #1a1a1a;
+            display: inline-block;
+        }
+
+        .led-light.active-green {
+            background-color: #2ecc71;
+            box-shadow: 0 0 8px #2ecc71;
+        }
+
+        .led-light.active-red {
+            background-color: #e74c3c;
+            box-shadow: 0 0 8px #e74c3c;
+        }
+
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        /* Tables styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        th {
+            background-color: #f3efe6;
+            color: var(--text-primary);
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid var(--border-color);
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #e5dfd5;
+            font-family: monospace;
+        }
+
+        .badge-win {
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .badge-loss {
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        /* Buttons styling */
+        .btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #f3efe6;
+        }
+
+        .btn-danger {
+            background-color: var(--accent-red);
+            color: white;
+            border-color: var(--accent-red);
+        }
+
+        .btn-danger:hover {
+            background-color: #991b1b;
+        }
+
+        /* Log console */
+        .log-console {
+            background: #faf8f5;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.85em;
+            color: var(--text-primary);
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 25px;
+        }
+
+        .flashing {
+            animation: flash-animation 0.5s alternate 2;
+        }
+
+        @keyframes flash-animation {
+            from { background-color: transparent; }
+            to { background-color: #fdf2f2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- INCLUDE HEADER -->
+
+        <!-- System Status Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+            <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 1.5em; font-weight: bold;">SmartDCA Engine Real-time</h2>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <div class="uptime-badge">Uptime: <span id="uptime-counter">00:00:00</span></div>
+                <div class="uptime-badge" style="border-color: var(--accent-green); color: var(--accent-green); font-weight: bold;">Winrate: <span id="winrate-counter">0.0%</span></div>
+                <div class="uptime-badge" style="border-color: var(--accent-blue); color: var(--accent-blue);">CPU: <span id="cpu-counter">0.0%</span></div>
+                <div class="uptime-badge" style="border-color: var(--accent-blue); color: var(--accent-blue);">RAM: <span id="ram-counter">0 MB</span></div>
+            </div>
+        </div>
+
+        <!-- Pipeline Status Indicators -->
+        <div class="indicator-row">
+            <div class="indicator-badge">
+                <span class="led-light" id="led-ws"></span> WebSocket
+            </div>
+            <div class="indicator-badge">
+                <span class="led-light" id="led-conclude"></span> Conclude (DCA)
+            </div>
+            <div class="indicator-badge">
+                <span class="led-light" id="led-validate"></span> Validate
+            </div>
+            <div class="indicator-badge">
+                <span class="led-light" id="led-executor"></span> Executor
+            </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Total Equity</h3>
+                <div class="metric-value" id="equity-val">$0.00</div>
+                <div class="metric-subtext">USDT + BTC Value</div>
+            </div>
+            <div class="metric-card">
+                <h3>Simulated Balance</h3>
+                <div class="metric-value" id="balance-val">$0.00</div>
+                <div class="metric-subtext">Remaining USDT Cash</div>
+            </div>
+            <div class="metric-card">
+                <h3>BTC Holdings</h3>
+                <div class="metric-value" id="btc-val">0.000000</div>
+                <div class="metric-subtext" id="btc-value-usd">$0.00 USD</div>
+            </div>
+            <div class="metric-card">
+                <h3>DCA Layers Filled</h3>
+                <div class="metric-value" id="layers-val">0 / 3</div>
+                <div class="metric-subtext">
+                    <span id="layer-dots" style="letter-spacing: 3px; font-weight: bold; color: var(--accent-blue);">○○○</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Panel Grid -->
+        <div class="main-panel-grid">
+            <!-- Left Panel: Equity Chart -->
+            <div class="panel-box">
+                <h2 class="panel-title">📈 Equity Curve (DCA Simulation)</h2>
+                <div class="chart-container">
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Right Panel: Active Position Summary -->
+            <div class="panel-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h2 class="panel-title">💼 Current Active Position</h2>
+                    <div style="margin-bottom: 12px; font-size: 0.95em;">
+                        <strong>Active Cycle:</strong> <span id="cycle-id">#0</span>
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 0.95em;">
+                        <strong>Weighted Avg Entry:</strong> <span id="avg-entry-val">$0.00</span>
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 0.95em;">
+                        <strong>Current BTC Price:</strong> <span id="btc-price-val" style="font-weight: bold;">$0.00</span>
+                    </div>
+                    <div style="margin-bottom: 12px; font-size: 0.95em;">
+                        <strong>Cycle HWM:</strong> <span id="hwm-val">$0.00</span>
+                    </div>
+                    <div style="margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); text-align: center;">
+                        <div style="font-size: 0.85em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 5px;">Real-time P&L</div>
+                        <div id="pnl-pct-val" style="font-size: 1.8em; font-weight: bold; font-family: 'Playfair Display', serif;">+0.00%</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-danger" onclick="triggerManualSell()" style="width: 100%; padding: 12px;">🚨 EMERGENCY MANUAL SELL</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tables section -->
+        <div class="main-panel-grid" style="grid-template-columns: 1fr 1fr;">
+            <!-- Cycles Table -->
+            <div class="panel-box">
+                <h2 class="panel-title">📜 DCA Cycle History</h2>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cycle</th>
+                                <th>Entry Avg</th>
+                                <th>Exit Price</th>
+                                <th>Net P&L ($)</th>
+                                <th>P&L %</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cycles-table-body">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading cycles...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Trade History Table -->
+            <div class="panel-box">
+                <h2 class="panel-title">📝 Recent Trade History</h2>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Cycle</th>
+                                <th>Action</th>
+                                <th>Layer</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading trades...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Console -->
+        <div class="panel-box" style="margin-top: 25px;">
+            <h2 class="panel-title" style="margin-bottom: 10px;">📋 Real-time Activity Logs</h2>
+            <div class="log-console" id="log-box">Loading logs...</div>
+        </div>
+
+        <!-- INCLUDE FOOTER -->
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        const script = document.createElement('script');
+        if (window.location.protocol === 'file:') {
+            script.src = '../js/dashboard.js';
+        } else {
+            script.src = 'js/dashboard.js';
+        }
+        document.body.appendChild(script);
+    </script>
+    <script>
+        // Sidebar burger controller
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebar-overlay').classList.toggle('active');
+        }
+
+        // Hide whale alert on header since it is not used in SmartDCA
+        const whaleBadge = document.getElementById('whale-badge');
+        if (whaleBadge) {
+            whaleBadge.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

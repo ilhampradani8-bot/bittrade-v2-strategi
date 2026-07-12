@@ -1,0 +1,614 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Buku Skripsi: Implementasi Quant Professional System (QPS) pada BitTrade-v2 | BitTrade Q-Lab"
+  description="Buku Skripsi Dwibahasa (Bilingual Long Version) mengenai evolusi Bot A (BitTrade-v2 Engine) menjadi Quant Professional System (QPS) menggunakan Kelly Criterion dan Market Microstructure Analysis."
+  botStatus="BOT A ONLINE (QPS)"
+>
+  <div class="paper-layout-wrapper">
+    <button id="mobileTocToggle" class="mobile-toc-toggle">&#9776; Daftar Isi</button>
+    <!-- Left TOC (Daftar Isi) -->
+    <div class="paper-toc-sidebar" id="tocSidebar">
+        <button id="closeToc" class="close-toc-btn">&times;</button>
+        <h4>Daftar Isi Buku<br/><span style="font-size:0.7em; font-weight:normal; color:var(--text-muted);">Table of Contents</span></h4>
+        <ul class="toc-list">
+            <li class="toc-item"><a href="#" data-target="0" class="toc-link active">Sampul &amp; Abstrak</a></li>
+            <li class="toc-item"><a href="#" data-target="1" class="toc-link">BAB I: Pendahuluan<br/><span class="en-sub">Chapter I: Introduction</span></a></li>
+            <li class="toc-item"><a href="#" data-target="2" class="toc-link">BAB II: Tinjauan Pustaka<br/><span class="en-sub">Chapter II: Literature Review</span></a></li>
+            <li class="toc-item"><a href="#" data-target="3" class="toc-link">BAB III: Arsitektur &amp; Metode<br/><span class="en-sub">Chapter III: Architecture</span></a></li>
+            <li class="toc-item"><a href="#" data-target="4" class="toc-link">BAB IV: Modifikasi Fase Pra-QPS<br/><span class="en-sub">Chapter IV: Pre-QPS Phase</span></a></li>
+            <li class="toc-item"><a href="#" data-target="5" class="toc-link">BAB V: Implementasi QPS<br/><span class="en-sub">Chapter V: QPS Implementation</span></a></li>
+            <li class="toc-item"><a href="#" data-target="6" class="toc-link">BAB VI: Hasil &amp; Pembahasan<br/><span class="en-sub">Chapter VI: Results</span></a></li>
+            <li class="toc-item"><a href="#" data-target="7" class="toc-link">BAB VII: Keterbatasan Metodologis<br/><span class="en-sub">Chapter VII: Methodological Limitations</span></a></li>
+            <li class="toc-item"><a href="#" data-target="8" class="toc-link">BAB VIII: Fase 5.1 - Kalibrasi Persentil<br/><span class="en-sub">Chapter VIII: Phase 5.1 - Percentile Calibration</span></a></li>
+            <li class="toc-item"><a href="#" data-target="9" class="toc-link">BAB IX: Kesimpulan &amp; Pustaka<br/><span class="en-sub">Chapter IX: Conclusion</span></a></li>
+        </ul>
+    </div>
+
+    <!-- Right Content (Buku Utama) -->
+    <div class="paper-main-content">
+        <div class="latex-document">
+
+            <div class="paper-actions-bar" style="justify-content: flex-end;">
+                <div style="font-size: 0.9em; color: var(--text-muted);">Format: <strong>Buku Skripsi Dwibahasa / Bilingual Book</strong> &nbsp;|&nbsp; Rev. Fase 5.0 (QPS)</div>
+            </div>
+
+            <div id="pages-viewport" style="overflow: hidden; width: 100%;">
+                <div id="pages-container">
+                    <!-- PAGE 0: Cover & Abstract -->
+                    <div class="book-page" data-page="0">
+                    <div id="cover" class="book-cover">
+                        <div class="university-header">
+                            BITTRADE QUANTITATIVE RESEARCH GROUP<br/>
+                            <span style="font-weight:normal; font-size: 0.8em;">ADVANCED AGENTIC TRADING DIVISION</span>
+                        </div>
+                        
+                        <h1 class="book-title">
+                            Sistem Trading Algoritmik Berbasis Regime Pasar dengan Manajemen Risiko Berlapis dan Analisis Mikrostruktur pada Aset Kripto BTC/USDT (Evolusi QPS)
+                        </h1>
+                        <div class="book-title-en">
+                            Market Regime-Based Algorithmic Trading System with Multi-Layer Risk Management and Microstructure Analysis on BTC/USDT Cryptocurrency Assets (QPS Evolution)
+                        </div>
+
+                        <div class="book-type">
+                            <strong>BUKU SKRIPSI / THESIS BOOK</strong><br/>
+                            Fase 5.0 - Edisi Juli 2026
+                        </div>
+
+                        <div class="book-author">
+                            Disusun Oleh / Authored By:<br/>
+                            <strong>Tim Peneliti BitTrade-v2 Engine (Bot A)</strong>
+                        </div>
+                    </div>
+
+                    <div class="paper-abstract-box" id="sec-abstract">
+                        <div class="abstract-section">
+                            <div class="abstract-header">Abstrak</div>
+                            <p class="abstract-text">
+                                Buku Skripsi ini menyajikan analisis komprehensif terhadap arsitektur dan evolusi kinerja <em>BitTrade-v2 Engine</em> (Bot A), sebuah sistem trading algoritmik yang beroperasi pada pasangan BTC/USDT. Sistem ini awalnya mengimplementasikan deteksi <em>market regime</em> (Trending dan Sideways). Namun, analisis data operasional nyata mengungkapkan kelemahan indikator konvensional yang sering memicu <em>false signal</em> (fake-out trap), mengakibatkan eksekusi yang merugikan. Penelitian ini mendokumentasikan peluncuran arsitektural Fase 5.0 yang mentransformasikan bot menjadi <em>Quant Professional System</em> (QPS). Pembaruan ini memperkenalkan <em>Dynamic Risk Management</em> berbasis <em>Quarter Kelly Criterion</em> dan perhitungan <em>Sharpe Ratio</em> berjalan, serta <em>Market Microstructure Analysis</em> yang memanfaatkan proksi likuiditas <em>Order Book Imbalance</em> (OBI) tingkat millisecond.
+                            </p>
+                            <div class="abstract-header" style="margin-top:20px; color:var(--text-muted);">Abstract</div>
+                            <p class="abstract-text en-text">
+                                This Thesis Book presents a comprehensive analysis of the architecture and performance evolution of the BitTrade-v2 Engine (Bot A), an algorithmic trading system operating on the BTC/USDT pair. The system initially implemented market regime detection (Trending and Sideways). However, analysis of real operational data revealed the weakness of conventional indicators which frequently triggered false signals (fake-out traps), resulting in unprofitable executions. This research documents the architectural launch of Phase 5.0 which transformed the bot into a Quant Professional System (QPS). This update introduces Dynamic Risk Management based on the Quarter Kelly Criterion and rolling Sharpe Ratio calculations, as well as Market Microstructure Analysis utilizing millisecond-level Order Book Imbalance (OBI) liquidity proxies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE 1: Bab I -->
+                <div class="book-page" data-page="1">
+                    <h2 class="section-title" id="bab-1">BAB I: PENDAHULUAN <span class="en-title">/ CHAPTER I: INTRODUCTION</span></h2>
+                    
+                    <h3 class="subsection-title">1.1 Latar Belakang Masalah <span class="en-subtitle">/ 1.1 Background of the Problem</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Pasar aset kripto, khususnya pasangan BTC/USDT, dicirikan oleh tingkat volatilitas yang ekstrim, asimetri informasi yang tinggi, serta kecepatan transisi kondisi pasar (<em>market regime</em>) yang sangat dinamis antara fase <em>trending</em> dan <em>sideways</em>. Karakteristik ini membuat pendekatan tradisional menggunakan indikator teknikal tunggal rentan menghasilkan sinyal perdagangan palsu ketika kondisi pasar mengalami pergantian mendadak.</p>
+                        <p class="p-en">The cryptocurrency asset market, particularly the BTC/USDT pair, is characterized by extreme volatility levels, high information asymmetry, and highly dynamic market regime transition speeds between trending and sideways phases. These characteristics make traditional approaches using single technical indicators prone to producing false trading signals when market conditions change abruptly.</p>
+                    </div>
+                    <div class="p-pair">
+                        <p class="p-id">Sistem trading algoritmik generasi awal seperti Bot A (BitTrade-v2 Engine) dirancang untuk memitigasi kelemahan tersebut melalui mekanisme deteksi <em>market regime</em> yang berupaya mengklasifikasikan kondisi pasar terlebih dahulu sebelum menentukan eksekusi strategi. Meskipun arsitektur awal berhasil memperkenalkan pengamanan dasar, data empiris nyata menunjukkan sebuah fenomena sistematis: mayoritas sinyal perpotongan indikator (<em>EMA Golden Cross</em>) terpicu akibat manipulasi likuiditas buatan atau *fake-out*, bukan oleh minat fundamental pasar sesungguhnya.</p>
+                        <p class="p-en">Early-generation algorithmic trading systems like Bot A (BitTrade-v2 Engine) were designed to mitigate these weaknesses through market regime detection mechanisms that attempt to classify market conditions first before determining strategy execution. Although the initial architecture successfully introduced basic safeguards, real empirical data demonstrated a systematic phenomenon: the majority of indicator crossover signals (EMA Golden Cross) were triggered by artificial liquidity manipulation or fake-outs, rather than by genuine fundamental market interest.</p>
+                    </div>
+                    
+                    <h3 class="subsection-title">1.2 Rumusan Masalah dan Tujuan <span class="en-subtitle">/ 1.2 Problem Formulation and Objectives</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Bagaimana mengidentifikasi dan memisahkan momentum pergerakan harga yang asli (<em>genuine breakout</em>) dari pergerakan harga palsu (<em>fake-out manipulation</em>) secara *real-time*? Dan bagaimana cara mencegah sistem mengalami kebangkrutan (*ruin*) pada masa transisi pasar yang dipenuhi rentetan kerugian (*losing streaks*) beruntun?</p>
+                        <p class="p-en">How to identify and separate genuine price movement momentum (genuine breakouts) from fake price movements (fake-out manipulation) in real-time? And how to prevent the system from experiencing bankruptcy (ruin) during market transition periods filled with consecutive losing streaks?</p>
+                    </div>
+                    <div class="p-pair">
+                        <p class="p-id">Tujuan utama dari penulisan skripsi ini adalah merancang, mengimplementasikan, dan mengevaluasi kinerja arsitektur Quant Professional System (QPS) pada BitTrade-v2. Secara spesifik, penelitian ini memformulasikan manajemen ukuran transaksi dinamis melalui <em>Kelly Criterion</em> yang dimodifikasi oleh <em>Sharpe Ratio</em>, serta mengembangkan modul <em>High-Frequency Microstructure Analysis</em> melalui kalkulasi tingkat ketidakseimbangan buku pesanan (<em>Order Book Imbalance</em> / OBI).</p>
+                        <p class="p-en">The main objective of writing this thesis is to design, implement, and evaluate the performance of the Quant Professional System (QPS) architecture on BitTrade-v2. Specifically, this research formulates dynamic transaction size management through the Kelly Criterion modified by the Sharpe Ratio, and develops a High-Frequency Microstructure Analysis module through the calculation of Order Book Imbalance (OBI) levels.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 2: Bab II -->
+                <div class="book-page" data-page="2">
+                    <h2 class="section-title" id="bab-2">BAB II: TINJAUAN PUSTAKA <span class="en-title">/ CHAPTER II: LITERATURE REVIEW</span></h2>
+                    
+                    <h3 class="subsection-title">2.1 Market Regime Detection <span class="en-subtitle">/ 2.1 Market Regime Detection</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Deteksi <em>market regime</em> merupakan fondasi dari seluruh sistem perdagangan adaptif modern. Lo &amp; MacKinlay (1988) membuktikan bahwa pasar keuangan bersifat non-stasioner, bergerak antara fase momentum dan reversion secara bergantian. Pendekatan umum adalah memanfaatkan tingkat volatilitas persentase (<em>standard deviation</em>) sebagai ambang batas klasifikasi.</p>
+                        <p class="p-en">Market regime detection is the foundation of all modern adaptive trading systems. Lo &amp; MacKinlay (1988) proved that financial markets are non-stationary, moving alternately between momentum and reversion phases. A common approach is to utilize percentage volatility levels (standard deviation) as a classification threshold.</p>
+                    </div>
+
+                    <h3 class="subsection-title">2.2 Manajemen Risiko Institusional <span class="en-subtitle">/ 2.2 Institutional Risk Management</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Dalam teori investasi kuantitatif, Kriteria Kelly adalah formula matematika yang menentukan porsi kekayaan optimal untuk dipertaruhkan. Sistem profesional modern mengadopsi <em>Fractional Kelly</em>, seperti <em>Quarter Kelly</em>. Selain itu, alokasi modal tidak hanya memperhitungkan peluang kemenang (<em>win rate</em>), melainkan juga disesuaikan dengan imbal-risiko aset tersebut yang biasa direpresentasikan dengan nilai <em>Sharpe Ratio</em> (Pardo, 2008).</p>
+                        <p class="p-en">In quantitative investment theory, the Kelly Criterion is a mathematical formula that determines the optimal portion of wealth to bet. Modern professional systems adopt Fractional Kelly, such as the Quarter Kelly. In addition, capital allocation not only takes into account winning opportunities (win rate), but is also adjusted to the risk-reward of the asset, which is usually represented by the Sharpe Ratio value (Pardo, 2008).</p>
+                    </div>
+
+                    <h3 class="subsection-title">2.3 Teori Mikrostruktur Pasar <span class="en-subtitle">/ 2.3 Market Microstructure Theory</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Mikrostruktur pasar mempelajari proses pembentukan harga pada tingkat terendah: pencocokan setiap *order bid* dan *ask*. <em>Order Book Imbalance</em> (OBI) adalah matriks asimetri utama yang mengungkap niat tersembunyi pasar (O'Hara, 1995). Pada aset kripto, institusi pembentuk harga (<em>market makers</em>) menempatkan *limit order* masif untuk menciptakan <em>Sell Wall</em> atau <em>Buy Wall</em>.</p>
+                        <p class="p-en">Market microstructure studies the price formation process at the lowest level: the matching of each bid and ask order. Order Book Imbalance (OBI) is the primary asymmetry matrix that reveals the market's hidden intentions (O'Hara, 1995). In crypto assets, market makers place massive limit orders to create a Sell Wall or Buy Wall.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 3: Bab III -->
+                <div class="book-page" data-page="3">
+                    <h2 class="section-title" id="bab-3">BAB III: ARSITEKTUR DAN METODE <span class="en-title">/ CHAPTER III: ARCHITECTURE &amp; METHODS</span></h2>
+                    
+                    <h3 class="subsection-title">3.1 Teknologi Inti <span class="en-subtitle">/ 3.1 Core Technology</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">BitTrade-v2 Engine dibangun sepenuhnya menggunakan bahasa pemrograman Rust, dipilih karena jaminan keamanan memori tingkat tinggi (<em>memory safety</em>) dan kemampuan *multithreading* asinkron ekstrem melalui ekosistem Tokio. Persistensi data dilakukan melalui basis data PostgreSQL menggunakan <code>sqlx</code>.</p>
+                        <p class="p-en">BitTrade-v2 Engine is built entirely using the Rust programming language, chosen for its high-level memory safety guarantees and extreme asynchronous multithreading capabilities through the Tokio ecosystem. Data persistence is handled via a PostgreSQL database using <code>sqlx</code>.</p>
+                    </div>
+
+                    <h3 class="subsection-title">3.2 Pipeline Event-Driven <span class="en-subtitle">/ 3.2 Event-Driven Pipeline</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Sistem dirancang mengalirkan setiap perubahan harga menjadi keputusan sepersekian detik melalui pipeline 5 tahap: Ingestion (Data), Heuristic (Pola), Conclude (Strategi), Risk &amp; Validate (Manajemen Risiko), dan Executor (Eksekusi virtual &amp; pemotongan biaya).</p>
+                        <p class="p-en">The system is designed to flow every price change into split-second decisions through a 5-stage pipeline: Ingestion (Data), Heuristic (Patterns), Conclude (Strategy), Risk &amp; Validate (Risk Management), and Executor (Virtual execution &amp; fee deduction).</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 4: Bab IV -->
+                <div class="book-page" data-page="4">
+                    <h2 class="section-title" id="bab-4">BAB IV: MODIFIKASI FASE PRA-QPS <span class="en-title">/ CHAPTER IV: PRE-QPS MODIFICATIONS</span></h2>
+                    
+                    <h3 class="subsection-title">4.1 Pengetatan Sistem (Fase 4.1) <span class="en-subtitle">/ 4.1 System Tightening (Phase 4.1)</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Masalah krusial pada versi awal adalah hiper-akumulasi posisi yang tak terkendali seiring naiknya harga. Pada Fase 4.1, disahkan aturan "Maksimal Pyramiding 3 Layer". Di samping itu, diterapkan pula filter *whipsaw* di mana konfirmasi tren harus bertahan selama 2 menit berturut-turut.</p>
+                        <p class="p-en">A crucial problem in the initial version was the uncontrolled hyper-accumulation of positions as prices rose. In Phase 4.1, a "Maximum 3 Layer Pyramiding" rule was enacted. In addition, a whipsaw filter was applied where trend confirmation must last for 2 consecutive minutes.</p>
+                    </div>
+
+                    <h3 class="subsection-title">4.2 Analisis Empiris Perilaku Sistem (Fase 4.2) <span class="en-subtitle">/ 4.2 Empirical Analysis (Phase 4.2)</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Pengujian coba jalan sistem selama 48 jam menghasilkan rasio kemenangan 30.0% dengan Net P&L kumulatif minus -$12.22. Pembedahan kronologis mengungkap pola destruktif: FOMO Re-entry Trap (masuk lagi pasca untung di harga mahal) dan Dead Volume Fake-out (masuk saat volume kosong).</p>
+                        <p class="p-en">A 48-hour test run of the system yielded a 30.0% win rate with a cumulative Net P&L of minus -$12.22. Chronological dissection revealed destructive patterns: FOMO Re-entry Trap (re-entering post-profit at expensive prices) and Dead Volume Fake-out (entering when volume is empty).</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 5: Bab V -->
+                <div class="book-page" data-page="5">
+                    <h2 class="section-title" id="bab-5">BAB V: IMPLEMENTASI QPS (FASE 5.0) <span class="en-title">/ CHAPTER V: QPS IMPLEMENTATION (PHASE 5.0)</span></h2>
+                    <div class="p-pair">
+                        <p class="p-id">Transisi dan peluncuran resmi arsitektur <em>Quant Professional System</em> (QPS) pada lingkungan produksi <em>live</em> dieksekusi secara mulus pada tanggal <strong>12 Juli 2026</strong>. Pembaruan ini mengubah paradigma bot dari sistem reaktif menjadi prediktif berorientasi risiko.</p>
+                        <p class="p-en">The transition and official launch of the Quant Professional System (QPS) architecture into the live production environment was seamlessly executed on <strong>July 12, 2026</strong>. This update shifts the bot's paradigm from a reactive system to a risk-oriented predictive one.</p>
+                    </div>
+                    
+                    <h3 class="subsection-title">5.1 Pilar Utama QPS: Dynamic Budgeting <span class="en-subtitle">/ 5.1 QPS Main Pillar: Dynamic Budgeting</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Modul QPS Risk menyapu tabel riwayat transaksi SQL untuk menganalisis 20 transaksi SELL terakhir (Window <em>T-20</em>). Modul menghasilkan rata-rata pengembalian bersih per perdagangan (&mu;) dan volatilitas pengembalian (&sigma;) untuk membentuk <em>Sharpe Ratio</em>.</p>
+                        <p class="p-en">The QPS Risk module sweeps the SQL transaction history table to analyze the last 20 SELL transactions (T-20 Window). The module generates the average net return per trade (&mu;) and return volatility (&sigma;) to form the Sharpe Ratio.</p>
+                    </div>
+                    
+                    <div class="math-block">
+                        <span>Sharpe = &mu; / &sigma;,&nbsp;&nbsp; f_quarter = 0.25 &middot; (&mu; / &sigma;&sup2;)</span>
+                        <span class="math-eq-num">(1)</span>
+                    </div>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Apabila Sharpe Ratio bernilai negatif, QPS memberikan instruksi perlindungan modal (<em>Capital Preservation Halt</em>) dan menekan alokasi menjadi 0%. Apabila positif, sistem mengeksekusi porsi anggaran berdasarkan proporsi <em>Quarter Kelly Fraction</em> (maksimal 35%).</p>
+                        <p class="p-en">If the Sharpe Ratio is negative, QPS issues a Capital Preservation Halt instruction and compresses allocation to 0%. If positive, the system executes a budget portion based on the Quarter Kelly Fraction proportion (maximum 35%).</p>
+                    </div>
+
+                    <h3 class="subsection-title">5.2 Pilar Kedua QPS: Anti-Fakeout OBI <span class="en-subtitle">/ 5.2 QPS Second Pillar: Anti-Fakeout OBI</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Sistem memantau kuantitas volume pada antrean *Best Bid* dan *Best Ask* untuk menghitung koefisien tekanan melalui rasio <em>Order Book Imbalance</em> (OBI):</p>
+                        <p class="p-en">The system monitors the volume quantities in the Best Bid and Best Ask queues to calculate the pressure coefficient through the Order Book Imbalance (OBI) ratio:</p>
+                    </div>
+
+                    <div class="math-block">
+                        <span>OBI = Volume_Bid / (Volume_Bid + Volume_Ask)</span>
+                        <span class="math-eq-num">(2)</span>
+                    </div>
+
+                    <div class="p-pair">
+                        <p class="p-id">Parameter penolakan keras ditetapkan pada skala <strong>0.40</strong>. Jika OBI &lt; 0.40 (artinya 60%+ dari keseluruhan volume antrean utama dikuasai oleh <em>Sell Wall</em>), maka sistem membatalkan perintah beli alih-alih terjun bebas ke dalam jebakan paus pasar.</p>
+                        <p class="p-en">The hard rejection parameter is set at a scale of 0.40. If OBI &lt; 0.40 (meaning 60%+ of the entire main queue volume is controlled by a Sell Wall), the system cancels buy orders instead of free-falling into a market whale trap.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 6: Bab VI -->
+                <div class="book-page" data-page="6">
+                    <h2 class="section-title" id="bab-6">BAB VI: HASIL DAN PEMBAHASAN <span class="en-title">/ CHAPTER VI: RESULTS AND DISCUSSION</span></h2>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Transformasi komprehensif ke arsitektur QPS memberikan perubahan yang teramat mencolok pada tabiat perilaku bot.</p>
+                        <p class="p-en">The comprehensive transformation to the QPS architecture provided an extremely striking change in the bot's behavioral traits.</p>
+                    </div>
+
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>Parameter Evaluasi<br/><span style="font-size:0.8em;font-weight:normal;">Evaluation Parameter</span></th>
+                                <th>Pra-QPS (Fase 4)<br/><span style="font-size:0.8em;font-weight:normal;">Pre-QPS</span></th>
+                                <th>Versi QPS (Fase 5)<br/><span style="font-size:0.8em;font-weight:normal;">QPS Version</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sinyal Breakout</strong> / <em>Breakout Signals</em></td>
+                                <td>Rentan terjebak Fake-out / <em>Vulnerable to Fake-outs</em></td>
+                                <td>Tangguh; Diblokir jika OBI &lt; 0.40 / <em>Robust; Blocked if OBI &lt; 0.40</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frekuensi Masuk</strong> / <em>Entry Frequency</em></td>
+                                <td>Overtrading (18 sinyal/jam) / <em>Overtrading</em></td>
+                                <td>Tertahan (0 Eksekusi akibat Over-filtered) / <em>Blocked (0 Executions)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Manajemen Posisi</strong> / <em>Position Management</em></td>
+                                <td>Statis (Alokasi saldo 20%) / <em>Static (20%)</em></td>
+                                <td>Dinamis via Kelly (0%-35%) / <em>Dynamic Kelly (0%-35%)</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Titik Proteksi</strong> / <em>Protection Point</em></td>
+                                <td>Kaku (-1.2% statis) / <em>Rigid (-1.2%)</em></td>
+                                <td>Berayun Dinamis (3.0&times; ATR) / <em>Dynamic Swing (3.0&times; ATR)</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Evaluasi pasca-deployment (<em>live</em>) menunjukkan anomali sistemik yang signifikan. Selama 9 hari pertama beroperasi penuh, QPS mencatat <strong>0 transaksi</strong>. Ini bukan indikasi kesuksesan perlindungan risiko, melainkan kegagalan parameter <em>threshold</em> statis.</p>
+                        <p class="p-en">Post-deployment (live) evaluation revealed a significant systemic anomaly. During the first 9 days of full operation, QPS recorded <strong>0 transactions</strong>. This is not an indication of successful risk protection, but rather a failure of the static threshold parameters.</p>
+                    </div>
+
+                    <div class="p-pair">
+                        <p class="p-id">Data riil membuktikan bahwa OBI (diukur secara level-1) jarang melampaui 0.40—faktanya, &gt;85% observasi berada di bawah 0.10. Akibatnya, dari 590 sinyal <em>Golden Cross</em> yang terpicu, 100% diblokir mentah-mentah sebelum dinilai oleh modul perhitungan rasio Sharpe/Kelly. Selain itu, strategi <em>Sideways</em> tercatat 0 kali aktif akibat ambang volatilitas kaku (0.085%) yang terlampau jauh dari kondisi pasar riil.</p>
+                        <p class="p-en">Real data proved that OBI (measured at level-1) rarely exceeds 0.40—in fact, &gt;85% of observations sit below 0.10. Consequently, of the 590 triggered Golden Cross signals, 100% were bluntly blocked before being evaluated by the Sharpe/Kelly ratio module. Furthermore, the Sideways strategy triggered 0 times due to a rigid volatility threshold (0.085%) wildly detached from actual market conditions.</p>
+                    </div>
+
+                    <h3 class="section-subtitle">A. Temuan Bug Kritis Pasca-Deployment <span class="en-title">/ Post-Deployment Critical Bug Findings</span></h3>
+                    <div class="p-pair">
+                        <p class="p-id">Proses verifikasi <em>staleness</em> menyingkap sebuah <em>bug table mismatch</em> krusial (<code>crypto_klines</code> vs <code>btc_klines</code>). Celah struktural ini menyebabkan instrumen inti QPS secara diam-diam bergantung sepenuhnya pada asupan data dari agen eksternal lainnya. Masalah telah diperbaiki pasca audit diagnostik, di mana mekanisme mandiri pembaruan data tiap 1-menit baru terverifikasi sempurna saat ini.</p>
+                        <p class="p-en">The staleness verification process revealed a crucial table mismatch bug (<code>crypto_klines</code> vs <code>btc_klines</code>). This structural flaw caused the core QPS instruments to silently depend entirely on data feeds from another external agent. The issue was rectified post diagnostic audit, with the independent 1-minute data update mechanism newly verified perfectly today.</p>
+                    </div>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Siklus perlindungan dari *Kelly Fractional* telah menyempurnakan bot. QPS dengan sadar menonaktifkan dirinya saat laju *Sharpe* memburuk tajam. Hal ini memotong <em>drawdown</em> raksasa yang umum dialami oleh sistem statis konvensional.</p>
+                        <p class="p-en">The protection cycle of the Kelly Fractional has perfected the bot. QPS consciously disables itself when the Sharpe rate deteriorates sharply. This cuts off giant drawdowns commonly experienced by conventional static systems.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 7: Bab VII -->
+                <div class="book-page" data-page="7">
+                    <h2 class="section-title" id="keterbatasan">BAB VII: KETERBATASAN METODOLOGIS <span class="en-title">/ CHAPTER VII: METHODOLOGICAL LIMITATIONS</span></h2>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Implementasi awal QPS Fase 5.0 mengandung kepincangan metodologi serius yang wajib diakui secara akademis. Ambang batas kritis (<em>threshold</em>) seperti penolakan OBI di 0.40, batas volatilitas batas di 0.085%, serta <em>multiplier</em> statis ATR (3.0x), ditegakkan berdasarkan asumsi kualitatif awal pengembang—bukan diekstraksi lewat analisis distribusi statistikal riil.</p>
+                        <p class="p-en">The initial implementation of QPS Phase 5.0 harbored serious methodological flaws that must be acknowledged academically. Critical thresholds such as the 0.40 OBI cutoff, the 0.085% volatility limit, and the static 3.0x ATR multiplier were established based on the developers' initial qualitative assumptions—not extracted through empirical statistical distribution analysis.</p>
+                    </div>
+                    <div class="p-pair">
+                        <p class="p-id">Lebih jauh, metrik OBI yang diterapkan sebetulnya hanyalah proksi likuiditas dangkal berbasis <em>level-1 order book</em> (sekadar <em>best bid/ask</em>), sangat jauh dari klaim agregasi institusional kedalaman <em>order book</em> menyeluruh. Tidak ada satupun tahapan <em>walk-forward validation</em> atau tes balik (<em>backtest</em>) formal komprehensif yang menjamin kelayakan parameter tersebut sebelum dilepas ke lingkungan eksekusi <em>live</em>.</p>
+                        <p class="p-en">Furthermore, the applied OBI metric was actually a shallow liquidity proxy based on the level-1 order book (merely best bid/ask), a far cry from claims of comprehensive institutional depth aggregation. Absolutely no walk-forward validation stages or rigorous formal backtesting processes vetted the viability of these parameters prior to their release into the live execution environment.</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 8: Bab VIII -->
+                <div class="book-page" data-page="8">
+                    <h2 class="section-title" id="fase-5-1">BAB VIII: FASE 5.1 — KALIBRASI BERBASIS PERSENTIL <span class="en-title">/ CHAPTER VIII: PHASE 5.1 — PERCENTILE CALIBRATION</span></h2>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Guna memulihkan fungsionalitas dan mengatasi kelumpuhan struktural di atas, operasi sistem saat ini diarahkan menuju pembaruan Fase 5.1 (Sedang Berjalan). Rezim statis sebelumnya mulai digugurkan; pendekatan kalkulasi distribusi adaptif/berbasis persentil akan mengambil alih.</p>
+                        <p class="p-en">To restore functionality and overcome the aforementioned structural paralysis, system operations are currently pivoting toward Phase 5.1 (Ongoing). The previous static regime is being discarded; adaptive calculation approaches based on dynamic percentile distributions will take over.</p>
+                    </div>
+                    <div class="p-pair">
+                        <p class="p-id">Pada saat laporan ini ditulis (Juli 2026), infrastruktur perekaman pasif <code>qps_market_metrics_log</code> berhasil ditanam di <em>engine database</em>. Alat ini merekam laju detak OBI, persentase fluktuasi, dan anomali volume absolut di setiap transisi menit. <em>Threshold</em> kelak dikalibrasi (misal persentil-70 atau p25) usai setidaknya 48-jam penghimpunan basis data empiris tercapai. [TBD: Hasil Kalibrasi 48 Jam]</p>
+                        <p class="p-en">At the time of this writing (July 2026), the passive recording infrastructure <code>qps_market_metrics_log</code> has been successfully planted in the database engine. This tool journals OBI heartbeats, fluctuation percentages, and absolute volume anomalies traversing every minute. Operating thresholds will eventually be calibrated (e.g., 70th or 25th percentile) once a minimum of 48-hours worth of empirical database compilation is achieved. [TBD: 48-Hour Calibration Results]</p>
+                    </div>
+                </div>
+
+                <!-- PAGE 9: Bab IX & Footer -->
+                <div class="book-page" data-page="9">
+                    <h2 class="section-title" id="kesimpulan">BAB IX: KESIMPULAN <span class="en-title">/ CHAPTER IX: CONCLUSION</span></h2>
+                    
+                    <div class="p-pair">
+                        <p class="p-id">Penerapan indikator statis teknikal konvensional tidak lagi memadai di pasar mata uang kripto modern. Tingkat likuiditas buatan dan presisi manipulatif di pasar menghancurkan rasio keuntungan dari sistem yang bergerak terlambat (<em>lagging</em>).</p>
+                        <p class="p-en">The application of conventional technical static indicators is no longer sufficient in modern cryptocurrency markets. The level of artificial liquidity and manipulative precision in the market destroys the profit ratio of lagging systems.</p>
+                    </div>
+                    <div class="p-pair">
+                        <p class="p-id">Migrasi ke kerangka <em>Quant Professional System</em> (QPS) menyediakan kanvas rekayasa bernilai tinggi. Meski pendayagunaan proksi <em>Order Book Imbalance</em> (OBI) masih berada pada strata simplistis dan terhambat bias penetapan awal (Fase 5.0), integrasi pengereman proporsional rasional via kerangka manajemen <em>Quarter Kelly Criterion</em> telah memaku fondasi logis pertama bagi *bot* untuk matang. Penataan kalibrasi persentil empiris (Fase 5.1) yang kini dirintis diharapkan menutupi semua lubang metodologi tersebut.</p>
+                        <p class="p-en">Migration to the Quant Professional System (QPS) framework provides a highly valuable engineering canvas. Even though the utilization of the Order Book Imbalance (OBI) proxy remains in its simplistic infancy and hindered by initial designation biases (Phase 5.0), the integration of rational proportional braking via the Quarter Kelly Criterion management framework has nailed the first logical foundation for the bot to mature. The empirical percentile calibration restructuring (Phase 5.1) currently pioneered is expected to plug all aforementioned methodological gaps.</p>
+                    </div>
+
+                    <!-- References -->
+                    <h2 class="section-title" id="sec-references">DAFTAR PUSTAKA <span class="en-title">/ REFERENCES</span></h2>
+                    <div style="font-size: 0.9em; line-height: 1.8; margin-left: 25px; text-indent: -25px;">
+                        <p>Aronson, D. R. (2006). <em>Evidence-Based Technical Analysis: Applying the Scientific Method and Statistical Inference to Trading Signals</em>. John Wiley &amp; Sons.</p>
+                        <p>Bollinger, J. (2001). <em>Bollinger on Bollinger Bands</em>. McGraw-Hill.</p>
+                        <p>Lo, A. W., &amp; MacKinlay, A. C. (1988). Stock market prices do not follow random walks. <em>Review of Financial Studies</em>, 1(1), 41–66.</p>
+                        <p>O'Hara, M. (1995). <em>Market Microstructure Theory</em>. Blackwell Publishers.</p>
+                        <p>Pardo, R. (2008). <em>The Evaluation and Optimization of Trading Strategies</em> (2nd ed.). John Wiley &amp; Sons.</p>
+                        <p>Prado, M. L. de (2018). <em>Advances in Financial Machine Learning</em>. John Wiley &amp; Sons.</p>
+                    </div>
+
+                    <div class="footer">
+                        Buku Skripsi Akademik — Evolusi QPS BitTrade-v2 Engine (Bot A) &nbsp;|&nbsp; Publikasi Resmi Fase 5.0<br />
+                        Academic Thesis Book — QPS Evolution BitTrade-v2 Engine (Bot A)<br/><br/>
+                        Penyusun: BitTrade Quantitative Research Group &nbsp;|&nbsp; Divisi Riset Agentic Trading
+                    </div>
+                </div>
+
+                </div><!-- #pages-container -->
+            </div><!-- #pages-viewport -->
+
+            <!-- BOOK NAVIGATION BAR -->
+            <div class="book-nav-bar">
+                <div class="page-indicator"><span id="currentPage">1</span> / 10</div>
+            </div>
+
+            <button id="btnPrev" class="btn-action floating-btn left-btn" disabled>&#10094;</button>
+            <button id="btnNext" class="btn-action floating-btn right-btn">&#10095;</button>
+
+        </div><!-- .latex-document -->
+    </div><!-- .paper-main-content -->
+  </div><!-- .paper-layout-wrapper -->
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentPage = 0;
+        const totalPages = 10;
+        const pagesContainer = document.getElementById('pages-container');
+        const links = document.querySelectorAll('.toc-link');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const pageIndicator = document.getElementById('currentPage');
+
+        function showPage(index) {
+            // Highlight TOC
+            links.forEach(l => l.classList.remove('active'));
+            const targetLink = document.querySelector(`.toc-link[data-target="${index}"]`);
+            if(targetLink) targetLink.classList.add('active');
+
+            // Slide pages (10% per page since container is 1000% wide)
+            pagesContainer.style.transform = `translateX(-${index * 10}%)`;
+
+            // Adjust viewport height to match active page
+            const pages = document.querySelectorAll('.book-page');
+            const viewport = document.getElementById('pages-viewport');
+            if(pages[index]) {
+                viewport.style.height = pages[index].offsetHeight + 'px';
+                viewport.style.transition = 'height 0.4s ease';
+            }
+
+            // Update UI
+            currentPage = index;
+            pageIndicator.innerText = (index + 1);
+            btnPrev.disabled = index === 0;
+            btnNext.disabled = index === totalPages - 1;
+
+            // Scroll to top of document
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TOC Clicks
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = parseInt(link.getAttribute('data-target'));
+                showPage(target);
+            });
+        });
+
+        // Prev / Next Clicks
+        btnPrev.addEventListener('click', () => {
+            if (currentPage > 0) showPage(currentPage - 1);
+        });
+        
+        btnNext.addEventListener('click', () => {
+            if (currentPage < totalPages - 1) showPage(currentPage + 1);
+        });
+
+        // Mobile TOC Toggle
+        const mobileTocToggle = document.getElementById('mobileTocToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+        const closeToc = document.getElementById('closeToc');
+        
+        if (mobileTocToggle && tocSidebar && closeToc) {
+            mobileTocToggle.addEventListener('click', () => {
+                tocSidebar.classList.add('open');
+            });
+            closeToc.addEventListener('click', () => {
+                tocSidebar.classList.remove('open');
+            });
+            
+            // Close sidebar when clicking a link on mobile
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        tocSidebar.classList.remove('open');
+                    }
+                });
+            });
+        }
+
+        // Init height
+        setTimeout(() => showPage(0), 50);
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
+
+  * { box-sizing: border-box !important; }
+
+  /* FULLWIDTH FIX */
+  .paper-layout-wrapper { width: 100%; max-width: 100%; margin: 20px auto; display: flex; gap: 40px; padding: 0 15px; }
+  
+  .paper-toc-sidebar { 
+      width: 340px; 
+      flex-shrink: 0;
+      position: sticky; 
+      top: 90px; 
+      background-color: var(--paper-bg); 
+      border: 1px solid var(--border-color); 
+      padding: 30px 25px; 
+      box-sizing: border-box; 
+      border-radius: 8px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-height: calc(100vh - 120px); 
+      overflow-y: auto; 
+      scrollbar-width: thin;
+  }
+  .paper-toc-sidebar h4 { margin-top: 0; margin-bottom: 20px; font-weight: bold; color: var(--text-primary); text-transform: uppercase; font-size: 1.05em; letter-spacing: 1px; border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; line-height:1.4; }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-item { margin-bottom: 16px; }
+  .toc-link { text-decoration: none; color: var(--text-primary); font-size: 0.95em; transition: all 0.2s; display: block; line-height: 1.4; font-weight: 500; cursor: pointer; }
+  .toc-link:hover, .toc-link.active { color: var(--accent-blue); font-weight: bold; padding-left: 8px; border-left: 3px solid var(--accent-blue); margin-left: -3px; }
+  .en-sub { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; display: block; margin-top: 3px; }
+  
+  .paper-main-content { flex-grow: 1; min-width: 0; max-width: 100%; overflow: hidden; }
+  .latex-document { background-color: var(--paper-bg); padding: 30px 25px; position: relative; min-height: auto; display: flex; flex-direction: column; width: 100%; max-width: 100%; word-break: break-word; overflow-wrap: break-word; font-size: clamp(14px, 1.6vw, 17px); }
+  
+  /* SLIDE SYSTEM */
+  #pages-viewport {
+      overflow: hidden;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      position: relative;
+  }
+  #pages-container { 
+      display: flex; 
+      flex-wrap: nowrap;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      margin-bottom: 40px; 
+      align-items: flex-start;
+      width: 1000%; /* 10 pages * 100% */
+  }
+  .book-page { 
+      width: 10%; /* 100% / 10 pages */
+      flex: 0 0 10%;
+      min-width: 0;
+      max-width: 10%;
+      opacity: 1 !important;
+      display: block !important;
+      white-space: normal;
+      overflow-x: hidden;
+  }
+
+  .book-nav-bar { display: flex; justify-content: center; align-items: center; border-top: 1.5px solid var(--border-color); padding-top: 20px; margin-top: auto; }
+  .page-indicator { font-family: monospace; font-size: 1.1em; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
+
+  /* FLOATING BUTTONS */
+  .floating-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 1.5em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      background: var(--paper-bg, #fff);
+  }
+  .left-btn { left: 20px; }
+  .right-btn { right: 20px; }
+
+  /* MOBILE TOC TOGGLE */
+  .mobile-toc-toggle { display: none; }
+  .close-toc-btn { display: none; }
+
+  .paper-actions-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-color); padding-bottom: 15px; margin-bottom: 50px; }
+  .btn-action { background: var(--paper-bg); border: 1px solid var(--border-color); padding: 10px 20px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95em; font-weight: bold; color: var(--text-primary); transition: all 0.2s; border-radius: 6px; }
+  .btn-action:hover:not(:disabled) { background: #faf8f5; border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+  /* COVER STYLES */
+  .book-cover { text-align: center; padding: 60px 20px 100px 20px; border-bottom: 4px double var(--border-color); margin-bottom: 60px; }
+  .university-header { font-size: 1.2em; font-weight: bold; letter-spacing: 2px; color: var(--text-primary); margin-bottom: 80px; line-height: 1.6; }
+  .book-title { font-size: 2.2em; font-weight: bold; line-height: 1.4; color: var(--text-primary); margin: 0 auto 20px auto; max-width: 900px; text-transform: uppercase; }
+  .book-title-en { font-size: 1.3em; font-style: italic; font-weight: normal; color: var(--text-muted); margin: 0 auto 80px auto; line-height: 1.5; max-width: 800px; }
+  .book-type { font-size: 1.1em; color: var(--text-primary); margin-bottom: 80px; line-height: 1.8; }
+  .book-author { font-size: 1.2em; color: var(--text-primary); line-height: 1.6; }
+
+  /* ABSTRACT STYLES */
+  .paper-abstract-box { background: #faf8f5; border: 1.5px solid var(--border-color); padding: 40px; margin: 40px 0; border-radius: 8px; }
+  .abstract-section { margin-bottom: 20px; }
+  .abstract-section:last-child { margin-bottom: 0; }
+  .abstract-header { font-weight: bold; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; color: var(--accent-blue); text-align: center; }
+  .abstract-text { font-size: 1.05em; text-align: justify; margin: 0 0 15px 0; line-height: 1.8; }
+  .abstract-text.en-text { color: var(--text-muted); font-style: italic; font-size: 0.95em; }
+  
+  /* TYPOGRAPHY */
+  h2.section-title { font-size: 1.5em; font-weight: bold; border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-top: 20px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .en-title { font-size: 0.75em; font-weight: normal; color: var(--text-muted); font-style: italic; letter-spacing: 0; text-transform: none; }
+  h3.subsection-title { font-size: 1.25em; font-weight: bold; margin-top: 40px; margin-bottom: 20px; color: var(--accent-blue); }
+  .en-subtitle { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; }
+  
+  .p-pair { margin-bottom: 35px; }
+  .p-id { text-align: justify; margin: 0 0 12px 0; font-size: 1.1em; color: var(--text-primary); line-height: 1.85; }
+  .p-en { text-align: justify; margin: 0; font-size: 0.95em; color: var(--text-muted); font-style: italic; line-height: 1.7; border-left: 3px solid var(--border-color); padding-left: 15px; }
+  
+  .math-block { background-color: #faf8f5; border-left: 4px solid var(--accent-blue); padding: 20px 30px; font-family: 'JetBrains Mono', monospace; font-style: italic; margin: 30px 0; font-size: 1.15em; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; overflow-x: auto; width: 100%; max-width: 100%; }
+  .math-eq-num { font-style: normal; font-weight: bold; color: var(--text-muted); margin-left: 20px; white-space: nowrap; }
+  
+  .academic-table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 40px 0; font-size: 1.05em; display: block; overflow-x: auto; white-space: nowrap; }
+  .academic-table th { border-top: 2px solid var(--text-primary); border-bottom: 1px solid var(--text-primary); padding: 16px 14px; font-weight: bold; text-align: left; background: var(--bg-neutral); line-height: 1.4; }
+  .academic-table td { padding: 14px 14px; border-bottom: 1px solid var(--border-color); text-align: left; line-height: 1.7; }
+  .academic-table tr:last-child td { border-bottom: 2px solid var(--text-primary); }
+  
+  .footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; font-size: 0.95em; color: var(--text-muted); font-family: monospace; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; width: 100%; }
+  
+  @media print { .paper-toc-sidebar, .paper-actions-bar, .book-nav-bar { display: none !important; } .paper-layout-wrapper { margin: 0; padding: 0; width: 100%; display: block; } .latex-document { box-shadow: none; border: none; padding: 0; min-height: auto; } .book-cover { padding-top: 0; } .book-page { display: block !important; animation: none !important; margin-bottom: 60px; } }
+  @media (max-width: 1000px) { .paper-layout-wrapper { flex-direction: column; padding: 0 10px; gap: 20px; } .paper-toc-sidebar { width: 100%; position: static; margin-bottom: 25px; max-height: none; } .latex-document { padding: 30px 20px; } .content-container { padding: 15px !important; } }
+  @media (max-width: 768px) {
+      .latex-document { padding: 20px 12px !important; }
+      .paper-layout-wrapper { padding: 0 !important; }
+      .content-container { padding: 10px !important; }
+      .paper-actions-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+      
+      /* Header mobile fix to prevent layout stretching */
+      .top-header { padding: 0 10px !important; }
+      .top-header .header-right button { display: none !important; } /* Hide Cetak PDF on mobile */
+      .top-header .header-right { gap: 8px !important; }
+      .main-area { max-width: 100vw !important; overflow-x: hidden !important; }
+      
+      /* Popup Sidebar */
+      .paper-toc-sidebar {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 280px;
+          height: 100vh;
+          z-index: 2000;
+          margin: 0;
+          transition: left 0.3s ease;
+          border-radius: 0;
+      }
+      .paper-toc-sidebar.open { left: 0; }
+      
+      .mobile-toc-toggle {
+          display: block;
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          z-index: 1500;
+          padding: 12px 20px;
+          border-radius: 30px;
+          background: var(--accent-blue, #0056b3);
+          color: white;
+          border: none;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          font-weight: bold;
+      }
+      .close-toc-btn {
+          display: block;
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: none;
+          border: none;
+          font-size: 2em;
+          color: var(--text-muted);
+          cursor: pointer;
+      }
+      
+      /* Adjust floating buttons */
+      .floating-btn { width: 45px; height: 45px; font-size: 1.2em; }
+      .left-btn { left: 10px; }
+      .right-btn { right: 10px; }
+
+      /* Table mobile scaling */
+      .academic-table { font-size: 0.75em !important; }
+      .academic-table th, .academic-table td { padding: 8px 6px !important; }
+  }
+</style>

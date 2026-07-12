@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistical Arbitrage (statARB) Engine Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;       /* Warm paper white */
+            --card-bg: #ffffff;        /* Crisp white */
+            --border-color: #1a1a1a;   /* Clean black border */
+            --text-primary: #1a1a1a;   /* Ink black */
+            --text-secondary: #555555; /* Gray ink */
+            --accent-blue: #0f4c81;    /* Ballpoint pen blue */
+            --accent-green: #2e7d32;   /* Green for success */
+            --accent-red: #b91c1c;     /* Corrections red */
+            --accent-yellow: #d97706;  /* Ochre yellow */
+            --paper-grid: #e5dfd5;     /* Soft paper grid lines */
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: #e5dfd3;       /* Wooden desk background */
+            color: var(--text-primary);
+            margin: 0;
+            padding: 30px 15px;
+            line-height: 1.5;
+        }
+
+        .dashboard-container {
+            background-color: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            margin-top: 0;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px double var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 2em;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .uptime-badge {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            font-size: 0.9em;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 22px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+            transition: all 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .badge {
+            font-family: monospace;
+            font-size: 0.8em;
+            padding: 2px 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+        }
+
+        .section-container {
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px dashed var(--paper-grid);
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .label {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+        .value {
+            font-weight: bold;
+            font-family: monospace;
+        }
+        .value-large {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--accent-blue);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .pipeline-status {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .pipeline-item {
+            font-size: 0.7em;
+            color: var(--text-secondary);
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* LED Lights */
+        .led-light {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #7f8c8d;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .active-green {
+            background-color: #2ecc71 !important;
+            box-shadow: 0 0 8px #2ecc71;
+        }
+        .active-red {
+            background-color: #e74c3c !important;
+            box-shadow: 0 0 8px #e74c3c;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.85em;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--paper-grid);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85em;
+        }
+        tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .text-buy {
+            color: var(--accent-green) !important;
+            font-weight: bold;
+        }
+        .text-sell {
+            color: var(--accent-red) !important;
+            font-weight: bold;
+        }
+        .text-pnl-up {
+            color: var(--accent-green) !important;
+            font-weight: bold;
+        }
+        .text-pnl-down {
+            color: var(--accent-red) !important;
+            font-weight: bold;
+        }
+
+        .filter-btn-coin {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            font-size: 0.85em;
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: monospace;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+        .filter-btn-coin:hover {
+            background-color: rgba(15, 76, 129, 0.1);
+            border-color: var(--accent-blue);
+        }
+        .filter-btn-coin.active {
+            background-color: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+            font-weight: bold;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin-top: 15px;
+            box-sizing: border-box;
+        }
+
+        .scroller {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            margin-top: 10px;
+        }
+
+        .log-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.85em;
+            color: var(--text-primary);
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .nav-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        /* Burger Menu Button & Sidebar Overrides (di-load dari header.html) */
+        .burger-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin-right: 15px;
+            transition: color 0.2s;
+        }
+        .burger-btn:hover {
+            color: var(--accent-blue);
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-color);
+            border-right: 2px solid var(--border-color);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+        .sidebar-overlay.open {
+            display: block;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-item {
+            margin-bottom: 15px;
+        }
+        .sidebar-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            border: 1px solid var(--border-color);
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+    </style>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function toggleSidebar() {
+            var sb = document.getElementById('sidebar');
+            var ov = document.getElementById('sidebar-overlay');
+            if (sb) sb.classList.toggle('open');
+            if (ov) ov.classList.toggle('open');
+        }
+    </script>
+</head>
+<body>
+    <!-- INCLUDE HEADER -->
+    <div class="dashboard-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <h1 style="margin-bottom: 0; border: none; font-size: 1.8em; padding-bottom: 0;">statARB: Statistical Arbitrage Engine</h1>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <div class="uptime-badge">System Uptime: <span id="uptime-label">00:00:00</span></div>
+                <div class="uptime-badge" style="border-color: var(--accent-green); color: var(--accent-green);">Mode: <span style="font-weight: bold;">MARKET-NEUTRAL</span></div>
+            </div>
+        </div>
+
+        <!-- Row 1: System Cards -->
+        <div class="grid-3 section-container">
+            
+            <!-- Card 1: Balance & Capital -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="led-light active-green" id="main-status-led"></span>
+                        <span>Account Balance</span>
+                    </div>
+                    <span class="badge">POSTGRESQL</span>
+                </div>
+                <div style="font-size: 0.8em; color: var(--text-secondary); margin-bottom: 12px; font-style: italic;">Capital allocation across active market-neutral spread pairs</div>
+                <div class="stat-row">
+                    <span class="label">Total Portfolio Equity</span>
+                    <span class="value-large" id="total-equity">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Available Cash (USDT)</span>
+                    <span class="value" id="simulated-balance">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Deployed USDT (Positions)</span>
+                    <span class="value" id="deployed-balance">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Realized P&L</span>
+                    <span class="value" id="realized-pnl">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Trades Executed</span>
+                    <span class="value" id="total-trades">0</span>
+                </div>
+            </div>
+
+            <!-- Card 2: StatArb Indicators (ETH-BTC Pair) -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="led-light" id="pair-status-led"></span>
+                        <span>Primary Benchmark Spread</span>
+                    </div>
+                    <span class="badge">BINANCE SPOT</span>
+                </div>
+                <div style="font-size: 0.8em; color: var(--text-secondary); margin-bottom: 12px; font-style: italic;">ETHUSDT / BTCUSDT rolling OLS statistics (120-tick window)</div>
+                <div class="stat-row">
+                    <span class="label">ETH Price (Asset A)</span>
+                    <span class="value" id="price-a">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Price (Asset B)</span>
+                    <span class="value" id="price-b">$0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Current Price Ratio</span>
+                    <span class="value" id="current-ratio">0.000000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Rolling Mean (120 Ticks)</span>
+                    <span class="value" id="rolling-mean">0.000000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Rolling Std Dev</span>
+                    <span class="value" id="rolling-std">0.000000</span>
+                </div>
+            </div>
+
+            <!-- Card 3: Real-Time Z-Score and Pipeline -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="led-light" id="zscore-status-led"></span>
+                        <span>Spread Z-Score</span>
+                    </div>
+                    <span class="badge">SIGNAL</span>
+                </div>
+                <div style="font-size: 0.8em; color: var(--text-secondary); margin-bottom: 5px; text-align: center; font-style: italic;">Standardized deviation measure ($Z = \frac{R_t - \mu}{\sigma}$)</div>
+                <div style="text-align: center; margin: 10px 0;">
+                    <div class="label" style="font-style: italic;">Current Benchmark Z-Score</div>
+                    <div style="font-size: 2.8em; font-weight: bold; font-family: monospace;" id="z-score-val">0.00</div>
+                    <div class="label" id="signal-recommendation">NEUTRAL</div>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="led-ws"></span><span>WebSocket</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="led-anls"></span><span>Analytics</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="led-val"></span><span>Validation</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="led-exec"></span><span>Execution</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="led-corr"></span><span>Correction</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Row 2: Charts -->
+        <div class="grid-2 section-container">
+            <div>
+                <h2>Real-time Z-Score Spread Trend</h2>
+                <div class="chart-wrapper">
+                    <canvas id="zscoreChart"></canvas>
+                </div>
+            </div>
+            <div>
+                <h2>Total Equity Growth (USDT)</h2>
+                <div class="chart-wrapper">
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Active Spread Positions -->
+        <div class="section-container">
+            <h2>Active Spread Positions</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pair Name</th>
+                            <th>Direction</th>
+                            <th>Entry Z-Score</th>
+                            <th>Entry Ratio</th>
+                            <th>Entry Price A / B</th>
+                            <th>Current Price A / B</th>
+                            <th>Deployed Capital</th>
+                            <th>Current P&L</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody id="active-positions-body">
+                        <tr>
+                            <td colspan="9" style="text-align: center; color: var(--text-secondary);">No active spread arbitrage positions.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Row 4: Real-Time Altcoin Co-Integration Spread Scanner (300+ Pairs) -->
+        <div class="section-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0;">⚡ Enterprise Co-Integration Spread Scanner (300+ Markets)</h2>
+                <span class="badge" style="background: var(--accent-blue); color: white; padding: 4px 10px; font-size: 0.85em; font-family: monospace;">🔍 LIVE SCANNING 300+ BINANCE MARKETS (REST + WS)</span>
+            </div>
+            <p style="font-size: 0.9em; color: var(--text-secondary); margin-top: 0; margin-bottom: 15px; font-style: italic;">
+                Real-time scanning of 300+ USDT-M cryptocurrency markets on Binance Futures/Spot against BTC and ETH benchmark anchors. Uses rolling Ordinary Least Squares (OLS) regression to detect highly cointegrated relationships ($R^2 \ge 90\%$). <strong>SELL SPREAD</strong> signal activates when Z-Score &gt; +2.0&sigma; (Leg A Overvalued, Leg B Undervalued). <strong>BUY SPREAD</strong> signal activates when Z-Score &lt; -2.0&sigma; (Leg A Undervalued, Leg B Overvalued).
+            </p>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.02); padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 4px;">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                    <span style="font-weight: bold; font-size: 0.85em; margin-right: 5px; font-family: monospace;">SECTOR FILTER:</span>
+                    <button class="filter-btn-coin active" onclick="filterCoins('all', this)">🌐 All 300+ Markets</button>
+                    <button class="filter-btn-coin" onclick="filterCoins('actionable', this)">🔥 Actionable ($|Z| > 1.8&sigma;)</button>
+                    <button class="filter-btn-coin" onclick="filterCoins('l1', this)">💎 Layer-1 / L2</button>
+                    <button class="filter-btn-coin" onclick="filterCoins('ai', this)">🤖 AI &amp; Big Data</button>
+                    <button class="filter-btn-coin" onclick="filterCoins('meme', this)">🐶 Meme Coins</button>
+                    <button class="filter-btn-coin" onclick="filterCoins('defi', this)">🏦 DeFi &amp; DEX</button>
+                </div>
+                <div>
+                    <input type="text" id="coin-search-input" placeholder="🔍 Search Symbol / Pair (e.g., SOL, PEPE, AI, ETH)..." oninput="searchCoins(this)" style="padding: 8px 15px; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.95em; width: 280px; border-radius: 4px; background: var(--card-bg); color: var(--text-primary);">
+                </div>
+            </div>
+
+            <div style="overflow-x: auto; max-height: 500px;" class="scroller">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin Pair (Leg A / Leg B)</th>
+                            <th>Price Leg A / Leg B</th>
+                            <th>Price Ratio ($R_t$)</th>
+                            <th>Rolling Mean ($\mu$)</th>
+                            <th>Rolling StdDev ($\sigma$)</th>
+                            <th>Correlation ($R^2$)</th>
+                            <th>Est. Yield (APR)</th>
+                            <th>Z-Score ($Z_t$)</th>
+                            <th>Signal &amp; Recommendation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coin-scanner-body">
+                        <tr>
+                            <td colspan="9" style="text-align: center; color: var(--text-secondary); padding: 20px;">Scanning 300+ Binance cointegrated markets in real-time...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Row 5: Transaction History -->
+        <div class="section-container">
+            <h2>Transaction History (PostgreSQL starb_trading_history)</h2>
+            <div class="scroller">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Pair Name</th>
+                            <th>Action</th>
+                            <th>Price A / B</th>
+                            <th>Z-Score</th>
+                            <th>Net P&L</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-secondary);">Loading transaction logs...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Row 5: Errors & System Logs -->
+        <div class="grid-2">
+            <div>
+                <h2>System Log Output</h2>
+                <div class="log-box" id="log-viewport">Connecting to system logger...</div>
+            </div>
+            <div>
+                <h2>Error Correction Log (PostgreSQL starb_corrections)</h2>
+                <div class="scroller">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Error Type</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corrections-body">
+                            <tr>
+                                <td colspan="3" style="text-align: center; color: var(--text-secondary);">No errors logged. System healthy.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script connection -->
+    <script src="js/dashboard.js"></script>
+    <!-- INCLUDE FOOTER -->
+</body>
+</html>

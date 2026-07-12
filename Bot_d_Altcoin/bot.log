@@ -1,0 +1,255 @@
+Memulai Bot Trading BTC...
+Melakukan sinkronisasi data historis awal dari Binance...
+Rekonstruksi saldo dari riwayat transaksi: USDT: $1000.00, BTC: 0.000000
+[CRASH RECOVERY] Memulihkan High Water Mark posisi aktif dari tabel alt_active_positions: $0.00
+Web Dashboard berjalan di http://localhost:8092
+Jika menggunakan VPS, buka http://<IP_VPS>:8092
+[2026-07-02 13:30:38] Terhubung ke Binance WebSocket untuk harga real-time BTC/USDT
+[2026-07-02 13:30:40] Siklus Menit Baru. Harga BTC Terakhir: $60506.00
+[ANALIS] State: BEARISH | EMA13/34: $60486.0/$60491.1 | VWAP Sesi: $60424.58 | Vol Surge: 0.3x | BB50: [$60380.10 - $60627.57] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60486.04 | EMA34: 60491.06 | Selisih: -5.01
+[2026-07-02 13:30:40] Keputusan analis: Wait
+[2026-07-02 13:30:40] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:31:41] Siklus Menit Baru. Harga BTC Terakhir: $60554.22
+[ANALIS] State: BULLISH | EMA13/34: $60497.1/$60493.6 | VWAP Sesi: $60424.72 | Vol Surge: 0.5x | BB50: [$60383.28 - $60621.73] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60497.07 | EMA34: 60493.64 | Selisih: 3.43
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60424.72), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:31:41] Keputusan analis: Buy(0.0033028251375378957, "[Trending] Quant EMA13/34 Buy (Vol 0.5x)")
+[2026-07-02 13:31:41] Mengeksekusi transaksi...
+[2026-07-02 13:31:41] Eksekusi sukses. Saldo: $799.80, BTC: 0.0033
+[2026-07-02 13:32:41] Siklus Menit Baru. Harga BTC Terakhir: $60569.04
+[ANALIS] State: BULLISH | EMA13/34: $60507.6/$60501.2 | VWAP Sesi: $60424.98 | Vol Surge: 0.8x | BB50: [$60384.41 - $60619.37] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60507.55 | EMA34: 60501.23 | Selisih: 6.32
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60424.98), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:32:41] Keputusan analis: Buy(0.002640953199852598, "[Trending] Quant EMA13/34 Buy (Vol 0.8x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:31:41 (1 menit lalu)
+[2026-07-02 13:32:41] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:33:41] Siklus Menit Baru. Harga BTC Terakhir: $60626.76
+[ANALIS] State: BULLISH | EMA13/34: $60526.1/$60506.3 | VWAP Sesi: $60425.28 | Vol Surge: 0.7x | BB50: [$60386.77 - $60616.11] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60526.14 | EMA34: 60506.35 | Selisih: 19.79
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60425.28), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:33:41] Keputusan analis: Buy(0.0026384388675891636, "[Trending] Quant EMA13/34 Buy (Vol 0.7x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:31:41 (2 menit lalu)
+[2026-07-02 13:33:41] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:34:41] Siklus Menit Baru. Harga BTC Terakhir: $60639.98
+[ANALIS] State: BULLISH | EMA13/34: $60542.2/$60515.6 | VWAP Sesi: $60425.55 | Vol Surge: 0.5x | BB50: [$60384.91 - $60619.14] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60542.21 | EMA34: 60515.59 | Selisih: 26.62
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60425.55), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:34:41] Keputusan analis: Buy(0.0026378636668415788, "[Trending] Quant EMA13/34 Buy (Vol 0.5x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:31:41 (3 menit lalu)
+[2026-07-02 13:34:41] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:35:41] Siklus Menit Baru. Harga BTC Terakhir: $60614.16
+[ANALIS] State: BULLISH | EMA13/34: $60551.4/$60518.6 | VWAP Sesi: $60425.72 | Vol Surge: 0.4x | BB50: [$60387.37 - $60615.24] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60551.41 | EMA34: 60518.56 | Selisih: 32.85
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60425.72), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:35:41] Keputusan analis: Buy(0.002638987325733789, "[Trending] Quant EMA13/34 Buy (Vol 0.4x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:31:41 (4 menit lalu)
+[2026-07-02 13:35:41] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:36:42] Siklus Menit Baru. Harga BTC Terakhir: $60599.86
+[ANALIS] State: BULLISH | EMA13/34: $60558.9/$60521.4 | VWAP Sesi: $60425.91 | Vol Surge: 0.5x | BB50: [$60387.09 - $60615.70] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60558.90 | EMA34: 60521.35 | Selisih: 37.54
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60425.91), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:36:42] Keputusan analis: Buy(0.002639610058505086, "[Trending] Quant EMA13/34 Buy (Vol 0.5x)")
+[2026-07-02 13:36:42] Mengeksekusi transaksi...
+[2026-07-02 13:36:42] Eksekusi sukses. Saldo: $639.68, BTC: 0.0059
+[2026-07-02 13:37:42] Siklus Menit Baru. Harga BTC Terakhir: $60552.00
+[ANALIS] State: BULLISH | EMA13/34: $60554.5/$60522.2 | VWAP Sesi: $60426.06 | Vol Surge: 0.6x | BB50: [$60388.35 - $60613.00] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60554.50 | EMA34: 60522.24 | Selisih: 32.27
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60426.06), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:37:42] Keputusan analis: Buy(0.0021128287752675387, "[Trending] Quant EMA13/34 Buy (Vol 0.6x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:36:42 (1 menit lalu)
+[2026-07-02 13:37:42] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:38:42] Siklus Menit Baru. Harga BTC Terakhir: $60604.99
+[ANALIS] State: BULLISH | EMA13/34: $60560.2/$60523.9 | VWAP Sesi: $60428.03 | Vol Surge: 4.8x | BB50: [$60387.11 - $60615.08] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60560.22 | EMA34: 60523.89 | Selisih: 36.33
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.03), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:38:42] Keputusan analis: Buy(0.002110981422486828, "[Trending] Quant EMA13/34 Buy (Vol 4.8x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:36:42 (2 menit lalu)
+[2026-07-02 13:38:42] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:39:42] Siklus Menit Baru. Harga BTC Terakhir: $60580.44
+[ANALIS] State: BULLISH | EMA13/34: $60562.0/$60525.0 | VWAP Sesi: $60428.10 | Vol Surge: 0.5x | BB50: [$60386.68 - $60617.34] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60562.00 | EMA34: 60525.00 | Selisih: 36.99
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.10), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:39:42] Keputusan analis: Buy(0.0021118368899268477, "[Trending] Quant EMA13/34 Buy (Vol 0.5x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:36:42 (3 menit lalu)
+[2026-07-02 13:39:42] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:40:42] Siklus Menit Baru. Harga BTC Terakhir: $60577.33
+[ANALIS] State: BULLISH | EMA13/34: $60564.1/$60528.9 | VWAP Sesi: $60428.22 | Vol Surge: 0.4x | BB50: [$60386.45 - $60620.84] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60564.14 | EMA34: 60528.94 | Selisih: 35.21
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.22), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:40:42] Keputusan analis: Buy(0.002111945310234043, "[Trending] Quant EMA13/34 Buy (Vol 0.4x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:36:42 (4 menit lalu)
+[2026-07-02 13:40:42] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:41:42] Siklus Menit Baru. Harga BTC Terakhir: $60579.96
+[ANALIS] State: BULLISH | EMA13/34: $60565.7/$60532.3 | VWAP Sesi: $60428.47 | Vol Surge: 0.3x | BB50: [$60386.03 - $60623.68] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60565.68 | EMA34: 60532.31 | Selisih: 33.37
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.47), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:41:42] Keputusan analis: Buy(0.00211185362288123, "[Trending] Quant EMA13/34 Buy (Vol 0.3x)")
+[2026-07-02 13:41:42] Mengeksekusi transaksi...
+[2026-07-02 13:41:42] Eksekusi sukses. Saldo: $511.62, BTC: 0.0081
+[2026-07-02 13:42:43] Siklus Menit Baru. Harga BTC Terakhir: $60556.01
+[ANALIS] State: BULLISH | EMA13/34: $60563.0/$60535.4 | VWAP Sesi: $60428.60 | Vol Surge: 0.4x | BB50: [$60386.17 - $60624.24] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60563.05 | EMA34: 60535.42 | Selisih: 27.63
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.60), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:42:43] Keputusan analis: Buy(0.001689728553753789, "[Trending] Quant EMA13/34 Buy (Vol 0.4x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:41:42 (1 menit lalu)
+[2026-07-02 13:42:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:43:43] Siklus Menit Baru. Harga BTC Terakhir: $60535.46
+[ANALIS] State: BULLISH | EMA13/34: $60557.1/$60534.4 | VWAP Sesi: $60428.77 | Vol Surge: 0.3x | BB50: [$60386.81 - $60621.50] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60557.11 | EMA34: 60534.38 | Selisih: 22.73
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60428.77), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:43:43] Keputusan analis: Buy(0.0016903021666705763, "[Trending] Quant EMA13/34 Buy (Vol 0.3x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:41:42 (2 menit lalu)
+[2026-07-02 13:43:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:44:43] Siklus Menit Baru. Harga BTC Terakhir: $60542.21
+[ANALIS] State: BULLISH | EMA13/34: $60556.2/$60534.3 | VWAP Sesi: $60429.14 | Vol Surge: 1.5x | BB50: [$60387.17 - $60620.46] | Tren 15m: BULLISH
+[DEBUG] EMA streak: 0 | EMA13: 60556.17 | EMA34: 60534.25 | Selisih: 21.91
+[ANALIS-TRENDING] Quant Golden Cross (EMA13 > EMA34), Di atas VWAP ($60429.14), & Tren 15m Bullish. Sinyal BUY.
+[2026-07-02 13:44:43] Keputusan analis: Buy(0.0016901137107218254, "[Trending] Quant EMA13/34 Buy (Vol 1.5x)")
+Mencegah transaksi berulang (Cool-down aktif). Aksi terakhir BUY pada 13:41:42 (3 menit lalu)
+[2026-07-02 13:44:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:45:43] Siklus Menit Baru. Harga BTC Terakhir: $60510.00
+[ANALIS] State: BULLISH | EMA13/34: $60548.6/$60532.0 | VWAP Sesi: $60429.63 | Vol Surge: 1.7x | BB50: [$60387.11 - $60618.68] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60548.61 | EMA34: 60532.02 | Selisih: 16.59
+[DEBUG] EMA streak: 1 | EMA13: 60548.61 | EMA34: 60532.02 | Selisih: 16.59 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:45:43] Keputusan analis: Wait
+[2026-07-02 13:45:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:46:43] Siklus Menit Baru. Harga BTC Terakhir: $60435.12
+[ANALIS] State: BULLISH | EMA13/34: $60526.4/$60523.1 | VWAP Sesi: $60429.52 | Vol Surge: 0.5x | BB50: [$60382.49 - $60617.15] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60526.39 | EMA34: 60523.13 | Selisih: 3.26
+[DEBUG] EMA streak: 2 | EMA13: 60526.39 | EMA34: 60523.13 | Selisih: 3.26 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:46:43] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+Mencegah Whipsaw (Holding time < 15 menit). Beli terakhir 5 menit lalu. Sinyal normal ([Trending] Quant EMA13/34 Sell Confirmed (2m streak)) diabaikan.
+[2026-07-02 13:46:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:47:43] Siklus Menit Baru. Harga BTC Terakhir: $60389.49
+[ANALIS] State: BEARISH | EMA13/34: $60505.6/$60514.0 | VWAP Sesi: $60429.42 | Vol Surge: 1.2x | BB50: [$60375.38 - $60618.38] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60505.59 | EMA34: 60513.98 | Selisih: -8.39
+[DEBUG] EMA streak: 1 | EMA13: 60505.59 | EMA34: 60513.98 | Selisih: -8.39 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:47:43] Keputusan analis: Wait
+[2026-07-02 13:47:43] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:48:44] Siklus Menit Baru. Harga BTC Terakhir: $60340.00
+[ANALIS] State: BEARISH | EMA13/34: $60480.8/$60503.3 | VWAP Sesi: $60428.14 | Vol Surge: 7.1x | BB50: [$60363.56 - $60623.11] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60480.77 | EMA34: 60503.35 | Selisih: -22.58
+[DEBUG] EMA streak: 2 | EMA13: 60480.77 | EMA34: 60503.35 | Selisih: -22.58 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:48:44] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+Mencegah Whipsaw (Holding time < 15 menit). Beli terakhir 7 menit lalu. Sinyal normal ([Trending] Quant EMA13/34 Sell Confirmed (2m streak)) diabaikan.
+[2026-07-02 13:48:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:49:44] Siklus Menit Baru. Harga BTC Terakhir: $60316.99
+[ANALIS] State: BEARISH | EMA13/34: $60456.9/$60492.0 | VWAP Sesi: $60427.21 | Vol Surge: 0.8x | BB50: [$60350.38 - $60628.63] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60456.90 | EMA34: 60491.98 | Selisih: -35.08
+[DEBUG] EMA streak: 1 | EMA13: 60456.90 | EMA34: 60491.98 | Selisih: -35.08 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:49:44] Keputusan analis: Wait
+[2026-07-02 13:49:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:50:44] Siklus Menit Baru. Harga BTC Terakhir: $60292.39
+[ANALIS] State: BEARISH | EMA13/34: $60434.0/$60480.4 | VWAP Sesi: $60426.55 | Vol Surge: 1.2x | BB50: [$60336.35 - $60634.76] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60434.01 | EMA34: 60480.38 | Selisih: -46.37
+[DEBUG] EMA streak: 2 | EMA13: 60434.01 | EMA34: 60480.38 | Selisih: -46.37 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:50:44] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+Mencegah Whipsaw (Holding time < 15 menit). Beli terakhir 9 menit lalu. Sinyal normal ([Trending] Quant EMA13/34 Sell Confirmed (2m streak)) diabaikan.
+[2026-07-02 13:50:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:51:44] Siklus Menit Baru. Harga BTC Terakhir: $60297.73
+[ANALIS] State: BEARISH | EMA13/34: $60414.0/$60470.3 | VWAP Sesi: $60425.89 | Vol Surge: 1.7x | BB50: [$60323.07 - $60640.33] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60414.01 | EMA34: 60470.34 | Selisih: -56.33
+[DEBUG] EMA streak: 1 | EMA13: 60414.01 | EMA34: 60470.34 | Selisih: -56.33 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:51:44] Keputusan analis: Wait
+[2026-07-02 13:51:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:52:44] Siklus Menit Baru. Harga BTC Terakhir: $60260.00
+[ANALIS] State: BEARISH | EMA13/34: $60389.1/$60454.2 | VWAP Sesi: $60425.64 | Vol Surge: 0.4x | BB50: [$60304.15 - $60648.80] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60389.12 | EMA34: 60454.24 | Selisih: -65.12
+[DEBUG] EMA streak: 2 | EMA13: 60389.12 | EMA34: 60454.24 | Selisih: -65.12 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:52:44] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+Mencegah Whipsaw (Holding time < 15 menit). Beli terakhir 11 menit lalu. Sinyal normal ([Trending] Quant EMA13/34 Sell Confirmed (2m streak)) diabaikan.
+[2026-07-02 13:52:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:53:44] Siklus Menit Baru. Harga BTC Terakhir: $60307.99
+[ANALIS] State: BEARISH | EMA13/34: $60380.2/$60447.5 | VWAP Sesi: $60425.53 | Vol Surge: 0.3x | BB50: [$60297.72 - $60650.65] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60380.23 | EMA34: 60447.48 | Selisih: -67.25
+[DEBUG] EMA streak: 1 | EMA13: 60380.23 | EMA34: 60447.48 | Selisih: -67.25 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:53:44] Keputusan analis: Wait
+[2026-07-02 13:53:44] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:54:45] Siklus Menit Baru. Harga BTC Terakhir: $60283.29
+[ANALIS] State: BEARISH | EMA13/34: $60366.5/$60440.4 | VWAP Sesi: $60425.43 | Vol Surge: 0.2x | BB50: [$60286.59 - $60655.06] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60366.55 | EMA34: 60440.36 | Selisih: -73.82
+[DEBUG] EMA streak: 2 | EMA13: 60366.55 | EMA34: 60440.36 | Selisih: -73.82 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:54:45] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+Mencegah Whipsaw (Holding time < 15 menit). Beli terakhir 13 menit lalu. Sinyal normal ([Trending] Quant EMA13/34 Sell Confirmed (2m streak)) diabaikan.
+[2026-07-02 13:54:45] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:55:45] Siklus Menit Baru. Harga BTC Terakhir: $60308.66
+[ANALIS] State: BEARISH | EMA13/34: $60364.0/$60434.9 | VWAP Sesi: $60421.28 | Vol Surge: 7.2x | BB50: [$60281.66 - $60654.45] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60363.99 | EMA34: 60434.88 | Selisih: -70.88
+[DEBUG] EMA streak: 1 | EMA13: 60363.99 | EMA34: 60434.88 | Selisih: -70.88 (After Increment)
+[ANALIS-TRENDING] Menunggu konfirmasi streak 2 menit. Saat ini: 1 menit.
+[2026-07-02 13:55:45] Keputusan analis: Wait
+[2026-07-02 13:55:45] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:56:45] Siklus Menit Baru. Harga BTC Terakhir: $60273.40
+[ANALIS] State: BEARISH | EMA13/34: $60350.5/$60424.2 | VWAP Sesi: $60421.07 | Vol Surge: 0.3x | BB50: [$60269.31 - $60658.14] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 1 | EMA13: 60350.47 | EMA34: 60424.18 | Selisih: -73.71
+[DEBUG] EMA streak: 2 | EMA13: 60350.47 | EMA34: 60424.18 | Selisih: -73.71 (After Increment)
+[ANALIS-TRENDING] Sinyal melemah/Death Cross terkonfirmasi 2 menit berturut. Sinyal SELL.
+[2026-07-02 13:56:45] Keputusan analis: Sell(0.008054288818924211, "[Trending] Quant EMA13/34 Sell Confirmed (2m streak)")
+[2026-07-02 13:56:45] Mengeksekusi transaksi...
+[2026-07-02 13:56:45] Eksekusi sukses. Saldo: $996.59, BTC: 0.0000
+[2026-07-02 13:57:45] Siklus Menit Baru. Harga BTC Terakhir: $60311.56
+[ANALIS] State: BEARISH | EMA13/34: $60344.3/$60416.4 | VWAP Sesi: $60420.90 | Vol Surge: 0.5x | BB50: [$60261.19 - $60660.04] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60344.27 | EMA34: 60416.35 | Selisih: -72.09
+[2026-07-02 13:57:45] Keputusan analis: Wait
+[2026-07-02 13:57:45] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:58:45] Siklus Menit Baru. Harga BTC Terakhir: $60307.91
+[ANALIS] State: BEARISH | EMA13/34: $60338.5/$60409.3 | VWAP Sesi: $60420.77 | Vol Surge: 0.3x | BB50: [$60253.66 - $60662.05] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60338.47 | EMA34: 60409.29 | Selisih: -70.82
+[2026-07-02 13:58:45] Keputusan analis: Wait
+[2026-07-02 13:58:45] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 13:59:45] Siklus Menit Baru. Harga BTC Terakhir: $60276.00
+[ANALIS] State: BEARISH | EMA13/34: $60328.6/$60401.8 | VWAP Sesi: $60420.73 | Vol Surge: 0.1x | BB50: [$60243.85 - $60665.41] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60328.58 | EMA34: 60401.80 | Selisih: -73.23
+[2026-07-02 13:59:45] Keputusan analis: Wait
+[2026-07-02 13:59:45] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:00:46] Siklus Menit Baru. Harga BTC Terakhir: $60267.99
+[ANALIS] State: BEARISH | EMA13/34: $60319.7/$60393.7 | VWAP Sesi: $60420.70 | Vol Surge: 0.1x | BB50: [$60233.88 - $60668.42] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60319.68 | EMA34: 60393.73 | Selisih: -74.06
+[2026-07-02 14:00:46] Keputusan analis: Wait
+[2026-07-02 14:00:46] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:01:46] Siklus Menit Baru. Harga BTC Terakhir: $60262.01
+[ANALIS] State: BEARISH | EMA13/34: $60310.7/$60385.5 | VWAP Sesi: $60420.36 | Vol Surge: 0.7x | BB50: [$60223.60 - $60671.59] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60310.70 | EMA34: 60385.53 | Selisih: -74.83
+[2026-07-02 14:01:46] Keputusan analis: Wait
+[2026-07-02 14:01:46] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:02:46] Siklus Menit Baru. Harga BTC Terakhir: $60270.00
+[ANALIS] State: BEARISH | EMA13/34: $60305.4/$60378.7 | VWAP Sesi: $60420.35 | Vol Surge: 0.0x | BB50: [$60215.37 - $60673.67] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60305.37 | EMA34: 60378.68 | Selisih: -73.31
+[2026-07-02 14:02:46] Keputusan analis: Wait
+[2026-07-02 14:02:46] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:03:46] Siklus Menit Baru. Harga BTC Terakhir: $60245.06
+[ANALIS] State: BEARISH | EMA13/34: $60296.8/$60370.6 | VWAP Sesi: $60420.16 | Vol Surge: 0.4x | BB50: [$60205.28 - $60676.83] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60296.75 | EMA34: 60370.59 | Selisih: -73.84
+[2026-07-02 14:03:46] Keputusan analis: Wait
+[2026-07-02 14:03:46] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:04:46] Siklus Menit Baru. Harga BTC Terakhir: $60240.10
+[ANALIS] State: BEARISH | EMA13/34: $60289.1/$60364.0 | VWAP Sesi: $60420.02 | Vol Surge: 0.2x | BB50: [$60195.69 - $60679.77] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60289.12 | EMA34: 60364.03 | Selisih: -74.91
+[2026-07-02 14:04:46] Keputusan analis: Wait
+[2026-07-02 14:04:46] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:05:47] Siklus Menit Baru. Harga BTC Terakhir: $60216.00
+[ANALIS] State: BEARISH | EMA13/34: $60278.7/$60356.4 | VWAP Sesi: $60419.80 | Vol Surge: 0.3x | BB50: [$60183.73 - $60683.45] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60278.68 | EMA34: 60356.42 | Selisih: -77.73
+[2026-07-02 14:05:47] Keputusan analis: Wait
+[2026-07-02 14:05:47] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:06:47] Siklus Menit Baru. Harga BTC Terakhir: $60207.72
+[ANALIS] State: BEARISH | EMA13/34: $60270.6/$60349.6 | VWAP Sesi: $60419.55 | Vol Surge: 0.3x | BB50: [$60172.66 - $60685.95] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60270.64 | EMA34: 60349.63 | Selisih: -78.99
+[2026-07-02 14:06:47] Keputusan analis: Wait
+[2026-07-02 14:06:47] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.
+[2026-07-02 14:07:47] Siklus Menit Baru. Harga BTC Terakhir: $60276.07
+[ANALIS] State: BEARISH | EMA13/34: $60277.1/$60346.6 | VWAP Sesi: $60419.41 | Vol Surge: 0.1x | BB50: [$60169.38 - $60683.95] | Tren 15m: BEARISH
+[DEBUG] EMA streak: 0 | EMA13: 60277.07 | EMA34: 60346.60 | Selisih: -69.53
+[2026-07-02 14:07:47] Keputusan analis: Wait
+[2026-07-02 14:07:47] Validasi gagal / keputusan WAIT. Tidak ada eksekusi.

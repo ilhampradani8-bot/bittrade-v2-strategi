@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Backtest Simulator | BitTrade Q-Lab Strategy Simulation"
+  description="Institutional historical backtest simulation environment for quantitative cryptocurrency trading strategies: Trend Following, DCA, and Statistical Arbitrage."
+  botStatus="SIMULATOR READY"
+>
+  <div style="margin-bottom: 35px;">
+    <h1 style="font-size: 2.2em; font-weight: 700; color: var(--text-primary); font-family: 'Inter', sans-serif; margin-bottom: 10px;">
+      Quantitative Backtest Simulator
+    </h1>
+    <p style="color: var(--text-muted); font-size: 1.1em; max-width: 800px;">
+      Simulate institutional strategies against historical tick data. Test parameter sensitivity, evaluate Kelly fraction drawdown resilience, and verify co-integration mean reversion before live deployment.
+    </p>
+  </div>
+
+  <div class="paper-box" style="padding: 30px;">
+    <h3 style="font-family: 'Inter', sans-serif; font-size: 1.3em; font-weight: 700; margin-bottom: 20px;">Simulation Configuration Parameters</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 25px;">
+      <div>
+        <label style="display: block; font-size: 0.85em; font-weight: 600; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Target Strategy</label>
+        <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--paper-bg); color: var(--text-primary); font-family: 'Inter', sans-serif;">
+          <option>Bot E: Statistical Arbitrage (300+ Coins)</option>
+          <option>Bot A: Trend Following System</option>
+          <option>Bot B: SmartDCA System</option>
+          <option>Bot D: Arbitrage Engine</option>
+        </select>
+      </div>
+      <div>
+        <label style="display: block; font-size: 0.85em; font-weight: 600; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Initial Capital ($)</label>
+        <input type="number" value="2000" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--paper-bg); color: var(--text-primary); font-family: 'JetBrains Mono', monospace;" />
+      </div>
+      <div>
+        <label style="display: block; font-size: 0.85em; font-weight: 600; margin-bottom: 8px; font-family: 'Inter', sans-serif;">Historical Range</label>
+        <select style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--paper-bg); color: var(--text-primary); font-family: 'Inter', sans-serif;">
+          <option>Last 30 Days (1-Second Ticks)</option>
+          <option>Last 90 Days (1-Minute Candles)</option>
+          <option>Last 1 Year (5-Minute Candles)</option>
+        </select>
+      </div>
+    </div>
+    <button style="background: var(--accent-blue); color: white; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; font-size: 0.95em; cursor: pointer; font-family: 'Inter', sans-serif;">
+      Run Backtest Simulation
+    </button>
+  </div>
+</Layout>

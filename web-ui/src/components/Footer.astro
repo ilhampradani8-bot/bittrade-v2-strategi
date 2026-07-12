@@ -1,0 +1,32 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer style="border-top: 1px solid var(--border-color); padding: 40px 30px; margin-top: auto; font-family: 'Georgia', serif; color: var(--text-secondary); font-size: 0.9em; background: var(--paper-bg);">
+  <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-bottom: 30px;">
+    <div>
+      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">BitTrade Q-Lab</h4>
+      <p style="line-height: 1.6; font-size: 0.85em; color: var(--text-muted);">
+        Quantitative Research &amp; Algorithm Automation Division. Developing institutional-scale trading systems based on advanced mathematical models for systematic digital asset market navigation.
+      </p>
+    </div>
+    <div>
+      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">Document Classification</h4>
+      <p style="line-height: 1.6; font-size: 0.85em; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
+        STATUS: INTERNAL DOCUMENT (PROPRIETARY)<br />
+        LEVEL: RESTRICTED (CONFIDENTIAL)<br />
+        VERSION: 3.0.0 (ASTRO ENTERPRISE)<br />
+        GROUP: ADVANCED AGENTIC TRADING
+      </p>
+    </div>
+    <div>
+      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">Risk Notice</h4>
+      <p style="line-height: 1.6; font-size: 0.85em; font-style: italic; color: var(--text-muted);">
+        Past performance does not guarantee future results. All cryptocurrency trading involves high volatility risks and potential for significant capital loss. Use simulations wisely.
+      </p>
+    </div>
+  </div>
+  <div style="max-width: 1300px; margin: 0 auto; border-top: 1px dashed var(--border-color); padding-top: 20px; text-align: center; font-size: 0.8em; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
+    &copy; {currentYear} BitTrade Q-Grade Laboratory. All Rights Reserved. Powered by Astro &amp; Rust Tokio.
+  </div>
+</footer>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>BitTrade Bot A - Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;       /* Warm paper white */
+            --card-bg: #ffffff;        /* Crisp white */
+            --border-color: #1a1a1a;   /* Clean black border */
+            --text-primary: #1a1a1a;   /* Ink black */
+            --text-secondary: #555555; /* Gray ink */
+            --accent-blue: #0f4c81;    /* Ballpoint pen blue */
+            --accent-green: #0f4c81;   /* Ink blue for success */
+            --accent-red: #b91c1c;     /* Corrections red */
+            --accent-yellow: #d97706;  /* Ochre yellow */
+            --paper-grid: #e5dfd5;     /* Soft paper grid lines */
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: #e5dfd3;       /* Wooden desk background */
+            color: var(--text-primary);
+            margin: 0;
+            padding: 30px 15px;
+            line-height: 1.5;
+        }
+
+        .dashboard-container {
+            background-color: var(--bg-color);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            margin-top: 0;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px double var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 2em;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .uptime-badge {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            font-size: 0.9em;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+        }
+        
+        .section-container {
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .price-val {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: var(--accent-blue);
+            font-family: 'Courier New', monospace;
+            transition: color 0.2s ease;
+        }
+        .price-val.up { color: var(--accent-blue); }
+        .price-val.down { color: var(--accent-red); }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .stat-row:last-child { margin-bottom: 0; }
+        .label { color: var(--text-secondary); font-style: italic; }
+        .value { font-weight: bold; font-family: 'Courier New', monospace; }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .process-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .led-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #e5e5e5;
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+            transition: background 0.3s;
+        }
+        /* LED States */
+        .led-light.active-green { background-color: var(--accent-blue); }
+        .led-light.active-blue { background-color: var(--accent-blue); }
+        .led-light.active-red { background-color: var(--accent-red); }
+        .led-light.active-yellow { background-color: var(--accent-yellow); }
+
+        .process-name {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-box {
+            padding-bottom: 15px;
+            border: 1px solid var(--border-color);
+            background: #faf8f5;
+            padding: 15px;
+            height: 250px;
+            position: relative;
+        }
+        
+        .filter-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 5px 12px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            background: var(--border-color);
+            color: var(--bg-color);
+        }
+        .filter-btn.active {
+            background: var(--border-color);
+            color: var(--bg-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            font-family: 'Courier New', monospace;
+            border: 1.5px solid var(--border-color);
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        th {
+            background: #f3efe6;
+            color: var(--text-primary);
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+        .text-buy { color: var(--accent-blue); font-weight: bold; }
+        .text-sell { color: var(--accent-red); font-weight: bold; }
+        .text-success { color: var(--accent-blue); }
+        .text-fail { color: var(--accent-red); }
+
+        .scroller {
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Burger Menu Button */
+        .burger-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin-right: 15px;
+            transition: color 0.2s;
+        }
+        .burger-btn:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Sidebar Drawer */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-color);
+            border-right: 2px solid var(--border-color);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+        .sidebar-overlay.open {
+            display: block;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-item {
+            margin-bottom: 15px;
+        }
+        .sidebar-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            border: 1px solid var(--border-color);
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 5px;
+            }
+            .dashboard-container {
+                padding: 20px 10px;
+            }
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .charts-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .chart-box {
+                height: 220px;
+            }
+            table {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('open');
+        }
+    </script>
+</head>
+<body>
+    <!-- INCLUDE HEADER -->
+    <div class="dashboard-container">
+        <h1>BitTrade Engine Dashboard</h1>
+
+    <!-- Info Cards Row (2 Columns Line Separated) -->
+    <div class="grid-2 section-container">
+        <!-- Col 1: Real-time Market -->
+        <div style="padding-right: 20px;">
+            <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Real-time Market</h2>
+            <div style="margin-bottom: 15px;">
+                <div class="label">BTC/USDT Price</div>
+                <div class="price-val" id="btc-price">$-</div>
+            </div>
+            <div class="stat-row">
+                <span class="label">Volatility (StdDev)</span>
+                <span class="value" id="market-volatility">$-</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Market Regime</span>
+                <span class="value" id="market-regime">$-</span>
+            </div>
+        </div>
+        
+        <!-- Col 2: Account & Balance -->
+        <div style="border-left: 1px dashed var(--border-color); padding-left: 20px;">
+            <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Account & Balance</h2>
+            <div class="stat-row">
+                <span class="label">Starting Capital</span>
+                <span class="value">$1,000.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Remaining USDT (Cash)</span>
+                <span class="value" id="usdt-balance">$1,000.00</span>
+            </div>
+            
+            <div style="margin-top: 10px; margin-bottom: 10px;">
+                <div style="color: var(--text-secondary); font-size: 0.9em; margin-bottom: 5px;">Crypto Assets (Multi-Coin):</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85em;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 5px 8px; border-radius: 4px;">BTC: <span id="btc-balance" style="font-weight:bold; color:var(--accent-blue)">0.00</span> (<span id="btc-value-display">$0</span>)</div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 5px 8px; border-radius: 4px;">ETH: <span id="eth-balance" style="font-weight:bold; color:var(--accent-blue)">0.00</span> (<span id="eth-value-display">$0</span>)</div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 5px 8px; border-radius: 4px;">BNB: <span id="bnb-balance" style="font-weight:bold; color:var(--accent-blue)">0.00</span> (<span id="bnb-value-display">$0</span>)</div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 5px 8px; border-radius: 4px;">SOL: <span id="sol-balance" style="font-weight:bold; color:var(--accent-blue)">0.00</span> (<span id="sol-value-display">$0</span>)</div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 5px 8px; border-radius: 4px;">XRP: <span id="xrp-balance" style="font-weight:bold; color:var(--accent-blue)">0.00</span> (<span id="xrp-value-display">$0</span>)</div>
+                </div>
+            </div>
+            <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
+                <span class="label">Total Capital (Equity)</span>
+                <span class="value" id="total-equity-val">$1,000.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Profit / Loss (P&L)</span>
+                <span class="value" id="pnl-value">$0.00 (0.00%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Status Lights (Multi-Coin) -->
+    <div class="section-container">
+        <h2 style="font-size: 1.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">System Process Pipeline Monitor (Real-time)</h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9em;">
+            <thead>
+                <tr style="background: rgba(255,255,255,0.05); color: var(--text-secondary);">
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left;">Coin</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">WebSocket</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">AI Pattern</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Conclude</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Validate</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Executor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- BTC -->
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left; font-weight: bold; color: var(--accent-blue);">BTC</td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ws-btc" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ai-btc" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-conclude-btc" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-validate-btc" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-executor-btc" style="margin: 0 auto;"></div></td>
+                </tr>
+                <!-- ETH -->
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left; font-weight: bold; color: var(--accent-blue);">ETH</td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ws-eth" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ai-eth" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-conclude-eth" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-validate-eth" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-executor-eth" style="margin: 0 auto;"></div></td>
+                </tr>
+                <!-- BNB -->
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left; font-weight: bold; color: var(--accent-blue);">BNB</td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ws-bnb" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ai-bnb" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-conclude-bnb" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-validate-bnb" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-executor-bnb" style="margin: 0 auto;"></div></td>
+                </tr>
+                <!-- SOL -->
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left; font-weight: bold; color: var(--accent-blue);">SOL</td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ws-sol" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ai-sol" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-conclude-sol" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-validate-sol" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-executor-sol" style="margin: 0 auto;"></div></td>
+                </tr>
+                <!-- XRP -->
+                <tr>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left; font-weight: bold; color: var(--accent-blue);">XRP</td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ws-xrp" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-ai-xrp" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-conclude-xrp" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-validate-xrp" style="margin: 0 auto;"></div></td>
+                    <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><div class="led-light" id="led-executor-xrp" style="margin: 0 auto;"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.9em; color: var(--text-secondary);">Error Corrector (Global):</span>
+                <div class="led-light" id="led-corrector"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market Regime Mode Card (Multi-Coin MTFA) -->
+    <div class="section-container">
+        <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Status Regime MTFA (Multi-Timeframe Analysis)</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-weight: bold; color: var(--accent-blue); margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">BTC</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1H</span>
+                    <div class="led-light" id="led-regime-btc"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="regime-text-btc">-</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">15M</span>
+                    <div class="led-light" id="led-15m-btc"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-15m-btc">WAIT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1M</span>
+                    <div class="led-light" id="led-1m-btc"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-1m-btc">WAIT</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-weight: bold; color: var(--accent-blue); margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">ETH</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1H</span>
+                    <div class="led-light" id="led-regime-eth"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="regime-text-eth">-</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">15M</span>
+                    <div class="led-light" id="led-15m-eth"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-15m-eth">WAIT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1M</span>
+                    <div class="led-light" id="led-1m-eth"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-1m-eth">WAIT</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-weight: bold; color: var(--accent-blue); margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">BNB</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1H</span>
+                    <div class="led-light" id="led-regime-bnb"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="regime-text-bnb">-</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">15M</span>
+                    <div class="led-light" id="led-15m-bnb"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-15m-bnb">WAIT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1M</span>
+                    <div class="led-light" id="led-1m-bnb"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-1m-bnb">WAIT</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-weight: bold; color: var(--accent-blue); margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">SOL</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1H</span>
+                    <div class="led-light" id="led-regime-sol"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="regime-text-sol">-</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">15M</span>
+                    <div class="led-light" id="led-15m-sol"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-15m-sol">WAIT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1M</span>
+                    <div class="led-light" id="led-1m-sol"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-1m-sol">WAIT</span>
+                </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <div style="font-weight: bold; color: var(--accent-blue); margin-bottom: 8px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;">XRP</div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1H</span>
+                    <div class="led-light" id="led-regime-xrp"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="regime-text-xrp">-</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">15M</span>
+                    <div class="led-light" id="led-15m-xrp"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-15m-xrp">WAIT</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 0.8em; color: var(--text-secondary); width: 25px;">1M</span>
+                    <div class="led-light" id="led-1m-xrp"></div>
+                    <span style="font-size: 0.8em; color: var(--text-secondary);" id="text-1m-xrp">WAIT</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-container">
+        <div class="chart-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="font-size: 1.2em; margin: 0;">Real-time Price</h2>
+                <select id="chart-coin-selector" style="background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px;">
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="BNB">BNB</option>
+                    <option value="SOL">SOL</option>
+                    <option value="XRP">XRP</option>
+                </select>
+            </div>
+            <div style="height: 190px;"><canvas id="priceChart"></canvas></div>
+        </div>
+        <div class="chart-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="font-size: 1.2em; margin: 0;">Asset Equity Growth (Total USDT)</h2>
+                <div style="display: flex; gap: 5px;">
+                    <button class="filter-btn active">Seconds</button>
+                    <button class="filter-btn">Hours</button>
+                    <button class="filter-btn">Days</button>
+                    <button class="filter-btn">Months</button>
+                </div>
+            </div>
+            <div style="height: 190px;"><canvas id="balanceChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Tables Row (Stacked Full Width) -->
+    <!-- Table 1: History -->
+    <div class="section-container">
+        <h2 id="history-title">Execution History (bot_trading_history)</h2>
+        <div class="scroller">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time (Timestamp)</th>
+                        <th>Action</th>
+                        <th>Price</th>
+                        <th>Amount & USD Value</th>
+                        <th>Notes / Fees / P&L</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table 2: Corrections -->
+    <div class="section-container" style="border-bottom: none;">
+        <h2>System Corrections & Failures (bot_corrections)</h2>
+        <div class="scroller">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time (Timestamp)</th>
+                        <th>Error Type (error_type)</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody id="corrections-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Section: Jurnal Trading & Observasi Fase 4 -->
+    <div class="section-container" style="border-bottom: none;">
+        <h2>📓 Trading Journal & Daily Observations (Phase 4)</h2>
+        <div style="background: #faf8f5; border: 1px solid var(--border-color); padding: 15px; font-family: monospace; white-space: pre-wrap; font-size: 0.85em; color: var(--text-primary); max-height: 300px; overflow-y: auto;" id="journal-box">Loading journal logs...</div>
+    </div>
+</div> <!-- End .dashboard-container -->
+
+<!-- INCLUDE FOOTER -->
+
+<!-- MTFA Modal Book -->
+<div id="mtfa-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center; padding: 20px;">
+    <div style="background: #faf8f5; border: 2px solid var(--border-color); width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; margin: 0 auto; top: 5vh; padding: 20px; box-sizing: border-box;">
+        <button onclick="document.getElementById('mtfa-modal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-primary); font-size: 1.5em; cursor: pointer;">&times;</button>
+        <div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+            <h2 style="margin: 0; color: var(--text-primary);">📖 Advanced Trading Engine Manual</h2>
+        </div>
+            <div style="padding: 20px; line-height: 1.6; font-size: 0.95em;">
+                
+                <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">A. System Indicators & Badges</h3>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>Winrate Bot</strong>: The percentage of successful (profitable) trades out of all executed sells.</li>
+                    <li><strong>CPU & RAM</strong>: Real-time VPS resource monitoring. Ensures the bot is not lagging.</li>
+                    <li><strong>Whale Alert</strong>: Detects massive institutional volume spikes. <span style="color: var(--accent-green);">DETECTED! 🐋</span> means smart money is actively buying.</li>
+                </ul>
+
+                <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">B. Process Pipeline (LED Monitors)</h3>
+                <p>The 5-stage pipeline represents the real-time event loop of the trading engine:</p>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong>WebSocket</strong>: Streams live ticks from Binance (1-second intervals).</li>
+                    <li><strong>AI Pattern</strong>: Detects candlestick patterns and basic formations.</li>
+                    <li><strong>Conclude</strong>: The strategy brain. Analyzes regimes and calculates MTFA parameters.</li>
+                    <li><strong>Validate</strong>: The safety layer. Blocks bad trades and enforces risk management (e.g., stopping trades during excessive spread).</li>
+                    <li><strong>Executor</strong>: Connects to the Exchange API to place the actual Buy/Sell orders.</li>
+                </ul>
+
+                <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">C. Multi-Timeframe Analysis (MTFA)</h3>
+                <p>The core trading strategy relies on 3 simultaneous timeframes to confirm a perfect entry point.</p>
+                
+                <h4 style="color: var(--accent-green); margin-top: 10px;">1. The 1H Layer (Macro Trend)</h4>
+                <p style="margin-top: 5px;">Analyzes the general market sentiment using Bollinger Bands.</p>
+                <ul>
+                    <li><strong style="color: var(--accent-green);">BULLISH</strong>: Price is hugging the upper band. Uptrend confirmed.</li>
+                    <li><strong style="color: var(--accent-yellow);">SIDEWAYS</strong>: Ranging market. Wait for breakout.</li>
+                    <li><strong style="color: var(--accent-red);">BEARISH</strong>: Downtrend. Highly risky to buy.</li>
+                </ul>
+
+                <h4 style="color: var(--accent-blue);">2. The 15M Layer (Local Momentum)</h4>
+                <p style="margin-top: 5px;">Hunts for market pullbacks or discount zones within the trend.</p>
+                <ul>
+                    <li><strong style="color: var(--accent-green);">OVERSOLD</strong>: Price is too cheap locally. High probability bounce.</li>
+                    <li><strong style="color: var(--accent-red);">OVERBOUGHT</strong>: Price is too expensive locally. Wait for correction.</li>
+                </ul>
+
+                <h4 style="color: var(--accent-red);">3. The 1M Layer (Whale Detector Trigger)</h4>
+                <p style="margin-top: 5px;">The sniper trigger looking for volume anomalies and Taker Buy Ratios.</p>
+                <ul style="margin-bottom: 20px;">
+                    <li><strong style="color: var(--accent-green);">PUMP DETECTED</strong>: Volume spiked 300%+ with >75% Taker Buys. EXECUTE.</li>
+                    <li><strong style="color: var(--accent-red);">DUMP DETECTED</strong>: Massive volume but dominated by Taker Sells. ABORT.</li>
+                </ul>
+
+                <div style="margin-top: 20px; padding: 10px; background: #f3efe6; border-left: 4px solid var(--accent-blue); color: var(--text-primary);">
+                    <strong>Perfect Sniper Setup:</strong> 1H [BULLISH] + 15M [OVERSOLD] + 1M [PUMP DETECTED]
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="/js/dashboard_okx.js?v=20260702_1620"></script>
+</body>
+</html>

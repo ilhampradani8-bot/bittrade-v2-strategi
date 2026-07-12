@@ -1,0 +1,15 @@
+/root/bittrade-v2-strategi/statARB/target/debug/deps/whoami-013f5afd4929b9c6.d: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/api.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/arch.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/conversions.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/desktop_env.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/fallible.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/language.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os/unix.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/platform.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/result.rs
+
+/root/bittrade-v2-strategi/statARB/target/debug/deps/libwhoami-013f5afd4929b9c6.rmeta: /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/lib.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/api.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/arch.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/conversions.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/desktop_env.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/fallible.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/language.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os/unix.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/platform.rs /root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/result.rs
+
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/lib.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/api.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/arch.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/conversions.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/desktop_env.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/fallible.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/language.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/os/unix.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/platform.rs:
+/root/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/whoami-1.6.1/src/result.rs:

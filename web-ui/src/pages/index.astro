@@ -1,0 +1,502 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="BitTrade Multi-Bot Main Dashboard">
+  <div class="dashboard-container">
+        <h1>BitTrade Multi-Bot Main Dashboard</h1>
+
+        <!-- Row 1: Bot Summary Cards -->
+        <div class="grid-3 section-container">
+            
+            <!-- Bot A Card -->
+            <div class="card" id="card-bot-a" onclick="window.location.href='/bota/'" style="cursor: pointer;">
+                <div class="bot-header">
+                    <div class="bot-title">
+                        <span class="led-light" id="bot-a-status-led"></span>
+                        <span>Bot A: Trend & Scalper</span>
+                    </div>
+                    <span class="bot-status-badge">BINANCE SPOT</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Price</span>
+                    <span class="value" id="bot-a-btc-price">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Equity</span>
+                    <span class="value-large" id="bot-a-equity">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">USDT Balance</span>
+                    <span class="value" id="bot-a-usdt">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Asset</span>
+                    <span class="value" id="bot-a-btc">0.000000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Winrate / P&L %</span>
+                    <span class="value" id="bot-a-winrate">-% (-%)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Market Condition / Vol</span>
+                    <span class="value" id="bot-a-regime">WAIT</span>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="bot-a-led-ws"></span><span>WS</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-a-led-conclude"></span><span>Anls</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-a-led-validate"></span><span>Val</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-a-led-executor"></span><span>Exec</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-a-led-corrector"></span><span>Corr</span></div>
+                </div>
+            </div>
+
+            <!-- Bot B Card (SmartDCA) -->
+            <div class="card" id="card-bot-b" onclick="window.location.href='/dca/'" style="cursor: pointer;">
+                <div class="bot-header">
+                    <div class="bot-title">
+                        <span class="led-light" id="bot-b-status-led"></span>
+                        <span>Bot B: SmartDCA</span>
+                    </div>
+                    <span class="bot-status-badge">DCA SYSTEM</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Price</span>
+                    <span class="value" id="bot-b-btc-price">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Equity</span>
+                    <span class="value-large" id="bot-b-equity">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">USDT Balance</span>
+                    <span class="value" id="bot-b-usdt">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Asset / Layer</span>
+                    <span class="value" id="bot-b-btc">0.000000 (0)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Winrate / P&L %</span>
+                    <span class="value" id="bot-b-winrate">-% (-%)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Panic Detector Status</span>
+                    <span class="value" id="bot-b-panic">SLEEPING</span>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-ws"></span><span>WS</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-conclude"></span><span>Anls</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-validate"></span><span>Val</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-executor"></span><span>Exec</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-panic"></span><span>Pnic</span></div>
+                </div>
+            </div>
+
+            <!-- Bot C Card (OKX Trading) -->
+            <div class="card" id="card-bot-c">
+                <div class="bot-header">
+                    <div class="bot-title">
+                        <span class="led-light" id="bot-c-status-led"></span>
+                        <span>Bot C: OKX Engine</span>
+                    </div>
+                    <span class="bot-status-badge">OKX SPOT</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Price</span>
+                    <span class="value" id="bot-c-btc-price">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Equity</span>
+                    <span class="value-large" id="bot-c-equity">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">USDT Balance</span>
+                    <span class="value" id="bot-c-usdt">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Asset</span>
+                    <span class="value" id="bot-c-btc">0.000000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Winrate / P&L %</span>
+                    <span class="value" id="bot-c-winrate">-% (-%)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Market Condition / Vol</span>
+                    <span class="value" id="bot-c-regime">WAIT</span>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="bot-c-led-ws"></span><span>WS</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-c-led-conclude"></span><span>Anls</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-c-led-validate"></span><span>Val</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-c-led-executor"></span><span>Exec</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-c-led-corrector"></span><span>Corr</span></div>
+                </div>
+            </div>
+
+            <!-- Bot D Card (Arbitrage Trading) -->
+            <div class="card" id="card-bot-d" onclick="window.location.href='/arbitrage/'" style="cursor: pointer;">
+                <div class="bot-header">
+                    <div class="bot-title">
+                        <span class="led-light" id="bot-d-status-led"></span>
+                        <span>Bot D: Arbitrage Engine</span>
+                    </div>
+                    <span class="bot-status-badge">BINANCE ARB</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">BTC Price</span>
+                    <span class="value" id="bot-d-btc-price">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Equity</span>
+                    <span class="value-large" id="bot-d-equity">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">USDT Balance</span>
+                    <span class="value" id="bot-d-usdt">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Deployed Size</span>
+                    <span class="value" id="bot-d-btc">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Funding Collected</span>
+                    <span class="value" id="bot-d-winrate">-$ (-%)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Monitored Pairs</span>
+                    <span class="value" id="bot-d-regime">WAIT</span>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="bot-d-led-ws"></span><span>WS</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-d-led-conclude"></span><span>Scan</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-d-led-validate"></span><span>Val</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-d-led-executor"></span><span>Exec</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-d-led-corrector"></span><span>Corr</span></div>
+                </div>
+            </div>
+
+            <!-- Bot E Card (Statistical Arbitrage) -->
+            <div class="card" id="card-bot-e" onclick="window.location.href='/statarb/'" style="cursor: pointer;">
+                <div class="bot-header">
+                    <div class="bot-title">
+                        <span class="led-light" id="bot-e-status-led"></span>
+                        <span>Bot E: Statistical Arbitrage</span>
+                    </div>
+                    <span class="bot-status-badge">BINANCE STATARB</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">ETH/BTC Ratio (Z-Score)</span>
+                    <span class="value" id="bot-e-btc-price">0.00000 (0.00)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Total Equity</span>
+                    <span class="value-large" id="bot-e-equity">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">USDT Balance</span>
+                    <span class="value" id="bot-e-usdt">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Active Spread Pairs</span>
+                    <span class="value" id="bot-e-btc">0</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Realized P&L / Winrate</span>
+                    <span class="value" id="bot-e-winrate">-$ (0%)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Market Condition / Vol</span>
+                    <span class="value" id="bot-e-regime">NORMAL</span>
+                </div>
+                <div class="pipeline-status">
+                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-ws"></span><span>WS</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-conclude"></span><span>Anls</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-validate"></span><span>Val</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-executor"></span><span>Exec</span></div>
+                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-corrector"></span><span>Corr</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Row 2: Equity Growth Comparison Chart -->
+        <div class="section-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0;">Equity Growth Comparison Chart (Total Equity)</h2>
+                <div style="display: flex; gap: 8px;">
+                    <button class="filter-btn active" id="btn-res-daily" onclick="setResolution('daily')">Daily</button>
+                    <button class="filter-btn" id="btn-res-hourly" onclick="setResolution('hourly')">Hourly</button>
+                    <button class="filter-btn" id="btn-res-all" onclick="setResolution('all')">All Data</button>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="mainEquityChart"></canvas>
+            </div>
+            <div class="sync-indicator" id="chart-sync-time">Connecting to PostgreSQL database...</div>
+        </div>
+
+        <!-- Row 3: Unified Latest Executed Orders -->
+        <div>
+            <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Unified Latest Transaction History (Database)</h2>
+            <div class="tabs-container" style="display: flex; gap: 8px; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; flex-wrap: wrap;">
+                <button class="filter-btn active" id="tab-all" onclick="setHistoryTab('all')">All Bots</button>
+                <button class="filter-btn" id="tab-bot-a" onclick="setHistoryTab('bot-a')">Bot A (Trend)</button>
+                <button class="filter-btn" id="tab-bot-b" onclick="setHistoryTab('bot-b')">Bot B (DCA)</button>
+                <button class="filter-btn" id="tab-bot-c" onclick="setHistoryTab('bot-c')">Bot C (OKX)</button>
+                <button class="filter-btn" id="tab-bot-d" onclick="setHistoryTab('bot-d')">Bot D (Arbitrage)</button>
+                <button class="filter-btn" id="tab-bot-e" onclick="setHistoryTab('bot-e')">Bot E (statARB)</button>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bot / Engine</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                            <th>Execution Price</th>
+                            <th>Asset Amount</th>
+                            <th>Notes & Realized P&L</th>
+                        </tr>
+                    </thead>
+                    <tbody id="unified-history-body">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading transactions from database...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script is:inline src="/js/dashboard_main.js?v=20260707_STATARB_ONLY"></script>
+</Layout>
+
+<style is:global>
+  .dashboard-container {
+      background-color: var(--bg-color);
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 40px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      border: 2px solid var(--border-color);
+      position: relative;
+  }
+
+  .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+  }
+  
+  .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+      margin-bottom: 25px;
+  }
+
+  .card {
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--border-color);
+      padding: 22px 0;
+      min-width: 0;
+      max-width: 100%;
+      transition: all 0.2s ease-in-out;
+  }
+  .card:hover {
+      background: rgba(0, 0, 0, 0.01);
+  }
+  
+  .bot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+  }
+  
+  .bot-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+  }
+  
+  .bot-status-badge {
+      font-family: monospace;
+      font-size: 0.8em;
+      padding: 2px 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-color);
+  }
+
+  .section-container {
+      padding-bottom: 25px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--border-color);
+  }
+
+  .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px dashed var(--paper-grid);
+  }
+  .stat-row:last-child {
+      border-bottom: none;
+  }
+  .label {
+      font-size: 0.9em;
+      color: var(--text-secondary);
+  }
+  .value {
+      font-weight: bold;
+      font-family: monospace;
+  }
+  .value-large {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--accent-blue);
+      font-family: 'Courier New', monospace;
+  }
+  
+  .pipeline-status {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      margin-top: 15px;
+      text-align: center;
+  }
+  .pipeline-item {
+      font-size: 0.7em;
+      color: var(--text-secondary);
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+  }
+
+  /* LED Lights */
+  .led-light {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #7f8c8d;
+      border: 1px solid #333;
+      transition: all 0.3s;
+      display: inline-block;
+  }
+  .active-green {
+      background-color: #2ecc71 !important;
+      box-shadow: 0 0 8px #2ecc71;
+  }
+  .active-red {
+      background-color: #e74c3c !important;
+      box-shadow: 0 0 8px #e74c3c;
+  }
+  .active-blue {
+      background-color: #3498db !important;
+      box-shadow: 0 0 8px #3498db;
+  }
+  .active-yellow {
+      background-color: #f1c40f !important;
+      box-shadow: 0 0 8px #f1c40f;
+  }
+
+  /* Table Styling */
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      font-size: 0.85em;
+  }
+  th, td {
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      text-align: left;
+  }
+  th {
+      background-color: var(--paper-grid);
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.85em;
+  }
+  tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+  }
+
+  .text-buy {
+      color: var(--accent-green) !important;
+      font-weight: bold;
+  }
+  .text-sell {
+      color: var(--accent-red) !important;
+      font-weight: bold;
+  }
+  .text-pnl-up {
+      color: var(--accent-green) !important;
+      font-weight: bold;
+  }
+  .text-pnl-down {
+      color: var(--accent-red) !important;
+      font-weight: bold;
+  }
+  
+  .filter-btn {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      font-size: 0.85em;
+      cursor: pointer;
+      border-radius: 4px;
+      font-family: monospace;
+      transition: all 0.2s;
+      color: var(--text-primary);
+  }
+  .filter-btn:hover {
+      background-color: rgba(15, 76, 129, 0.1);
+      border-color: var(--accent-blue);
+  }
+  .filter-btn.active {
+      background-color: var(--accent-blue);
+      color: white;
+      border-color: var(--accent-blue);
+      font-weight: bold;
+  }
+  
+  .chart-wrapper {
+      position: relative;
+      height: 350px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      margin-top: 15px;
+      box-sizing: border-box;
+  }
+  
+  .sync-indicator {
+      font-family: monospace;
+      font-size: 0.8em;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 10px;
+  }
+  @media (max-width: 900px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr !important; }
+      .dashboard-container { padding: 15px 10px !important; border: none !important; box-shadow: none !important; }
+      table { font-size: 0.75em !important; }
+      th, td { padding: 6px 6px !important; }
+  }
+</style>

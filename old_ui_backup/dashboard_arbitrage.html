@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Funding Rate Arbitrage Dashboard (Cash-and-Carry)</title>
+    <style>
+        :root {
+            --bg-color: #faf8f5;       /* Warm paper white */
+            --card-bg: #ffffff;        /* Crisp white */
+            --border-color: #1a1a1a;   /* Clean black border */
+            --text-primary: #1a1a1a;   /* Ink black */
+            --text-secondary: #555555; /* Gray ink */
+            --accent-blue: #0f4c81;    /* Ballpoint pen blue */
+            --accent-green: #2e7d32;   /* Green for success */
+            --accent-red: #b91c1c;     /* Corrections red */
+            --accent-yellow: #d97706;  /* Ochre yellow */
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: #e5dfd3;       /* Wooden desk background */
+            color: var(--text-primary);
+            margin: 0;
+            padding: 30px 15px;
+            line-height: 1.5;
+        }
+
+        .dashboard-container {
+            background-color: var(--bg-color);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', Georgia, serif;
+            margin-top: 0;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px double var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 2em;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .uptime-badge {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            font-size: 0.9em;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+        }
+        
+        .section-container {
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .price-val {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: var(--accent-blue);
+            font-family: 'Courier New', monospace;
+            transition: color 0.2s ease;
+        }
+        .price-val.up { color: var(--accent-blue); }
+        .price-val.down { color: var(--accent-red); }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .stat-row:last-child { margin-bottom: 0; }
+        .label { color: var(--text-secondary); font-style: italic; }
+        .value { font-weight: bold; font-family: 'Courier New', monospace; }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .process-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .led-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #e5e5e5;
+            border: 1px solid var(--border-color);
+            margin-bottom: 8px;
+            transition: background 0.3s;
+        }
+        /* LED States */
+        .led-light.active-green { background-color: var(--accent-green); }
+        .led-light.active-blue { background-color: var(--accent-blue); }
+        .led-light.active-red { background-color: var(--accent-red); }
+        .led-light.active-yellow { background-color: var(--accent-yellow); }
+
+        .process-name {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .chart-box {
+            padding-bottom: 15px;
+            border: 1px solid var(--border-color);
+            background: #faf8f5;
+            padding: 15px;
+            height: 250px;
+            position: relative;
+        }
+        
+        .filter-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 5px 12px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            background: var(--border-color);
+            color: var(--bg-color);
+        }
+        .filter-btn.active {
+            background: var(--border-color);
+            color: var(--bg-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            font-family: 'Courier New', monospace;
+            border: 1.5px solid var(--border-color);
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        th {
+            background: #f3efe6;
+            color: var(--text-primary);
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+        }
+        .text-buy { color: var(--accent-blue); font-weight: bold; }
+        .text-sell { color: var(--accent-red); font-weight: bold; }
+        .text-open-arb { color: #3498db !important; font-weight: bold; }
+        .text-close-arb { color: #e74c3c !important; font-weight: bold; }
+        .text-success { color: var(--accent-green); }
+        .text-fail { color: var(--accent-red); }
+
+        .scroller {
+            max-height: 220px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Burger Menu Button */
+        .burger-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin-right: 15px;
+            transition: color 0.2s;
+        }
+        .burger-btn:hover {
+            color: var(--accent-blue);
+        }
+        
+        /* Sidebar Drawer */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--bg-color);
+            border-right: 2px solid var(--border-color);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+        .sidebar-overlay.open {
+            display: block;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-item {
+            margin-bottom: 15px;
+        }
+        .sidebar-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            border: 1px solid var(--border-color);
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px 5px;
+            }
+            .dashboard-container {
+                padding: 20px 10px;
+            }
+            .grid-3, .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .charts-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .chart-box {
+                height: 220px;
+            }
+            table {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('open');
+        }
+    </script>
+</head>
+<body>
+    <!-- INCLUDE HEADER -->
+    <div class="dashboard-container">
+        <h1>Funding Rate Arbitrage Dashboard (Cash-and-Carry)</h1>
+
+    <!-- Info Cards Row (2 Columns Line Separated) -->
+    <div class="grid-2 section-container">
+        <!-- Col 1: Real-time Market -->
+        <div style="padding-right: 20px;">
+            <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Arbitrage Market Overview</h2>
+            <div style="margin-bottom: 15px;">
+                <div class="label">Index BTC/USDT Price</div>
+                <div class="price-val" id="btc-price">$-</div>
+            </div>
+            <div class="stat-row">
+                <span class="label">System CPU Usage</span>
+                <span class="value" id="cpu-counter">-%</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">System Memory</span>
+                <span class="value" id="ram-counter">- MB</span>
+            </div>
+        </div>
+        
+        <!-- Col 2: Account & Balance -->
+        <div style="border-left: 1px dashed var(--border-color); padding-left: 20px;">
+            <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">USDT Account & Balance</h2>
+            <div class="stat-row">
+                <span class="label">Starting Capital (Deposit)</span>
+                <span class="value" id="starting-capital-val">$200.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Available Cash (USDT)</span>
+                <span class="value" id="usdt-balance">$200.00</span>
+            </div>
+            <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
+                <span class="label">Total Portfolio Value (Equity)</span>
+                <span class="value" id="total-equity-val">$200.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Total Funding Collected (USDT)</span>
+                <span class="value" id="pnl-value">$0.00 (0.00%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Status Lights (Multi-Coin) -->
+    <div class="section-container">
+        <h2 style="font-size: 1.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">System Process Pipeline Monitor (Real-time)</h2>
+        <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9em;">
+            <thead>
+                <tr style="background: rgba(0,0,0,0.02); color: var(--text-secondary);">
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left;">Engine Pipeline</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Binance WSS Stream</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Data Initializer</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Market Scanner</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Arb Validator</th>
+                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Two-Leg Executor</th>
+                </tr>
+            </thead>
+            <tbody id="pipeline-body">
+                <tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading pipeline status...</td></tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 0.9em; color: var(--text-secondary);">Error Corrector (Global):</span>
+                <div class="led-light" id="led-corrector"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Active Arbitrage Positions APR & Basis Overview</h2>
+        <div id="mtfa-container" style="display: flex; flex-direction: row; gap: 15px; overflow-x: auto; padding: 5px 0 15px; scrollbar-width: thin; -webkit-overflow-scrolling: touch;">
+            <div style="text-align: center; color: var(--text-secondary); width: 100%; grid-column: 1 / -1;">Loading market data...</div>
+        </div>
+    </div>
+    <!-- Charts Row -->
+    <div class="charts-container">
+        <div class="chart-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="font-size: 1.2em; margin: 0;">Real-time Price</h2>
+                <select id="chart-coin-selector" style="background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 4px;">
+                    <option value="BTC">BTC</option>
+                    <option value="ETH">ETH</option>
+                    <option value="BNB">BNB</option>
+                    <option value="SOL">SOL</option>
+                    <option value="XRP">XRP</option>
+                </select>
+            </div>
+            <div style="height: 190px;"><canvas id="priceChart"></canvas></div>
+        </div>
+        <div class="chart-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="font-size: 1.2em; margin: 0;">Asset Equity Growth (USDT)</h2>
+                <div style="display: flex; gap: 5px;">
+                    <button class="filter-btn active">Seconds</button>
+                    <button class="filter-btn">Hours</button>
+                    <button class="filter-btn">Days</button>
+                    <button class="filter-btn">Months</button>
+                </div>
+            </div>
+            <div style="height: 190px;"><canvas id="balanceChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Tables Row (Stacked Full Width) -->
+    <!-- Table 1: Current Arbitrage History -->
+    <div class="section-container">
+        <h2 id="history-title">Riwayat Arbitrase (alt_trading_history - Arbitrage)</h2>
+        <div class="scroller">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time (Timestamp)</th>
+                        <th>Action</th>
+                        <th>Price</th>
+                        <th>Amount & USD Value</th>
+                        <th>Notes / Fees / P&L</th>
+                    </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <!-- Multi-Asset Scanner Cards (Stacked Full Width) -->
+    <div class="section-container" style="display: flex; flex-direction: column; gap: 25px;">
+        <!-- Card 1: Top Funding Rate Candidates -->
+        <div class="card">
+            <h3 style="border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-size: 1.2em;">🔍 Top Funding Rate Candidates (Binance Futures)</h3>
+            <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                USDT-M Perpetual Futures pairs sorted by highest real-time funding rate.
+            </div>
+            <div class="scroller" style="max-height: 250px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin (Symbol)</th>
+                            <th>Funding Rate (8-Hour)</th>
+                            <th>Estimated APR %</th>
+                        </tr>
+                    </thead>
+                    <tbody id="altcoin-filtered-body">
+                        <tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Card 3: Funding Payment Logs -->
+        <div class="card">
+            <h3 style="border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-size: 1.2em;">💸 Funding Payment Collect Logs</h3>
+            <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
+                Log entries of passive cash-and-carry funding rate payouts received every 8 hours.
+            </div>
+            <div class="scroller" style="max-height: 250px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin (Symbol)</th>
+                            <th>Funding Rate</th>
+                            <th>Payment Received</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="altcoin-excluded-body">
+                        <tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">No funding payments collected yet.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Section: Detailed Active Arbitrage Engine State -->
+    <div class="section-container">
+        <h2>🔥 Detailed Active Arbitrage State</h2>
+        <div style="margin-bottom: 10px; font-size: 0.9em; color: var(--text-secondary);">
+            Detailed real-time indicators, entry prices, basis spreads, and collected funding rates per position.
+        </div>
+        <div class="scroller" style="max-height: 300px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Coin (Symbol)</th>
+                        <th>Spot Entry</th>
+                        <th>Futures Entry</th>
+                        <th>Current Spot</th>
+                        <th>Current Futures</th>
+                        <th>Basis Spread %</th>
+                        <th>Deployed Size</th>
+                        <th>Total Funding</th>
+                        <th>Collect Count</th>
+                        <th>Annualized APR %</th>
+                    </tr>
+                </thead>
+                <tbody id="altcoin-details-body">
+                    <tr><td colspan="10" style="text-align: center; color: var(--text-secondary);">Loading detailed info...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Section: Trading Journal & Observations -->
+    <div class="section-container" style="border-bottom: none;">
+        <h2>📓 Trading Journal & Daily Observations (Phase 4)</h2>
+        <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 15px; font-family: monospace; white-space: pre-wrap; font-size: 0.85em; color: var(--text-primary); max-height: 300px; overflow-y: auto;" id="journal-box">Loading journal logs...</div>
+    </div>
+</div> <!-- End .dashboard-container -->
+
+<!-- INCLUDE FOOTER -->
+
+<!-- MTFA Modal Book -->
+<div id="mtfa-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; justify-content: center; align-items: center; padding: 20px;">
+    <div style="background: #faf8f5; border: 2px solid var(--border-color); width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; margin: 0 auto; top: 5vh; padding: 20px; box-sizing: border-box;">
+        <button onclick="document.getElementById('mtfa-modal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-primary); font-size: 1.5em; cursor: pointer;">&times;</button>
+        <div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
+            <h2 style="margin: 0; color: var(--text-primary);">📖 Advanced Arbitrage Engine Manual</h2>
+        </div>
+        <div style="padding: 20px; line-height: 1.6; font-size: 0.95em;">
+            
+            <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">A. Cash-and-Carry Strategy Concept</h3>
+            <p>
+                Strategi ini merupakan delta-neutral arbitrage yang menangkap selisih pendanaan (funding rate) antara Binance Spot dan Perpetual Futures:
+            </p>
+            <ul>
+                <li><strong>Leg A (Spot):</strong> Melakukan pembelian aset (Buy Spot) secara fisik/simulasi.</li>
+                <li><strong>Leg B (Futures):</strong> Membuka posisi Short Perpetual Futures dengan nominal yang setara secara simultan.</li>
+                <li><strong>Net Delta = 0:</strong> Eksposur arah pasar sepenuhnya dinetralkan. Jika harga naik, keuntungan spot menutup kerugian futures, dan sebaliknya.</li>
+                <li><strong>Pendapatan Pasif:</strong> Ketika Funding Rate bernilai positif (mayoritas pasar bullish), trader Short akan menerima pembayaran cash setiap 8 jam sekali langsung dari trader Long.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">B. Process Pipeline (LED Monitors)</h3>
+            <p>Representasi alur kerja internal real-time engine:</p>
+            <ul>
+                <li><strong>Binance WSS Stream:</strong> Memantau harga mark dan funding rate dari websocket stream <code>!markPrice@arr@1s</code>.</li>
+                <li><strong>Data Initializer:</strong> Memuat data historis dan menyelaraskan state bot saat dinyalakan.</li>
+                <li><strong>Market Scanner:</strong> Menyaring 300+ simbol dan mencari kandidat dengan funding rate ≥ 0.01% per 8 jam (APR ≥ 10.95%).</li>
+                <li><strong>Arb Validator:</strong> Menerapkan guardrail seperti batas deviasi basis spread (&lt; 0.5%) dan penyaringan lonjakan FR tidak wajar (FR Spike).</li>
+                <li><strong>Two-Leg Executor:</strong> Melakukan eksekusi simultan beli spot dan jual futures untuk menghindari slippage.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">C. Risk Mitigation & Exit Guards</h3>
+            <ul>
+                <li><strong>Negative Funding Protection:</strong> Jika funding rate berbalik menjadi negatif, posisi akan dipantau dan otomatis dilikuidasi jika tetap negatif selama 2 periode berturut-turut.</li>
+                <li><strong>Basis Deviation Guard:</strong> Mencegah pembukaan posisi saat selisih harga spot & futures terlalu lebar untuk membatasi risiko kerugian basis saat penutupan.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="js/dashboard_arbitrage.js?v=20260705_1500"></script>
+</body>
+</html>
