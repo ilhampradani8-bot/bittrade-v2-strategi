@@ -1,3 +1,4 @@
+// INI ADALAH FILE main.rs
 use sqlx::postgres::PgPoolOptions;
 use std::env;
 use std::sync::Arc;
@@ -19,6 +20,8 @@ mod conclude;
 mod validate;
 mod get;
 pub mod risk;
+
+pub const CURRENT_STRATEGY_VERSION: &str = "v5.0_qps";
 
 #[derive(Clone)]
 pub struct AppState {

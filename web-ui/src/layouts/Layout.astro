@@ -8,12 +8,14 @@ export interface Props {
   title?: string;
   description?: string;
   botStatus?: string;
+  scholarMeta?: string; // Raw HTML string for academic citation meta tags (Google Scholar / Scopus)
 }
 
 const {
   title = "BitTrade Q-Lab | Quantitative Trading System",
   description = "Institutional-grade algorithmic trading and statistical arbitrage engines built on asynchronous Rust and multi-currency co-integration analysis.",
-  botStatus = "SYSTEM ACTIVE"
+  botStatus = "SYSTEM ACTIVE",
+  scholarMeta = ""
 } = Astro.props;
 ---
 
@@ -36,6 +38,9 @@ const {
   
   <link rel="icon" type="image/png" href="/favicon.png" />
   <meta name="generator" content={Astro.generator} />
+  <!-- Academic Citation Meta Tags (Google Scholar / Scopus / Dublin Core) -->
+  {scholarMeta && <Fragment set:html={scholarMeta} />}
+  <slot name="head" />
 </head>
 <body>
   <div class="app-wrapper">

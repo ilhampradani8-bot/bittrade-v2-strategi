@@ -286,8 +286,60 @@ import Layout from '../layouts/Layout.astro';
                         <p class="p-en">To restore functionality and overcome the aforementioned structural paralysis, system operations are currently pivoting toward Phase 5.1 (Ongoing). The previous static regime is being discarded; adaptive calculation approaches based on dynamic percentile distributions will take over.</p>
                     </div>
                     <div class="p-pair">
-                        <p class="p-id">Pada saat laporan ini ditulis (Juli 2026), infrastruktur perekaman pasif <code>qps_market_metrics_log</code> berhasil ditanam di <em>engine database</em>. Alat ini merekam laju detak OBI, persentase fluktuasi, dan anomali volume absolut di setiap transisi menit. <em>Threshold</em> kelak dikalibrasi (misal persentil-70 atau p25) usai setidaknya 48-jam penghimpunan basis data empiris tercapai. [TBD: Hasil Kalibrasi 48 Jam]</p>
-                        <p class="p-en">At the time of this writing (July 2026), the passive recording infrastructure <code>qps_market_metrics_log</code> has been successfully planted in the database engine. This tool journals OBI heartbeats, fluctuation percentages, and absolute volume anomalies traversing every minute. Operating thresholds will eventually be calibrated (e.g., 70th or 25th percentile) once a minimum of 48-hours worth of empirical database compilation is achieved. [TBD: 48-Hour Calibration Results]</p>
+                        <p class="p-id">Pada saat laporan ini ditulis (Juli 2026), infrastruktur perekaman pasif <code>qps_market_metrics_log</code> berhasil ditanam di <em>engine database</em>. Alat ini merekam laju detak OBI, persentase fluktuasi, dan anomali volume absolut di setiap transisi menit. Setelah berjalan selama lebih dari 48 jam (terhitung 50.01 jam efektif dengan total 2.995 observasi menit tanpa adanya gap waktu signifikan), hasil kalibrasi persentil empiris berhasil ditarik dengan detail sebagai berikut:</p>
+                        <p class="p-en">At the time of this writing (July 2026), the passive recording infrastructure <code>qps_market_metrics_log</code> has been successfully planted in the database engine. This tool journals OBI heartbeats, fluctuation percentages, and absolute volume anomalies traversing every minute. After running for more than 48 hours (specifically 50.01 effective hours totaling 2,995 minute observations with no significant time gaps), the empirical percentile calibration results have been extracted as follows:</p>
+                    </div>
+
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>Metrik / Metric</th>
+                                <th>Min</th>
+                                <th>P10 / P25</th>
+                                <th>P50 (Median)</th>
+                                <th>P70 / P75</th>
+                                <th>P90</th>
+                                <th>Max</th>
+                                <th>Rata-rata / Mean</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Order Book Imbalance (OBI)</strong></td>
+                                <td>0.0001</td>
+                                <td>-</td>
+                                <td>0.5111</td>
+                                <td>0.7393 (P70)</td>
+                                <td>0.9627</td>
+                                <td>0.9999</td>
+                                <td>0.5029</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Volatilitas / Volatility</strong></td>
+                                <td>0.0168%</td>
+                                <td>0.0360% (P10) / 0.0545% (P25)</td>
+                                <td>0.0865%</td>
+                                <td>0.1276% (P75)</td>
+                                <td>-</td>
+                                <td>0.3324%</td>
+                                <td>0.0997%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Volume Surge</strong></td>
+                                <td>0.0000</td>
+                                <td>-</td>
+                                <td>0.2731</td>
+                                <td>0.5356 (P70)</td>
+                                <td>-</td>
+                                <td>13.2754</td>
+                                <td>0.5517</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="p-pair" style="margin-top: 15px;">
+                        <p class="p-id">Berdasarkan hasil kalibrasi di atas, simulasi dampak penyesuaian threshold menunjukkan bahwa menaikkan batas minimum OBI dari 0.40 menjadi P70 (0.7393) akan menyaring sinyal trading secara signifikan, menurunkan persentase kelulusan sinyal dari 59.67% menjadi 30.02%. Sementara itu, menurunkan batas sideways volatilitas dari 0.085% menjadi P25 (0.0545%) akan membatasi aktivitas mean reversion hanya pada kondisi pasar yang benar-benar pasif, menurunkan persentase kelulusan sideways dari 49.12% menjadi 25.01%.</p>
+                        <p class="p-en">Based on the calibration results above, the threshold adjustment simulation shows that raising the minimum OBI filter from 0.40 to P70 (0.7393) will significantly restrict trading signals, reducing the signal pass-through rate from 59.67% to 30.02%. Meanwhile, lowering the sideways volatility boundary from 0.085% to P25 (0.0545%) restricts mean-reversion activities only to truly quiet market conditions, dropping the sideways pass-through rate from 49.12% to 25.01%.</p>
                     </div>
                 </div>
 

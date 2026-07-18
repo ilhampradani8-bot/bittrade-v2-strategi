@@ -342,3 +342,46 @@ pub async fn start_scanner_loop(state: AppState) {
         sleep(Duration::from_secs(60)).await;
     }
 }
+
+pub async fn start_exchange_limits_updater(state: AppState) {
+    let client = reqwest::Client::builder().timeout(Duration::from_secs(10)).build().unwrap_or_default();
+    let url = "https://fapi.binance.com/fapi/v1/exchangeInfo";
+
+    loop {
+        if let Ok(resp) = client.get(url).send().await {
+            if let Ok(val) = resp.json::<Value>().await {
+                if let Some(symbols) = val.get("symbols").and_then(|s| s.as_array()) {
+                    for sym in symbols {
+                        if let Some(symbol) = sym.get("symbol").and_then(|s| s.as_str()) {
+                            if symbol == "BTCUSDT" || symbol == "ETHUSDT" {
+                                let mut step_size = 0.001;
+                                let mut min_notional = 5.0;
+
+                                if let Some(filters) = sym.get("filters").and_then(|f| f.as_array()) {
+                                    for filter in filters {
+                                        if filter.get("filterType").and_then(|ft| ft.as_str()) == Some("LOT_SIZE") {
+                                            step_size = filter.get("stepSize").and_then(|s| s.as_str()).and_then(|s| s.parse::<f64>().ok()).unwrap_or(0.001);
+                                        }
+                                        if filter.get("filterType").and_then(|ft| ft.as_str()) == Some("MIN_NOTIONAL") {
+                                            min_notional = filter.get("notional").and_then(|n| n.as_str()).and_then(|n| n.parse::<f64>().ok()).unwrap_or(5.0);
+                                        }
+                                    }
+                                }
+
+                                if symbol == "BTCUSDT" {
+                                    *state.btc_step_size.write().await = step_size;
+                                    *state.btc_min_notional.write().await = min_notional;
+                                } else if symbol == "ETHUSDT" {
+                                    *state.eth_step_size.write().await = step_size;
+                                    *state.eth_min_notional.write().await = min_notional;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // Update every 4 hours
+        sleep(Duration::from_secs(4 * 3600)).await;
+    }
+}

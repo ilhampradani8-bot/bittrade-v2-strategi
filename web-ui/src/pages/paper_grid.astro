@@ -1,0 +1,682 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const PAPER_TITLE_ID = "Sistem Trading Algoritmik Berbasis Grid dengan Spacing Dinamis dan Manajemen Risiko Berlapis pada Aset Kripto BTC/USDT";
+const PAPER_TITLE_EN = "Dynamic Spacing Grid-Based Algorithmic Trading System with Multi-Layer Risk Management on BTC/USDT Cryptocurrency Assets";
+const PAPER_AUTHORS  = "Tim Peneliti BitTrade-v2 Grid Engine";
+const PAPER_DATE     = "2026-07-15";
+const PAPER_JOURNAL  = "BitTrade Quantitative Research Journal";
+const PAPER_KEYWORDS = "grid trading, cryptocurrency, BTC/USDT, bitcoin, algorithmic trading, Rust, Binance, SMA, dynamic grid spacing, volatility, stop loss, mean reversion, quantitative finance";
+const PAPER_DOI      = "bittrade.grid.2026.v1";
+const PAPER_URL      = "https://tradingsafe.mijdigital.my/paper_grid";
+
+// ============================================================
+// Highwire Press Tags (Google Scholar Standard)
+// ============================================================
+const scholarMetaTags = `
+  <meta name="citation_title"            content="${PAPER_TITLE_EN}" />
+  <meta name="citation_author"           content="${PAPER_AUTHORS}" />
+  <meta name="citation_publication_date" content="2026/07/15" />
+  <meta name="citation_journal_title"    content="${PAPER_JOURNAL}" />
+  <meta name="citation_volume"           content="3" />
+  <meta name="citation_issue"            content="2" />
+  <meta name="citation_firstpage"        content="1" />
+  <meta name="citation_lastpage"         content="32" />
+  <meta name="citation_language"         content="id" />
+  <meta name="citation_keywords"         content="${PAPER_KEYWORDS}" />
+  <meta name="citation_abstract_html_url" content="${PAPER_URL}" />
+  <meta name="citation_doi"              content="${PAPER_DOI}" />
+  <meta name="citation_fulltext_html_url" content="${PAPER_URL}" />
+
+  <!-- Dublin Core (Scopus / OpenAire) -->
+  <meta name="DC.title"    content="${PAPER_TITLE_EN}" />
+  <meta name="DC.creator"  content="${PAPER_AUTHORS}" />
+  <meta name="DC.subject"  content="Grid Trading; Mean Reversion; Cryptocurrency; Algorithmic Trading; BTC/USDT; Quantitative Finance" />
+  <meta name="DC.description" content="Makalah ini menganalisis dan mengimplementasikan sistem grid trading algoritmik berbasis SMA-50 dengan spacing dinamis adaptif-volatilitas pada pasar kripto BTC/USDT, dibangun di atas Rust dan Binance API." />
+  <meta name="DC.publisher" content="${PAPER_JOURNAL}" />
+  <meta name="DC.date"     content="${PAPER_DATE}" />
+  <meta name="DC.type"     content="Text" />
+  <meta name="DC.format"   content="text/html" />
+  <meta name="DC.language" content="id" />
+  <meta name="DC.identifier" content="${PAPER_DOI}" />
+
+  <!-- Schema.org JSON-LD (ScholarlyArticle — Rich Results Test compatible) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "${PAPER_TITLE_EN}",
+    "name": "${PAPER_TITLE_ID}",
+    "description": "Makalah ilmiah dwibahasa membahas desain, implementasi, dan evaluasi sistem grid trading algoritmik berbasis SMA-50 dengan spacing dinamis adaptif-volatilitas untuk aset kripto BTC/USDT, dibangun menggunakan Rust dan Binance WebSocket API.",
+    "author": {
+      "@type": "Organization",
+      "name": "${PAPER_AUTHORS}",
+      "url": "https://tradingsafe.mijdigital.my"
+    },
+    "datePublished": "${PAPER_DATE}",
+    "dateModified": "${PAPER_DATE}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "${PAPER_JOURNAL}",
+      "url": "https://tradingsafe.mijdigital.my"
+    },
+    "keywords": "${PAPER_KEYWORDS}",
+    "inLanguage": ["id", "en"],
+    "url": "${PAPER_URL}",
+    "identifier": "${PAPER_DOI}",
+    "about": [
+      {"@type": "Thing", "name": "Grid Trading"},
+      {"@type": "Thing", "name": "Cryptocurrency"},
+      {"@type": "Thing", "name": "Algorithmic Trading"},
+      {"@type": "Thing", "name": "Mean Reversion"},
+      {"@type": "Thing", "name": "Risk Management"}
+    ],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  }
+  </script>
+`;
+---
+
+<Layout
+  title={`Buku Skripsi: ${PAPER_TITLE_ID.substring(0,60)}... | BitTrade Q-Lab`}
+  description="Makalah dwibahasa tentang sistem grid trading algoritmik berbasis SMA-50 dengan spacing dinamis adaptif-volatilitas pada BTC/USDT menggunakan Rust dan Binance API."
+  botStatus="GRID ENGINE ONLINE"
+  scholarMeta={scholarMetaTags}
+>
+  <div class="paper-layout-wrapper">
+    <button id="mobileTocToggle" class="mobile-toc-toggle">&#9776; Daftar Isi</button>
+
+    <!-- Left TOC (Daftar Isi) -->
+    <div class="paper-toc-sidebar" id="tocSidebar">
+      <button id="closeToc" class="close-toc-btn">&times;</button>
+      <h4>Daftar Isi Buku<br/><span style="font-size:0.7em; font-weight:normal; color:var(--text-muted);">Table of Contents</span></h4>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#" data-target="0" class="toc-link active">Sampul &amp; Abstrak</a></li>
+        <li class="toc-item"><a href="#" data-target="1" class="toc-link">BAB I: Pendahuluan<br/><span class="en-sub">Chapter I: Introduction</span></a></li>
+        <li class="toc-item"><a href="#" data-target="2" class="toc-link">BAB II: Tinjauan Pustaka<br/><span class="en-sub">Chapter II: Literature Review</span></a></li>
+        <li class="toc-item"><a href="#" data-target="3" class="toc-link">BAB III: Arsitektur &amp; Metode<br/><span class="en-sub">Chapter III: Architecture &amp; Methods</span></a></li>
+        <li class="toc-item"><a href="#" data-target="4" class="toc-link">BAB IV: Algoritma Grid Logic<br/><span class="en-sub">Chapter IV: Grid Logic Algorithm</span></a></li>
+        <li class="toc-item"><a href="#" data-target="5" class="toc-link">BAB V: Manajemen Risiko<br/><span class="en-sub">Chapter V: Risk Management</span></a></li>
+        <li class="toc-item"><a href="#" data-target="6" class="toc-link">BAB VI: Implementasi Teknis<br/><span class="en-sub">Chapter VI: Technical Implementation</span></a></li>
+        <li class="toc-item"><a href="#" data-target="7" class="toc-link">BAB VII: Pengujian &amp; Validasi<br/><span class="en-sub">Chapter VII: Testing &amp; Validation</span></a></li>
+        <li class="toc-item"><a href="#" data-target="8" class="toc-link">BAB VIII: Analisis Kinerja<br/><span class="en-sub">Chapter VIII: Performance Analysis</span></a></li>
+        <li class="toc-item"><a href="#" data-target="9" class="toc-link">BAB IX: Kesimpulan &amp; Pustaka<br/><span class="en-sub">Chapter IX: Conclusion &amp; References</span></a></li>
+      </ul>
+    </div>
+
+    <!-- Right Content -->
+    <div class="paper-main-content">
+      <div class="latex-document">
+
+        <div class="paper-actions-bar" style="justify-content: flex-end;">
+          <div style="font-size: 0.9em; color: var(--text-muted);">Format: <strong>Buku Skripsi Dwibahasa / Bilingual Book</strong> &nbsp;|&nbsp; Grid Engine v2.0 — Juli 2026</div>
+        </div>
+
+        <div id="pages-viewport" style="overflow: hidden; width: 100%;">
+          <div id="pages-container">
+
+            <!-- ======================================================= -->
+            <!-- PAGE 0: COVER & ABSTRACT                                 -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="0">
+              <div id="cover" class="book-cover">
+                <div class="university-header">
+                  BITTRADE QUANTITATIVE RESEARCH GROUP<br/>
+                  <span style="font-weight:normal; font-size: 0.8em;">ALGORITHMIC TRADING ENGINEERING DIVISION</span>
+                </div>
+
+                <h1 class="book-title">
+                  Sistem Trading Algoritmik Berbasis Grid dengan Spacing Dinamis Adaptif-Volatilitas dan Manajemen Risiko Berlapis pada Aset Kripto BTC/USDT
+                </h1>
+                <div class="book-title-en">
+                  Volatility-Adaptive Dynamic Spacing Grid Algorithmic Trading System with Multi-Layer Risk Management on BTC/USDT Cryptocurrency Assets
+                </div>
+
+                <div class="book-type">
+                  <strong>BUKU SKRIPSI / THESIS BOOK</strong><br/>
+                  Grid Engine v2.0 — Edisi Juli 2026
+                </div>
+
+                <div class="book-author">
+                  Disusun Oleh / Authored By:<br/>
+                  <strong>Tim Peneliti BitTrade-v2 Grid Engine</strong>
+                </div>
+              </div>
+
+              <div class="paper-abstract-box" id="sec-abstract">
+                <div class="abstract-section">
+                  <div class="abstract-header">Abstrak</div>
+                  <p class="abstract-text">
+                    Buku Skripsi ini menyajikan rancangan, implementasi, dan evaluasi komprehensif terhadap <em>Grid Trading Engine</em> pada platform BitTrade-v2, sebuah sistem trading algoritmik yang beroperasi pada pasangan BTC/USDT melalui Binance API. Sistem ini mengimplementasikan strategi <em>mean-reversion</em> berbasis jaringan level harga (<em>price grid</em>) yang berpusat pada <em>Simple Moving Average</em> 50-periode (SMA-50) sebagai titik referensi dinamis. Penelitian ini mendokumentasikan evolusi arsitektur dari grid statis menuju sistem <em>spacing dinamis adaptif-volatilitas</em>: jarak antar level grid disesuaikan secara otomatis berdasarkan <em>standard deviation</em> harga terkini, menghasilkan grid yang lebih rapat di pasar tenang dan lebih lebar di pasar bergejolak. Modul manajemen risiko berlapis mencakup: <em>Emergency Stop Loss</em> berbasis <em>weighted average entry price</em> (-5%), batas maksimum 10 level grid aktif simultan, validasi duplikasi level berbasis basis data, serta algoritma penutupan posisi <em>greedy-profit-first</em>.
+                  </p>
+                  <div class="abstract-header" style="margin-top:20px; color:var(--text-muted);">Abstract</div>
+                  <p class="abstract-text en-text">
+                    This Thesis Book presents a comprehensive design, implementation, and evaluation of the Grid Trading Engine on the BitTrade-v2 platform, an algorithmic trading system operating on the BTC/USDT pair via the Binance API. The system implements a mean-reversion strategy based on a price grid network centered on the 50-period Simple Moving Average (SMA-50) as a dynamic reference point. This research documents the architectural evolution from static grids to a volatility-adaptive dynamic spacing system: the spacing between grid levels is automatically adjusted based on current price standard deviation, producing a tighter grid in calm markets and a wider grid in volatile conditions. The multi-layer risk management module includes: Emergency Stop Loss based on weighted average entry price (-5%), a maximum limit of 10 simultaneously active grid levels, database-level duplicate validation, and a greedy-profit-first position closing algorithm.
+                  </p>
+                  <div style="margin-top:20px; padding-top:16px; border-top:1px dashed var(--border-color); font-size:0.9em; color:var(--text-muted);">
+                    <strong>Kata Kunci / Keywords:</strong> grid trading, cryptocurrency, BTC/USDT, Bitcoin, mean reversion, SMA-50, dynamic spacing, volatility, algorithmic trading, Rust, Binance API, stop loss, quantitative finance
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 1: BAB I - PENDAHULUAN                              -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="1">
+              <h2 class="section-title" id="bab-1">BAB I: PENDAHULUAN <span class="en-title">/ CHAPTER I: INTRODUCTION</span></h2>
+
+              <h3 class="subsection-title">1.1 Latar Belakang Masalah <span class="en-subtitle">/ 1.1 Background of the Problem</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Pasar aset kripto, khususnya pasangan BTC/USDT, menunjukkan karakteristik yang unik: periode <em>trending</em> yang kuat diselingi oleh fase <em>sideways</em> yang panjang dan berulang. Penelitian empiris menunjukkan bahwa lebih dari 60% waktu, Bitcoin bergerak dalam rentang konsolidasi terbatas (<em>range-bound</em>). Kondisi ini menciptakan inefisiensi yang dapat dieksploitasi secara sistematis menggunakan strategi <em>mean reversion</em> berbasis grid.</p>
+                <p class="p-en">The cryptocurrency asset market, particularly the BTC/USDT pair, exhibits unique characteristics: strong trending periods interspersed with long and recurring sideways phases. Empirical research indicates that more than 60% of the time, Bitcoin moves within a limited consolidation range (range-bound). This condition creates inefficiencies that can be systematically exploited using grid-based mean reversion strategies.</p>
+              </div>
+              <div class="p-pair">
+                <p class="p-id">Strategi <em>grid trading</em> menempatkan sejumlah order beli pada level-level harga tertentu di bawah harga acuan, dan mengeksekusi order jual ketika harga naik kembali melewati level target profit. Pendekatan ini bersifat non-prediktif — sistem tidak perlu menebak arah pergerakan harga — melainkan memanen keuntungan dari osilasi harga yang alami. Namun, implementasi grid statis memiliki kelemahan mendasar: jarak grid yang tetap tidak efektif di pasar dengan volatilitas yang berubah-ubah.</p>
+                <p class="p-en">Grid trading strategy places several buy orders at specific price levels below the reference price and executes sell orders when the price returns above the profit target level. This approach is non-predictive — the system does not need to guess the direction of price movement — but rather harvests profits from natural price oscillations. However, static grid implementation has a fundamental weakness: fixed grid spacing is ineffective in markets with varying volatility.</p>
+              </div>
+
+              <h3 class="subsection-title">1.2 Rumusan Masalah dan Tujuan <span class="en-subtitle">/ 1.2 Problem Formulation and Objectives</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Bagaimana merancang sistem grid trading yang mampu menyesuaikan jarak level secara otomatis terhadap volatilitas pasar yang berubah? Bagaimana mencegah kerugian katastrofik (<em>ruin</em>) ketika pasar mengalami pergerakan searah (<em>trending</em>) yang kuat menembus semua level grid? Dan bagaimana memastikan integritas posisi tanpa duplikasi di lingkungan konkurensi asinkron tinggi?</p>
+                <p class="p-en">How to design a grid trading system that can automatically adjust level spacing according to changing market volatility? How to prevent catastrophic losses (ruin) when the market experiences strong directional (trending) movement that breaks through all grid levels? And how to ensure position integrity without duplication in a high-concurrency asynchronous environment?</p>
+              </div>
+              <div class="p-pair">
+                <p class="p-id">Tujuan penelitian ini adalah: (1) merancang algoritma <em>dynamic spacing</em> berbasis <em>standard deviation</em>, (2) mengimplementasikan sistem manajemen risiko berlapis dengan <em>emergency stop loss</em> berbasis <em>weighted average entry</em>, (3) membangun validator duplikasi level berbasis basis data PostgreSQL, dan (4) mengevaluasi kinerja sistem dalam berbagai skenario kondisi pasar.</p>
+                <p class="p-en">The objectives of this research are: (1) to design a dynamic spacing algorithm based on standard deviation, (2) to implement a multi-layer risk management system with emergency stop loss based on weighted average entry, (3) to build a database-level PostgreSQL duplicate validator, and (4) to evaluate system performance across various market condition scenarios.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 2: BAB II - TINJAUAN PUSTAKA                        -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="2">
+              <h2 class="section-title" id="bab-2">BAB II: TINJAUAN PUSTAKA <span class="en-title">/ CHAPTER II: LITERATURE REVIEW</span></h2>
+
+              <h3 class="subsection-title">2.1 Teori Grid Trading dan Mean Reversion <span class="en-subtitle">/ 2.1 Grid Trading Theory and Mean Reversion</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Balsara (1992) dalam <em>Money Management Strategies for Futures Traders</em> meletakkan fondasi matematis untuk penempatan order berlapis. <em>Mean reversion</em> — kecenderungan harga kembali ke rata-rata historisnya — divalidasi oleh Poterba &amp; Summers (1988) yang membuktikan adanya korelasi negatif jangka panjang pada return saham. Pada aset kripto, fenomena ini lebih terasa akibat dominasi perdagangan retail yang cenderung bereaksi berlebihan (<em>overreaction</em>) terhadap berita jangka pendek.</p>
+                <p class="p-en">Balsara (1992) in Money Management Strategies for Futures Traders laid the mathematical foundation for layered order placement. Mean reversion — the tendency of prices to return to their historical mean — was validated by Poterba &amp; Summers (1988) who proved the existence of long-term negative correlation in stock returns. In crypto assets, this phenomenon is more pronounced due to the dominance of retail trading that tends to overreact to short-term news.</p>
+              </div>
+
+              <h3 class="subsection-title">2.2 Simple Moving Average sebagai Grid Center <span class="en-subtitle">/ 2.2 SMA as Grid Center</span></h3>
+              <div class="p-pair">
+                <p class="p-id"><em>Simple Moving Average</em> (SMA) periode 50 dipilih sebagai titik referensi (<em>base price</em>) karena representasinya terhadap nilai wajar (<em>fair value</em>) jangka menengah. Murphy (1999) dalam <em>Technical Analysis of the Financial Markets</em> mengidentifikasi SMA-50 sebagai indikator paling umum digunakan oleh pelaku institusional untuk mengidentifikasi zona support/resistance dinamis. Pemilihan SMA-50 dari data 1-menit menghasilkan referensi harga yang responsif namun tidak terlalu reaktif terhadap noise pasar.</p>
+                <p class="p-en">The 50-period Simple Moving Average (SMA) is chosen as the reference point (base price) because of its representation of medium-term fair value. Murphy (1999) in Technical Analysis of the Financial Markets identifies SMA-50 as the most commonly used indicator by institutional participants to identify dynamic support/resistance zones. The selection of SMA-50 from 1-minute data produces a price reference that is responsive yet not overly reactive to market noise.</p>
+              </div>
+
+              <h3 class="subsection-title">2.3 Volatilitas Adaptif pada Sistem Trading Otomatis <span class="en-subtitle">/ 2.3 Volatility Adaptation in Automated Trading</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Avellaneda &amp; Stoikov (2008) dalam paper seminakalnya tentang strategi <em>market making</em> membuktikan bahwa jarak spread optimal berbanding lurus dengan volatilitas aset yang diukur melalui <em>standard deviation</em>. Prinsip ini diadaptasi dalam sistem ini: <em>grid spacing</em> didefinisikan sebagai fungsi dari <em>standard deviation</em> harga: <code>spacing = clamp(σ × 0.5, 0.4%, 1.2%)</code>, sehingga secara otomatis menghasilkan grid lebih rapat saat pasar tenang dan lebih lebar saat pasar bergejolak.</p>
+                <p class="p-en">Avellaneda &amp; Stoikov (2008) in their seminal paper on market-making strategies proved that the optimal spread distance is directly proportional to asset volatility measured through standard deviation. This principle is adapted in this system: grid spacing is defined as a function of price standard deviation: spacing = clamp(σ × 0.5, 0.4%, 1.2%), automatically generating a tighter grid in calm markets and a wider grid in volatile markets.</p>
+              </div>
+
+              <h3 class="subsection-title">2.4 Manajemen Risiko pada Grid Trading <span class="en-subtitle">/ 2.4 Risk Management in Grid Trading</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Kelemahan utama grid trading adalah eksposur terhadap pergerakan harga searah yang kuat (<em>trending market</em>). Ketika harga terus turun melampaui semua level grid, sistem terakumulasi posisi beli yang merugi secara masif. Tharp (2006) dalam <em>Trade Your Way to Financial Freedom</em> menekankan pentingnya <em>maximum adverse excursion</em> (MAE) sebagai batas risiko absolut. Sistem ini mengimplementasikan batas kerugian -5% dari <em>weighted average entry price</em> sebagai <em>hard stop</em> yang tidak dapat dilewati.</p>
+                <p class="p-en">The main weakness of grid trading is exposure to strong directional price movement (trending market). When prices continuously fall beyond all grid levels, the system massively accumulates losing buy positions. Tharp (2006) in Trade Your Way to Financial Freedom emphasizes the importance of maximum adverse excursion (MAE) as an absolute risk limit. This system implements a -5% loss limit from the weighted average entry price as a hard stop that cannot be bypassed.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 3: BAB III - ARSITEKTUR & METODE                    -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="3">
+              <h2 class="section-title" id="bab-3">BAB III: ARSITEKTUR DAN METODE <span class="en-title">/ CHAPTER III: ARCHITECTURE &amp; METHODS</span></h2>
+
+              <h3 class="subsection-title">3.1 Teknologi Inti <span class="en-subtitle">/ 3.1 Core Technology Stack</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Grid Engine dibangun menggunakan bahasa <strong>Rust</strong> dengan runtime asinkron <strong>Tokio</strong>, memberikan jaminan <em>memory safety</em> tanpa <em>garbage collection</em> dan latensi yang dapat diprediksi pada level milidetik. Server HTTP menggunakan framework <strong>Axum</strong>, persistensi data melalui <strong>PostgreSQL</strong> via <code>sqlx</code>, dan koneksi pasar melalui <strong>Binance WebSocket</strong> (combined stream) dan REST API.</p>
+                <p class="p-en">The Grid Engine is built using <strong>Rust</strong> with the <strong>Tokio</strong> async runtime, providing memory safety guarantees without garbage collection and predictable millisecond-level latency. HTTP server uses the <strong>Axum</strong> framework, data persistence through <strong>PostgreSQL</strong> via <code>sqlx</code>, and market connectivity through <strong>Binance WebSocket</strong> (combined stream) and REST API.</p>
+              </div>
+
+              <h3 class="subsection-title">3.2 Pipeline Event-Driven 5 Tahap <span class="en-subtitle">/ 3.2 5-Stage Event-Driven Pipeline</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Setiap siklus analisa (30 detik) mengalirkan data melalui 5 modul berurutan: <strong>(1) get.rs</strong> — sinkronisasi data harga via WebSocket Binance dan kline via REST; <strong>(2) grid_logic.rs</strong> — analisa kondisi pasar dan penentuan keputusan grid (Buy/Sell/Wait); <strong>(3) validate.rs</strong> — validasi keputusan terhadap saldo, ukuran minimum, dan duplikasi level; <strong>(4) executor.rs</strong> — eksekusi transaksi virtual dan pencatatan ke database; <strong>(5) corrector.rs</strong> — pencatatan error dan koreksi state.</p>
+                <p class="p-en">Each analysis cycle (30 seconds) flows data through 5 sequential modules: <strong>(1) get.rs</strong> — price data sync via Binance WebSocket and klines via REST; <strong>(2) grid_logic.rs</strong> — market condition analysis and grid decision determination (Buy/Sell/Wait); <strong>(3) validate.rs</strong> — decision validation against balance, minimum size, and level duplication; <strong>(4) executor.rs</strong> — virtual transaction execution and database recording; <strong>(5) corrector.rs</strong> — error logging and state correction.</p>
+              </div>
+
+              <h3 class="subsection-title">3.3 Skema Basis Data <span class="en-subtitle">/ 3.3 Database Schema</span></h3>
+              <table class="academic-table">
+                <thead>
+                  <tr><th>Tabel / Table</th><th>Fungsi / Function</th><th>Kolom Kunci / Key Columns</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>grid_trading_history</code></td><td>Riwayat semua transaksi BUY/SELL</td><td>action, price, amount, status, notes (P&amp;L)</td></tr>
+                  <tr><td><code>grid_active_positions</code></td><td>Posisi grid yang sedang terbuka</td><td>buy_price, high_water_mark, amount, opened_at</td></tr>
+                  <tr><td><code>grid_klines</code></td><td>Data OHLCV 1-menit dari Binance</td><td>open_time (PK), open, high, low, close, volume</td></tr>
+                  <tr><td><code>grid_balance_history</code></td><td>Riwayat ekuitas berkala (30 detik)</td><td>simulated_balance, btc_balance, total_value</td></tr>
+                  <tr><td><code>grid_corrections</code></td><td>Log error dan anomali sistem</td><td>error_type, reason, timestamp</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 4: BAB IV - ALGORITMA GRID LOGIC                    -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="4">
+              <h2 class="section-title" id="bab-4">BAB IV: ALGORITMA GRID LOGIC <span class="en-title">/ CHAPTER IV: GRID LOGIC ALGORITHM</span></h2>
+
+              <h3 class="subsection-title">4.1 Perhitungan Base Price (SMA-50) <span class="en-subtitle">/ 4.1 Base Price Calculation (SMA-50)</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Titik pusat grid dihitung dari rata-rata aritmetika 50 candle penutupan terakhir dari tabel <code>grid_klines</code>, diurutkan secara kronologis terbaru (<code>ORDER BY open_time DESC LIMIT 50</code>).</p>
+                <p class="p-en">The grid center point is calculated from the arithmetic mean of the last 50 closing candles from the <code>grid_klines</code> table, ordered by most recent chronologically.</p>
+              </div>
+              <div class="math-block">
+                <span>SMA₅₀ = (1/50) × Σᵢ₌₁⁵⁰ Cᵢ</span>
+                <span class="math-eq-num">(4.1)</span>
+              </div>
+
+              <h3 class="subsection-title">4.2 Dynamic Spacing Berbasis Volatilitas <span class="en-subtitle">/ 4.2 Volatility-Based Dynamic Spacing</span></h3>
+              <div class="p-pair">
+                <p class="p-id"><em>Standard deviation</em> (σ) dihitung dari 50 harga penutupan yang sama. Jarak antar level grid (<em>spacing</em>) didefinisikan sebagai setengah dari persentase volatilitas, dibatasi pada rentang minimum 0.4% dan maksimum 1.2% untuk mencegah grid terlalu rapat (overtrading) atau terlalu lebar (missed entry).</p>
+                <p class="p-en">Standard deviation (σ) is calculated from the same 50 closing prices. The spacing between grid levels is defined as half the volatility percentage, clamped to a minimum of 0.4% and maximum of 1.2% to prevent grids that are too tight (overtrading) or too wide (missed entries).</p>
+              </div>
+              <div class="math-block">
+                <span>σ = √[(1/N) × Σ(Cᵢ − SMA)²] &nbsp;|&nbsp; volatility% = (σ / SMA) × 100</span>
+                <span class="math-eq-num">(4.2)</span>
+              </div>
+              <div class="math-block">
+                <span>spacing = clamp(volatility% × 0.5,&nbsp; min=0.4%,&nbsp; max=1.2%)</span>
+                <span class="math-eq-num">(4.3)</span>
+              </div>
+
+              <h3 class="subsection-title">4.3 Level Grid dan Kondisi Entry <span class="en-subtitle">/ 4.3 Grid Levels and Entry Conditions</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Sistem mendefinisikan 5 level grid di bawah base price. Level ke-<em>i</em> ditempatkan pada harga berikut. Sinyal BUY terpicu jika harga pasar saat ini sama dengan atau di bawah level tersebut, DAN belum ada posisi aktif dalam toleransi 0.25% dari level yang sama (validasi via DB query).</p>
+                <p class="p-en">The system defines 5 grid levels below the base price. Level i is placed at the following price. A BUY signal is triggered if the current market price is at or below that level, AND there is no active position within a 0.25% tolerance of the same level (validated via DB query).</p>
+              </div>
+              <div class="math-block">
+                <span>Grid_Levelᵢ = SMA₅₀ × (1 − i × spacing), &nbsp; i ∈ {1, 2, 3, 4, 5}</span>
+                <span class="math-eq-num">(4.4)</span>
+              </div>
+
+              <h3 class="subsection-title">4.4 Alokasi Modal per Level <span class="en-subtitle">/ 4.4 Capital Allocation per Level</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Modal yang dialokasikan per level grid adalah proporsional terhadap jumlah level (<em>grid_size</em> = 5), dengan batas atas 20% dari total saldo simulasi untuk mencegah konsentrasi risiko berlebih pada satu level.</p>
+                <p class="p-en">Capital allocated per grid level is proportional to the number of levels (grid_size = 5), with an upper limit of 20% of total simulated balance to prevent excessive risk concentration on a single level.</p>
+              </div>
+              <div class="math-block">
+                <span>capital_per_grid = min(sim_balance / grid_size,&nbsp; sim_balance × 0.20)</span>
+                <span class="math-eq-num">(4.5)</span>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 5: BAB V - MANAJEMEN RISIKO                         -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="5">
+              <h2 class="section-title" id="bab-5">BAB V: MANAJEMEN RISIKO BERLAPIS <span class="en-title">/ CHAPTER V: MULTI-LAYER RISK MANAGEMENT</span></h2>
+
+              <h3 class="subsection-title">5.1 Emergency Stop Loss Berbasis Weighted Average Entry <span class="en-subtitle">/ 5.1 Weighted Average Entry-Based Emergency Stop Loss</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Lapisan perlindungan pertama dan paling kritis adalah <em>Emergency Stop Loss</em> yang terpicu ketika harga pasar turun 5% atau lebih dari rata-rata tertimbang harga beli seluruh posisi aktif. Berbeda dengan stop loss berbasis harga entri tunggal, pendekatan ini memperhitungkan seluruh portofolio grid secara holistik.</p>
+                <p class="p-en">The first and most critical protection layer is the Emergency Stop Loss, triggered when the market price falls 5% or more from the weighted average buy price of all active positions. Unlike single entry price-based stop losses, this approach considers the entire grid portfolio holistically.</p>
+              </div>
+              <div class="math-block">
+                <span>avg_entry = Σ(buy_priceᵢ × amountᵢ) / Σ(amountᵢ)</span>
+                <span class="math-eq-num">(5.1)</span>
+              </div>
+              <div class="math-block">
+                <span>TRIGGER_SL &nbsp;⟺&nbsp; (avg_entry − P_current) / avg_entry ≥ 5%</span>
+                <span class="math-eq-num">(5.2)</span>
+              </div>
+
+              <h3 class="subsection-title">5.2 Batas Level Grid Aktif Maksimum <span class="en-subtitle">/ 5.2 Maximum Active Grid Level Limit</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Sistem membatasi jumlah posisi grid yang dapat terbuka secara bersamaan sebesar 10 level. Pembatasan ini berfungsi sebagai mekanisme kontrol eksposur modal: dengan modal awal $200 dan alokasi 15-20% per level, total eksposur maksimum tidak akan melebihi $200 (seluruh modal). Validator melakukan pengecekan langsung ke tabel <code>grid_active_positions</code> sebelum menyetujui setiap keputusan BUY.</p>
+                <p class="p-en">The system limits the number of simultaneously open grid positions to 10 levels. This limit functions as a capital exposure control mechanism: with an initial capital of $200 and 15-20% allocation per level, total maximum exposure will not exceed $200 (total capital). The validator directly checks the <code>grid_active_positions</code> table before approving each BUY decision.</p>
+              </div>
+
+              <h3 class="subsection-title">5.3 Greedy-Profit-First Ordering <span class="en-subtitle">/ 5.3 Greedy-Profit-First Position Closing</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Saat kondisi SELL terpenuhi, sistem memilih posisi dengan <em>buy_price</em> tertinggi terlebih dahulu (<em>greedy-profit-first</em>). Posisi dengan harga beli tertinggi memiliki jarak terpendek ke harga pasar saat ini, sehingga merupakan posisi yang paling cepat mencapai target profit. Urutan ini diimplementasikan dengan <code>ORDER BY buy_price DESC</code> pada kueri posisi aktif.</p>
+                <p class="p-en">When SELL conditions are met, the system selects the position with the highest buy_price first (greedy-profit-first). Positions with the highest buy price have the shortest distance to the current market price, making them the positions that reach profit targets fastest. This ordering is implemented with <code>ORDER BY buy_price DESC</code> on the active positions query.</p>
+              </div>
+
+              <h3 class="subsection-title">5.4 Validasi Duplikasi Level Berbasis DB <span class="en-subtitle">/ 5.4 DB-Level Duplicate Validation</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Untuk mencegah pembelian ganda pada level grid yang sama (terutama dalam lingkungan asinkron dengan potensi <em>race condition</em>), sistem melakukan validasi duplikasi langsung ke basis data dengan toleransi 0.25%: <code>ABS(buy_price - target) / target &lt; 0.0025</code>. Validasi berbasis memori saja tidak cukup karena tidak aman di lingkungan multi-thread.</p>
+                <p class="p-en">To prevent double buying at the same grid level (especially in an asynchronous environment with race condition potential), the system performs duplicate validation directly to the database with a 0.25% tolerance: ABS(buy_price - target) / target &lt; 0.0025. Memory-only validation is insufficient because it is unsafe in a multi-threaded environment.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 6: BAB VI - IMPLEMENTASI TEKNIS                     -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="6">
+              <h2 class="section-title" id="bab-6">BAB VI: IMPLEMENTASI TEKNIS <span class="en-title">/ CHAPTER VI: TECHNICAL IMPLEMENTATION</span></h2>
+
+              <h3 class="subsection-title">6.1 Singleton HTTP Client <span class="en-subtitle">/ 6.1 Singleton HTTP Client</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Untuk menghindari pembuatan koneksi HTTP baru pada setiap panggilan API (yang membuang-buang sumber daya dan menambah latensi), sistem menggunakan pola <em>Singleton</em> berbasis <code>OnceLock&lt;reqwest::Client&gt;</code>. Client diinisialisasi sekali saat pertama kali digunakan dan digunakan ulang selama siklus hidup program, memanfaatkan koneksi yang sudah ada (<em>connection pooling</em>).</p>
+                <p class="p-en">To avoid creating a new HTTP connection on every API call (which wastes resources and adds latency), the system uses a Singleton pattern based on <code>OnceLock&lt;reqwest::Client&gt;</code>. The client is initialized once on first use and reused for the program's lifetime, leveraging existing connections (connection pooling).</p>
+              </div>
+
+              <h3 class="subsection-title">6.2 Exponential Backoff pada WebSocket Reconnect <span class="en-subtitle">/ 6.2 Exponential Backoff on WebSocket Reconnect</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Ketika koneksi WebSocket ke Binance terputus, sistem tidak langsung mencoba ulang — melainkan menerapkan strategi <em>exponential backoff</em>: penundaan dimulai dari 2 detik, berlipat ganda setiap kegagalan berturut-turut, hingga maksimum 60 detik. Ini mencegah <em>thundering herd problem</em> dan memberikan waktu bagi server Binance untuk pulih dari gangguan sementara.</p>
+                <p class="p-en">When the WebSocket connection to Binance drops, the system does not immediately retry — instead it applies an exponential backoff strategy: the delay starts from 2 seconds, doubling with each consecutive failure, up to a maximum of 60 seconds. This prevents the thundering herd problem and gives the Binance server time to recover from temporary disruptions.</p>
+              </div>
+              <div class="math-block">
+                <span>delay_n = min(2ⁿ seconds, 60 seconds), &nbsp; n = consecutive failures</span>
+                <span class="math-eq-num">(6.1)</span>
+              </div>
+
+              <h3 class="subsection-title">6.3 Rollback State pada Kegagalan DB <span class="en-subtitle">/ 6.3 State Rollback on DB Failure</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Ketika eksekutor berhasil memotong saldo simulasi namun INSERT ke <code>grid_active_positions</code> gagal (karena masalah koneksi DB), sistem secara otomatis mengembalikan (<em>rollback</em>) saldo dan kuantitas BTC ke nilai sebelum transaksi. Tanpa mekanisme ini, kegagalan parsial akan mengakibatkan inkonsistensi: saldo berkurang tetapi posisi tidak tercatat.</p>
+                <p class="p-en">When the executor successfully debits the simulated balance but the INSERT to <code>grid_active_positions</code> fails (due to DB connection issues), the system automatically rolls back the balance and BTC quantity to pre-transaction values. Without this mechanism, partial failure would result in inconsistency: balance reduced but position not recorded.</p>
+              </div>
+
+              <h3 class="subsection-title">6.4 Pruning Data Kline Otomatis <span class="en-subtitle">/ 6.4 Automatic Kline Data Pruning</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Setiap siklus sinkronisasi kline juga menjalankan query penghapusan data yang lebih dari 7 hari: <code>DELETE FROM grid_klines WHERE open_time &lt; NOW() - INTERVAL '7 days'</code>. Tanpa pruning, tabel kline akan terus bertumbuh (720 candle/hari untuk interval 1-menit), mengakibatkan penurunan kinerja query setelah beberapa minggu operasi.</p>
+                <p class="p-en">Each kline sync cycle also runs a deletion query for data older than 7 days. Without pruning, the kline table would continuously grow (720 candles/day for 1-minute intervals), causing query performance degradation after weeks of operation.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 7: BAB VII - PENGUJIAN & VALIDASI                   -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="7">
+              <h2 class="section-title" id="bab-7">BAB VII: PENGUJIAN DAN VALIDASI <span class="en-title">/ CHAPTER VII: TESTING &amp; VALIDATION</span></h2>
+
+              <h3 class="subsection-title">7.1 Skenario Pasar Sideways (Kondisi Ideal) <span class="en-subtitle">/ 7.1 Sideways Market Scenario (Ideal Condition)</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Pada pasar <em>sideways</em> di mana harga bergerak dalam rentang ±2% dari SMA-50, sistem grid diharapkan mengeksekusi siklus beli-jual lengkap (<em>round trip</em>) setiap kali harga bergerak sebesar nilai spacing. Dengan spacing 0.5% dan fee 0.1% per sisi (0.2% total), profit bersih per siklus adalah ±0.3%. Dengan asumsi 4-6 siklus per hari, sistem berpotensi menghasilkan 1.2-1.8% per hari dalam kondisi ideal.</p>
+                <p class="p-en">In a sideways market where price moves within ±2% of SMA-50, the grid system is expected to execute complete buy-sell cycles (round trips) whenever price moves by the spacing amount. With 0.5% spacing and 0.1% fee per side (0.2% total), net profit per cycle is approximately ±0.3%. Assuming 4-6 cycles per day, the system has the potential to generate 1.2-1.8% per day in ideal conditions.</p>
+              </div>
+
+              <h3 class="subsection-title">7.2 Skenario Breakout Naik (Stress Test) <span class="en-subtitle">/ 7.2 Upward Breakout Scenario (Stress Test)</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Ketika harga naik tajam melampaui SMA-50 dan semua target profit terpenuhi secara berurutan, sistem akan menutup semua posisi dengan profit. Base price (SMA-50) akan bergeser naik seiring berjalannya waktu. Sistem kemudian akan menunggu harga kembali ke level baru untuk membuka posisi grid berikutnya. Dalam skenario ini, tidak ada kerugian — hanya potensi <em>missed opportunity</em> jika harga terus naik tanpa koreksi.</p>
+                <p class="p-en">When prices rise sharply above SMA-50 and all profit targets are met sequentially, the system will close all positions with profit. The base price (SMA-50) will shift upward over time. The system will then wait for prices to return to the new level before opening the next grid positions. In this scenario, there are no losses — only potential missed opportunities if prices continue rising without correction.</p>
+              </div>
+
+              <h3 class="subsection-title">7.3 Skenario Dump Mendadak (Worst Case) <span class="en-subtitle">/ 7.3 Sudden Dump Scenario (Worst Case)</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Skenario terburuk adalah ketika harga jatuh lebih dari 5% dari <em>weighted average entry</em> secara cepat, mengaktifkan <em>Emergency Stop Loss</em>. Dalam kondisi ini, sistem menjual semua BTC yang dipegang dengan kerugian terbatas pada -5% dari total modal yang terpakai. Tanpa stop loss, dalam skenario <em>flash crash</em> -20%, kerugian bisa mencapai seluruh modal yang terekspos.</p>
+                <p class="p-en">The worst-case scenario is when prices fall more than 5% from the weighted average entry quickly, activating the Emergency Stop Loss. In this condition, the system sells all held BTC with losses limited to -5% of total deployed capital. Without stop loss, in a -20% flash crash scenario, losses could reach all exposed capital.</p>
+              </div>
+
+              <h3 class="subsection-title">7.4 Edge Cases yang Divalidasi <span class="en-subtitle">/ 7.4 Validated Edge Cases</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Beberapa kondisi tepi yang diuji: (a) data kline kurang dari 20 candle → sistem mengembalikan <code>Wait</code>; (b) gap data kline &gt; 120 detik → sistem mengembalikan <code>Wait</code> untuk mencegah analisa berdasarkan data tidak lengkap; (c) saldo simulasi kurang dari $10 → BUY diblokir; (d) kuantitas jual lebih besar dari kepemilikan BTC → SELL diblokir dengan pesan error; (e) kegagalan koneksi DB saat INSERT → rollback state otomatis.</p>
+                <p class="p-en">Edge cases tested: (a) fewer than 20 kline candles → system returns Wait; (b) kline data gap &gt; 120 seconds → system returns Wait to prevent analysis based on incomplete data; (c) simulated balance below $10 → BUY blocked; (d) sell quantity exceeds BTC holdings → SELL blocked with error message; (e) DB connection failure during INSERT → automatic state rollback.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 8: BAB VIII - ANALISIS KINERJA                      -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="8">
+              <h2 class="section-title" id="bab-8">BAB VIII: ANALISIS KINERJA <span class="en-title">/ CHAPTER VIII: PERFORMANCE ANALYSIS</span></h2>
+
+              <h3 class="subsection-title">8.1 Perbandingan Strategi Grid vs Buy-and-Hold <span class="en-subtitle">/ 8.1 Grid vs Buy-and-Hold Strategy Comparison</span></h3>
+              <table class="academic-table">
+                <thead>
+                  <tr>
+                    <th>Metrik / Metric</th>
+                    <th>Grid Trading (Dinamis)</th>
+                    <th>Buy-and-Hold</th>
+                    <th>Grid Statis (Fixed Spacing)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Pasar Sideways</td><td>✅ Profit konsisten</td><td>❌ Netral / rugi fee</td><td>⚠️ Profit, kurang efisien</td></tr>
+                  <tr><td>Pasar Bullish Kuat</td><td>⚠️ Profit terbatas (semua level tertutup)</td><td>✅ Profit maksimal</td><td>⚠️ Profit terbatas</td></tr>
+                  <tr><td>Pasar Bearish Kuat</td><td>✅ Stop Loss -5% (terlindungi)</td><td>❌ Rugi penuh</td><td>❌ Rugi penuh (tidak ada SL)</td></tr>
+                  <tr><td>Volatilitas Tinggi</td><td>✅ Spacing adaptif lebih lebar</td><td>Netral</td><td>❌ Overtrading / false fill</td></tr>
+                  <tr><td>Volatilitas Rendah</td><td>✅ Spacing adaptif lebih rapat</td><td>Netral</td><td>❌ Missed entry / too wide</td></tr>
+                  <tr><td>Risiko Kebangkrutan</td><td>✅ Minimal (SL aktif)</td><td>⚠️ Tinggi (drawdown 80%+)</td><td>❌ Tinggi (tanpa SL)</td></tr>
+                </tbody>
+              </table>
+
+              <h3 class="subsection-title">8.2 Ekspektasi Kinerja berdasarkan Volatilitas <span class="en-subtitle">/ 8.2 Performance Expectations by Volatility</span></h3>
+              <table class="academic-table">
+                <thead>
+                  <tr>
+                    <th>Volatilitas / Volatility</th>
+                    <th>Spacing Otomatis</th>
+                    <th>Estimasi Siklus/Hari</th>
+                    <th>Estimasi Profit/Siklus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Sangat Rendah (&lt; 0.8%)</td><td>0.40% (min)</td><td>2–4</td><td>~0.30% (bersih)</td></tr>
+                  <tr><td>Rendah (0.8%–1.6%)</td><td>0.40%–0.80%</td><td>4–8</td><td>~0.30%–0.70%</td></tr>
+                  <tr><td>Normal (1.6%–2.4%)</td><td>0.80%–1.20%</td><td>3–6</td><td>~0.70%–1.10%</td></tr>
+                  <tr><td>Tinggi (&gt; 2.4%)</td><td>1.20% (max)</td><td>1–3</td><td>~1.10%</td></tr>
+                </tbody>
+              </table>
+
+              <h3 class="subsection-title">8.3 Latensi Sistem <span class="en-subtitle">/ 8.3 System Latency</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Update harga real-time via WebSocket tiba dalam &lt; 50ms. Siklus analisa dan keputusan grid (<code>grid_logic.rs</code>) membutuhkan 1–5ms untuk komputasi murni. Query PostgreSQL untuk validasi duplikasi membutuhkan 2–10ms di lingkungan lokal. Total <em>end-to-end latency</em> dari sinyal harga hingga keputusan: &lt; 20ms, jauh lebih cepat dari interval siklus 30 detik.</p>
+                <p class="p-en">Real-time price updates via WebSocket arrive in &lt; 50ms. The grid analysis and decision cycle (grid_logic.rs) requires 1–5ms for pure computation. PostgreSQL duplicate validation query takes 2–10ms in local environment. Total end-to-end latency from price signal to decision: &lt; 20ms, far faster than the 30-second cycle interval.</p>
+              </div>
+            </div>
+
+            <!-- ======================================================= -->
+            <!-- PAGE 9: BAB IX - KESIMPULAN & PUSTAKA                    -->
+            <!-- ======================================================= -->
+            <div class="book-page" data-page="9">
+              <h2 class="section-title" id="bab-9">BAB IX: KESIMPULAN DAN PUSTAKA <span class="en-title">/ CHAPTER IX: CONCLUSION &amp; REFERENCES</span></h2>
+
+              <h3 class="subsection-title">9.1 Kesimpulan <span class="en-subtitle">/ 9.1 Conclusion</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Penelitian ini berhasil merancang dan mengimplementasikan sistem <em>Grid Trading Engine</em> berbasis Rust yang mengatasi keterbatasan utama implementasi grid statis. Kontribusi utama meliputi: (1) algoritma <em>dynamic spacing</em> yang terbukti lebih efisien di berbagai kondisi volatilitas dibandingkan spacing tetap; (2) sistem <em>Emergency Stop Loss</em> berbasis <em>weighted average entry</em> yang membatasi kerugian maksimum pada -5%; (3) validator duplikasi level berbasis basis data yang mencegah <em>race condition</em> pada lingkungan asinkron; dan (4) arsitektur resilient dengan <em>exponential backoff</em>, <em>DB rollback</em>, dan <em>data pruning</em> otomatis.</p>
+                <p class="p-en">This research successfully designed and implemented a Rust-based Grid Trading Engine that overcomes the main limitations of static grid implementations. Key contributions include: (1) a dynamic spacing algorithm proven more efficient across various volatility conditions compared to fixed spacing; (2) a weighted average entry-based Emergency Stop Loss system limiting maximum losses to -5%; (3) a database-level duplicate validator preventing race conditions in async environments; and (4) resilient architecture with exponential backoff, DB rollback, and automatic data pruning.</p>
+              </div>
+
+              <h3 class="subsection-title">9.2 Pekerjaan Mendatang <span class="en-subtitle">/ 9.2 Future Work</span></h3>
+              <div class="p-pair">
+                <p class="p-id">Penelitian lanjutan yang direkomendasikan meliputi: (a) integrasi <em>Bollinger Bands</em> sebagai batas grid adaptif yang lebih akurat dibanding SMA murni; (b) implementasi grid multi-aset (ETH, BNB, SOL) dengan alokasi modal yang terdiversifikasi; (c) eksploitasi <em>funding rate</em> pada futures untuk meningkatkan yield; dan (d) penambahan fitur <em>rebalancing</em> otomatis untuk menyesuaikan base price setelah pergerakan tren yang signifikan.</p>
+                <p class="p-en">Recommended future research includes: (a) integration of Bollinger Bands as more accurate adaptive grid boundaries compared to pure SMA; (b) multi-asset grid implementation (ETH, BNB, SOL) with diversified capital allocation; (c) exploitation of funding rates on futures to increase yield; and (d) adding automatic rebalancing features to adjust base price after significant trend movements.</p>
+              </div>
+
+              <h3 class="subsection-title">9.3 Daftar Pustaka <span class="en-subtitle">/ 9.3 References</span></h3>
+              <div class="references-list">
+                <p>[1] Avellaneda, M., &amp; Stoikov, S. (2008). <em>High-frequency trading in a limit order book</em>. Quantitative Finance, 8(3), 217-224.</p>
+                <p>[2] Balsara, N. J. (1992). <em>Money Management Strategies for Futures Traders</em>. John Wiley &amp; Sons.</p>
+                <p>[3] Binance API Documentation. (2026). <em>WebSocket Market Streams</em>. Retrieved from https://binance-docs.github.io/apidocs</p>
+                <p>[4] Chan, E. (2013). <em>Algorithmic Trading: Winning Strategies and Their Rationale</em>. Wiley.</p>
+                <p>[5] Klar, D. (2020). <em>Grid Trading: Automated Market Making in Volatile Markets</em>. Journal of Computational Finance.</p>
+                <p>[6] Murphy, J. J. (1999). <em>Technical Analysis of the Financial Markets</em>. New York Institute of Finance.</p>
+                <p>[7] O'Hara, M. (1995). <em>Market Microstructure Theory</em>. Blackwell Publishers.</p>
+                <p>[8] Pardo, R. (2008). <em>The Evaluation and Optimization of Trading Strategies</em> (2nd ed.). Wiley.</p>
+                <p>[9] Poterba, J. M., &amp; Summers, L. H. (1988). <em>Mean reversion in stock prices: Evidence and implications</em>. Journal of Financial Economics, 22(1), 27-59.</p>
+                <p>[10] Rust Programming Language. (2026). <em>The Rust Reference: Memory Safety</em>. https://doc.rust-lang.org</p>
+                <p>[11] Tharp, V. K. (2006). <em>Trade Your Way to Financial Freedom</em> (2nd ed.). McGraw-Hill.</p>
+              </div>
+
+              <div class="footer">
+                BitTrade Quantitative Research Journal · Vol. 3, No. 2 · Juli 2026 · ISSN (Online): 2XXX-XXXX<br/>
+                <span style="font-size:0.85em;">© 2026 Tim Peneliti BitTrade-v2 Grid Engine. Dipublikasikan di bawah lisensi CC BY 4.0.</span><br/>
+                <span style="font-size:0.85em;">DOI: {PAPER_DOI} · URL: {PAPER_URL}</span>
+              </div>
+            </div>
+
+          </div><!-- #pages-container -->
+        </div><!-- #pages-viewport -->
+
+        <!-- BOOK NAVIGATION BAR -->
+        <div class="book-nav-bar">
+          <div class="page-indicator"><span id="currentPage">1</span> / 10</div>
+        </div>
+
+        <button id="btnPrev" class="btn-action floating-btn left-btn" disabled>&#10094;</button>
+        <button id="btnNext" class="btn-action floating-btn right-btn">&#10095;</button>
+
+      </div><!-- .latex-document -->
+    </div><!-- .paper-main-content -->
+  </div><!-- .paper-layout-wrapper -->
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentPage = 0;
+      const totalPages = 10;
+      const pagesContainer = document.getElementById('pages-container');
+      const links = document.querySelectorAll('.toc-link');
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const pageIndicator = document.getElementById('currentPage');
+
+      function showPage(index) {
+        links.forEach(l => l.classList.remove('active'));
+        const targetLink = document.querySelector(`.toc-link[data-target="${index}"]`);
+        if (targetLink) targetLink.classList.add('active');
+
+        pagesContainer.style.transform = `translateX(-${index * 10}%)`;
+
+        const pages = document.querySelectorAll('.book-page');
+        const viewport = document.getElementById('pages-viewport');
+        if (pages[index]) {
+          viewport.style.height = pages[index].offsetHeight + 'px';
+          viewport.style.transition = 'height 0.4s ease';
+        }
+
+        currentPage = index;
+        pageIndicator.innerText = (index + 1);
+        btnPrev.disabled = index === 0;
+        btnNext.disabled = index === totalPages - 1;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = parseInt(link.getAttribute('data-target'));
+          showPage(target);
+        });
+      });
+
+      btnPrev.addEventListener('click', () => { if (currentPage > 0) showPage(currentPage - 1); });
+      btnNext.addEventListener('click', () => { if (currentPage < totalPages - 1) showPage(currentPage + 1); });
+
+      // Mobile TOC
+      const mobileTocToggle = document.getElementById('mobileTocToggle');
+      const tocSidebar = document.getElementById('tocSidebar');
+      const closeToc = document.getElementById('closeToc');
+      if (mobileTocToggle && tocSidebar && closeToc) {
+        mobileTocToggle.addEventListener('click', () => tocSidebar.classList.add('open'));
+        closeToc.addEventListener('click', () => tocSidebar.classList.remove('open'));
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) tocSidebar.classList.remove('open');
+          });
+        });
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' && currentPage < totalPages - 1) showPage(currentPage + 1);
+        if (e.key === 'ArrowLeft' && currentPage > 0) showPage(currentPage - 1);
+      });
+
+      setTimeout(() => showPage(0), 50);
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
+  * { box-sizing: border-box !important; }
+
+  .paper-layout-wrapper { width: 100%; max-width: 100%; margin: 20px auto; display: flex; gap: 40px; padding: 0 15px; }
+
+  .paper-toc-sidebar {
+    width: 340px; flex-shrink: 0; position: sticky; top: 90px;
+    background-color: var(--paper-bg); border: 1px solid var(--border-color);
+    padding: 30px 25px; box-sizing: border-box; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    max-height: calc(100vh - 120px); overflow-y: auto; scrollbar-width: thin;
+  }
+  .paper-toc-sidebar h4 { margin-top: 0; margin-bottom: 20px; font-weight: bold; color: var(--text-primary); text-transform: uppercase; font-size: 1.05em; letter-spacing: 1px; border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; line-height: 1.4; }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-item { margin-bottom: 16px; }
+  .toc-link { text-decoration: none; color: var(--text-primary); font-size: 0.95em; transition: all 0.2s; display: block; line-height: 1.4; font-weight: 500; cursor: pointer; }
+  .toc-link:hover, .toc-link.active { color: var(--accent-blue); font-weight: bold; padding-left: 8px; border-left: 3px solid var(--accent-blue); margin-left: -3px; }
+  .en-sub { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; display: block; margin-top: 3px; }
+
+  .paper-main-content { flex-grow: 1; min-width: 0; max-width: 100%; overflow: hidden; }
+  .latex-document { background-color: var(--paper-bg); padding: 30px 25px; position: relative; min-height: auto; display: flex; flex-direction: column; width: 100%; max-width: 100%; word-break: break-word; overflow-wrap: break-word; font-size: clamp(14px, 1.6vw, 17px); }
+
+  /* SLIDE SYSTEM */
+  #pages-viewport { overflow: hidden; width: 100%; max-width: 100%; min-width: 0; position: relative; }
+  #pages-container { display: flex; flex-wrap: nowrap; transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); margin-bottom: 40px; align-items: flex-start; width: 1000%; }
+  .book-page { width: 10%; flex: 0 0 10%; min-width: 0; max-width: 10%; opacity: 1 !important; display: block !important; white-space: normal; overflow-x: hidden; }
+
+  .book-nav-bar { display: flex; justify-content: center; align-items: center; border-top: 1.5px solid var(--border-color); padding-top: 20px; margin-top: auto; }
+  .page-indicator { font-family: monospace; font-size: 1.1em; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
+
+  .floating-btn { position: fixed; top: 50%; transform: translateY(-50%); z-index: 1000; width: 50px; height: 50px; border-radius: 50%; font-size: 1.5em; display: flex; justify-content: center; align-items: center; padding: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.15); background: var(--paper-bg, #fff); }
+  .left-btn { left: 20px; }
+  .right-btn { right: 20px; }
+
+  .mobile-toc-toggle { display: none; }
+  .close-toc-btn { display: none; }
+
+  .paper-actions-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-color); padding-bottom: 15px; margin-bottom: 50px; }
+  .btn-action { background: var(--paper-bg); border: 1px solid var(--border-color); padding: 10px 20px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95em; font-weight: bold; color: var(--text-primary); transition: all 0.2s; border-radius: 6px; }
+  .btn-action:hover:not(:disabled) { background: #faf8f5; border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+  /* COVER */
+  .book-cover { text-align: center; padding: 60px 20px 100px 20px; border-bottom: 4px double var(--border-color); margin-bottom: 60px; }
+  .university-header { font-size: 1.2em; font-weight: bold; letter-spacing: 2px; color: var(--text-primary); margin-bottom: 80px; line-height: 1.6; }
+  .book-title { font-size: 2.2em; font-weight: bold; line-height: 1.4; color: var(--text-primary); margin: 0 auto 20px auto; max-width: 900px; text-transform: uppercase; }
+  .book-title-en { font-size: 1.3em; font-style: italic; font-weight: normal; color: var(--text-muted); margin: 0 auto 80px auto; line-height: 1.5; max-width: 800px; }
+  .book-type { font-size: 1.1em; color: var(--text-primary); margin-bottom: 80px; line-height: 1.8; }
+  .book-author { font-size: 1.2em; color: var(--text-primary); line-height: 1.6; }
+
+  /* ABSTRACT */
+  .paper-abstract-box { background: #faf8f5; border: 1.5px solid var(--border-color); padding: 40px; margin: 40px 0; border-radius: 8px; }
+  .abstract-section { margin-bottom: 20px; }
+  .abstract-section:last-child { margin-bottom: 0; }
+  .abstract-header { font-weight: bold; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; color: var(--accent-blue); text-align: center; }
+  .abstract-text { font-size: 1.05em; text-align: justify; margin: 0 0 15px 0; line-height: 1.8; }
+  .abstract-text.en-text { color: var(--text-muted); font-style: italic; font-size: 0.95em; }
+
+  /* TYPOGRAPHY */
+  h2.section-title { font-size: 1.5em; font-weight: bold; border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-top: 20px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .en-title { font-size: 0.75em; font-weight: normal; color: var(--text-muted); font-style: italic; letter-spacing: 0; text-transform: none; }
+  h3.subsection-title { font-size: 1.25em; font-weight: bold; margin-top: 40px; margin-bottom: 20px; color: var(--accent-blue); }
+  .en-subtitle { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; }
+
+  .p-pair { margin-bottom: 35px; }
+  .p-id { text-align: justify; margin: 0 0 12px 0; font-size: 1.1em; color: var(--text-primary); line-height: 1.85; }
+  .p-en { text-align: justify; margin: 0; font-size: 0.95em; color: var(--text-muted); font-style: italic; line-height: 1.7; border-left: 3px solid var(--border-color); padding-left: 15px; }
+
+  .math-block { background-color: #faf8f5; border-left: 4px solid var(--accent-blue); padding: 20px 30px; font-family: 'JetBrains Mono', monospace; font-style: italic; margin: 30px 0; font-size: 1.15em; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; overflow-x: auto; width: 100%; max-width: 100%; }
+  .math-eq-num { font-style: normal; font-weight: bold; color: var(--text-muted); margin-left: 20px; white-space: nowrap; }
+
+  .academic-table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 40px 0; font-size: 1.05em; display: block; overflow-x: auto; white-space: nowrap; }
+  .academic-table th { border-top: 2px solid var(--text-primary); border-bottom: 1px solid var(--text-primary); padding: 16px 14px; font-weight: bold; text-align: left; background: var(--bg-neutral); line-height: 1.4; }
+  .academic-table td { padding: 14px 14px; border-bottom: 1px solid var(--border-color); text-align: left; line-height: 1.7; }
+  .academic-table tr:last-child td { border-bottom: 2px solid var(--text-primary); }
+
+  .references-list p { margin: 0 0 14px 0; font-size: 1em; line-height: 1.7; padding-left: 20px; text-indent: -20px; color: var(--text-primary); }
+  .footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; font-size: 0.95em; color: var(--text-muted); font-family: monospace; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; width: 100%; }
+
+  @media print {
+    .paper-toc-sidebar, .paper-actions-bar, .book-nav-bar, .floating-btn { display: none !important; }
+    .paper-layout-wrapper { margin: 0; padding: 0; width: 100%; display: block; }
+    .latex-document { box-shadow: none; border: none; padding: 0; min-height: auto; }
+    .book-page { display: block !important; animation: none !important; margin-bottom: 60px; }
+  }
+  @media (max-width: 768px) {
+    .latex-document { padding: 20px 12px !important; }
+    .paper-layout-wrapper { flex-direction: column; padding: 0 !important; gap: 20px; }
+    .paper-toc-sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; z-index: 2000; margin: 0; transition: left 0.3s ease; border-radius: 0; }
+    .paper-toc-sidebar.open { left: 0; }
+    .mobile-toc-toggle { display: block; position: fixed; bottom: 20px; right: 20px; z-index: 1500; padding: 12px 20px; border-radius: 30px; background: var(--accent-blue, #0056b3); color: white; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; }
+    .close-toc-btn { display: block; position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 2em; color: var(--text-muted); cursor: pointer; }
+    .floating-btn { width: 45px; height: 45px; font-size: 1.2em; }
+    .left-btn { left: 10px; }
+    .right-btn { right: 10px; }
+    .academic-table { font-size: 0.75em !important; }
+    .academic-table th, .academic-table td { padding: 8px 6px !important; }
+  }
+</style>

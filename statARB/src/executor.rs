@@ -52,7 +52,7 @@ pub async fn calculate_dynamic_size(state: &AppState, stats: &PairStats) -> f64 
 
     let optimal_size = default_size * performance_multiplier * z_strength * vol_discount;
     // Cap to 40% of available balance (dynamic adaptation) and never exceed 1.5x default
-    optimal_size.clamp(20.0, balance * 0.40).min(default_size * 1.5)
+    optimal_size.clamp(1.0, balance * 0.40).min(default_size * 1.5)
 }
 
 pub async fn open_position(
@@ -70,6 +70,23 @@ pub async fn open_position(
     let beta = stats.beta.abs().max(0.01);
     let size_a = size / (1.0 + beta);
     let size_b = (beta * size) / (1.0 + beta);
+    
+    // FIX: Dynamic Exchange Limits Validation
+    let btc_step_size = *state.btc_step_size.read().await;
+    let eth_step_size = *state.eth_step_size.read().await;
+    let btc_min_notional = *state.btc_min_notional.read().await;
+    let eth_min_notional = *state.eth_min_notional.read().await;
+
+    let btc_step_dollar_value = btc_step_size * price_b;
+    let eth_step_dollar_value = eth_step_size * price_a;
+
+    let btc_floor = btc_min_notional.max(btc_step_dollar_value);
+    let eth_floor = eth_min_notional.max(eth_step_dollar_value);
+
+    if size_b < btc_floor || size_a < eth_floor {
+        return Err(format!("Signal rejected: Allocated sizes (ETH: ${:.2}, BTC: ${:.2}) fail to meet exchange limits (ETH floor: ${:.2}, BTC floor: ${:.2})", size_a, size_b, eth_floor, btc_floor).into());
+    }
+
     let qty_a = size_a / price_a;
     let qty_b = size_b / price_b;
 

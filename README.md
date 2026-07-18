@@ -36,7 +36,8 @@ Sistem ini terdiri dari **empat bot independen** yang berjalan di background, ma
 ### 3. Bot C: OKX Engine
 *   Engine terisolasi yang berjalan dengan arsitektur menyerupai Bot A tetapi dioptimalkan secara asinkron untuk berinteraksi langsung dengan orderbook dan data pasar OKX.
 
-### 4. Bot E: Statistical Arbitrage Engine (statARB)
+### 4. Bot E: Statistical Arbitrage Engine (statARB) [SUSPENDED]
+*   **STATUS**: **SUSPENDED**. Berdasarkan hasil backtest empiris dan simulasi *walk-forward* (lihat [RESEARCH_FINDINGS.md](statARB/RESEARCH_FINDINGS.md)), model OLS *linear* saat ini tidak *viable* melawan biaya komisi 0.10% di Binance Futures (fee rate secara sistematis menghancurkan *gross edge* kointegrasi).
 *   **Co-Integration Spread Modeling**: Memantau rasio harga ETH/BTC secara real-time pada resolusi 1-detik dan menghitung statistik rolling window (Mean & StdDev).
 *   **Dual-Leg Spread Entry**: 
     *   **SELL_SPREAD**: Masuk posisi Short ETHUSDT & Long BTCUSDT saat Z-score > +2.0 (ETH relatif overpriced terhadap BTC).

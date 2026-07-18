@@ -285,9 +285,19 @@ function renderBotCCard() {
         return;
     }
 
-    const totalEquity = s.simulated_balance + (s.btc_balance * s.current_btc_price);
-    const pnl = totalEquity - 1000.0;
-    const pnlPct = (pnl / 1000.0) * 100;
+    // Support multi-asset grid fields
+    let totalAssetsValue = 0;
+    if (s.asset_balances && s.prices) {
+        for (const sym in s.asset_balances) {
+            totalAssetsValue += s.asset_balances[sym] * (s.prices[sym] || 0);
+        }
+    }
+    const totalEquity = s.simulated_balance + totalAssetsValue;
+    
+    // Starting capital is $200.00
+    const startCapital = 200.0;
+    const pnl = totalEquity - startCapital;
+    const pnlPct = (pnl / startCapital) * 100;
 
     // Calculate daily winrate (from today's history data)
     const todayStr = new Date().toDateString();
@@ -300,17 +310,24 @@ function renderBotCCard() {
     const pnlSign = pnl >= 0 ? '+' : '';
 
     updateLED('bot-c-status-led', true, 'active-green');
-    (function(){var _n=document.getElementById('bot-c-btc-price');if(_n)_n.innerText = formatUSD(s.current_btc_price);;})();
+    
+    // Get BTC price
+    const btcPrice = s.prices ? (s.prices['BTCUSDT'] || 0) : 0;
+    const btcBalance = s.asset_balances ? (s.asset_balances['BTCUSDT'] || 0) : 0;
+    const btcRegime = s.market_regimes ? (s.market_regimes['BTCUSDT'] || 'GRID') : 'GRID';
+    const btcVol = s.volatilities ? (s.volatilities['BTCUSDT'] || 0) : 0;
+
+    (function(){var _n=document.getElementById('bot-c-btc-price');if(_n)_n.innerText = formatUSD(btcPrice);;})();
     document.getElementById('bot-c-equity').innerHTML = `<span style="color: ${pnlColor}; font-weight: bold;">${formatUSD(totalEquity)}</span>`;
     (function(){var _n=document.getElementById('bot-c-usdt');if(_n)_n.innerText = formatUSD(s.simulated_balance);;})();
-    (function(){var _n=document.getElementById('bot-c-btc');if(_n)_n.innerText = (s.btc_balance||0).toFixed(6);;})();
+    (function(){var _n=document.getElementById('bot-c-btc');if(_n)_n.innerText = btcBalance.toFixed(6);;})();
     
     document.getElementById('bot-c-winrate').innerHTML = `
         <span style="color: ${wrColor}; font-weight: bold;">${dailyWinrate.toFixed(1)}%</span> 
         (<span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlPct.toFixed(2)}%</span>) 
         <span style="font-size: 0.8em; color: var(--text-secondary); display: block; margin-top: 2px;">[Daily: ${todaySells.length} sells]</span>
     `;
-    (function(){var _n=document.getElementById('bot-c-regime');if(_n)_n.innerText = `${s.market_regime || 'WAIT'} (${(s.market_volatility || 0.0).toFixed(4)}%)`;;})();
+    (function(){var _n=document.getElementById('bot-c-regime');if(_n)_n.innerText = `${btcRegime} (${(btcVol * 100).toFixed(4)}%)`;;})();
 
     // Pipeline
     updateLED('bot-c-led-ws', s.ws_active, 'active-green');
@@ -674,7 +691,7 @@ function renderEquityChart() {
         };
 
         const datasetC = {
-            label: 'Bot C: OKX Engine',
+            label: 'Bot C: Grid Engine',
             data: mapToLabels(dataPointsC),
             borderColor: '#2ecc71',
             borderWidth: 2,

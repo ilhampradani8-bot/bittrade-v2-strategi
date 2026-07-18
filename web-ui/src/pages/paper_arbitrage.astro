@@ -8,215 +8,506 @@ import Layout from '../layouts/Layout.astro';
   botStatus="ARBITRAGE ONLINE"
 >
   <div class="paper-layout-wrapper">
-    <!-- Left TOC -->
-    <div class="paper-toc-sidebar">
-        <h4>Paper Sections</h4>
+    <button id="mobileTocToggle" class="mobile-toc-toggle">&#9776; Daftar Isi</button>
+    <!-- Left TOC (Daftar Isi) -->
+    <div class="paper-toc-sidebar" id="tocSidebar">
+        <button id="closeToc" class="close-toc-btn">&times;</button>
+        <h4>Paper Sections<br/><span style="font-size:0.7em; font-weight:normal; color:var(--text-muted);">Table of Contents</span></h4>
         <ul class="toc-list">
-            <li class="toc-item"><a href="#sec-title" class="toc-link active">Title / Judul</a></li>
-            <li class="toc-item"><a href="#sec-abstract" class="toc-link">Abstract</a></li>
-            <li class="toc-item"><a href="#sec-intro" class="toc-link">1. Introduction</a></li>
-            <li class="toc-item"><a href="#sec-methods" class="toc-link">2. Methodology &amp; Architecture</a></li>
-            <li class="toc-item"><a href="#sec-results" class="toc-link">3. Empirical Performance</a></li>
-            <li class="toc-item"><a href="#sec-risk" class="toc-link">4. Risk Management</a></li>
-            <li class="toc-item"><a href="#sec-conclusion" class="toc-link">5. Conclusion</a></li>
-            <li class="toc-item"><a href="#sec-references" class="toc-link">References</a></li>
+            <li class="toc-item"><a href="#" data-target="0" class="toc-link active">Judul &amp; Abstrak<br/><span class="en-sub">Title &amp; Abstract</span></a></li>
+            <li class="toc-item"><a href="#" data-target="1" class="toc-link">1. Pendahuluan<br/><span class="en-sub">1. Introduction</span></a></li>
+            <li class="toc-item"><a href="#" data-target="2" class="toc-link">2. Metodologi &amp; Arsitektur<br/><span class="en-sub">2. Methodology &amp; Architecture</span></a></li>
+            <li class="toc-item"><a href="#" data-target="3" class="toc-link">3. Kinerja Empiris<br/><span class="en-sub">3. Empirical Performance</span></a></li>
+            <li class="toc-item"><a href="#" data-target="4" class="toc-link">4. Manajemen Risiko<br/><span class="en-sub">4. Risk Management</span></a></li>
+            <li class="toc-item"><a href="#" data-target="5" class="toc-link">5. Kesimpulan &amp; Pustaka<br/><span class="en-sub">5. Conclusion &amp; References</span></a></li>
         </ul>
     </div>
 
-    <!-- Right Content -->
+    <!-- Right Content (Buku Utama) -->
     <div class="paper-main-content">
         <div class="latex-document">
 
             <div class="paper-actions-bar" style="justify-content: flex-end;">
-                <div style="font-size: 0.85em; color: var(--text-muted);">Format: <strong>Academic Research Article</strong> &nbsp;|&nbsp; Rev. July 2026</div>
+                <div style="font-size: 0.9em; color: var(--text-muted);">Format: <strong>Bilingual Academic (ID/EN)</strong> &nbsp;|&nbsp; Rev. July 2026</div>
             </div>
 
-            <div class="journal-header" id="sec-title">
-                Journal of Quantitative Crypto-Finance — Research Article
+            <div id="pages-viewport" style="overflow: hidden; width: 100%;">
+                <div id="pages-container">
+                    <!-- PAGE 0: Cover & Abstract -->
+                    <div class="book-page" data-page="0">
+                        <div id="cover" class="book-cover">
+                            <div class="university-header">
+                                JURNAL KUANTITATIF KRIPTO-KEUANGAN — ARTIKEL PENELITIAN<br/>
+                                <span style="font-weight:normal; font-size: 0.8em; color: var(--text-muted);">Journal of Quantitative Crypto-Finance — Research Article</span>
+                            </div>
+                            
+                            <h1 class="book-title" style="font-size: 2.1em; text-transform: none;">
+                                Optimasi Sistem Arbitrase Funding Rate (Cash-and-Carry): Pendekatan Multi-Koin Frekuensi Tinggi pada Perpetual Futures
+                            </h1>
+                            <div class="book-title-en" style="margin-bottom: 50px;">
+                                Funding Rate Arbitrage (Cash-and-Carry) System Optimization: A High-Frequency Multi-Coin Approach in Perpetual Futures
+                            </div>
+
+                            <div class="book-author" style="margin-top: 40px;">
+                                Disusun Oleh / Authored By:<br/>
+                                <strong>Bot D Quantitative Development Team</strong>
+                            </div>
+
+                            <div class="book-type" style="margin-top: 20px; font-style: italic;">
+                                Department of Quantitative Analysis &amp; Algorithmic Trading Systems, BitTrade Systems
+                            </div>
+                        </div>
+
+                        <div class="paper-abstract-box" id="sec-abstract">
+                            <div class="abstract-section">
+                                <div class="abstract-header">Abstrak</div>
+                                <p class="abstract-text">
+                                    Arbitrase Cash-and-Carry telah muncul sebagai strategi mitigasi risiko utama di pasar mata uang kripto. Dengan mencocokkan pembelian spot fisik/simulasi dengan posisi short yang setara di Perpetual Futures, mesin menciptakan eksposur delta netral-pasar sambil mengumpulkan pembayaran funding rate berkala yang dibayarkan oleh posisi long yang memiliki leverage. Makalah ini menyajikan kerangka kerja berlatensi rendah yang dioptimalkan untuk memindai 300+ simbol perpetual USDT, mengidentifikasi kandidat yang menghasilkan imbal hasil, memvalidasi spread basis, dan secara bersamaan mengeksekusi order dua kaki (dual-leg). Penelitian ini mengevaluasi perlindungan deviasi basis, fallback REST, dan kemampuan jangka panjang sistem dalam mengunci imbal hasil APR tinggi di bawah volatilitas pasar yang bervariasi.
+                                </p>
+                                <div class="abstract-header" style="margin-top:20px; color:var(--text-muted);">Abstract</div>
+                                <p class="abstract-text en-text">
+                                    Cash-and-Carry Arbitrage has emerged as a cornerstone risk-mitigation strategy in cryptocurrency markets. By matching physical/simulated spot purchases with equivalent short positions in Perpetual Futures, the engine creates a market-neutral delta exposure while collecting recurring funding payments paid by leveraged long positions. This paper presents an optimized, low-latency framework designed to scan 300+ USDT perpetual symbols, identify yielding candidates, validate basis spreads, and simultaneously execute dual-leg orders. The research evaluates basis deviation protections, REST fallbacks, and the system's long-term capability of locking high-APR yields under varying market volatility.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 1 -->
+                    <div class="book-page" data-page="1">
+                        <h2 class="section-title" id="sec-intro">1. Pendahuluan <span class="en-title">/ 1. Introduction</span></h2>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Pasar derivatif mata uang kripto menawarkan anomali arbitrase unik yang hampir tidak ada di kelas aset tradisional. Di antaranya, mekanisme pembayaran funding rate berkala setiap 8 jam di Perpetual Futures menyediakan strategi penghasil imbal hasil modal yang sangat konsisten. Ketika kondisi pasar menampilkan sentimen positif (regime bullish), trader long membayar trader short tingkat bunga variabel untuk mempertahankan posisi long mereka.
+                            </p>
+                            <p class="p-en">
+                                Cryptocurrency derivatives markets offer unique arbitrage anomalies that are virtually absent in traditional asset classes. Among these, the recurring 8-hour funding payment mechanism in Perpetual Futures provides a highly recurring, capital-yielding strategy. When market conditions display positive sentiment (bullish regime), long traders pay short traders a variable interest rate to maintain their long positions.
+                            </p>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Dengan membangun portofolio delta-neutral di mana:
+                            </p>
+                            <p class="p-en">
+                                By constructing a delta-neutral portfolio where:
+                            </p>
+                        </div>
+                        <div class="math-block">
+                            <span>Portfolio Delta (&Delta;) = &Delta;_Spot + &Delta;_Short_Futures = 1 - 1 = 0</span>
+                            <span class="math-eq-num">(1)</span>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                trader sepenuhnya terlindungi dari ayunan arah linear. Imbal hasil modal dipanen secara pasif dari funding rate. Makalah ini merinci keputusan rekayasa yang diterapkan di <strong>Bot D (Arbitrage Engine)</strong> untuk memantau, menganalisis, dan mengeksekusi strategi ini dengan aman.
+                            </p>
+                            <p class="p-en">
+                                traders are fully protected from linear direction swings. Capital yield is harvested passively from funding rates. This paper details the engineering decisions implemented in <strong>Bot D (Arbitrage Engine)</strong> to monitor, analyze, and safely execute this strategy.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 2 -->
+                    <div class="book-page" data-page="2">
+                        <h2 class="section-title" id="sec-methods">2. Metodologi &amp; Arsitektur Sistem <span class="en-title">/ 2. Methodology &amp; System Architecture</span></h2>
+                        
+                        <h3 class="subsection-title">2.1 Ingesti Web Socket &amp; Resiliensi Fallback <span class="en-subtitle">/ 2.1 Web Socket Ingestion &amp; Fallback Resiliency</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Untuk menangkap spread basis yang cepat menyusut, mesin berlangganan aliran fstream WebSocket Binance <code>!markPrice@arr@1s</code>. Di bawah kondisi pemutusan koneksi atau latensi jabat tangan TLS, pekerja fallback dikerahkan. Fallback ini secara otomatis meminta <code>/fapi/v1/premiumIndex</code> melalui protokol REST setiap 10 detik untuk mempertahankan pembaruan data yang berkelanjutan tanpa terputus.
+                            </p>
+                            <p class="p-en">
+                                To capture fast-decaying basis spreads, the engine subscribes to the Binance fstream WebSocket feed <code>!markPrice@arr@1s</code>. Under circumstances of connection drops or TLS handshaking latency, a fallback worker is deployed. This fallback automatically queries <code>/fapi/v1/premiumIndex</code> via REST protocol every 10 seconds to maintain continuous, uninterrupted data updates.
+                            </p>
+                        </div>
+
+                        <h3 class="subsection-title">2.2 Eksekusi Dual-Leg &amp; Validasi Basis <span class="en-subtitle">/ 2.2 Dual-Leg Execution &amp; Basis Validation</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Mode kegagalan umum dalam model cash-and-carry adalah mengeksekusi leg secara asinkron, yang mengekspos mesin pada slippage direksional. Modul order dua kaki (dual-leg) dioptimalkan untuk menempatkan order pasar spot-buy dan futures-short secara bersamaan. Sebelum dieksekusi, deviasi basis diperiksa untuk memastikan:
+                            </p>
+                            <p class="p-en">
+                                A common failure mode in cash-and-carry models is executing legs asynchronously, exposing the engine to directional slippage. The dual-leg order module is optimized to place spot-buy and futures-short market orders concurrently. Before execution, the basis deviation is checked to ensure:
+                            </p>
+                        </div>
+                        <div class="math-block">
+                            <span>Basis Spread % = ((Futures Mark Price - Spot Index Price) / Spot Index Price) &times; 100 &lt; 0.5%</span>
+                            <span class="math-eq-num">(2)</span>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Hal ini mencegah pembukaan posisi arbitrase ketika harga spot dan futures telah menyimpang ke tingkat yang tidak berkelanjutan.
+                            </p>
+                            <p class="p-en">
+                                This prevents opening arbitrage positions when spot and futures prices have deviated to an unsustainable degree.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 3 -->
+                    <div class="book-page" data-page="3">
+                        <h2 class="section-title" id="sec-results">3. Analisis Kinerja Empiris <span class="en-title">/ 3. Empirical Performance Analysis</span></h2>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Di bawah kondisi pengujian dengan modal awal $200.00 USDT, sistem menyebarkan 10 posisi aktif. Rekaman distribusi APR menunjukkan imbal hasil yang stabil seperti yang digambarkan pada Tabel 1.
+                            </p>
+                            <p class="p-en">
+                                Under test conditions using a starting equity of $200.00 USDT, the system deployed 10 active positions. The recorded APR distribution shows stable yields as depicted in Table 1.
+                            </p>
+                        </div>
+
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Posisi Arbitrase (Simbol)<br/><span style="font-size:0.8em;font-weight:normal;">Arbitrage Position (Symbol)</span></th>
+                                    <th>Rata-rata Funding Rate (8j)<br/><span style="font-size:0.8em;font-weight:normal;">Average Funding Rate (8h)</span></th>
+                                    <th>APR Tahunan %<br/><span style="font-size:0.8em;font-weight:normal;">Annualized APR %</span></th>
+                                    <th>Total Pembayaran Dikumpulkan<br/><span style="font-size:0.8em;font-weight:normal;">Total Payments Collected</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>BTCUSDT</td>
+                                    <td>0.0125%</td>
+                                    <td>13.68%</td>
+                                    <td>24x</td>
+                                </tr>
+                                <tr>
+                                    <td>ETHUSDT</td>
+                                    <td>0.0150%</td>
+                                    <td>16.42%</td>
+                                    <td>24x</td>
+                                </tr>
+                                <tr>
+                                    <td>SOLUSDT</td>
+                                    <td>0.0350%</td>
+                                    <td>38.32%</td>
+                                    <td>24x</td>
+                                </tr>
+                                <tr>
+                                    <td>XRPUSDT</td>
+                                    <td>0.0840%</td>
+                                    <td>91.98%</td>
+                                    <td>24x</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="font-size: 0.85em; font-style: italic; color: var(--text-muted); text-align: center; margin-top: -15px; margin-bottom: 30px;">
+                            Tabel 1: Kinerja Arbitrase dan Imbal Hasil APR Tahunan per Simbol.<br/>
+                            <span style="font-size: 0.9em; font-style: normal; color: var(--text-muted);">Table 1: Arbitrage Performance and Annualized APR Yields per Symbol.</span>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 4 -->
+                    <div class="book-page" data-page="4">
+                        <h2 class="section-title" id="sec-risk">4. Manajemen Risiko dan Perlindungan <span class="en-title">/ 4. Risk Management and Safeguards</span></h2>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Mesin ini mengintegrasikan proteksi funding rate negatif otomatis. Jika funding rate suatu simbol turun di bawah 0% selama lebih dari dua interval berturut-turut, posisi tersebut ditandai untuk likuidasi. Demikian pula, jika spread basis menyimpang secara signifikan dari basis masuk (entry basis), sistem memicu peringatan untuk melindungi dari peluruhan basis.
+                            </p>
+                            <p class="p-en">
+                                The engine incorporates automated negative funding protection. If a symbol's funding rate falls below 0% for more than two consecutive intervals, the position is marked for liquidation. Similarly, if the basis spread deviates significantly from the entry basis, the system triggers a warning to protect against basis decay.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 5 -->
+                    <div class="book-page" data-page="5">
+                        <h2 class="section-title" id="sec-conclusion">5. Kesimpulan <span class="en-title">/ 5. Conclusion</span></h2>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Mesin Arbitrase Funding Rate menyediakan alternatif berisiko rendah yang sangat tangguh dibandingkan sistem trend-following tradisional. Dengan mempertahankan eksekusi delta-neutral di berbagai keranjang pasangan perpetual, sistem menghasilkan imbal hasil yang konsisten. Penelitian masa depan akan mengeksplorasi peluang arbitrase lintas bursa untuk menangkap spread basis yang lebih luas.
+                            </p>
+                            <p class="p-en">
+                                The Funding Rate Arbitrage Engine provides a highly resilient, low-risk alternative to traditional trend-following systems. By maintaining delta-neutral execution across a diverse basket of perpetual pairs, the system generates consistent yield. Future research will explore cross-exchange arbitrage opportunities to capture even wider basis spreads.
+                            </p>
+                        </div>
+
+                        <h2 class="section-title" id="sec-references" style="margin-top: 60px;">Daftar Pustaka <span class="en-title">/ References</span></h2>
+                        <div style="font-size: 0.9em; line-height: 1.8; margin-left: 25px; text-indent: -25px;">
+                            <p>[1] Hasbrouck, J. (2007). <i>Empirical Market Microstructure: The Institutions, Semiparametrics, and Finance of Market Behavior</i>. Oxford University Press.</p>
+                            <p>[2] Alexander, C., &amp; Deng, J. (2020). <i>Arbitrage in Cryptocurrency Markets: Funding Rates and Basis Trading</i>. Journal of Financial Econometrics, 18(3), 442-475.</p>
+                        </div>
+
+                        <div class="footer">
+                            BitTrade Technical Research Paper — Bot D (Arbitrage Engine) &nbsp;|&nbsp; Rev. July 2026<br />
+                            BitTrade Quantitative Research Group &nbsp;|&nbsp; Advanced Agentic Trading Division
+                        </div>
+                    </div>
+
+                </div><!-- #pages-container -->
+            </div><!-- #pages-viewport -->
+
+            <!-- BOOK NAVIGATION BAR -->
+            <div class="book-nav-bar">
+                <div class="page-indicator"><span id="currentPage">1</span> / 6</div>
             </div>
 
-            <h1 class="paper-title">
-                Funding Rate Arbitrage (Cash-and-Carry) System Optimization: A High-Frequency Multi-Coin Approach in Perpetual Futures
-            </h1>
-
-            <div class="authors">
-                <strong>Bot D Quantitative Development Team</strong>
-            </div>
-
-            <div class="affiliations">
-                Department of Quantitative Analysis &amp; Algorithmic Trading Systems, BitTrade Systems
-            </div>
-
-            <div class="abstract-section" id="sec-abstract">
-                <div class="abstract-title">Abstract</div>
-                <div class="abstract-content">
-                    Cash-and-Carry Arbitrage has emerged as a cornerstone risk-mitigation strategy in cryptocurrency markets. By matching physical/simulated spot purchases with equivalent short positions in Perpetual Futures, the engine creates a market-neutral delta exposure while collecting recurring funding payments paid by leveraged long positions. This paper presents an optimized, low-latency framework designed to scan 300+ USDT perpetual symbols, identify yielding candidates, validate basis spreads, and simultaneously execute dual-leg orders. The research evaluates basis deviation protections, REST fallbacks, and the system's long-term capability of locking high-APR yields under varying market volatility.
-                </div>
-            </div>
-
-            <h2 class="section-heading" id="sec-intro">1. Introduction</h2>
-            <p>
-                Cryptocurrency derivatives markets offer unique arbitrage anomalies that are virtually absent in traditional asset classes. Among these, the recurring 8-hour funding payment mechanism in Perpetual Futures provides a highly recurring, capital-yielding strategy. When market conditions display positive sentiment (bullish regime), long traders pay short traders a variable interest rate to maintain their long positions.
-            </p>
-            <p>
-                By constructing a delta-neutral portfolio where:
-            </p>
-            <div class="formula-box">
-                <span>Portfolio Delta (&Delta;) = &Delta;_Spot + &Delta;_Short_Futures = 1 - 1 = 0</span>
-                <span class="formula-num">(1)</span>
-            </div>
-            <p class="no-indent">
-                traders are fully protected from linear direction swings. Capital yield is harvested passively from funding rates. This paper details the engineering decisions implemented in <strong>Bot D (Arbitrage Engine)</strong> to monitor, analyze, and safely execute this strategy.
-            </p>
-
-            <h2 class="section-heading" id="sec-methods">2. Methodology &amp; System Architecture</h2>
-            
-            <h3 class="subsection-heading">2.1 Web Socket Ingestion &amp; Fallback Resiliency</h3>
-            <p>
-                To capture fast-decaying basis spreads, the engine subscribes to the Binance fstream WebSocket feed <code>!markPrice@arr@1s</code>. Under circumstances of connection drops or TLS handshaking latency, a fallback worker is deployed. This fallback automatically queries <code>/fapi/v1/premiumIndex</code> via REST protocol every 10 seconds to maintain continuous, uninterrupted data updates.
-            </p>
-
-            <h3 class="subsection-heading">2.2 Dual-Leg Execution &amp; Basis Validation</h3>
-            <p>
-                A common failure mode in cash-and-carry models is executing legs asynchronously, exposing the engine to directional slippage. The dual-leg order module is optimized to place spot-buy and futures-short market orders concurrently. Before execution, the basis deviation is checked to ensure:
-            </p>
-            <div class="formula-box">
-                <span>Basis Spread % = ((Futures Mark Price - Spot Index Price) / Spot Index Price) &times; 100 &lt; 0.5%</span>
-                <span class="formula-num">(2)</span>
-            </div>
-            <p class="no-indent">
-                This prevents opening arbitrage positions when spot and futures prices have deviated to an unsustainable degree.
-            </p>
-
-            <h2 class="section-heading" id="sec-results">3. Empirical Performance Analysis</h2>
-            <p>
-                Under test conditions using a starting equity of $200.00 USDT, the system deployed 10 active positions. The recorded APR distribution shows stable yields as depicted in Table 1.
-            </p>
-
-            <table class="academic-table">
-                <thead>
-                    <tr>
-                        <th>Arbitrage Position (Symbol)</th>
-                        <th>Average Funding Rate (8h)</th>
-                        <th>Annualized APR %</th>
-                        <th>Total Payments Collected</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>BTCUSDT</td>
-                        <td>0.0125%</td>
-                        <td>13.68%</td>
-                        <td>24x</td>
-                    </tr>
-                    <tr>
-                        <td>ETHUSDT</td>
-                        <td>0.0150%</td>
-                        <td>16.42%</td>
-                        <td>24x</td>
-                    </tr>
-                    <tr>
-                        <td>SOLUSDT</td>
-                        <td>0.0350%</td>
-                        <td>38.32%</td>
-                        <td>24x</td>
-                    </tr>
-                    <tr>
-                        <td>XRPUSDT</td>
-                        <td>0.0840%</td>
-                        <td>91.98%</td>
-                        <td>24x</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="caption">Table 1: Arbitrage Performance and Annualized APR Yields per Symbol.</div>
-
-            <h2 class="section-heading" id="sec-risk">4. Risk Management and Safeguards</h2>
-            <p>
-                The engine incorporates automated negative funding protection. If a symbol's funding rate falls below 0% for more than two consecutive intervals, the position is marked for liquidation. Similarly, if the basis spread deviates significantly from the entry basis, the system triggers a warning to protect against basis decay.
-            </p>
-
-            <h2 class="section-heading" id="sec-conclusion">5. Conclusion</h2>
-            <p>
-                The Funding Rate Arbitrage Engine provides a highly resilient, low-risk alternative to traditional trend-following systems. By maintaining delta-neutral execution across a diverse basket of perpetual pairs, the system generates consistent yield. Future research will explore cross-exchange arbitrage opportunities to capture even wider basis spreads.
-            </p>
-
-            <div class="references" id="sec-references">
-                <h3 class="subsection-heading" style="margin-top: 0;">References</h3>
-                <div class="ref-item">
-                    [1] Hasbrouck, J. (2007). <i>Empirical Market Microstructure: The Institutions, Semiparametrics, and Finance of Market Behavior</i>. Oxford University Press.
-                </div>
-                <div class="ref-item">
-                    [2] Alexander, C., &amp; Deng, J. (2020). <i>Arbitrage in Cryptocurrency Markets: Funding Rates and Basis Trading</i>. Journal of Financial Econometrics, 18(3), 442-475.
-                </div>
-            </div>
-
-            <div class="footer">
-                BitTrade Technical Research Paper — Bot D (Arbitrage Engine) &nbsp;|&nbsp; Rev. July 2026<br />
-                BitTrade Quantitative Research Group &nbsp;|&nbsp; Advanced Agentic Trading Division
-            </div>
+            <button id="btnPrev" class="btn-action floating-btn left-btn" disabled>&#10094;</button>
+            <button id="btnNext" class="btn-action floating-btn right-btn">&#10095;</button>
 
         </div><!-- .latex-document -->
     </div><!-- .paper-main-content -->
   </div><!-- .paper-layout-wrapper -->
 
   <script is:inline>
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentPage = 0;
+        const totalPages = 6;
+        const pagesContainer = document.getElementById('pages-container');
         const links = document.querySelectorAll('.toc-link');
-        const sectionIds = Array.from(links).map(l => l.getAttribute('href')?.replace('#', '') || '');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const pageIndicator = document.getElementById('currentPage');
 
-        window.addEventListener('scroll', () => {
-            let current = sectionIds[0];
-            const scrollPos = window.scrollY + 160;
-            sectionIds.forEach(id => {
-                if (!id) return;
-                const el = document.getElementById(id);
-                if (el && el.offsetTop <= scrollPos) current = id;
-            });
-            links.forEach(l => {
-                l.classList.remove('active');
-                if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+        function showPage(index) {
+            // Highlight TOC
+            links.forEach(l => l.classList.remove('active'));
+            const targetLink = document.querySelector(`.toc-link[data-target="${index}"]`);
+            if(targetLink) targetLink.classList.add('active');
+
+            // Slide pages (16.6666% per page since container is 600% wide)
+            pagesContainer.style.transform = `translateX(-${index * 16.6666}%)`;
+
+            // Adjust viewport height to match active page
+            const pages = document.querySelectorAll('.book-page');
+            const viewport = document.getElementById('pages-viewport');
+            if(pages[index]) {
+                viewport.style.height = pages[index].offsetHeight + 'px';
+                viewport.style.transition = 'height 0.4s ease';
+            }
+
+            // Update UI
+            currentPage = index;
+            pageIndicator.innerText = (index + 1);
+            btnPrev.disabled = index === 0;
+            btnNext.disabled = index === totalPages - 1;
+
+            // Scroll to top of document
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TOC Clicks
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = parseInt(link.getAttribute('data-target'));
+                showPage(target);
             });
         });
+
+        // Prev / Next Clicks
+        btnPrev.addEventListener('click', () => {
+            if (currentPage > 0) showPage(currentPage - 1);
+        });
+        
+        btnNext.addEventListener('click', () => {
+            if (currentPage < totalPages - 1) showPage(currentPage + 1);
+        });
+
+        // Mobile TOC Toggle
+        const mobileTocToggle = document.getElementById('mobileTocToggle');
+        const tocSidebar = document.getElementById('tocSidebar');
+        const closeToc = document.getElementById('closeToc');
+        
+        if (mobileTocToggle && tocSidebar && closeToc) {
+            mobileTocToggle.addEventListener('click', () => {
+                tocSidebar.classList.add('open');
+            });
+            closeToc.addEventListener('click', () => {
+                tocSidebar.classList.remove('open');
+            });
+            
+            // Close sidebar when clicking a link on mobile
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        tocSidebar.classList.remove('open');
+                    }
+                });
+            });
+        }
+
+        // Init height
+        setTimeout(() => showPage(0), 50);
     });
   </script>
-</Layout>
 
-<style is:global>
-  .paper-layout-wrapper { width: 100%; max-width: 100%; margin: 20px auto; display: flex; gap: 40px; padding: 0 15px; align-items: flex-start; box-sizing: border-box; }
-  .paper-toc-sidebar { width: 250px; position: sticky; top: 90px; background-color: var(--paper-bg); border: 1px solid var(--border-color); padding: 20px; box-sizing: border-box; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .paper-toc-sidebar h4 { margin-top: 0; margin-bottom: 15px; font-weight: bold; color: var(--text-primary); text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; border-bottom: 1.5px solid var(--text-primary); padding-bottom: 5px; }
-  .toc-list { list-style: none; padding: 0; margin: 0; }
-  .toc-item { margin-bottom: 10px; }
-  .toc-link { text-decoration: none; color: var(--text-muted); font-size: 0.9em; transition: all 0.2s; display: block; }
-  .toc-link:hover, .toc-link.active { color: var(--accent-blue); font-weight: bold; padding-left: 5px; }
-  .paper-main-content { flex-grow: 1; min-width: 0; max-width: 100%; overflow: hidden; }
-  .latex-document { background-color: var(--paper-bg); padding: 30px 25px; position: relative; min-height: auto; display: flex; flex-direction: column; width: 100%; max-width: 100%; word-break: break-word; overflow-wrap: break-word; font-size: clamp(14px, 1.6vw, 17px); }
-  .paper-actions-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px; }
-  .btn-action { background: var(--paper-bg); border: 1px solid var(--border-color); padding: 6px 12px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-size: 0.9em; color: var(--text-primary); transition: all 0.2s; border-radius: 4px; }
-  .btn-action:hover { background: #faf8f5; border-color: var(--text-primary); }
-  .journal-header { text-align: center; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 30px; }
-  h1.paper-title { font-size: 2.1em; font-weight: normal; line-height: 1.3; text-align: center; margin-bottom: 25px; }
-  .authors { text-align: center; font-size: 1.05em; margin-bottom: 5px; }
-  .affiliations { text-align: center; font-size: 0.85em; color: var(--text-muted); margin-bottom: 30px; font-style: italic; }
-  .abstract-section { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 25px 0; margin: 35px 0; }
-  .abstract-title { text-align: center; font-weight: bold; text-transform: uppercase; font-size: 0.9em; letter-spacing: 1px; margin-bottom: 15px; color: var(--accent-blue); }
-  .abstract-content { font-size: 0.95em; text-align: justify; color: var(--text-secondary); line-height: 1.7; }
-  h2.section-heading { font-size: 1.3em; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; margin-top: 45px; margin-bottom: 20px; font-weight: bold; }
-  h3.subsection-heading { font-size: 1.1em; margin-top: 30px; margin-bottom: 12px; font-weight: bold; font-style: italic; color: var(--accent-blue); }
-  p { text-align: justify; margin-bottom: 20px; text-indent: 30px; line-height: 1.7; }
-  p.no-indent { text-indent: 0; }
-  .formula-box { background-color: var(--bg-neutral); border: 1px solid var(--border-color); padding: 15px 25px; margin: 25px 0; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-style: italic; border-radius: 4px; }
-  .formula-num { font-style: normal; font-weight: bold; color: var(--text-muted); }
-  table.academic-table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 0.9em; display: block; overflow-x: auto; white-space: nowrap; }
-  table.academic-table th, table.academic-table td { padding: 10px 12px; text-align: left; }
-  table.academic-table th { border-top: 2px solid var(--text-primary); border-bottom: 1px solid var(--text-primary); font-weight: bold; text-transform: uppercase; font-size: 0.85em; background: var(--bg-neutral); }
-  table.academic-table td { border-bottom: 1px solid var(--border-color); }
-  table.academic-table tr:last-child td { border-bottom: 2px solid var(--text-primary); }
-  .caption { font-size: 0.85em; font-style: italic; color: var(--text-muted); text-align: center; margin-top: -15px; margin-bottom: 30px; }
-  .references { border-top: 1px solid var(--border-color); margin-top: 50px; padding-top: 30px; font-size: 0.85em; }
-  .ref-item { margin-bottom: 15px; padding-left: 20px; text-indent: -20px; text-align: justify; line-height: 1.7; }
-  .footer { margin-top: 50px; border-top: 1px solid var(--border-color); padding-top: 20px; text-align: center; font-size: 0.85em; color: var(--text-muted); font-family: monospace; }
-  @media print { .paper-toc-sidebar, .paper-actions-bar { display: none !important; } .paper-layout-wrapper { margin: 0; padding: 0; } .latex-document { box-shadow: none; border: none; padding: 0; } }
-  @media (max-width: 900px) { .paper-layout-wrapper { flex-direction: column; padding: 0 !important; } .paper-toc-sidebar { width: 100%; position: static; margin-bottom: 20px; } .latex-document { padding: 20px 12px !important; max-width: 100% !important; word-break: break-word !important; overflow-wrap: break-word !important; } .content-container { padding: 10px !important; } }
-</style>
+  <style is:global>
+    .unique-arbitrage-style-only { color: #000002; }
+    html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
+
+    * { box-sizing: border-box !important; }
+
+    /* FULLWIDTH FIX */
+    .paper-layout-wrapper { width: 100%; max-width: 100%; margin: 20px auto; display: flex; gap: 40px; padding: 0 15px; }
+    
+    .paper-toc-sidebar { 
+        width: 340px; 
+        flex-shrink: 0;
+        position: sticky; 
+        top: 90px; 
+        background-color: var(--paper-bg); 
+        border: 1px solid var(--border-color); 
+        padding: 30px 25px; 
+        box-sizing: border-box; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        max-height: calc(100vh - 120px); 
+        overflow-y: auto; 
+        scrollbar-width: thin;
+    }
+    .paper-toc-sidebar h4 { margin-top: 0; margin-bottom: 20px; font-weight: bold; color: var(--text-primary); text-transform: uppercase; font-size: 1.05em; letter-spacing: 1px; border-bottom: 2px solid var(--text-primary); padding-bottom: 12px; line-height: 1.4; }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-item { margin-bottom: 16px; }
+    .toc-link { text-decoration: none; color: var(--text-primary); font-size: 0.95em; transition: all 0.2s; display: block; line-height: 1.4; font-weight: 500; cursor: pointer; }
+    .toc-link:hover, .toc-link.active { color: var(--accent-blue); font-weight: bold; padding-left: 8px; border-left: 3px solid var(--accent-blue); margin-left: -3px; }
+    .en-sub { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; display: block; margin-top: 3px; }
+    
+    .paper-main-content { flex-grow: 1; min-width: 0; max-width: 100%; overflow: hidden; }
+    .latex-document { background-color: var(--paper-bg); padding: 30px 25px; position: relative; min-height: auto; display: flex; flex-direction: column; width: 100%; max-width: 100%; word-break: break-word; overflow-wrap: break-word; font-size: clamp(14px, 1.6vw, 17px); }
+    
+    /* SLIDE SYSTEM */
+    #pages-viewport {
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        position: relative;
+    }
+    #pages-container { 
+        display: flex; 
+        flex-wrap: nowrap;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        margin-bottom: 40px; 
+        align-items: flex-start;
+        width: 600%; /* 6 pages * 100% */
+    }
+    .book-page { 
+        width: 16.6666%; /* 100% / 6 pages */
+        flex: 0 0 16.6666%;
+        min-width: 0;
+        max-width: 16.6666%;
+        opacity: 1 !important;
+        display: block !important;
+        white-space: normal;
+        overflow-x: hidden;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        padding: 10px;
+    }
+    
+    /* FLOATING ACTIONS BUTTONS */
+    .floating-btn { position: fixed; bottom: 80px; width: 55px; height: 55px; border-radius: 50%; background: var(--paper-bg); border: 1.5px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; font-size: 1.4em; cursor: pointer; transition: all 0.3s; z-index: 1000; color: var(--text-primary); }
+    .floating-btn:hover:not(:disabled) { transform: translateY(-5px); background: #faf8f5; border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+    .floating-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .left-btn { left: 20px; }
+    .right-btn { right: 20px; }
+
+    /* MOBILE TOC TOGGLE */
+    .mobile-toc-toggle { display: none; }
+    .close-toc-btn { display: none; }
+
+    .paper-actions-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--border-color); padding-bottom: 15px; margin-bottom: 50px; }
+    .btn-action { background: var(--paper-bg); border: 1px solid var(--border-color); padding: 10px 20px; font-family: 'Georgia', serif; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95em; font-weight: bold; color: var(--text-primary); transition: all 0.2s; border-radius: 6px; }
+    .btn-action:hover:not(:disabled) { background: #faf8f5; border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+
+    /* COVER STYLES */
+    .book-cover { text-align: center; padding: 60px 20px 100px 20px; border-bottom: 4px double var(--border-color); margin-bottom: 60px; }
+    .university-header { font-size: 1.2em; font-weight: bold; letter-spacing: 2px; color: var(--text-primary); margin-bottom: 80px; line-height: 1.6; }
+    .book-title { font-size: 2.2em; font-weight: bold; line-height: 1.4; color: var(--text-primary); margin: 0 auto 20px auto; max-width: 900px; text-transform: uppercase; }
+    .book-title-en { font-size: 1.3em; font-style: italic; font-weight: normal; color: var(--text-muted); margin: 0 auto 80px auto; line-height: 1.5; max-width: 800px; }
+    .book-type { font-size: 1.1em; color: var(--text-primary); margin-bottom: 80px; line-height: 1.8; }
+    .book-author { font-size: 1.2em; color: var(--text-primary); line-height: 1.6; }
+
+    /* ABSTRACT STYLES */
+    .paper-abstract-box { background: #faf8f5; border: 1.5px solid var(--border-color); padding: 40px; margin: 40px 0; border-radius: 8px; }
+    .abstract-section { margin-bottom: 20px; }
+    .abstract-section:last-child { margin-bottom: 0; }
+    .abstract-header { font-weight: bold; font-size: 1.1em; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; color: var(--accent-blue); text-align: center; }
+    .abstract-text { font-size: 1.05em; text-align: justify; margin: 0 0 15px 0; line-height: 1.8; }
+    .abstract-text.en-text { color: var(--text-muted); font-style: italic; font-size: 0.95em; }
+    
+    /* TYPOGRAPHY */
+    h2.section-title { font-size: 1.5em; font-weight: bold; border-bottom: 2px solid var(--text-primary); padding-bottom: 8px; margin-top: 20px; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .en-title { font-size: 0.75em; font-weight: normal; color: var(--text-muted); font-style: italic; letter-spacing: 0; text-transform: none; }
+    h3.subsection-title { font-size: 1.25em; font-weight: bold; margin-top: 40px; margin-bottom: 20px; color: var(--accent-blue); }
+    .en-subtitle { font-size: 0.85em; font-weight: normal; color: var(--text-muted); font-style: italic; }
+    
+    .p-pair { margin-bottom: 35px; }
+    .p-id { text-align: justify; margin: 0 0 12px 0; font-size: 1.1em; color: var(--text-primary); line-height: 1.85; }
+    .p-en { text-align: justify; margin: 0; font-size: 0.95em; color: var(--text-muted); font-style: italic; line-height: 1.7; border-left: 3px solid var(--border-color); padding-left: 15px; }
+    
+    .math-block { background-color: #faf8f5; border-left: 4px solid var(--accent-blue); padding: 20px 30px; font-family: 'JetBrains Mono', monospace; font-style: italic; margin: 30px 0; font-size: 1.15em; display: flex; justify-content: space-between; align-items: center; border-radius: 4px; overflow-x: auto; width: 100%; max-width: 100%; }
+    .math-eq-num { font-style: normal; font-weight: bold; color: var(--text-muted); margin-left: 20px; white-space: nowrap; }
+    
+    .academic-table { width: 100%; max-width: 100%; border-collapse: collapse; margin: 40px 0; font-size: 1.05em; display: block; overflow-x: auto; white-space: nowrap; }
+    .academic-table th { border-top: 2px solid var(--text-primary); border-bottom: 1px solid var(--text-primary); padding: 16px 14px; font-weight: bold; text-align: left; background: var(--bg-neutral); line-height: 1.4; }
+    .academic-table td { padding: 14px 14px; border-bottom: 1px solid var(--border-color); text-align: left; line-height: 1.7; }
+    .academic-table tr:last-child td { border-bottom: 2px solid var(--text-primary); }
+    
+    .footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; font-size: 0.95em; color: var(--text-muted); font-family: monospace; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; width: 100%; }
+    
+    @media print { .paper-toc-sidebar, .paper-actions-bar, .book-nav-bar { display: none !important; } .paper-layout-wrapper { margin: 0; padding: 0; width: 100%; display: block; } .latex-document { box-shadow: none; border: none; padding: 0; min-height: auto; } .book-cover { padding-top: 0; } .book-page { display: block !important; animation: none !important; margin-bottom: 60px; } }
+    @media (max-width: 1000px) { .paper-layout-wrapper { flex-direction: column; padding: 0 10px; gap: 20px; } .paper-toc-sidebar { width: 100%; position: static; margin-bottom: 25px; max-height: none; } .latex-document { padding: 30px 20px; } .content-container { padding: 15px !important; } }
+    @media (max-width: 768px) {
+        .latex-document { padding: 20px 12px !important; }
+        .paper-layout-wrapper { padding: 0 !important; }
+        .content-container { padding: 10px !important; }
+        .paper-actions-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+        
+        /* Header mobile fix to prevent layout stretching */
+        .top-header { padding: 0 10px !important; }
+        .top-header .header-right button { display: none !important; } /* Hide Cetak PDF on mobile */
+        .top-header .header-right { gap: 8px !important; }
+        .main-area { max-width: 100vw !important; overflow-x: hidden !important; }
+        
+        /* Popup Sidebar */
+        .paper-toc-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            z-index: 2000;
+            margin: 0;
+            transition: left 0.3s ease;
+            border-radius: 0;
+        }
+        .paper-toc-sidebar.open { left: 0; }
+        
+        .mobile-toc-toggle {
+            display: block;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1500;
+            padding: 12px 20px;
+            border-radius: 30px;
+            background: var(--accent-blue, #0056b3);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+        .close-toc-btn {
+            display: block;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+        
+        /* Adjust floating buttons */
+        .floating-btn { width: 45px; height: 45px; font-size: 1.2em; }
+        .left-btn { left: 10px; }
+        .right-btn { right: 10px; }
+
+        /* Table mobile scaling */
+        .academic-table { font-size: 0.75em !important; }
+        .academic-table th, .academic-table td { padding: 8px 6px !important; }
+    }
+  </style>
+</Layout>

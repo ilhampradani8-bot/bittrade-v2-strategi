@@ -2,10 +2,28 @@
 .env
 
 # Rust build artifacts
-rust_bot/target/
-rust_bot/bot.log
+**/target/
+*.log
+**/*.log
+
+# Data/Temporary files
+*.csv
+**/*.csv
+*.json
+!web-ui/package.json
+!web-ui/tsconfig.json
+!grid_trading/Cargo.json
+!rust_bot/Cargo.json
+!statARB/Cargo.json
+!package.json
+!cargo.toml
+!Cargo.toml
+!**/Cargo.toml
 
 # IDEs & System files
 .vscode/
 .idea/
 .DS_Store
+node_modules/
+**/node_modules/
+

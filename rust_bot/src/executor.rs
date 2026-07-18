@@ -1,3 +1,4 @@
+// INI ADALAH FILE executor.rs
 use crate::{AppState, conclude::Decision};
 
 pub async fn execute_trade(decision: &Decision, price: f64, state: &AppState) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
@@ -22,13 +23,14 @@ pub async fn execute_trade(decision: &Decision, price: f64, state: &AppState) ->
                 
                 let notes = format!("{} | Biaya admin 0.1%: ${:.4}", reason, fee);
                 sqlx::query(
-                    "INSERT INTO bot_trading_history (action, price, amount, status, notes) VALUES ($1, $2, $3, $4, $5)"
+                    "INSERT INTO bot_trading_history (action, price, amount, status, notes, strategy_version) VALUES ($1, $2, $3, $4, $5, $6)"
                 )
                 .bind("BUY")
                 .bind(price)
                 .bind(*amount)
                 .bind("SUCCESS")
                 .bind(notes)
+                .bind(crate::CURRENT_STRATEGY_VERSION)
                 .execute(&state.db)
                 .await?;
             } else {
@@ -80,13 +82,14 @@ pub async fn execute_trade(decision: &Decision, price: f64, state: &AppState) ->
 
                 let notes = format!("{} | Biaya admin 0.1%: ${:.4}{}", reason, fee, pnl_str);
                 sqlx::query(
-                    "INSERT INTO bot_trading_history (action, price, amount, status, notes) VALUES ($1, $2, $3, $4, $5)"
+                    "INSERT INTO bot_trading_history (action, price, amount, status, notes, strategy_version) VALUES ($1, $2, $3, $4, $5, $6)"
                 )
                 .bind("SELL")
                 .bind(price)
                 .bind(*amount)
                 .bind("SUCCESS")
                 .bind(notes)
+                .bind(crate::CURRENT_STRATEGY_VERSION)
                 .execute(&state.db)
                 .await?;
             } else {

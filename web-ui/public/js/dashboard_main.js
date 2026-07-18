@@ -154,24 +154,7 @@ async function fetchHistoryD() {
 async function fetchStatusE() {
     try {
         const res = await fetch('/statarb/api/status');
-        if (res.ok) {
-            botEData.status = await res.json();
-            
-            // Fetch pair stats to display the benchmark ratio and Z-score on the main dashboard card
-            try {
-                const pairRes = await fetch('/statarb/api/pair_stats');
-                if (pairRes.ok) {
-                    const pairList = await pairRes.json();
-                    if (pairList && pairList.length > 0) {
-                        const latestPair = pairList[pairList.length - 1];
-                        botEData.status.current_ratio = latestPair.current_ratio;
-                        botEData.status.z_score = latestPair.z_score;
-                    }
-                }
-            } catch (errPair) {
-                console.error("Failed to fetch Bot E pair stats:", errPair);
-            }
-        }
+        if (res.ok) botEData.status = await res.json();
     } catch (e) {
         console.error("Failed to fetch Bot E status:", e);
         botEData.status = null;
@@ -302,9 +285,19 @@ function renderBotCCard() {
         return;
     }
 
-    const totalEquity = s.simulated_balance + (s.btc_balance * s.current_btc_price);
-    const pnl = totalEquity - 1000.0;
-    const pnlPct = (pnl / 1000.0) * 100;
+    // Support multi-asset grid fields
+    let totalAssetsValue = 0;
+    if (s.asset_balances && s.prices) {
+        for (const sym in s.asset_balances) {
+            totalAssetsValue += s.asset_balances[sym] * (s.prices[sym] || 0);
+        }
+    }
+    const totalEquity = s.simulated_balance + totalAssetsValue;
+    
+    // Starting capital is $200.00
+    const startCapital = 200.0;
+    const pnl = totalEquity - startCapital;
+    const pnlPct = (pnl / startCapital) * 100;
 
     // Calculate daily winrate (from today's history data)
     const todayStr = new Date().toDateString();
@@ -317,17 +310,24 @@ function renderBotCCard() {
     const pnlSign = pnl >= 0 ? '+' : '';
 
     updateLED('bot-c-status-led', true, 'active-green');
-    (function(){var _n=document.getElementById('bot-c-btc-price');if(_n)_n.innerText = formatUSD(s.current_btc_price);;})();
+    
+    // Get BTC price
+    const btcPrice = s.prices ? (s.prices['BTCUSDT'] || 0) : 0;
+    const btcBalance = s.asset_balances ? (s.asset_balances['BTCUSDT'] || 0) : 0;
+    const btcRegime = s.market_regimes ? (s.market_regimes['BTCUSDT'] || 'GRID') : 'GRID';
+    const btcVol = s.volatilities ? (s.volatilities['BTCUSDT'] || 0) : 0;
+
+    (function(){var _n=document.getElementById('bot-c-btc-price');if(_n)_n.innerText = formatUSD(btcPrice);;})();
     document.getElementById('bot-c-equity').innerHTML = `<span style="color: ${pnlColor}; font-weight: bold;">${formatUSD(totalEquity)}</span>`;
     (function(){var _n=document.getElementById('bot-c-usdt');if(_n)_n.innerText = formatUSD(s.simulated_balance);;})();
-    (function(){var _n=document.getElementById('bot-c-btc');if(_n)_n.innerText = (s.btc_balance||0).toFixed(6);;})();
+    (function(){var _n=document.getElementById('bot-c-btc');if(_n)_n.innerText = btcBalance.toFixed(6);;})();
     
     document.getElementById('bot-c-winrate').innerHTML = `
         <span style="color: ${wrColor}; font-weight: bold;">${dailyWinrate.toFixed(1)}%</span> 
         (<span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlPct.toFixed(2)}%</span>) 
         <span style="font-size: 0.8em; color: var(--text-secondary); display: block; margin-top: 2px;">[Daily: ${todaySells.length} sells]</span>
     `;
-    (function(){var _n=document.getElementById('bot-c-regime');if(_n)_n.innerText = `${s.market_regime || 'WAIT'} (${(s.market_volatility || 0.0).toFixed(4)}%)`;;})();
+    (function(){var _n=document.getElementById('bot-c-regime');if(_n)_n.innerText = `${btcRegime} (${(btcVol * 100).toFixed(4)}%)`;;})();
 
     // Pipeline
     updateLED('bot-c-led-ws', s.ws_active, 'active-green');
@@ -388,9 +388,9 @@ function renderBotECard() {
         return;
     }
 
-    const totalEquity = s.total_equity || 200.0;
+    const totalEquity = s.equity || 200.0;
     const usdtBalance = s.simulated_balance || 200.0;
-    const pnl = s.total_pnl || (totalEquity - 200.0);
+    const pnl = totalEquity - 200.0;
     const pnlPct = (pnl / 200.0) * 100.0;
     const pnlColor = pnl >= 0 ? '#2ecc71' : '#e74c3c';
     const pnlSign = pnl >= 0 ? '+' : '';
@@ -399,14 +399,14 @@ function renderBotECard() {
     const elPrice = document.getElementById('bot-e-btc-price'); if(elPrice) elPrice.innerText = `${(s.current_ratio || 0).toFixed(5)} (Z: ${(s.z_score || 0).toFixed(2)})`;
     const elEq    = document.getElementById('bot-e-equity');    if(elEq)    elEq.innerHTML    = `<span style="color:${pnlColor};font-weight:bold">${formatUSD(totalEquity)}</span>`;
     const elUsdt  = document.getElementById('bot-e-usdt');      if(elUsdt)  elUsdt.innerText  = formatUSD(usdtBalance);
-    const elBtc   = document.getElementById('bot-e-btc');       if(elBtc)   elBtc.innerText   = `${s.active_positions_count || 0} pairs`;
+    const elBtc   = document.getElementById('bot-e-btc');       if(elBtc)   elBtc.innerText   = `${s.active_positions || 0} pairs`;
     const elWr    = document.getElementById('bot-e-winrate');   if(elWr)    elWr.innerHTML    = `<span style="color:${pnlColor};font-weight:bold">${pnlSign}${formatUSD(pnl)}</span> (<span style="color:${pnlColor};font-weight:bold">${pnlSign}${pnlPct.toFixed(2)}%</span>)`;
-    const elRegime= document.getElementById('bot-e-regime');    if(elRegime)elRegime.innerText= `NEUTRAL (Entry: ±${(s.z_entry_threshold || 2.0).toFixed(1)})`;
+    const elRegime= document.getElementById('bot-e-regime');    if(elRegime)elRegime.innerText= `${s.market_regime || 'NORMAL'} (${(s.market_volatility || 0).toFixed(2)}%)`;
 
     updateLED('bot-e-led-ws',        s.ws_active,       'active-green');
-    updateLED('bot-e-led-conclude',  s.engine_active,   'active-green');
-    updateLED('bot-e-led-validate',  s.engine_active,   'active-green');
-    updateLED('bot-e-led-executor',  s.engine_active,   'active-green');
+    updateLED('bot-e-led-conclude',  s.conclude_active, 'active-green');
+    updateLED('bot-e-led-validate',  s.validate_active, 'active-green');
+    updateLED('bot-e-led-executor',  s.executor_active, 'active-green');
     updateLED('bot-e-led-corrector', s.corrector_active,'active-green');
 }
 
@@ -489,12 +489,12 @@ function renderUnifiedHistory() {
     botEData.history.forEach(t => {
         merged.push({
             botKey: 'bot-e',
-            botName: `Bot E: ${t.pair_name || 'Spread'}`,
+            botName: 'Bot E: Statistical Arbitrage',
             timestamp: new Date(t.timestamp),
             action: t.action,
-            price: t.ratio || 0.0,
-            amount: t.amount_a || 0.0,
-            notes: t.notes || (t.net_pnl !== null && t.net_pnl !== undefined ? `P&L: $${t.net_pnl.toFixed(2)}` : `Z-Score: ${(t.z_score || 0).toFixed(2)}`)
+            price: t.price,
+            amount: t.amount,
+            notes: t.notes || '-'
         });
     });
 
@@ -567,7 +567,7 @@ function aggregateData(balanceArray, resolution, isBotD = false) {
         });
         return Object.keys(grouped).sort().map(key => {
             const date = new Date(key + 'T12:00:00');
-            let val = parseFloat(grouped[key].total_value || grouped[key].total_equity || 0);
+            let val = parseFloat(grouped[key].total_value || 0);
             if (isBotD && val > 0) {
                 const cap = Math.round(val / 1000) * 1000;
                 if (cap > 0) val = (val / cap) * 1000;
@@ -592,7 +592,7 @@ function aggregateData(balanceArray, resolution, isBotD = false) {
         });
         return Object.keys(grouped).sort().map(key => {
             const date = new Date(key);
-            let val = parseFloat(grouped[key].total_value || grouped[key].total_equity || 0);
+            let val = parseFloat(grouped[key].total_value || 0);
             if (isBotD && val > 0) {
                 const cap = Math.round(val / 1000) * 1000;
                 if (cap > 0) val = (val / cap) * 1000;
@@ -613,7 +613,7 @@ function aggregateData(balanceArray, resolution, isBotD = false) {
         for (let i = 0; i < sorted.length; i += step) {
             const item = sorted[i];
             const date = new Date(item.timestamp);
-            let val = parseFloat(item.total_value || item.total_equity || 0);
+            let val = parseFloat(item.total_value || 0);
             if (isBotD && val > 0) {
                 const cap = Math.round(val / 1000) * 1000;
                 if (cap > 0) val = (val / cap) * 1000;
@@ -628,7 +628,7 @@ function aggregateData(balanceArray, resolution, isBotD = false) {
         if (sorted.length > 0 && (sorted.length - 1) % step !== 0) {
             const lastItem = sorted[sorted.length - 1];
             const date = new Date(lastItem.timestamp);
-            let val = parseFloat(lastItem.total_value || lastItem.total_equity || 0);
+            let val = parseFloat(lastItem.total_value || 0);
             if (isBotD && val > 0) {
                 const cap = Math.round(val / 1000) * 1000;
                 if (cap > 0) val = (val / cap) * 1000;
@@ -691,7 +691,7 @@ function renderEquityChart() {
         };
 
         const datasetC = {
-            label: 'Bot C: OKX Engine',
+            label: 'Bot C: Grid Engine',
             data: mapToLabels(dataPointsC),
             borderColor: '#2ecc71',
             borderWidth: 2,

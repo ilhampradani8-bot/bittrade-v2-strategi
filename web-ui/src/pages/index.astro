@@ -93,14 +93,14 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <!-- Bot C Card (OKX Trading) -->
-            <div class="card" id="card-bot-c">
+            <!-- Bot C Card (Grid Trading) -->
+            <div class="card" id="card-bot-c" onclick="window.location.href='/grid/'" style="cursor: pointer;">
                 <div class="bot-header">
                     <div class="bot-title">
                         <span class="led-light" id="bot-c-status-led"></span>
-                        <span>Bot C: OKX Engine</span>
+                        <span>Bot C: Grid Engine</span>
                     </div>
-                    <span class="bot-status-badge">OKX SPOT</span>
+                    <span class="bot-status-badge">GRID SYSTEM</span>
                 </div>
                 <div class="stat-row">
                     <span class="label">BTC Price</span>
@@ -124,7 +124,7 @@ import Layout from '../layouts/Layout.astro';
                 </div>
                 <div class="stat-row">
                     <span class="label">Market Condition / Vol</span>
-                    <span class="value" id="bot-c-regime">WAIT</span>
+                    <span class="value" id="bot-c-regime">GRID</span>
                 </div>
                 <div class="pipeline-status">
                     <div class="pipeline-item"><span class="led-light" id="bot-c-led-ws"></span><span>WS</span></div>
@@ -177,47 +177,7 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <!-- Bot E Card (Statistical Arbitrage) -->
-            <div class="card" id="card-bot-e" onclick="window.location.href='/statarb/'" style="cursor: pointer;">
-                <div class="bot-header">
-                    <div class="bot-title">
-                        <span class="led-light" id="bot-e-status-led"></span>
-                        <span>Bot E: Statistical Arbitrage</span>
-                    </div>
-                    <span class="bot-status-badge">BINANCE STATARB</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">ETH/BTC Ratio (Z-Score)</span>
-                    <span class="value" id="bot-e-btc-price">0.00000 (0.00)</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">Total Equity</span>
-                    <span class="value-large" id="bot-e-equity">$-</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">USDT Balance</span>
-                    <span class="value" id="bot-e-usdt">$-</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">Active Spread Pairs</span>
-                    <span class="value" id="bot-e-btc">0</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">Realized P&L / Winrate</span>
-                    <span class="value" id="bot-e-winrate">-$ (0%)</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">Market Condition / Vol</span>
-                    <span class="value" id="bot-e-regime">NORMAL</span>
-                </div>
-                <div class="pipeline-status">
-                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-ws"></span><span>WS</span></div>
-                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-conclude"></span><span>Anls</span></div>
-                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-validate"></span><span>Val</span></div>
-                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-executor"></span><span>Exec</span></div>
-                    <div class="pipeline-item"><span class="led-light" id="bot-e-led-corrector"></span><span>Corr</span></div>
-                </div>
-            </div>
+
 
         </div>
 
@@ -244,9 +204,9 @@ import Layout from '../layouts/Layout.astro';
                 <button class="filter-btn active" id="tab-all" onclick="setHistoryTab('all')">All Bots</button>
                 <button class="filter-btn" id="tab-bot-a" onclick="setHistoryTab('bot-a')">Bot A (Trend)</button>
                 <button class="filter-btn" id="tab-bot-b" onclick="setHistoryTab('bot-b')">Bot B (DCA)</button>
-                <button class="filter-btn" id="tab-bot-c" onclick="setHistoryTab('bot-c')">Bot C (OKX)</button>
+                <button class="filter-btn" id="tab-bot-c" onclick="setHistoryTab('bot-c')">Bot C (Grid)</button>
                 <button class="filter-btn" id="tab-bot-d" onclick="setHistoryTab('bot-d')">Bot D (Arbitrage)</button>
-                <button class="filter-btn" id="tab-bot-e" onclick="setHistoryTab('bot-e')">Bot E (statARB)</button>
+
             </div>
             <div style="overflow-x: auto;">
                 <table>

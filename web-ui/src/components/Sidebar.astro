@@ -40,6 +40,12 @@ const currentPath = Astro.url.pathname;
         </a>
       </li>
       <li>
+        <a href="/grid/" class={currentPath.startsWith("/grid") ? "sidebar-link active" : "sidebar-link"}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg>
+          <span>Bot C: Grid Engine</span>
+        </a>
+      </li>
+      <li>
         <a href="/arbitrage/" class={currentPath.startsWith("/arbitrage") && !currentPath.includes("paper") ? "sidebar-link active" : "sidebar-link"}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
           <span>Bot D: Arbitrage Engine</span>
@@ -63,6 +69,7 @@ const currentPath = Astro.url.pathname;
         <ul class="sidebar-subnav">
           <li><a href="/paper_a">• Paper Bot A (Trend)</a></li>
           <li><a href="/paper_b">• Paper Bot B (DCA)</a></li>
+          <li><a href="/paper_grid">• Paper Bot C (Grid)</a></li>
           <li><a href="/paper_arbitrage">• Paper Bot D (Arbitrage)</a></li>
           <li><a href="/paper_statarb">• Paper Bot E (statARB)</a></li>
         </ul>

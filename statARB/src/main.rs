@@ -149,6 +149,12 @@ pub struct AppState {
     pub circuit_breakers: Arc<RwLock<HashMap<String, PairCircuitBreaker>>>,
     pub data_feed_healthy: Arc<RwLock<bool>>,
     pub current_samples: Arc<RwLock<usize>>,
+
+    // UPGRADE: Dynamic exchange limits
+    pub btc_step_size: Arc<RwLock<f64>>,
+    pub eth_step_size: Arc<RwLock<f64>>,
+    pub btc_min_notional: Arc<RwLock<f64>>,
+    pub eth_min_notional: Arc<RwLock<f64>>,
 }
 
 // ============================================================
@@ -348,19 +354,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // UPGRADE: Dynamic configurations loaded from environment
     let z_entry_threshold = get_env_or_default("STAT_ARB_Z_ENTRY_THRESHOLD", 2.0);
     let z_exit_threshold = get_env_or_default("STAT_ARB_Z_EXIT_THRESHOLD", 0.2);
-    let position_size_usdt = get_env_or_default("STAT_ARB_POSITION_SIZE_USDT", 1000.0);
-    let max_positions = get_env_or_default("STAT_ARB_MAX_POSITIONS", 3);
+    let position_size_usdt = get_env_or_default("STAT_ARB_POSITION_SIZE_USDT", 130.0);
+    let max_positions = get_env_or_default("STAT_ARB_MAX_POSITIONS", 1);
     let interval_secs = get_env_or_default("STAT_ARB_INTERVAL_SECS", 300);
     let fee_rate = get_env_or_default("STAT_ARB_FEE_RATE", 0.0016);
     let cooldown_seconds = get_env_or_default("STAT_ARB_COOLDOWN_SECONDS", 60);
-    let min_samples_for_signal = get_env_or_default("STAT_ARB_MIN_SAMPLES_FOR_SIGNAL", 120);
+    let min_samples_for_signal = get_env_or_default("STAT_ARB_MIN_SAMPLES_FOR_SIGNAL", 96);
     let min_r2 = get_env_or_default("STAT_ARB_MIN_R2", 0.85);
     let max_consecutive_sl = get_env_or_default("STAT_ARB_MAX_CONSECUTIVE_SL", 3);
     let consecutive_sl_window_mins = get_env_or_default("STAT_ARB_CONSECUTIVE_SL_WINDOW_MINS", 5);
     let pause_duration_mins = get_env_or_default("STAT_ARB_PAUSE_DURATION_MINS", 15);
-    let max_drawdown_pct = get_env_or_default("STAT_ARB_MAX_DRAWDOWN_PCT", 10.0);
+    let max_drawdown_pct = get_env_or_default("STAT_ARB_MAX_DRAWDOWN_PCT", 15.0);
     let expected_value_buffer_multiplier = get_env_or_default("STAT_ARB_EXPECTED_VALUE_BUFFER_MULTIPLIER", 2.5);
-    let mode = env::var("STAT_ARB_MODE").unwrap_or_else(|_| "paper".to_string());
+    // UPGRADE: Mode is hardcoded to SUSPENDED by default due to empirical research findings.
+    let mode = env::var("STAT_ARB_MODE").unwrap_or_else(|_| "SUSPENDED".to_string());
 
     // UPGRADE: Validation checks on configurations at load time
     if z_entry_threshold <= 0.0 || z_exit_threshold < 0.0 || z_exit_threshold >= z_entry_threshold {
@@ -438,6 +445,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         circuit_breakers: Arc::new(RwLock::new(HashMap::new())),
         data_feed_healthy: Arc::new(RwLock::new(true)),
         current_samples: Arc::new(RwLock::new(0)),
+        btc_step_size: Arc::new(RwLock::new(0.001)),
+        eth_step_size: Arc::new(RwLock::new(0.001)),
+        btc_min_notional: Arc::new(RwLock::new(50.0)),
+        eth_min_notional: Arc::new(RwLock::new(20.0)),
     };
 
     // Load active positions from database for recovery
@@ -471,7 +482,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 2. Statistical Analysis & Trade Arbitrage loop
     let engine_state = state.clone();
-    tokio::spawn(conclude::start_analysis_loop(engine_state));
+    if engine_state.mode != "SUSPENDED" {
+        tokio::spawn(conclude::start_analysis_loop(engine_state));
+    } else {
+        println!("[SUSPENDED] Trade Arbitrage loop dinonaktifkan secara hardcode. Merujuk ke statARB/RESEARCH_FINDINGS.md.");
+    }
 
     // 3. System Corrector & DB Sync Loop
     let corrector_state = state.clone();
@@ -480,6 +495,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 4. 300+ Coin Co-Integration Spread Scanner Loop
     let scanner_state = state.clone();
     tokio::spawn(get::start_scanner_loop(scanner_state));
+
+    // 5. Exchange Limits Updater
+    let limits_state = state.clone();
+    tokio::spawn(get::start_exchange_limits_updater(limits_state));
 
     // ────────── Router Configuration ──────────
     let app = Router::new()

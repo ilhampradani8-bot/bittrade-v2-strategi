@@ -1,0 +1,480 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Bot C Dashboard: Grid Trading Engine | BitTrade Q-Lab"
+  description="Real-time monitoring dashboard for Bot C (Volatility-Adaptive Dynamic Grid Engine) trading BTC/USDT."
+  botStatus="GRID BOT ONLINE"
+>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+      <h1 style="margin-bottom: 0; border: none; font-size: 1.8em; padding-bottom: 0;">
+        Mesin Trading Grid BTC Real-time (Bot C)
+        <span class="en-sub">BTC Real-time Grid Engine (Bot C)</span>
+      </h1>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div class="uptime-badge">Masa Aktif Bot: <span id="uptime-counter">00:00:00</span> <span class="en-sub" style="color: inherit; display: inline; font-size: 0.9em; margin-left: 3px;">(Bot Uptime)</span></div>
+        <div class="uptime-badge" style="border-color: var(--accent-blue); color: var(--accent-blue);">Winrate Bot: <span id="winrate-counter">0.0%</span> <span class="en-sub" style="color: inherit; display: inline; font-size: 0.9em; margin-left: 3px;">(Bot Winrate)</span></div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; margin-bottom: 25px; flex-wrap: wrap;">
+      <button id="btn-page-overview" class="page-tab-btn active" onclick="switchPageTab('overview')">
+        Overview <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Ringkasan</span>
+      </button>
+      <button id="btn-page-positions" class="page-tab-btn" onclick="switchPageTab('positions')">
+        Active Positions <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Posisi Aktif</span>
+      </button>
+      <button id="btn-page-history" class="page-tab-btn" onclick="switchPageTab('history')">
+        Execution History <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Riwayat Transaksi</span>
+      </button>
+      <button id="btn-page-corrections" class="page-tab-btn" onclick="switchPageTab('corrections')">
+        System Corrections <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Koreksi Sistem</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Overview Section -->
+    <div id="section-overview" class="page-section">
+      <!-- Info Cards Row -->
+      <div class="grid-2">
+        <!-- Card 1: Harga Real-time -->
+        <div class="card">
+          <h2>Pasar Real-time <span class="en-sub">Real-time Market Data</span></h2>
+          <div style="margin-bottom: 15px;">
+            <div class="label">Harga BTC/USDT <span class="en-sub">BTC/USDT Price</span></div>
+            <div style="display: flex; align-items: baseline; gap: 15px;">
+              <div class="price-val" id="btc-price">$-</div>
+              <select id="chart-coin-selector" class="coin-select">
+                <option value="BTCUSDT">BTC / Bitcoin</option>
+                <option value="SOLUSDT">SOL / Solana</option>
+                <option value="DOGEUSDT">DOGE / Dogecoin</option>
+                <option value="AVAXUSDT">AVAX / Avalanche</option>
+                <option value="LINKUSDT">LINK / Chainlink</option>
+              </select>
+            </div>
+          </div>
+          <div class="stat-row">
+            <span class="label">Volatilitas (StdDev) <span class="en-sub">Volatility (StdDev)</span></span>
+            <span class="value" id="market-volatility">$-</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Regime Pasar <span class="en-sub">Market Regime State</span></span>
+            <span class="value" id="market-regime">GRID</span>
+          </div>
+          <div class="stat-row" id="whale-badge" style="border: 1px solid #3b3b3b; padding: 4px 8px; margin-top: 8px;">
+            <span class="label" style="color: inherit;">Whale Activity <span class="en-sub" style="color: inherit;">Whale Detector</span></span>
+            <span class="value" id="whale-status">SLEEPING</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Saldo & Perkembangan -->
+        <div class="card">
+          <h2>Akun &amp; Saldo <span class="en-sub">Account &amp; Balances</span></h2>
+          <div class="stat-row">
+            <span class="label">Modal Awal <span class="en-sub">Starting Capital</span></span>
+            <span class="value">$200.00</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Sisa Modal <span class="en-sub">Remaining Capital (simulated_balance)</span></span>
+            <span class="value" id="usdt-balance">$1,000.00</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Saldo Aset BTC <span class="en-sub">BTC Asset Balance (btc_balance)</span></span>
+            <span class="value" id="btc-balance">0.0000 BTC</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Nilai BTC Saat Ini <span class="en-sub">Current BTC Value</span></span>
+            <span class="value" id="btc-value-display">$0.00</span>
+          </div>
+          <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
+            <span class="label">Total Modal Saat Ini <span class="en-sub">Total Current Capital (total_value)</span></span>
+            <span class="value" id="total-equity-val">$1,000.00</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Profit / Rugi <span class="en-sub">Profit / Loss (P&amp;L)</span></span>
+            <span class="value" id="pnl-value">$0.00 (0.00%)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Process Status Lights -->
+      <div class="card" style="margin-bottom: 20px; margin-top: 20px;">
+        <h2 style="font-size: 1.1em;">Monitor Alur Proses Sistem <span class="en-sub">System Process Pipeline Monitor (Real-time)</span></h2>
+        <div class="process-grid">
+          <div class="process-card">
+            <div class="led-light" id="led-ws-btc"></div>
+            <div class="process-name">WebSocket Feed</div>
+          </div>
+          <div class="process-card">
+            <div class="led-light" id="led-ai-btc"></div>
+            <div class="process-name">SMA-50 Base</div>
+          </div>
+          <div class="process-card">
+            <div class="led-light" id="led-conclude-btc"></div>
+            <div class="process-name">Grid Logic</div>
+          </div>
+          <div class="process-card">
+            <div class="led-light" id="led-validate-btc"></div>
+            <div class="process-name">Validate</div>
+          </div>
+          <div class="process-card">
+            <div class="led-light" id="led-executor-btc"></div>
+            <div class="process-name">Executor</div>
+          </div>
+          <div class="process-card">
+            <div class="led-light" id="led-corrector"></div>
+            <div class="process-name">Corrector</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Asset Regime Monitor -->
+      <div class="card" style="margin-bottom: 20px;">
+        <h2 style="font-size: 1.1em;">Status Multikoin <span class="en-sub">Multi-Asset Stream Status</span></h2>
+        <div class="coins-regime-grid">
+          <div class="coin-regime-card">
+            <h3>BTCUSDT</h3>
+            <div class="led-light" id="led-regime-BTCUSDT"></div>
+            <div class="regime-status-val" id="regime-text-BTCUSDT">GRID</div>
+          </div>
+          <div class="coin-regime-card">
+            <h3>SOLUSDT</h3>
+            <div class="led-light" id="led-regime-SOLUSDT"></div>
+            <div class="regime-status-val" id="regime-text-SOLUSDT">GRID</div>
+          </div>
+          <div class="coin-regime-card">
+            <h3>DOGEUSDT</h3>
+            <div class="led-light" id="led-regime-DOGEUSDT"></div>
+            <div class="regime-status-val" id="regime-text-DOGEUSDT">GRID</div>
+          </div>
+          <div class="coin-regime-card">
+            <h3>AVAXUSDT</h3>
+            <div class="led-light" id="led-regime-AVAXUSDT"></div>
+            <div class="regime-status-val" id="regime-text-AVAXUSDT">GRID</div>
+          </div>
+          <div class="coin-regime-card">
+            <h3>LINKUSDT</h3>
+            <div class="led-light" id="led-regime-LINKUSDT"></div>
+            <div class="regime-status-val" id="regime-text-LINKUSDT">GRID</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-container">
+        <div class="chart-box">
+          <h3>Grafik Harga Real-time <span class="en-sub">Real-time Ticker Price</span></h3>
+          <canvas id="priceChart"></canvas>
+        </div>
+        <div class="chart-box">
+          <h3>Grafik Akumulasi Saldo <span class="en-sub">Cumulative Balance (Total Equity)</span></h3>
+          <canvas id="balanceChart"></canvas>
+        </div>
+      </div>
+
+      <!-- System Resources & Logs -->
+      <div class="grid-2">
+        <div class="card">
+          <h2>Monitor Sumber Daya Server <span class="en-sub">Server Hardware Resources</span></h2>
+          <div class="stat-row">
+            <span class="label">Penggunaan CPU <span class="en-sub">CPU Usage</span></span>
+            <span class="value" id="cpu-counter">0.0%</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Penggunaan RAM <span class="en-sub">RAM Memory Usage</span></span>
+            <span class="value" id="ram-counter">0 MB</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">OS Server <span class="en-sub">Operating System</span></span>
+            <span class="value">Linux x86_64</span>
+          </div>
+          <div class="stat-row">
+            <span class="label">Framework <span class="en-sub">Engine Backend</span></span>
+            <span class="value">Rust (Tokio + Axum)</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Jurnal Sistem Real-time <span class="en-sub">Real-time Journal Logs</span></h2>
+          <pre id="journal-box" class="journal-pre">Connecting to log stream...</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Active Positions -->
+    <div id="section-positions" class="page-section" style="display: none;">
+      <div class="card">
+        <h2 id="positions-title">Daftar Posisi Grid Aktif (grid_active_positions)</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Harga Beli (Buy Price)</th>
+                <th>High Water Mark (HWM)</th>
+                <th>Kuantitas (Amount)</th>
+                <th>Nilai Posisi (Value)</th>
+                <th>Waktu Dibuka (Opened At)</th>
+              </tr>
+            </thead>
+            <tbody id="positions-body">
+              <tr>
+                <td colspan="6" style="text-align: center; color: var(--text-secondary);">Tidak ada posisi aktif yang terbuka.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: History Section -->
+    <div id="section-history" class="page-section" style="display: none;">
+      <div class="card">
+        <h2 id="history-title">Riwayat Eksekusi (grid_trading_history)</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Aksi</th>
+                <th>Harga BTC</th>
+                <th>Volume BTC (Kuantitas)</th>
+                <th>Keterangan / Realized P&amp;L</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              <tr>
+                <td colspan="5" style="text-align: center; color: var(--text-secondary);">Memuat data transaksi dari basis data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Corrections Section -->
+    <div id="section-corrections" class="page-section" style="display: none;">
+      <div class="card">
+        <h2>Log Koreksi Error Sistem (grid_corrections)</h2>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Waktu</th>
+                <th>Tipe Error</th>
+                <th>Alasan / Penjelasan Koreksi</th>
+              </tr>
+            </thead>
+            <tbody id="corrections-body">
+              <tr>
+                <td colspan="3" style="text-align: center; color: var(--text-secondary);">Tidak ada catatan koreksi error.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // Tab switcher
+    window.switchPageTab = function(tabName) {
+      document.querySelectorAll('.page-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+      
+      const activeBtn = document.getElementById('btn-page-' + tabName);
+      if (activeBtn) activeBtn.classList.add('active');
+      
+      const activeSec = document.getElementById('section-' + tabName);
+      if (activeSec) activeSec.style.display = 'block';
+    }
+  </script>
+
+  <!-- Load Chart JS & Custom Grid dashboard JS -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script is:inline src="/js/dashboard_grid.js?v=20260715_V2"></script>
+</Layout>
+
+<style is:global>
+  .dashboard-container {
+    background-color: var(--bg-color);
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    border: 2px solid var(--border-color);
+    position: relative;
+  }
+  .uptime-badge {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 5px 12px;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+  }
+  .page-tab-btn {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .page-tab-btn:hover, .page-tab-btn.active {
+    background: var(--border-color);
+    color: var(--bg-color);
+  }
+  .coin-select {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    font-family: 'Georgia', serif;
+    padding: 6px 12px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+  }
+  .price-val {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--accent-blue);
+    font-family: 'Courier New', monospace;
+    transition: color 0.2s ease;
+  }
+  .price-val.up { color: var(--accent-blue); }
+  .price-val.down { color: var(--accent-red); }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+  }
+  .label { color: var(--text-secondary); font-style: italic; }
+  .value { font-weight: bold; font-family: 'Courier New', monospace; }
+  
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+  }
+  .process-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .led-light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #e5e5e5;
+    border: 1px solid var(--border-color);
+    margin-bottom: 8px;
+    transition: background 0.3s;
+  }
+  .led-light.active-green { background-color: var(--accent-blue); }
+  .led-light.active-blue { background-color: var(--accent-blue); }
+  .led-light.active-red { background-color: var(--accent-red); }
+  .led-light.active-yellow { background-color: var(--accent-yellow); }
+  .process-name {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+  }
+
+  .coins-regime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+  }
+  .coin-regime-card {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    background: var(--bg-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .coin-regime-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+  }
+  .regime-status-val {
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    margin-bottom: 8px;
+  }
+  .aux-val {
+    font-size: 0.8em;
+    color: var(--text-secondary);
+    font-family: 'Courier New', monospace;
+  }
+
+  .charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  .chart-box {
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    padding: 15px;
+    height: 280px;
+  }
+  .journal-pre {
+    background: #1a1a1a;
+    color: #00ff00;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    overflow-y: auto;
+    max-height: 180px;
+    border: 1.5px solid var(--border-color);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    font-family: 'Courier New', monospace;
+    border: 1.5px solid var(--border-color);
+  }
+  th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+  }
+  th {
+    background: var(--border-color);
+    color: var(--bg-color);
+  }
+  .text-buy { color: var(--accent-blue); font-weight: bold; }
+  .text-sell { color: var(--accent-red); font-weight: bold; }
+  .text-fail { color: var(--accent-red); font-weight: bold; }
+</style>

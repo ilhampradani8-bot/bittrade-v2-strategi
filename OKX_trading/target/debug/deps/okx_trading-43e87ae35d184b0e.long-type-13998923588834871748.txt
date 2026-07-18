@@ -1,7 +1,0 @@
-FromRequest<(), axum_core::extract::private::ViaParts>
-fn(State<AppState>) -> impl futures_util::Future<Output = impl IntoResponse> {get_status}
-Handler<(axum_core::extract::private::ViaParts, State<AppState>), ()>
-fn(State<AppState>) -> impl futures_util::Future<Output = impl IntoResponse> {get_history}
-fn(State<AppState>) -> impl futures_util::Future<Output = impl IntoResponse> {get_corrections}
-fn(State<AppState>) -> impl futures_util::Future<Output = impl IntoResponse> {get_balance_history}
-fn(State<AppState>) -> impl futures_util::Future<Output = impl IntoResponse> {get_journal}

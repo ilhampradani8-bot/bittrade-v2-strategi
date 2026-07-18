@@ -1,3 +1,4 @@
+// INI ADALAH FILE corrector.rs
 use crate::AppState;
 
 pub async fn log_error(state: &AppState, error_type: &str, reason: &str) {
