@@ -1,467 +1,415 @@
-function getApiPrefix() {
-    const path = window.location.pathname;
-    if (path.startsWith('/alt') || path.indexOf('/alt/') !== -1) {
-        return '/alt/';
-    } else if (path.startsWith('/okx') || path.indexOf('/okx/') !== -1) {
-        return '/okx/';
-    } else if (path.startsWith('/dca') || path.indexOf('/dca/') !== -1) {
-        return '/dca/';
-    }
-    return '/';
-}
 let lastPrice = 0;
-        let botStartTime = null;
-        let priceChart = null;
-        let balanceChart = null;
-        let isBalanceHistoryInitialized = false;
+let botStartTime = null;
+let isBalanceHistoryInitialized = false;
+let showAllBalanceHistory = false;
+let selectedSymbol = 'BTCUSDT';
+const apiBase = window.location.protocol === 'file:' ? 'https://tradingsafe.mijdigital.my/dca/' : '';
 
-        const priceChartEl = document.getElementById('priceChart');
-        if (priceChartEl) {
-            priceChart = new Chart(priceChartEl.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        borderColor: '#1a1a1a', // Ink Black
-                        borderWidth: 1.8,
-                        data: [],
-                        fill: false,
-                        tension: 0.1,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#1a1a1a' }, grid: { color: '#e5dfd5' } },
-                        y: { ticks: { color: '#1a1a1a' }, grid: { color: '#e5dfd5' } }
-                    }
-                }
-            });
+// Initialize Equity Chart
+const ctxEquity = document.getElementById('equityChart').getContext('2d');
+const equityChart = new Chart(ctxEquity, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            borderColor: '#0f4c81',
+            borderWidth: 1.8,
+            data: [],
+            fill: false,
+            tension: 0.3,
+            pointRadius: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { ticks: { color: 'var(--text-secondary, #666)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+            y: { ticks: { color: 'var(--text-secondary, #666)' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+        }
+    }
+});
+
+const fmtUSD = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+
+// ─── Page Tab Switching ───────────────────────────────────────────────────────
+function switchPageTab(tabName) {
+    const sections = ['overview', 'cycles', 'history', 'scanner'];
+    sections.forEach(s => {
+        const el = document.getElementById(`section-${s}`);
+        if (el) el.style.display = (s === tabName) ? '' : 'none';
+        const btn = document.getElementById(`btn-page-${s}`);
+        if (btn) btn.classList.toggle('active', s === tabName);
+    });
+}
+window.switchPageTab = switchPageTab;
+
+// ─── Chart All-Data Toggle ────────────────────────────────────────────────────
+async function toggleBalanceHistoryRange() {
+    showAllBalanceHistory = !showAllBalanceHistory;
+    const btn = document.getElementById('btn-chart-all');
+    if (btn) {
+        btn.classList.toggle('active', showAllBalanceHistory);
+        btn.innerHTML = showAllBalanceHistory
+            ? 'Default (1 Minggu) <span style="font-size:0.85em;font-weight:normal;opacity:0.8;margin-left:3px;">(Show 1 Week)</span>'
+            : 'Tampilkan Semua Data <span style="font-size:0.85em;font-weight:normal;opacity:0.8;margin-left:3px;">(Show All Data)</span>';
+    }
+    isBalanceHistoryInitialized = false;
+    await fetchBalanceHistory();
+}
+window.toggleBalanceHistoryRange = toggleBalanceHistoryRange;
+
+// ─── Uptime Counter ───────────────────────────────────────────────────────────
+setInterval(() => {
+    if (!botStartTime) return;
+    const now = new Date();
+    const diffMs = now - botStartTime;
+    const diffSec = Math.floor(diffMs / 1000);
+    const hours = String(Math.floor(diffSec / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((diffSec % 3600) / 60)).padStart(2, '0');
+    const seconds = String(diffSec % 60).padStart(2, '0');
+    const uptimeEl = document.getElementById('uptime-counter');
+    if (uptimeEl) uptimeEl.innerText = `${hours}:${minutes}:${seconds}`;
+}, 1000);
+
+// ─── Symbol Selection ────────────────────────────────────────────────────────
+async function changeSelectedSymbol(val) {
+    selectedSymbol = val;
+    lastPrice = 0; // reset price flashing
+    await Promise.all([
+        fetchStatus(),
+        fetchHistory(),
+        fetchCycles()
+    ]);
+}
+window.changeSelectedSymbol = changeSelectedSymbol;
+
+// ─── Status Fetch ─────────────────────────────────────────────────────────────
+async function fetchStatus() {
+    try {
+        const res = await fetch(`${apiBase}api/status?symbol=${selectedSymbol}`);
+        const data = await res.json();
+
+        if (!botStartTime) {
+            botStartTime = new Date(data.start_time);
         }
 
-        const balanceChartEl = document.getElementById('balanceChart');
-        if (balanceChartEl) {
-            balanceChart = new Chart(balanceChartEl.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        borderColor: '#0f4c81', // Ink Blue
-                        borderWidth: 1.8,
-                        data: [],
-                        fill: false,
-                        tension: 0.1,
-                        pointRadius: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#1a1a1a' }, grid: { color: '#e5dfd5' } },
-                        y: { ticks: { color: '#1a1a1a' }, grid: { color: '#e5dfd5' } }
-                    }
-                }
-            });
+        // Update static coin label
+        const coinLabel = document.getElementById('current-selected-coin');
+        if (coinLabel) {
+            coinLabel.innerText = selectedSymbol;
         }
 
-        const fmtUSD = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
-
-
-        // Update Uptime
-        setInterval(() => {
-            if (!botStartTime) return;
-            const now = new Date();
-            const diffMs = now - botStartTime;
-            const diffSec = Math.floor(diffMs / 1000);
-            const hours = String(Math.floor(diffSec / 3600)).padStart(2, '0');
-            const minutes = String(Math.floor((diffSec % 3600) / 60)).padStart(2, '0');
-            const seconds = String(diffSec % 60).padStart(2, '0');
-            const uptimeEl = document.getElementById('uptime-counter');
-            if (uptimeEl) uptimeEl.innerText = `${hours}:${minutes}:${seconds}`;
-        }, 1000);
-
-        // Filter Buttons Logic
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                // Nanti bisa dipasang trigger fetch grafik ulang di sini sesuai filter
-            });
+        // Update token name text tags
+        const baseAsset = selectedSymbol.replace('USDT', '');
+        const cleanTags = ['token-name-holdings', 'token-name-price', 'token-name-hwm'];
+        cleanTags.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = baseAsset;
         });
 
-        // Chart Dropdown Logic
-        const coinSelector = document.getElementById('chart-coin-selector');
-        if (coinSelector) {
-            coinSelector.addEventListener('change', function() {
-                priceChart.data.labels = [];
-                priceChart.data.datasets[0].data = [];
-                priceChart.update();
-                lastPrice = 0; // Reset last price for flashing effect
-            });
-        }
-
-        async function fetchStatus() {
-            try {
-                const res = await fetch(getApiPrefix() + 'api/status');
-                const data = await res.json();
-
-                // Simpan Start Time untuk Uptime
-                if (!botStartTime) {
-                    botStartTime = new Date(data.start_time);
-                }
-
-                // Update Balances
-                const usdt = data.simulated_balance;
-                
-                // BTC
-                const btc = data.btc_balance;
-                const btcValue = btc * data.current_btc_price;
-                
-                // ETH
-                const eth = data.eth_balance || 0;
-                const ethValue = eth * (data.current_eth_price || 0);
-                
-                // BNB
-                const bnb = data.bnb_balance || 0;
-                const bnbValue = bnb * (data.current_bnb_price || 0);
-                
-                // SOL
-                const sol = data.sol_balance || 0;
-                const solValue = sol * (data.current_sol_price || 0);
-                
-                // XRP
-                const xrp = data.xrp_balance || 0;
-                const xrpValue = xrp * (data.current_xrp_price || 0);
-                
-                const totalEquity = usdt + btcValue + ethValue + bnbValue + solValue + xrpValue;
-                
-                const usdtEl = document.getElementById('usdt-balance');
-                if (usdtEl) usdtEl.innerText = fmtUSD(usdt);
-                const totalEquityEl = document.getElementById('total-equity-val');
-                if (totalEquityEl) totalEquityEl.innerText = fmtUSD(totalEquity);
-                
-                // Update Koin
-                const btcBalEl = document.getElementById('btc-balance');
-                if (btcBalEl) btcBalEl.innerText = btc.toFixed(6);
-                const btcValEl = document.getElementById('btc-value-display');
-                if (btcValEl) btcValEl.innerText = fmtUSD(btcValue);
-
-                const ethBalEl = document.getElementById('eth-balance');
-                if (ethBalEl) ethBalEl.innerText = eth.toFixed(4);
-                const ethValEl = document.getElementById('eth-value-display');
-                if (ethValEl) ethValEl.innerText = fmtUSD(ethValue);
-
-                const bnbBalEl = document.getElementById('bnb-balance');
-                if (bnbBalEl) bnbBalEl.innerText = bnb.toFixed(4);
-                const bnbValEl = document.getElementById('bnb-value-display');
-                if (bnbValEl) bnbValEl.innerText = fmtUSD(bnbValue);
-
-                const solBalEl = document.getElementById('sol-balance');
-                if (solBalEl) solBalEl.innerText = sol.toFixed(2);
-                const solValEl = document.getElementById('sol-value-display');
-                if (solValEl) solValEl.innerText = fmtUSD(solValue);
-
-                const xrpBalEl = document.getElementById('xrp-balance');
-                if (xrpBalEl) xrpBalEl.innerText = xrp.toFixed(2);
-                const xrpValEl = document.getElementById('xrp-value-display');
-                if (xrpValEl) xrpValEl.innerText = fmtUSD(xrpValue);
-                
-                // Update Winrate
-                const winrateEl = document.getElementById('winrate-counter');
-                if (winrateEl) winrateEl.innerText = data.winrate.toFixed(1) + '%';
-                
-                // Update System Resources
-                const cpuEl = document.getElementById('cpu-counter');
-                if (cpuEl) cpuEl.innerText = (data.sys_cpu_pct || 0).toFixed(1) + '%';
-                const ramEl = document.getElementById('ram-counter');
-                if (ramEl) ramEl.innerText = (data.sys_mem_mb || 0).toFixed(0) + ' MB';
-                
-                const whaleBadge = document.getElementById('whale-badge');
-                const whaleStatus = document.getElementById('whale-status');
-                if (whaleBadge && whaleStatus) {
-                    if (data.whale_detected) {
-                        whaleBadge.style.borderColor = 'var(--accent-green)';
-                        whaleBadge.style.color = 'var(--accent-green)';
-                        whaleBadge.style.boxShadow = '0 0 10px var(--accent-green)';
-                        whaleStatus.innerText = 'DETECTED! 🐋';
-                    } else {
-                        whaleBadge.style.borderColor = '#3b3b3b';
-                        whaleBadge.style.color = '#888';
-                        whaleBadge.style.boxShadow = 'none';
-                        whaleStatus.innerText = 'SLEEPING';
-                    }
-                }
-
-                // Update Market Regime & Volatility
-                const regime = data.market_regime || 'SIDEWAYS';
-                const marketRegimeEl = document.getElementById('market-regime');
-                if (marketRegimeEl) marketRegimeEl.innerText = regime;
-                const marketVolatilityEl = document.getElementById('market-volatility');
-                if (marketVolatilityEl) marketVolatilityEl.innerText = fmtUSD(data.market_volatility);
-
-                try {
-                    // Update Regime
-                    const regimeBtc = document.getElementById('led-regime-btc');
-                    const regimeTextBtc = document.getElementById('regime-text-btc');
-                    const setRegime = (id, rgm) => {
-                        const rEl = document.getElementById('led-regime-' + id);
-                        const rTxt = document.getElementById('regime-text-' + id);
-                        if(rEl && rTxt) {
-                            rEl.className = 'led-light';
-                            rTxt.innerText = rgm || 'SIDEWAYS';
-                            if (rgm === 'BULLISH') {
-                                rEl.classList.add('active-green');
-                                rTxt.style.color = 'var(--accent-green)';
-                            } else if (rgm === 'SIDEWAYS') {
-                                rEl.classList.add('active-yellow');
-                                rTxt.style.color = 'var(--accent-yellow)';
-                            } else if (rgm === 'BEARISH') {
-                                rEl.classList.add('active-red');
-                                rTxt.style.color = 'var(--accent-red)';
-                            }
-                        }
-                    };
-                    setRegime('btc', data.market_regime);
-                    setRegime('eth', data.market_regime_eth);
-                    setRegime('bnb', data.market_regime_bnb);
-                    setRegime('sol', data.market_regime_sol);
-                    setRegime('xrp', data.market_regime_xrp);
-
-                    // Update Pipeline BTC
-                    if (data.ws_active) {
-                        triggerLED('led-ws-btc', 'active-green');
-                        triggerLED('led-ws-eth', 'active-green');
-                        triggerLED('led-ws-bnb', 'active-green');
-                        triggerLED('led-ws-sol', 'active-green');
-                        triggerLED('led-ws-xrp', 'active-green');
-                    } else {
-                        turnOffLED('led-ws-btc');
-                        turnOffLED('led-ws-eth');
-                        turnOffLED('led-ws-bnb');
-                        turnOffLED('led-ws-sol');
-                        turnOffLED('led-ws-xrp');
-                    }
-                    if (data.conclude_active) triggerLED('led-conclude-btc', 'active-blue'); else turnOffLED('led-conclude-btc');
-                    if (data.validate_active) triggerLED('led-validate-btc', 'active-green'); else turnOffLED('led-validate-btc');
-                    if (data.executor_active) triggerLED('led-executor-btc', 'active-green'); else turnOffLED('led-executor-btc');
-                    
-                    // Global Corrector
-                    if (data.corrector_active) triggerLED('led-corrector', 'active-red'); else turnOffLED('led-corrector');
-                    // AI LED BTC
-                    if (data.conclude_active) triggerLED('led-ai-btc', 'active-blue'); else turnOffLED('led-ai-btc');
-                } catch(e) {
-                    console.error("Error updating LEDs:", e);
-                }
-
-                // Profit / Loss (P&L) dari $1000 modal awal
-                const pnlAbsolute = totalEquity - 1000.0;
-                const pnlPercentage = (pnlAbsolute / 1000.0) * 100.0;
-                const pnlEl = document.getElementById('pnl-value');
-                if (pnlEl) {
-                    const prefix = pnlAbsolute >= 0 ? '+$' : '-$';
-                    pnlEl.innerText = `${prefix}${Math.abs(pnlAbsolute).toFixed(2)} (${pnlPercentage.toFixed(2)}%)`;
-                    pnlEl.style.color = pnlAbsolute >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
-                }
-
-                // Update Price & Flashing Effect
-                const coinSelector = document.getElementById('chart-coin-selector');
-                const selectedCoin = coinSelector ? coinSelector.value : 'BTC';
-                
-                let price = 0;
-                if (selectedCoin === 'BTC') price = data.current_btc_price;
-                else if (selectedCoin === 'ETH') price = data.current_eth_price;
-                else if (selectedCoin === 'BNB') price = data.current_bnb_price;
-                else if (selectedCoin === 'SOL') price = data.current_sol_price;
-                else if (selectedCoin === 'XRP') price = data.current_xrp_price;
-
-                const priceEl = document.getElementById('btc-price'); // Update the main display
-                if (priceEl && price > 0) {
-                    priceEl.innerText = fmtUSD(price);
-                    
-                    if (lastPrice > 0) {
-                        if (price > lastPrice) {
-                            priceEl.className = "price-val up";
-                        } else if (price < lastPrice) {
-                            priceEl.className = "price-val down";
-                        }
-                    }
-                    lastPrice = price;
-
-                    // Plot ke chart harga
-                    const timeStr = new Date().toLocaleTimeString('id-ID');
-                    if (priceChart) {
-                        if (priceChart.data.labels.length === 0 || priceChart.data.datasets[0].data[priceChart.data.datasets[0].data.length - 1] !== price) {
-                            priceChart.data.labels.push(timeStr);
-                            priceChart.data.datasets[0].data.push(price);
-                            if (priceChart.data.labels.length > 25) {
-                                priceChart.data.labels.shift();
-                                priceChart.data.datasets[0].data.shift();
-                            }
-                            priceChart.update();
-                        }
-                    }
-
-                    // Plot ke balance chart secara real-time
-                    if (balanceChart) {
-                        const currentBalance = totalEquity;
-                        const balanceData = balanceChart.data.datasets[0].data;
-                        const lastPlottedBalance = balanceData[balanceData.length - 1];
-                        if (lastPlottedBalance === undefined || Math.abs(lastPlottedBalance - currentBalance) > 0.01) {
-                            balanceChart.data.labels.push(timeStr);
-                            balanceChart.data.datasets[0].data.push(currentBalance);
-                            if (balanceChart.data.labels.length > 100) {
-                                balanceChart.data.labels.shift();
-                                balanceChart.data.datasets[0].data.shift();
-                            }
-                            balanceChart.update();
-                        }
-                    }
-                } else if (priceEl) {
-                    priceEl.innerText = fmtUSD(price);
-                } else {
-                    turnOffLED('led-ws-btc');
-                }
-            } catch(e) {
-                console.error('fetchStatus error:', e);
-            }
-        }
-
-        async function fetchLogsAndSystemState() {
-            // LED status diatur secara real-time langsung dari payload status API
-        }
-
-        async function fetchHistory() {
-            try {
-                const res = await fetch(getApiPrefix() + 'api/history');
-                const list = await res.json();
-                
-                let winCount = 0;
-                let lossCount = 0;
-
-                const historyBody = document.getElementById('history-body');
-                if (historyBody) {
-                    historyBody.innerHTML = list.map(item => {
-                        const actClass = item.action === 'BUY' ? 'text-buy' : 'text-sell';
-                        const time = new Date(item.timestamp).toLocaleTimeString('id-ID');
-                        const notesVal = item.notes || '-';
-                        let formattedNotes = notesVal;
-                        let rowStyle = '';
-                        
-                        if (notesVal.includes('P&L: $+')) {
-                            winCount++;
-                            formattedNotes = notesVal.replace(/(P&L:\s*\+\$[0-9.-]+)/g, '<span class="text-buy" style="font-weight: bold;">$1</span>');
-                            rowStyle = 'background: rgba(63, 185, 80, 0.05);';
-                        } else if (notesVal.includes('P&L: $-')) {
-                            lossCount++;
-                            formattedNotes = notesVal.replace(/(P&L:\s*-\$[0-9.-]+)/g, '<span class="text-sell" style="font-weight: bold;">$1</span>');
-                            rowStyle = 'background: rgba(248, 81, 73, 0.15);'; // Red background for loss
-                        }
-                        
-                        return `
-                            <tr style="${rowStyle}">
-                                 <td>${time}</td>
-                                 <td class="${actClass}">${item.action}</td>
-                                 <td>${fmtUSD(item.price)}</td>
-                                 <td>${item.amount.toFixed(6)} BTC (${fmtUSD(item.amount * item.price)})</td>
-                                 <td>${formattedNotes}</td>
-                            </tr>
-                        `;
-                    }).join('');
-                }
-                
-
-                const historyTitle = document.getElementById('history-title');
-                if(historyTitle) {
-                    historyTitle.innerText = `Riwayat Eksekusi (bot_trading_history) | Wins: ${winCount} | Losses: ${lossCount}`;
-                }
-            } catch (e) {}
-        }
-        async function fetchCorrections() {
-            try {
-                const res = await fetch(getApiPrefix() + 'api/corrections');
-                const list = await res.json();
-                const correctionsBody = document.getElementById('corrections-body');
-                if (correctionsBody) {
-                    correctionsBody.innerHTML = list.map(item => {
-                        const time = new Date(item.timestamp).toLocaleTimeString('id-ID');
-                        return `
-                            <tr>
-                                <td>${time}</td>
-                                <td class="text-fail">${item.error_type}</td>
-                                <td>${item.reason}</td>
-                            </tr>
-                        `;
-                    }).join('');
-                }
-            } catch (e) {}
-        }
-
-        async function fetchBalanceHistory() {
-            if (isBalanceHistoryInitialized) return;
-            try {
-                const res = await fetch(getApiPrefix() + 'api/balance_history');
-                const list = await res.json();
-                
-                if (balanceChart && list && list.length > 0) {
-                    const slicedList = list.slice(-150);
-                    balanceChart.data.labels = slicedList.map(item => {
-                        const cleanTime = item.timestamp.includes('.') ? (item.timestamp.split('.')[0] + 'Z') : item.timestamp;
-                        return new Date(cleanTime).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-                    });
-                    balanceChart.data.datasets[0].data = slicedList.map(item => item.total_value);
-                    balanceChart.update();
-                    isBalanceHistoryInitialized = true;
-                }
-            } catch (e) {}
-        }
-
-        // Helper LEDs
-        function triggerLED(id, activeClass) {
-            const el = document.getElementById(id);
-            if (el) el.className = "led-light " + activeClass;
-        }
-
-        function turnOffLED(id) {
-            const el = document.getElementById(id);
-            if (el) el.className = "led-light";
-        }
-
-        async function fetchJournal() {
-            try {
-                const res = await fetch(getApiPrefix() + 'api/journal');
-                const text = await res.text();
-                const box = document.getElementById('journal-box');
-                if (box) box.innerText = text;
-            } catch (e) {}
-        }
-
-        // Interval
-        setInterval(fetchStatus, 1000); // 1 detik harga & status
-        setInterval(fetchLogsAndSystemState, 2000); // 2 detik status alur log
-        setInterval(fetchHistory, 10000);
-        setInterval(fetchCorrections, 10000);
-        setInterval(fetchBalanceHistory, 10000);
-        setInterval(fetchJournal, 15000);
-
-        // Init
-        fetchStatus();
-        fetchLogsAndSystemState();
-        fetchHistory();
-        fetchCorrections();
-        fetchBalanceHistory();
-        fetchJournal();
-
-        // Highlight active navigation link in sidebar
-        const currentPath = window.location.pathname;
-        document.querySelectorAll('.sidebar-link').forEach(link => {
-            if (link.getAttribute('href') === currentPath || (currentPath === '/' && link.getAttribute('href') === '/')) {
-                link.classList.add('active');
+        // Update active positions table
+        const activeTbody = document.getElementById('active-positions-table-body');
+        if (activeTbody && data.active_positions) {
+            if (data.active_positions.length === 0) {
+                activeTbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary); padding: 15px;">Tidak ada koin aktif — No active positions</td></tr>`;
             } else {
-                link.classList.remove('active');
+                activeTbody.innerHTML = data.active_positions.map(pos => {
+                    const pnlVal = pos.current_pnl_pct;
+                    const pnlColor = pnlVal >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                    const pnlSign = pnlVal >= 0 ? '+' : '';
+                    const isSelected = pos.symbol === selectedSymbol;
+                    const rowBg = isSelected ? 'background: rgba(15, 76, 129, 0.05);' : '';
+                    return `
+                        <tr style="${rowBg}">
+                            <td style="font-weight: bold; color: var(--accent-blue);">${pos.symbol}</td>
+                            <td>#${pos.cycle_id}</td>
+                            <td style="font-weight: bold;">${pos.layers_filled}/3</td>
+                            <td>${fmtUSD(pos.avg_entry_price)}</td>
+                            <td>${fmtUSD(pos.current_price)}</td>
+                            <td>
+                                <span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlVal.toFixed(2)}%</span>
+                            </td>
+                            <td>
+                                <button class="btn" style="padding: 4px 8px; font-size: 0.8em; font-weight: bold;" onclick="changeSelectedSymbol('${pos.symbol}');">Chart</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
             }
+        }
+
+        // Update general top metrics cards
+        const equityVal = document.getElementById('equity-val');
+        if (equityVal) equityVal.innerText = fmtUSD(data.total_equity);
+        const leveragedEquityVal = document.getElementById('leveraged-equity-val');
+        if (leveragedEquityVal) leveragedEquityVal.innerText = fmtUSD(data.total_equity * 3.0);
+        const marginSpentVal = document.getElementById('margin-spent-val');
+        if (marginSpentVal) marginSpentVal.innerText = fmtUSD(data.total_margin_spent || 0.0);
+        const balanceVal = document.getElementById('balance-val');
+        if (balanceVal) balanceVal.innerText = fmtUSD(data.simulated_balance);
+
+        // Header Metrics
+        const winrateEl = document.getElementById('winrate-counter');
+        if (winrateEl) winrateEl.innerText = `${data.winrate.toFixed(1)}%`;
+        const cpuEl = document.getElementById('cpu-counter');
+        if (cpuEl) cpuEl.innerText = `${data.sys_cpu_pct.toFixed(1)}%`;
+        const ramEl = document.getElementById('ram-counter');
+        if (ramEl) ramEl.innerText = `${data.sys_mem_mb.toFixed(0)} MB`;
+
+        // LED Indicators
+        setLED('led-ws', data.ws_active);
+        setLED('led-conclude', data.conclude_active);
+        setLED('led-validate', data.validate_active);
+        setLED('led-executor', data.executor_active);
+
+
+
+    } catch (e) {
+        console.error("Gagal fetch status API:", e);
+    }
+}
+
+function setLED(id, active) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.className = active ? "led-light active-green" : "led-light active-red";
+}
+
+// ─── Balance History ──────────────────────────────────────────────────────────
+async function fetchBalanceHistory() {
+    try {
+        const url = showAllBalanceHistory
+            ? `${apiBase}api/balance?all=true`
+            : `${apiBase}api/balance`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data || data.length === 0) return;
+
+        const labels = data.map(item => {
+            const d = new Date(item.timestamp);
+            return d.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' })
+                 + ' ' + d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
         });
+        const values = data.map(item => item.total_value);
+
+        // Safeguard against flat-line NaN issue on mobile
+        const minVal = Math.min(...values);
+        const maxVal = Math.max(...values);
+        const yOptions = {};
+        if (maxVal - minVal < 0.01) {
+            yOptions.min = minVal - 10;
+            yOptions.max = maxVal + 10;
+        }
+
+        equityChart.options.scales.y = {
+            ...equityChart.options.scales.y,
+            ...yOptions
+        };
+        equityChart.data.labels = labels;
+        equityChart.data.datasets[0].data = values;
+        equityChart.update();
+        isBalanceHistoryInitialized = true;
+    } catch (e) {
+        console.error("Gagal fetch balance history:", e);
+    }
+}
+
+// ─── DCA Cycles ───────────────────────────────────────────────────────────────
+async function fetchCycles() {
+    try {
+        const res = await fetch(`${apiBase}api/cycles`);
+        const data = await res.json();
+        const tbody = document.getElementById('cycles-table-body');
+        if (!tbody) return;
+
+        if (data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary);">Belum ada riwayat siklus selesai — No completed cycle history</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = data.map(cycle => {
+            const pnlClass = cycle.status === 'WIN' ? 'badge-win' : 'badge-loss';
+            const prefix = (cycle.net_pnl || 0) >= 0 ? '+' : '';
+            const pnlPctPrefix = (cycle.pnl_pct || 0) >= 0 ? '+' : '';
+            return `
+                <tr>
+                    <td style="font-weight: bold; color: var(--accent-blue);">${cycle.symbol}</td>
+                    <td>#${cycle.cycle_id}</td>
+                    <td>${fmtUSD(cycle.avg_entry_price || 0)}</td>
+                    <td>${fmtUSD(cycle.exit_price || 0)}</td>
+                    <td class="${pnlClass}">${prefix}${fmtUSD(cycle.net_pnl || 0)}</td>
+                    <td class="${pnlClass}">${pnlPctPrefix}${(cycle.pnl_pct || 0).toFixed(2)}%</td>
+                    <td class="${pnlClass}">${cycle.status || '-'}</td>
+                </tr>
+            `;
+        }).join('');
+    } catch (e) {
+        console.error("Gagal fetch cycles:", e);
+    }
+}
+
+// ─── Trade History ────────────────────────────────────────────────────────────
+async function fetchHistory() {
+    try {
+        const res = await fetch(`${apiBase}api/history`);
+        const data = await res.json();
+        const tbody = document.getElementById('history-table-body');
+        if (!tbody) return;
+
+        if (data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-secondary);">Belum ada transaksi — No trade history</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = data.map(trade => {
+            const date = new Date(trade.timestamp).toLocaleString('id-ID', {
+                month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            const isBuy = trade.action === 'BUY';
+            const isSell = trade.action === 'SELL';
+
+            // Row highlight color
+            const rowStyle = isSell
+                ? `background: rgba(46, 204, 113, 0.06); border-left: 3px solid var(--accent-green);`
+                : `border-left: 3px solid var(--accent-blue, #0f4c81);`;
+            const actionClass = isBuy ? 'badge-win' : 'badge-loss';
+            const layerStr = trade.layer ? `L${trade.layer}` : '-';
+
+            // PNL cell for SELL rows
+            let pnlCell = '-';
+            if (isSell && trade.net_pnl != null) {
+                const pnl = trade.net_pnl;
+                const pct = trade.pnl_pct;
+                const pnlColor = pnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                const pnlSign = pnl >= 0 ? '+' : '';
+                const pctSign = pct >= 0 ? '+' : '';
+                pnlCell = `<span style="color:${pnlColor}; font-weight: bold;">
+                    ${pnlSign}${fmtUSD(pnl)}<br>
+                    <span style="font-size:0.85em;">${pctSign}${pct.toFixed(2)}%</span>
+                </span>`;
+            } else if (isBuy) {
+                const spent = trade.usdt_spent != null ? fmtUSD(trade.usdt_spent) : '-';
+                pnlCell = `<span style="color: var(--text-secondary); font-size:0.9em;">${spent}</span>`;
+            }
+
+            return `
+                <tr style="${rowStyle}">
+                    <td>${date}</td>
+                    <td style="font-weight: bold; color: var(--accent-blue);">${trade.symbol}</td>
+                    <td>#${trade.cycle_id}</td>
+                    <td class="${actionClass}" style="font-weight:bold;">${trade.action}</td>
+                    <td>${layerStr}</td>
+                    <td>${fmtUSD(trade.price)}</td>
+                    <td>${trade.amount.toFixed(6)}</td>
+                    <td>${pnlCell}</td>
+                </tr>
+            `;
+        }).join('');
+    } catch (e) {
+        console.error("Gagal fetch history:", e);
+    }
+}
+
+// ─── Logs ─────────────────────────────────────────────────────────────────────
+async function fetchLogs() {
+    try {
+        const res = await fetch(`${apiBase}api/logs`);
+        const logs = await res.json();
+        const logBox = document.getElementById('log-box');
+        if (!logBox) return;
+        logBox.innerText = logs.join('\n');
+        logBox.scrollTop = logBox.scrollHeight;
+    } catch (e) {
+        console.error("Gagal fetch logs:", e);
+    }
+}
+
+// ─── Manual Sell ──────────────────────────────────────────────────────────────
+async function triggerManualSell() {
+    if (!confirm("Anda yakin ingin melakukan Emergency Manual Sell untuk menutup siklus saat ini?\n\nAre you sure you want to trigger an Emergency Manual Sell?")) {
+        return;
+    }
+    try {
+        const res = await fetch('api/manual_sell', { 
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ symbol: selectedSymbol })
+        });
+        if (res.ok) {
+            alert("Emergency Manual Sell berhasil dieksekusi!");
+            fetchStatus();
+            fetchHistory();
+            fetchCycles();
+        } else {
+            const text = await res.text();
+            alert("Gagal melakukan manual sell: " + text);
+        }
+    } catch (e) {
+        alert("Error menghubungi server: " + e);
+    }
+}
+window.triggerManualSell = triggerManualSell;
+
+// ─── Volatility Scanner ────────────────────────────────────────────────────────
+async function fetchScanner() {
+    try {
+        const res = await fetch(`${apiBase}api/scanner`);
+        const data = await res.json();
+        const tbody = document.getElementById('scanner-table-body');
+        if (!tbody) return;
+
+        if (!data || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-secondary);">Tidak ada data pemindai</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = data.map((candidate, idx) => {
+            const statusBadge = candidate.is_active
+                ? `<span style="border: 1px solid var(--accent-green); color: var(--accent-green); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; background: rgba(46, 204, 113, 0.05);">MONITORED</span>`
+                : `<span style="color: var(--text-secondary); border: 1px solid var(--border-color); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; background: rgba(0, 0, 0, 0.02);">IDLE</span>`;
+
+            const layersStr = candidate.layers_filled > 0
+                ? `<span style="color: var(--accent-red); font-weight: bold;">POSITION (${candidate.layers_filled}/3)</span>`
+                : `<span style="color: var(--text-secondary);">None (0/3)</span>`;
+
+            const rank = idx + 1;
+            const rankStyle = rank <= 5 ? 'font-weight: bold; color: var(--accent-blue);' : '';
+
+            return `
+                <tr>
+                    <td style="${rankStyle}">#${rank}</td>
+                    <td style="font-weight: bold; color: var(--accent-blue); font-family: monospace;">${candidate.symbol}</td>
+                    <td style="font-family: monospace; font-weight: bold;">${candidate.volatility.toFixed(2)}%</td>
+                    <td style="font-family: monospace;">${fmtUSD(candidate.volume)}</td>
+                    <td>${statusBadge}</td>
+                    <td>${layersStr}</td>
+                    <td>
+                        <button class="btn" style="padding: 4px 8px; font-size: 0.85em; font-weight: bold;" onclick="changeSelectedSymbol('${candidate.symbol}'); switchPageTab('overview');">View</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    } catch (e) {
+        console.error("Gagal fetch scanner:", e);
+    }
+}
+
+// ─── Refresh Loops ────────────────────────────────────────────────────────────
+setInterval(fetchStatus, 1000);
+setInterval(fetchLogs, 2000);
+setInterval(fetchScanner, 5000); // Poll scanner every 5 seconds for instant feedback
+setInterval(fetchHistory, 10000);
+setInterval(fetchCycles, 10000);
+setInterval(fetchBalanceHistory, 15000);
+
+// ─── Initial Loads ────────────────────────────────────────────────────────────
+fetchStatus();
+fetchLogs();
+fetchScanner();
+fetchHistory();
+fetchCycles();
+fetchBalanceHistory();

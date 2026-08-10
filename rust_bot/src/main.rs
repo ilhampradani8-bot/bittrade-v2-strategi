@@ -1,5 +1,6 @@
 // INI ADALAH FILE main.rs
 use sqlx::postgres::PgPoolOptions;
+use reqwest;
 use std::env;
 use std::sync::Arc;
 use std::time::Duration;
@@ -16,16 +17,36 @@ use tower_http::cors::CorsLayer;
 
 mod corrector;
 mod executor;
-mod conclude;
+pub mod conclude;
 mod validate;
 mod get;
 pub mod risk;
+pub mod uptrend;
+pub mod sideways;
+pub mod downtrend;
+pub mod breakout;
+pub mod classifier;
+pub mod calibration;
 
 pub const CURRENT_STRATEGY_VERSION: &str = "v5.0_qps";
+
+#[derive(Clone, Debug, serde::Serialize)]
+pub struct CoinState {
+    pub symbol: String,
+    pub price: f64,
+    pub change_24h: f64,
+    pub order_book_imbalance: f64,
+    pub market_regime: String,
+    pub volatility_category: String,
+    pub trend_status: String,
+    pub quote_volume: f64,
+    pub daily_volatility: f64,
+}
 
 #[derive(Clone)]
 pub struct AppState {
     pub db: sqlx::PgPool,
+    pub coin_states: Arc<RwLock<std::collections::HashMap<String, CoinState>>>,
     pub simulated_balance: Arc<RwLock<f64>>,
     pub btc_balance: Arc<RwLock<f64>>,
     pub current_btc_price: Arc<RwLock<f64>>,
@@ -66,6 +87,8 @@ pub struct AppState {
 
     // FASE 5.0a: Order Book Imbalance (OBI) untuk mendeteksi dinding jual (Sell Wall)
     pub order_book_imbalance: Arc<RwLock<f64>>,
+    pub active_symbol: String,
+    pub volatility_category: String,
 }
 
 #[derive(serde::Serialize, sqlx::FromRow)]
@@ -95,6 +118,28 @@ pub struct BalanceHistory {
     pub btc_value: f64,
     pub total_value: f64,
     pub timestamp: chrono::DateTime<chrono::Utc>,
+}
+
+#[derive(serde::Serialize, Clone, Debug)]
+pub struct StatusPositionInfo {
+    pub buy_price: f64,
+    pub high_water_mark: f64,
+    pub amount: f64,
+    pub opened_at: String,
+}
+
+#[derive(serde::Serialize, Clone, Debug)]
+pub struct CoinStateResponse {
+    pub symbol: String,
+    pub price: f64,
+    pub change_24h: f64,
+    pub order_book_imbalance: f64,
+    pub market_regime: String,
+    pub volatility_category: String,
+    pub trend_status: String,
+    pub quote_volume: f64,
+    pub daily_volatility: f64,
+    pub position: Option<StatusPositionInfo>,
 }
 
 #[derive(serde::Serialize)]
@@ -129,6 +174,9 @@ pub struct StatusResponse {
     pub order_book_imbalance: f64,
     pub sys_cpu_pct: f64,
     pub sys_mem_mb: f64,
+    pub active_symbol: String,
+    pub volatility_category: String,
+    pub coin_states: Vec<CoinStateResponse>,
 }
 
 pub async fn add_log(state: &AppState, msg: &str) {
@@ -143,7 +191,7 @@ pub async fn add_log(state: &AppState, msg: &str) {
 }
 
 async fn reconstruct_balance(pool: &sqlx::PgPool) -> (f64, f64) {
-    let mut usdt = 1000.0;
+    let mut usdt = 200.0;
     let mut btc = 0.0;
     
     let trades: Vec<TradeHistory> = sqlx::query_as::<_, TradeHistory>(
@@ -169,17 +217,23 @@ async fn reconstruct_balance(pool: &sqlx::PgPool) -> (f64, f64) {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("Memulai Bot Trading BTC...");
-    
     // Load config dari parent dir .env
     dotenvy::from_filename("../.env").ok();
     let db_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-
+    let symbol = env::var("SYMBOL").unwrap_or_else(|_| "BTCUSDT".to_string()).to_uppercase();
+    
+    println!("Memulai Bot Trading {}...", symbol);
+    
     // Setup DB
     let pool = PgPoolOptions::new()
         .max_connections(5)
         .connect(&db_url)
         .await?;
+
+    let category = classifier::classify_coin_rust(&symbol).await;
+    println!("[CVC] Aset aktif: {} | Kategori volatilitas: {}", symbol, category);
+
+
 
     // Inisialisasi DB (Buat tabel jika belum ada)
     sqlx::query(
@@ -235,9 +289,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         );"
     ).execute(&pool).await?;
 
+    sqlx::query(
+        "CREATE TABLE IF NOT EXISTS bot_a_parameters (
+            category VARCHAR(20) PRIMARY KEY,
+            stop_loss_limit DOUBLE PRECISION NOT NULL,
+            uptrend_tp_trail_trigger DOUBLE PRECISION NOT NULL,
+            uptrend_tp_trail_pullback DOUBLE PRECISION NOT NULL
+        );"
+    ).execute(&pool).await?;
+
     // Sync 100 data KLine pertama saat startup
     println!("Melakukan sinkronisasi data historis awal dari Binance...");
-    if let Err(e) = get::sync_klines(&pool, "BTCUSDT", 100).await {
+    if let Err(e) = get::sync_klines(&pool, &symbol, 100).await {
         eprintln!("Warning: Gagal sync data kline awal: {}", e);
     }
 
@@ -251,9 +314,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap_or(0.0);
     println!("[CRASH RECOVERY] Memulihkan High Water Mark posisi aktif dari tabel bot_active_positions: ${:.2}", initial_hwm);
 
+    let initial_states = std::collections::HashMap::new();
+
     let now = chrono::Utc::now();
     let state = AppState {
         db: pool,
+        coin_states: Arc::new(RwLock::new(initial_states)),
         simulated_balance: Arc::new(RwLock::new(initial_sim)),
         btc_balance: Arc::new(RwLock::new(initial_btc)),
         current_btc_price: Arc::new(RwLock::new(0.0)),
@@ -284,6 +350,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         ema_death_cross_streak: Arc::new(RwLock::new(0)),
         last_profitable_sell_at: Arc::new(RwLock::new(None)),
         order_book_imbalance: Arc::new(RwLock::new(0.5)),
+        active_symbol: symbol.clone(),
+        volatility_category: category.clone(),
     };
 
     // Pemicu insert saldo awal ke balance history jika kosong
@@ -308,6 +376,27 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
+    // Synchronize parameters at startup
+    if let Err(e) = calibration::sync_strategy_parameters(&state.db).await {
+        eprintln!("[Sync] Gagal memuat parameter dinamis saat startup: {}", e);
+    } else {
+        add_log(&state, "[Sync] Sinkronisasi parameter strategi awal dari database bot_a_parameters berhasil.").await;
+    }
+
+    // Spawn parameters background sync task (runs every 5 minutes)
+    let sync_pool = state.db.clone();
+    let sync_state = state.clone();
+    tokio::spawn(async move {
+        loop {
+            sleep(Duration::from_secs(300)).await;
+            if let Err(e) = calibration::sync_strategy_parameters(&sync_pool).await {
+                eprintln!("[Sync Error] Gagal menyinkronkan parameter dari DB: {}", e);
+            } else {
+                add_log(&sync_state, "[Sync] Auto-Sync parameter strategi dari database bot_a_parameters berhasil.").await;
+            }
+        }
+    });
+
     // 1. Spawn WebSocket Price Listener di background (Real-time)
     let listener_state = state.clone();
     tokio::spawn(get::start_price_listener(listener_state));
@@ -319,82 +408,112 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         sleep(Duration::from_secs(3)).await;
 
         loop {
-            // Sinkronkan 5 KLine terbaru agar data historis di db selalu lengkap & update
-            if let Err(e) = get::sync_klines(&worker_state.db, "BTCUSDT", 5).await {
-                eprintln!("Gagal sync 5 kline terbaru: {}", e);
+            // Proteksi Delisting: cek dan bersihkan koin yang dihapus dari Binance
+            if let Err(e) = check_and_purge_delisted_coins(&worker_state).await {
+                eprintln!("[Delist Protection] Gagal melakukan pengecekan koin delist: {}", e);
             }
 
-            // Dapatkan harga dari memori
-            let mut price = { *worker_state.current_btc_price.read().await };
-            
-            // Fallback REST API jika WebSocket tidak aktif atau data stale (>30 detik)
-            let last_ws = *worker_state.last_ws_activity.read().await;
-            let ws_stale = (chrono::Utc::now() - last_ws).num_seconds() > 30;
+            // Kita kumpulkan koin yang harganya valid (> 0.0)
+            let coins_to_analyze: Vec<(String, f64, String)> = {
+                let map = worker_state.coin_states.read().await;
+                let mut list: Vec<CoinState> = map.values().cloned().collect();
+                // Filter volume >= 1,000,000 USDT
+                list.retain(|c| c.quote_volume >= 1_000_000.0);
+                // Sort by quote volume descending
+                list.sort_by(|a, b| b.quote_volume.partial_cmp(&a.quote_volume).unwrap_or(std::cmp::Ordering::Equal));
+                // Limit to top 100
+                list.truncate(100);
+                list.into_iter()
+                    .map(|c| (c.symbol, c.price, c.volatility_category))
+                    .collect()
+            };
 
-            if price <= 0.0 || ws_stale {
-                if let Ok(rest_p) = get::get_rest_price().await {
-                    let mut price_lock = worker_state.current_btc_price.write().await;
-                    *price_lock = rest_p;
-                    price = rest_p;
-                    if ws_stale {
-                        add_log(&worker_state, &format!("[FALLBACK REST] Aliran WebSocket stale (>30 dtk). Harga di-sync via REST API: ${:.2}", price)).await;
-                    }
+            *worker_state.last_conclude_activity.write().await = chrono::Utc::now();
+            *worker_state.last_validate_activity.write().await = chrono::Utc::now();
+            *worker_state.last_executor_activity.write().await = chrono::Utc::now();
+
+            // Jalankan analisa untuk tiap koin secara paralel menggunakan tokio::spawn
+            for (symbol, price, _category) in coins_to_analyze {
+                if price <= 0.0 {
+                    continue;
                 }
-            }
-            
-            if price > 0.0 {
-                add_log(&worker_state, &format!("Siklus Menit Baru. Harga BTC Terakhir: ${:.2}", price)).await;
                 
-                // Conclude: Analisa dan buat keputusan
-                *worker_state.last_conclude_activity.write().await = chrono::Utc::now();
-                let decision = conclude::analyze_market(price, &worker_state).await;
-                add_log(&worker_state, &format!("Keputusan analis: {:?}", decision)).await;
+                let coin_state = worker_state.clone();
+                tokio::spawn(async move {
+                    // Cek jumlah kline di DB untuk symbol ini
+                    let db_klines_cnt: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM crypto_klines WHERE symbol = $1")
+                        .bind(&symbol)
+                        .fetch_one(&coin_state.db)
+                        .await
+                        .unwrap_or(0);
+                    let limit = if db_klines_cnt < 35 { 50 } else { 5 };
+                    if let Err(e) = get::sync_klines(&coin_state.db, &symbol, limit).await {
+                        println!("[{}] ERR SYNC: {}", symbol, e);
+                    }
 
-                // Validate: Validasi apakah aman untuk transaksi
-                *worker_state.last_validate_activity.write().await = chrono::Utc::now();
-                let is_valid = validate::validate_decision(&decision, price, &worker_state).await;
-
-                // Executor: Lakukan eksekusi (simulasi)
-                if is_valid {
-                    *worker_state.last_executor_activity.write().await = chrono::Utc::now();
-                    add_log(&worker_state, "Mengeksekusi transaksi...").await;
-                    match executor::execute_trade(&decision, price, &worker_state).await {
-                        Ok(_) => {
-                            let bal = worker_state.simulated_balance.read().await;
-                            let btc = worker_state.btc_balance.read().await;
-                            add_log(&worker_state, &format!("Eksekusi sukses. Saldo: ${:.2}, BTC: {:.4}", *bal, *btc)).await;
-                        },
-                        Err(e) => {
-                            let err_msg = e.to_string();
-                            add_log(&worker_state, &format!("Eksekusi Gagal: {}", err_msg)).await;
-                            corrector::log_error(&worker_state, "EXECUTION_ERROR", &err_msg).await;
+                    // Conclude: Analisa dan buat keputusan
+                    let decision = conclude::analyze_market_for_symbol(&symbol, price, &coin_state).await;
+                    
+                    // Update trend status di coin_states berdasarkan regime koin
+                    let regime = match &decision {
+                        conclude::Decision::Buy(_, _) => "BULLISH".to_string(),
+                        conclude::Decision::Sell(_, _) => "BEARISH".to_string(),
+                        _ => "SIDEWAYS".to_string(),
+                    };
+                    {
+                        let mut map = coin_state.coin_states.write().await;
+                        if let Some(c) = map.get_mut(&symbol) {
+                            c.trend_status = regime.clone();
+                            c.market_regime = regime;
                         }
                     }
-                } else {
-                    add_log(&worker_state, "Validasi gagal / keputusan WAIT. Tidak ada eksekusi.").await;
-                }
 
-                // Simpan perkembangan modal (simulated balance + value of btc holdings) ke database
-                let sim_bal = *worker_state.simulated_balance.read().await;
-                let btc_bal = *worker_state.btc_balance.read().await;
-                let btc_val = btc_bal * price;
-                let total_val = sim_bal + btc_val;
-                sqlx::query(
-                    "INSERT INTO bot_balance_history (simulated_balance, btc_balance, btc_value, total_value) VALUES ($1, $2, $3, $4)"
-                )
-                .bind(sim_bal)
-                .bind(btc_bal)
-                .bind(btc_val)
-                .bind(total_val)
-                .execute(&worker_state.db)
-                .await
-                .ok();
+                    // Validate: Validasi apakah aman untuk transaksi
+                    let is_valid = validate::validate_decision(&decision, &symbol, price, &coin_state).await;
 
-            } else {
-                add_log(&worker_state, "Menunggu harga awal dari WebSocket...").await;
+                    // Executor: Lakukan eksekusi (simulasi)
+                    if is_valid {
+                        if let Err(e) = executor::execute_trade(&decision, &symbol, price, &coin_state).await {
+                            eprintln!("[{}] Eksekusi Gagal: {}", symbol, e);
+                        }
+                    }
+                });
             }
 
-            // Tunggu 1 menit sebelum loop selanjutnya
+            // Simpan perkembangan total modal (simulated balance + value of all coin holdings) ke database
+            let sim_bal = *worker_state.simulated_balance.read().await;
+            
+            // Hitung nilai seluruh aset koin yang dipegang dari tabel bot_active_positions
+            let active_positions: Vec<(String, f64)> = sqlx::query_as::<_, (String, f64)>(
+                "SELECT symbol, amount FROM bot_active_positions"
+            )
+            .fetch_all(&worker_state.db)
+            .await
+            .unwrap_or_default();
+
+            let mut total_holdings_value = 0.0;
+            {
+                let map = worker_state.coin_states.read().await;
+                for (sym, amount) in active_positions {
+                    if let Some(c) = map.get(&sym) {
+                        total_holdings_value += amount * c.price;
+                    }
+                }
+            }
+
+            let total_val = sim_bal + total_holdings_value;
+            sqlx::query(
+                "INSERT INTO bot_balance_history (simulated_balance, btc_balance, btc_value, total_value) VALUES ($1, $2, $3, $4)"
+            )
+            .bind(sim_bal)
+            .bind(0.0)
+            .bind(total_holdings_value)
+            .bind(total_val)
+            .execute(&worker_state.db)
+            .await
+            .ok();
+
+            // Tunggu 60 detik sebelum siklus menit berikutnya
             sleep(Duration::from_secs(60)).await;
         }
     });
@@ -427,6 +546,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .route("/api/logs", get(get_logs))
         .route("/api/balance_history", get(get_balance_history))
         .route("/api/journal", get(get_journal))
+        .route("/api/parameters", get(calibration::get_parameters))
+        .route("/api/parameters/update", post(calibration::update_parameters))
+        .route("/api/parameters/calibrate", post(calibration::run_calibration))
         .layer(CorsLayer::permissive())
         .layer(Extension(state));
 
@@ -636,6 +758,66 @@ async fn get_status(Extension(state): Extension<AppState>) -> impl IntoResponse 
         (cpu, mem_mb)
     };
 
+    // Ambil data posisi aktif untuk seluruh koin
+    let positions: Vec<(String, f64, f64, f64, chrono::DateTime<chrono::Utc>)> = sqlx::query_as::<_, (String, f64, f64, f64, chrono::DateTime<chrono::Utc>)>(
+        "SELECT symbol, buy_price, high_water_mark, amount, opened_at FROM bot_active_positions"
+    )
+    .fetch_all(&state.db)
+    .await
+    .unwrap_or_default();
+
+    let mut pos_map: std::collections::HashMap<String, StatusPositionInfo> = std::collections::HashMap::new();
+    for pos in positions {
+        let symbol = pos.0.clone();
+        let buy_price = pos.1;
+        let hwm = pos.2;
+        let amount = pos.3;
+        let opened_at = pos.4;
+        
+        pos_map.entry(symbol)
+            .and_modify(|existing| {
+                let total_cost = (existing.buy_price * existing.amount) + (buy_price * amount);
+                existing.amount += amount;
+                if existing.amount > 0.0 {
+                    existing.buy_price = total_cost / existing.amount;
+                }
+                if hwm > existing.high_water_mark {
+                    existing.high_water_mark = hwm;
+                }
+                if let Ok(existing_time) = chrono::DateTime::parse_from_rfc3339(&existing.opened_at) {
+                    if opened_at < existing_time {
+                        existing.opened_at = opened_at.to_rfc3339();
+                    }
+                }
+            })
+            .or_insert(StatusPositionInfo {
+                buy_price,
+                high_water_mark: hwm,
+                amount,
+                opened_at: opened_at.to_rfc3339(),
+            });
+    }
+
+    let coin_states_list: Vec<CoinStateResponse> = {
+        let map = state.coin_states.read().await;
+        map.values()
+            .map(|c| {
+                let pos = pos_map.get(&c.symbol).cloned();
+                CoinStateResponse {
+                    symbol: c.symbol.clone(),
+                    price: c.price,
+                    change_24h: c.change_24h,
+                    order_book_imbalance: c.order_book_imbalance,
+                    market_regime: c.market_regime.clone(),
+                    volatility_category: c.volatility_category.clone(),
+                    trend_status: c.trend_status.clone(),
+                    quote_volume: c.quote_volume,
+                    daily_volatility: c.daily_volatility,
+                    position: pos,
+                }
+            }).collect()
+    };
+
     Json(StatusResponse {
         simulated_balance: *sim_bal,
         btc_balance: *btc_bal,
@@ -667,6 +849,9 @@ async fn get_status(Extension(state): Extension<AppState>) -> impl IntoResponse 
         order_book_imbalance: *state.order_book_imbalance.read().await,
         sys_cpu_pct,
         sys_mem_mb,
+        active_symbol: state.active_symbol.clone(),
+        volatility_category: state.volatility_category.clone(),
+        coin_states: coin_states_list,
     })
 }
 
@@ -849,5 +1034,79 @@ async fn serve_js_main() -> impl IntoResponse {
         .header("cache-control", "no-store, no-cache, must-revalidate")
         .body(js)
         .unwrap()
+}
+
+async fn check_and_purge_delisted_coins(state: &AppState) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    // 1. Ambil seluruh koin unik yang sedang di-hold
+    let held_symbols: Vec<String> = sqlx::query_scalar(
+        "SELECT DISTINCT symbol FROM bot_active_positions"
+    )
+    .fetch_all(&state.db)
+    .await?;
+
+    for symbol in held_symbols {
+        // 2. Cek apakah koin masih aktif di Binance dengan memanggil ticker/price
+        let url = format!("https://api.binance.com/api/v3/ticker/price?symbol={}", symbol);
+        let resp = reqwest::get(&url).await;
+        
+        let is_delisted = match resp {
+            Ok(res) => {
+                if res.status() == reqwest::StatusCode::BAD_REQUEST {
+                    true
+                } else if let Ok(json) = res.json::<serde_json::Value>().await {
+                    if let Some(code) = json.get("code").and_then(|c| c.as_i64()) {
+                        code == -1121 // -1121 is "Invalid symbol"
+                    } else {
+                        false
+                    }
+                } else {
+                    false
+                }
+            }
+            Err(_) => false, // Jangan anggap delisted jika isu koneksi
+        };
+
+        if is_delisted {
+            let msg = format!(
+                "[{}] Proteksi Delisting: Koin telah dihapus/delist dari Binance! Membersihkan posisi aktif.",
+                symbol
+            );
+            println!("{}", msg);
+            corrector::log_error(state, "COIN_DELISTED_ALERT", &msg).await;
+
+            // Ambil jumlah koin yang sedang di-hold untuk mencatat riwayat jual darurat (delisted)
+            let held_amount: f64 = sqlx::query_scalar(
+                "SELECT COALESCE(SUM(amount), 0.0) FROM bot_active_positions WHERE symbol = $1"
+            )
+            .bind(&symbol)
+            .fetch_one(&state.db)
+            .await
+            .unwrap_or(0.0);
+
+            if held_amount > 0.0 {
+                // Hapus posisi dari bot_active_positions
+                sqlx::query("DELETE FROM bot_active_positions WHERE symbol = $1")
+                    .bind(&symbol)
+                    .execute(&state.db)
+                    .await?;
+
+                // Catat transaksi SELL darurat karena delisting dengan harga 0.0
+                let notes = format!("PROTEKSI DELISTING: Posisi otomatis dihapus karena koin dihapus dari Binance. Jumlah: {:.6}", held_amount);
+                sqlx::query(
+                    "INSERT INTO bot_trading_history (action, price, amount, status, notes, symbol, strategy_version) VALUES ($1, $2, $3, $4, $5, $6, $7)"
+                )
+                .bind("SELL")
+                .bind(0.0)
+                .bind(held_amount)
+                .bind("SUCCESS")
+                .bind(notes)
+                .bind(&symbol)
+                .bind(CURRENT_STRATEGY_VERSION)
+                .execute(&state.db)
+                .await?;
+            }
+        }
+    }
+    Ok(())
 }
 

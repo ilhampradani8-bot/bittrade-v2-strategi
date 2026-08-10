@@ -6,8 +6,65 @@ import Layout from '../../layouts/Layout.astro';
   <div class="dashboard-container">
         <h1>Funding Rate Arbitrage Dashboard (Cash-and-Carry)</h1>
 
-    <!-- Info Cards Row (2 Columns Line Separated) -->
-    <div class="grid-2 section-container">
+    <!-- Account Profile Switcher -->
+    <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1.5px solid var(--border-color); display: flex; gap: 10px; align-items: center; justify-content: flex-end; flex-wrap: wrap;">
+        <span style="font-size: 0.9em; color: var(--text-muted); font-weight: bold; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 6px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+            Active Portfolio Profile:
+        </span>
+        <button class="filter-btn active" id="profile-retail-btn" style="border-radius: 4px;">Retail ($200 | 3 Coins)</button>
+        <button class="filter-btn" id="profile-inst-btn" style="border-radius: 4px;">Institutional ($2,000 | 8 Coins)</button>
+    </div>
+
+    <!-- Main Tab Navigation -->
+    <div class="section-container" style="border-bottom: none; margin-bottom: 20px; padding-bottom: 0px;">
+        <div style="display: flex; align-items: center; gap: 5px; width: 100%;">
+            <!-- Left scroll button -->
+            <button id="scroll-tab-left" class="filter-btn" style="padding: 8px 12px; border-radius: 4px; display: none; align-items: center; justify-content: center; font-size: 1em; border: 1.5px solid var(--border-color); flex-shrink: 0; background: var(--paper-bg); cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            
+            <!-- Tab list -->
+            <div id="tab-nav-container" class="tab-navigation" style="display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); padding-bottom: 0px; margin-bottom: 0px; overflow-x: auto; scroll-behavior: smooth; flex-grow: 1; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
+                <button class="tab-btn active" data-tab="tab-overview" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    Overview & Performance
+                </button>
+                <button class="tab-btn" data-tab="tab-active-state" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    Active Positions Details
+                </button>
+                <button class="tab-btn" data-tab="tab-trade-history" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    Trade History (Buy/Sell)
+                </button>
+                <button class="tab-btn" data-tab="tab-funding-logs" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Funding Payout Logs
+                </button>
+                <button class="tab-btn" data-tab="tab-market-scanner" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    Market Scanner (Top FR)
+                </button>
+                <button class="tab-btn" data-tab="tab-faq" style="display: flex; align-items: center; gap: 6px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    FAQ & Guides
+                </button>
+            </div>
+            
+            <!-- Right scroll button -->
+            <button id="scroll-tab-right" class="filter-btn" style="padding: 8px 12px; border-radius: 4px; display: none; align-items: center; justify-content: center; font-size: 1; border: 1.5px solid var(--border-color); flex-shrink: 0; background: var(--paper-bg); cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Tab Contents Container -->
+    <div class="tab-contents-container">
+        <!-- Tab 1: Overview & Performance -->
+        <div id="tab-overview" class="tab-pane active">
+            <!-- Info Cards Row (2 Columns Line Separated) -->
+            <div class="grid-2 section-container">
         <!-- Col 1: Real-time Market -->
         <div style="padding-right: 20px;">
             <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">Arbitrage Market Overview</h2>
@@ -29,20 +86,103 @@ import Layout from '../../layouts/Layout.astro';
         <div style="border-left: 1px dashed var(--border-color); padding-left: 20px;">
             <h2 style="border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">USDT Account & Balance</h2>
             <div class="stat-row">
-                <span class="label">Starting Capital (Deposit)</span>
-                <span class="value" id="starting-capital-val">$200.00</span>
+                <span class="label">Starting Capital</span>
+                <span class="value" id="starting-capital-val" style="font-family: monospace;">$200.00</span>
             </div>
             <div class="stat-row">
-                <span class="label">Available Cash (USDT)</span>
-                <span class="value" id="usdt-balance">$200.00</span>
+                <span class="label">Futures Leverage</span>
+                <span class="value" style="color: var(--accent-blue); font-weight: bold;">10x Leverage</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Max Arb Hedged Cap</span>
+                <span class="value" id="leverage-power-val" style="color: var(--text-secondary); font-family: monospace; font-weight: bold;">$181.81</span>
+            </div>
+            <div class="stat-row" style="border-top: 1px dashed var(--border-color); padding-top: 4px; margin-top: 4px;">
+                <span class="label" style="color: var(--text-muted); font-size: 0.9em; padding-left: 10px;">↳ Active Spot Capital (1x)</span>
+                <span class="value" id="active-spot-locked" style="font-family: monospace; color: var(--text-secondary);">$0.00</span>
+            </div>
+            <div class="stat-row">
+                <span class="label" style="color: var(--text-muted); font-size: 0.9em; padding-left: 10px;">↳ Active Futures Capital (10x)</span>
+                <span class="value" id="active-futures-margin" style="font-family: monospace; color: var(--text-secondary);">$0.00</span>
+            </div>
+            <div class="stat-row" style="border-top: 1px dashed var(--border-color); padding-top: 4px;">
+                <span class="label">Available Cash (Free)</span>
+                <span class="value" id="usdt-balance" style="font-family: monospace;">$200.00</span>
             </div>
             <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
-                <span class="label">Total Portfolio Value (Equity)</span>
-                <span class="value" id="total-equity-val">$200.00</span>
+                <span class="label">Total Portfolio Value (Real Net Equity)</span>
+                <span class="value" id="total-equity-val" style="font-family: monospace; font-weight: bold; color: var(--accent-blue);">$200.00</span>
             </div>
             <div class="stat-row">
-                <span class="label">Total Funding Collected (USDT)</span>
-                <span class="value" id="pnl-value">$0.00 (0.00%)</span>
+                <span class="label">Total Funding Collected</span>
+                <span class="value" id="pnl-value" style="font-family: monospace;">$0.00 (0.00%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Investment Projection & Compounding Simulator Card -->
+    <div class="grid-2 section-container" style="background: rgba(15, 76, 129, 0.03); border: 1.5px solid var(--border-color); padding: 20px; border-radius: 6px; margin-bottom: 30px;">
+        <!-- Column 1: Projections for $200 Capital -->
+        <div>
+            <h3 style="border-bottom: 2px solid var(--accent-blue); padding-bottom: 8px; margin-bottom: 15px; color: var(--accent-blue); font-size: 1.15em; display: flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                $200 Capital Profit Projection
+            </h3>
+            <div style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 12px; font-style: italic;">
+                Estimated passive returns for **$200 starting capital** (3 Coins):
+            </div>
+            <table style="width: 100%; font-size: 0.85em; text-align: left; background: #ffffff;">
+                <thead>
+                    <tr style="background: #f3efe6;">
+                        <th style="padding: 6px;">Market Scenario</th>
+                        <th style="padding: 6px;">Est. APR</th>
+                        <th style="padding: 6px;">Daily Yield</th>
+                        <th style="padding: 6px;">Monthly Yield</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 6px; font-weight: bold; color: var(--text-primary);">Bearish Market</td>
+                        <td style="padding: 6px;">25% APR</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$0.12</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$3.70</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px; font-weight: bold; color: var(--accent-blue);">Normal Market</td>
+                        <td style="padding: 6px;">50% APR</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$0.25</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$7.40</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px; font-weight: bold; color: var(--text-primary);">Bullish Market</td>
+                        <td style="padding: 6px;">80% APR</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$0.40</td>
+                        <td style="padding: 6px; color: var(--accent-green); font-weight: bold;">+$11.80</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Column 2: Compounding Calculator -->
+        <div style="border-left: 1.5px dashed var(--border-color); padding-left: 20px;">
+            <h3 style="border-bottom: 2px solid var(--accent-blue); padding-bottom: 8px; margin-bottom: 15px; color: var(--accent-blue); font-size: 1.15em; display: flex; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                Compounding Growth Calculator
+            </h3>
+            <div style="font-size: 0.85em; color: var(--text-secondary); margin-bottom: 15px;">
+                Calculate compound interest growth from <strong>$200 starting capital</strong> (at average 50% APR / 4.5% monthly ROI for Top 3 Coins):
+            </div>
+            <div class="stat-row">
+                <span class="label">Time to double capital ($400)</span>
+                <span class="value" style="color: var(--accent-green); font-family: monospace;">16 Months</span>
+            </div>
+            <div class="stat-row">
+                <span class="label">Time to accumulate $100 profit</span>
+                <span class="value" style="color: var(--accent-green); font-family: monospace;">13.5 Months</span>
+            </div>
+            <div class="stat-row" style="border-top: 1px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
+                <span class="label">Capital in 24 Months (Compounded)</span>
+                <span class="value" style="color: var(--accent-blue); font-family: monospace;">$575.20</span>
             </div>
         </div>
     </div>
@@ -50,21 +190,23 @@ import Layout from '../../layouts/Layout.astro';
     <!-- Process Status Lights (Multi-Coin) -->
     <div class="section-container">
         <h2 style="font-size: 1.1em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">System Process Pipeline Monitor (Real-time)</h2>
-        <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9em;">
-            <thead>
-                <tr style="background: rgba(0,0,0,0.02); color: var(--text-secondary);">
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left;">Engine Pipeline</th>
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Binance WSS Stream</th>
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Data Initializer</th>
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Market Scanner</th>
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Arb Validator</th>
-                    <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Two-Leg Executor</th>
-                </tr>
-            </thead>
-            <tbody id="pipeline-body">
-                <tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading pipeline status...</td></tr>
-            </tbody>
-        </table>
+        <div class="scroller" style="max-height: none; border: none;">
+            <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9em;">
+                <thead>
+                    <tr style="background: rgba(0,0,0,0.02); color: var(--text-secondary);">
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color); text-align: left;">Engine Pipeline</th>
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Binance WSS Stream</th>
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Data Initializer</th>
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Market Scanner</th>
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Arb Validator</th>
+                        <th style="padding: 10px; border-bottom: 1px solid var(--border-color);">Two-Leg Executor</th>
+                    </tr>
+                </thead>
+                <tbody id="pipeline-body">
+                    <tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading pipeline status...</td></tr>
+                </tbody>
+            </table>
+        </div>
         
         <div style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px; text-align: left;">
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -108,107 +250,471 @@ import Layout from '../../layouts/Layout.astro';
             <div style="height: 190px;"><canvas id="balanceChart"></canvas></div>
         </div>
     </div>
+        </div>
+        <!-- Tab 1: Active Arbitrage Details -->
+        <div id="tab-active-state" class="tab-pane">
+            <div class="section-container">
+                <h2 style="display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    Detailed Active Arbitrage State
+                </h2>
+                <div style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary);">
+                    Detailed real-time indicators, entry prices, basis spreads, and collected funding rates per position.
+                </div>
+                <div class="scroller" style="max-height: 350px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Coin (Symbol)</th>
+                                <th>Spot Entry</th>
+                                <th>Futures Entry</th>
+                                <th>Current Spot</th>
+                                <th>Current Futures</th>
+                                <th>Basis Spread %</th>
+                                <th>Real Modal Deployed</th>
+                                <th>Total Funding</th>
+                                <th>Collect Count</th>
+                                <th>Annualized APR %</th>
+                            </tr>
+                        </thead>
+                        <tbody id="altcoin-details-body">
+                            <tr><td colspan="10" style="text-align: center; color: var(--text-secondary);">Loading detailed info...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-    <!-- Tables Row (Stacked Full Width) -->
-    <!-- Table 1: Current Arbitrage History -->
-    <div class="section-container">
-        <h2 id="history-title">Riwayat Arbitrase (alt_trading_history - Arbitrage)</h2>
-        <div class="scroller">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Time (Timestamp)</th>
-                        <th>Action</th>
-                        <th>Price</th>
-                        <th>Amount & USD Value</th>
-                        <th>Notes / Fees / P&L</th>
-                    </tr>
-                </thead>
-                <tbody id="history-body"></tbody>
-            </table>
+        <!-- Tab 2: Trade History (Buy/Sell) -->
+        <div id="tab-trade-history" class="tab-pane">
+            <div class="section-container">
+                <h2 id="history-title">Arbitrage Trade History (alt_trading_history)</h2>
+                <div style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary);">
+                    Complete trade execution history, displaying both physical Spot buy/sell and hedging Futures short/cover legs.
+                </div>
+                <div class="scroller" style="max-height: 350px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time (Timestamp)</th>
+                                <th>Action</th>
+                                <th>Coin (Symbol)</th>
+                                <th>Price</th>
+                                <th>Amount & USD Value</th>
+                                <th>Notes / Fees / P&L</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Funding Payment Payout Logs -->
+        <div id="tab-funding-logs" class="tab-pane">
+            <div class="section-container">
+                <h2 style="display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    Funding Payment Collect Logs
+                </h2>
+                <div style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary);">
+                    Log entries of passive cash-and-carry funding rate payouts received every 8 hours.
+                </div>
+
+                <!-- Summary Cards & Settlement Schedule Table -->
+                <div class="grid-2" style="margin-bottom: 25px; gap: 15px;">
+                    <div style="background: rgba(15, 76, 129, 0.02); border: 1px solid var(--border-color); padding: 15px; border-radius: 4px;">
+                        <h4 style="margin: 0 0 10px; color: var(--accent-blue); font-family: Georgia, serif;">📊 Yield Summary</h4>
+                        <div class="stat-row"><span class="label">Total Funding Collected:</span><span class="value" id="funding-summary-total">$0.00</span></div>
+                        <div class="stat-row"><span class="label">Daily Average:</span><span class="value" id="funding-summary-daily" style="color: var(--accent-green); font-family: monospace;">$0.00 / day</span></div>
+                        <div class="stat-row"><span class="label">Date Range:</span><span class="value" id="funding-summary-range" style="font-size:0.8em; font-family: monospace;">- to -</span></div>
+                    </div>
+                    <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 15px; border-radius: 4px;">
+                        <h4 style="margin: 0 0 10px; color: var(--accent-blue); font-family: Georgia, serif;">⏰ Binance Funding Payout Schedule</h4>
+                        <table style="width: 100%; font-size: 0.8em; border: none; text-align: left; background: #ffffff;">
+                            <thead>
+                                <tr style="background: #f3efe6;">
+                                    <th style="padding: 4px; border: none;">Session</th>
+                                    <th style="padding: 4px; border: none;">UTC Time</th>
+                                    <th style="padding: 4px; border: none;">WIB Time</th>
+                                    <th style="padding: 4px; border: none;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 4px; border: none;">Morning Session</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">00:00 UTC</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">07:00 WIB</td>
+                                    <td style="padding: 4px; border: none;" id="session-status-morning">Pending</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 4px; border: none;">Afternoon Session</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">08:00 UTC</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">15:00 WIB</td>
+                                    <td style="padding: 4px; border: none;" id="session-status-afternoon">Pending</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 4px; border: none;">Night Session</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">16:00 UTC</td>
+                                    <td style="padding: 4px; border: none; font-family: monospace;">23:00 WIB</td>
+                                    <td style="padding: 4px; border: none;" id="session-status-night">Pending</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="font-size: 0.7em; color: var(--text-muted); margin-top: 6px; font-style: italic;">
+                            *Note: Funding settlement times are identical for all coins, except for certain highly volatile (hype) coins which may settle every 4 or 2 hours.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scroller" style="max-height: 350px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Coin (Symbol)</th>
+                                <th>Funding Rate</th>
+                                <th>Payment Received</th>
+                                <th>Timestamp</th>
+                            </tr>
+                        </thead>
+                        <tbody id="altcoin-excluded-body">
+                            <tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">No funding payments collected yet.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Market Scanner Top Candidates -->
+        <div id="tab-market-scanner" class="tab-pane">
+            <div class="section-container">
+                <h2 style="display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    Top Funding Rate Candidates (Binance Futures)
+                </h2>
+                <div style="margin-bottom: 15px; font-size: 0.9em; color: var(--text-secondary);">
+                    USDT-M Perpetual Futures pairs sorted by highest real-time funding rate.
+                </div>
+                <div class="scroller" style="max-height: 350px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 50px; text-align: center;">#</th>
+                                <th>Coin (Symbol)</th>
+                                <th>Funding Rate (8-Hour)</th>
+                                <th>Estimated APR %</th>
+                                <th>Status Portofolio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="altcoin-filtered-body">
+                            <tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 5: FAQ & Guides -->
+        <div id="tab-faq" class="tab-pane">
+            <div class="section-container">
+                <h2 style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    Frequently Asked Questions (FAQ)
+                </h2>
+                
+                <!-- Sub-tab Navigation for FAQ -->
+                <div style="display: flex; gap: 5px; margin-bottom: 20px; border-bottom: 1.5px solid var(--border-color); padding-bottom: 0px;">
+                    <button class="faq-sub-tab-btn active" data-faq-group="faq-group-general" style="background: transparent; border: none; padding: 10px 16px; cursor: pointer; font-weight: bold; font-family: 'Inter', sans-serif;">
+                        🌐 General Concept
+                    </button>
+                    <button class="faq-sub-tab-btn" data-faq-group="faq-group-technical" style="background: transparent; border: none; padding: 10px 16px; cursor: pointer; font-weight: bold; font-family: 'Inter', sans-serif;">
+                        ⚙️ Technical Details
+                    </button>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Group 1: General Concept -->
+                    <div id="faq-group-general" class="faq-group-pane active-faq-group" style="background: rgba(15, 76, 129, 0.02); border: 1.5px solid var(--border-color); padding: 20px; border-radius: 6px;">
+                        <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-family: Georgia, serif;">🌐 General Concept</h3>
+                        
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: What is Cash-and-Carry Arbitrage?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Cash-and-carry is a market-neutral strategy where an investor buys an asset in the spot market (Cash) and simultaneously shorts it in the perpetual futures market (Carry). By maintaining a delta-neutral position (1:1), the investor is immune to price volatility and profits purely from the interest-like funding rates paid between long and short contract holders.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why do we buy Spot and short Futures? (Why do we need Futures?)</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Trading Spot allows us to buy the physical asset. Trading Futures allows us to short (hedge) the asset with leverage. By buying Spot and shorting Futures 1:1, our overall price risk is zero (Delta Neutral). If the coin price goes up, Spot profits offset Futures losses. If the coin price drops, Futures profits offset Spot losses. This allows us to safely harvest funding payments without price exposure.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Is this strategy completely risk-free?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    While it is market-neutral (protected against coin price drops or pumps), it is not entirely risk-free. Risks include: exchange counterparty risk, futures liquidation during extreme price spikes if margin is insufficient, API connection downtime, and negative funding rates (which are mitigated by our bot's auto-exit guards).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: How much capital do I need to start?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    The bot is configured with profiles starting from $200 (Retail Profile, which handles up to 3 coins with $60 size each). You can scale this up to $2,000 (Institutional Profile, handling up to 8 coins) or customize the configuration in the bot's `.env` parameters to match your capital.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Can I withdraw my funds at any time?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Yes, you can manually close positions through the exchange or stop the bot to release the spot assets and futures margin back into free USDT. The bot does not lock your funds in fixed-term deposits.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: How are profits collected and calculated?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Profit is collected in the form of USDT funding fees paid directly into your futures account every 8 hours. The bot tracks these settlements and aggregates them into the "Total Funding Collected" metric.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Group 2: Technical Arbitrage Details -->
+                    <div id="faq-group-technical" class="faq-group-pane" style="background: #ffffff; border: 1.5px solid var(--border-color); padding: 20px; border-radius: 6px; display: none;">
+                        <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-family: Georgia, serif;">⚙️ Technical Arbitrage Details</h3>
+                        
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why do we use 10x leverage on the Futures leg?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Futures leverage allows us to hedge the spot position using only a fraction of the capital as margin. With 10x leverage, we only need 10% of the position size as collateral in Futures. This frees up the remaining 90% of our capital to buy the physical asset on Spot, keeping the overall position perfectly balanced 1:1.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why are funding rates settled 3 times a day (every 8 hours)?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Binance Futures settlements occur every 8 hours (00:00, 08:00, and 16:00 UTC / 07:00, 15:00, and 23:00 WIB). During these times, traders holding Long positions pay funding fees to traders holding Short positions (or vice versa, depending on the funding rate polarity). Our bot shorts the Futures leg to collect these payments passively 3 times a day.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why is there a small cash buffer left (e.g. $2.00 free cash)?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    The bot operates with fixed position sizes ($60 per koin for Retail). The remaining cash acts as a buffer to cover exchange trading fees and absorb temporary margin fluctuations on the Futures leg, protecting the account from execution failures or margin calls.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why doesn't the bot trade the absolute highest (Top 1) funding rate coin?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    Highly volatile coins with extreme funding rates often have wide basis spreads (&gt; 0.5% difference between Spot and Futures prices). If the spread is too wide, the potential loss when the spread narrows (basis convergence) can exceed the funding yield. The bot filters out any candidates with a basis spread greater than 0.5% for capital safety.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: How does the "Negative Funding Protection" guardrail work?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    If a coin's funding rate turns negative, shorts pay longs. If this negative rate persists for 2 consecutive funding periods (16 hours) or drops below an emergency threshold (-0.5%), the bot automatically executes a two-leg exit to close both Spot and Futures positions simultaneously to prevent capital erosion.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="border-bottom: 1px solid var(--border-color); padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: How does the "Dynamic Sizing" algorithm allocate capital?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    The bot calculates your total equity (free cash + spot holdings + futures margin) and divides 95% of it equally among your maximum allowed position slots (e.g. 3 slots). This dynamically adjusts the size per coin as your account grows, while ensuring a 5% cash buffer is always maintained for fee and margin protection.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" style="padding: 12px 0;">
+                            <button class="faq-question" style="background: transparent; border: none; width: 100%; text-align: left; font-size: 1.05em; font-weight: bold; color: var(--text-primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-family: 'Inter', sans-serif;">
+                                <span>Q: Why is there an "Order Executor Retry" mechanism?</span>
+                                <span class="faq-icon" style="transition: transform 0.2s; font-size: 0.8em; color: var(--accent-blue);">▼</span>
+                            </button>
+                            <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out; color: var(--text-secondary); font-size: 0.9em; line-height: 1.5;">
+                                <p style="margin: 8px 0 0 0; padding-bottom: 10px;">
+                                    During extreme market volatility, spot or futures orders may occasionally experience latency, partial fills, or execution errors. The bot implements a multi-step retry routine that automatically adjusts limit orders or executes market orders to ensure both legs are closed or opened successfully, avoiding unhedged exposure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Multi-Asset Scanner Cards (Stacked Full Width) -->
-    <div class="section-container" style="display: flex; flex-direction: column; gap: 25px;">
-        <!-- Card 1: Top Funding Rate Candidates -->
-        <div class="card">
-            <h3 style="border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-size: 1.2em;">🔍 Top Funding Rate Candidates (Binance Futures)</h3>
-            <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
-                USDT-M Perpetual Futures pairs sorted by highest real-time funding rate.
-            </div>
-            <div class="scroller" style="max-height: 250px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Coin (Symbol)</th>
-                            <th>Funding Rate (8-Hour)</th>
-                            <th>Estimated APR %</th>
-                        </tr>
-                    </thead>
-                    <tbody id="altcoin-filtered-body">
-                        <tr><td colspan="3" style="text-align: center; color: var(--text-secondary);">Loading...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <script is:inline>
+        // Inline client-side tab switcher logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Switch button active status
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Switch content panel visibility
+                    tabPanes.forEach(pane => {
+                        if (pane.id === targetTab) {
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
 
-        <!-- Card 3: Funding Payment Logs -->
-        <div class="card">
-            <h3 style="border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px; font-size: 1.2em;">💸 Funding Payment Collect Logs</h3>
-            <div style="font-size: 0.9em; color: var(--text-secondary); margin-bottom: 10px;">
-                Log entries of passive cash-and-carry funding rate payouts received every 8 hours.
-            </div>
-            <div class="scroller" style="max-height: 250px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Coin (Symbol)</th>
-                            <th>Funding Rate</th>
-                            <th>Payment Received</th>
-                            <th>Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody id="altcoin-excluded-body">
-                        <tr><td colspan="4" style="text-align: center; color: var(--text-secondary);">No funding payments collected yet.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+            // Scroll button handlers for tab navigation
+            const tabNav = document.getElementById('tab-nav-container');
+            const btnLeft = document.getElementById('scroll-tab-left');
+            const btnRight = document.getElementById('scroll-tab-right');
 
-    <!-- Section: Detailed Active Arbitrage Engine State -->
-    <div class="section-container">
-        <h2>🔥 Detailed Active Arbitrage State</h2>
-        <div style="margin-bottom: 10px; font-size: 0.9em; color: var(--text-secondary);">
-            Detailed real-time indicators, entry prices, basis spreads, and collected funding rates per position.
-        </div>
-        <div class="scroller" style="max-height: 300px;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Coin (Symbol)</th>
-                        <th>Spot Entry</th>
-                        <th>Futures Entry</th>
-                        <th>Current Spot</th>
-                        <th>Current Futures</th>
-                        <th>Basis Spread %</th>
-                        <th>Deployed Size</th>
-                        <th>Total Funding</th>
-                        <th>Collect Count</th>
-                        <th>Annualized APR %</th>
-                    </tr>
-                </thead>
-                <tbody id="altcoin-details-body">
-                    <tr><td colspan="10" style="text-align: center; color: var(--text-secondary);">Loading detailed info...</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            if (tabNav && btnLeft && btnRight) {
+                const updateScrollButtons = () => {
+                    const hasOverflow = tabNav.scrollWidth > tabNav.clientWidth;
+                    if (hasOverflow) {
+                        btnLeft.style.display = tabNav.scrollLeft > 5 ? 'flex' : 'none';
+                        const maxScroll = tabNav.scrollWidth - tabNav.clientWidth;
+                        btnRight.style.display = tabNav.scrollLeft < maxScroll - 5 ? 'flex' : 'none';
+                    } else {
+                        btnLeft.style.display = 'none';
+                        btnRight.style.display = 'none';
+                    }
+                };
+
+                tabNav.addEventListener('scroll', updateScrollButtons);
+                window.addEventListener('resize', updateScrollButtons);
+
+                btnLeft.addEventListener('click', () => {
+                    tabNav.scrollBy({ left: -150, behavior: 'smooth' });
+                });
+
+                btnRight.addEventListener('click', () => {
+                    tabNav.scrollBy({ left: 150, behavior: 'smooth' });
+                });
+
+                // Init after some delay to let layout render
+                setTimeout(updateScrollButtons, 300);
+            }
+
+            // Accordion hide/show logic for FAQ
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    
+                    if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                        answer.style.maxHeight = '0px';
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        // Close all other FAQ answers first for cleaner UX
+                        document.querySelectorAll('.faq-answer').forEach(ans => {
+                            ans.style.maxHeight = '0px';
+                        });
+                        document.querySelectorAll('.faq-icon').forEach(ic => {
+                            ic.style.transform = 'rotate(0deg)';
+                        });
+                        
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+
+            // Sub-tab switching logic for FAQ groups
+            const faqSubTabBtns = document.querySelectorAll('.faq-sub-tab-btn');
+            const faqGroupPanes = document.querySelectorAll('.faq-group-pane');
+            
+            faqSubTabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetGroup = this.getAttribute('data-faq-group');
+                    
+                    faqSubTabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    faqGroupPanes.forEach(pane => {
+                        if (pane.id === targetGroup) {
+                            pane.style.display = 'block';
+                        } else {
+                            pane.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 
     <!-- Section: Trading Journal & Observations -->
     <div class="section-container" style="border-bottom: none;">
-        <h2>📓 Trading Journal & Daily Observations (Phase 4)</h2>
+        <h2 style="display: flex; align-items: center; gap: 8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Trading Journal & Daily Observations (Phase 4)
+        </h2>
         <div style="background: #ffffff; border: 1px solid var(--border-color); padding: 15px; font-family: monospace; white-space: pre-wrap; font-size: 0.85em; color: var(--text-primary); max-height: 300px; overflow-y: auto;" id="journal-box">Loading journal logs...</div>
     </div>
   </div>
@@ -218,7 +724,10 @@ import Layout from '../../layouts/Layout.astro';
       <div style="background: #faf8f5; border: 2px solid var(--border-color); width: 100%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; margin: 0 auto; top: 5vh; padding: 20px; box-sizing: border-box;">
           <button onclick="document.getElementById('mtfa-modal').style.display='none'" style="position: absolute; top: 15px; right: 15px; background: transparent; border: none; color: var(--text-primary); font-size: 1.5em; cursor: pointer;">&times;</button>
           <div style="padding: 10px 0; border-bottom: 1px solid var(--border-color);">
-              <h2 style="margin: 0; color: var(--text-primary);">📖 Advanced Arbitrage Engine Manual</h2>
+              <h2 style="margin: 0; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                  Advanced Arbitrage Engine Manual
+              </h2>
           </div>
           <div style="padding: 20px; line-height: 1.6; font-size: 0.95em;">
               <h3 style="color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">A. Cash-and-Carry Strategy Concept</h3>
@@ -248,29 +757,55 @@ import Layout from '../../layouts/Layout.astro';
   </div>
 
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <script is:inline src="/js/dashboard_arbitrage.js?v=20260705_1500"></script>
+  <script is:inline src="/js/dashboard_arbitrage.js?v=20260730_1306"></script>
 </Layout>
 
 <style is:global>
+  .content-container {
+      max-width: 100% !important;
+      padding: 20px 30px !important;
+  }
+  @media (max-width: 900px) {
+      .content-container {
+          padding: 10px !important;
+      }
+  }
+  #tab-nav-container::-webkit-scrollbar {
+      display: none;
+  }
+  .faq-sub-tab-btn {
+      border-bottom: 3px solid transparent !important;
+      color: var(--text-muted) !important;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      font-size: 0.95em;
+  }
+  .faq-sub-tab-btn:hover {
+      color: var(--text-primary) !important;
+  }
+  .faq-sub-tab-btn.active {
+      color: var(--accent-blue) !important;
+      border-bottom-color: var(--accent-blue) !important;
+  }
   .dashboard-container {
-      background-color: var(--bg-color);
       width: 100%;
       max-width: 100%;
-      margin: 0 auto;
-      padding: 40px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-      border: 2px solid var(--border-color);
+      margin: 0;
+      padding: 0;
+      box-shadow: none !important;
+      border: none !important;
+      background: transparent !important;
       position: relative;
   }
   .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
       gap: 20px;
       margin-bottom: 20px;
   }
   .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
       gap: 20px;
       margin-bottom: 20px;
   }
@@ -341,7 +876,7 @@ import Layout from '../../layouts/Layout.astro';
   }
   .charts-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       margin-bottom: 20px;
   }
@@ -379,6 +914,9 @@ import Layout from '../../layouts/Layout.astro';
       font-family: 'Courier New', monospace;
       border: 1.5px solid var(--border-color);
   }
+  .scroller table {
+      min-width: 600px !important;
+  }
   th, td {
       padding: 8px 12px;
       text-align: left;
@@ -403,9 +941,51 @@ import Layout from '../../layouts/Layout.astro';
       width: 100%;
       max-width: 100%;
   }
+  .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--text-muted);
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+  }
+  .tab-btn:hover {
+      color: var(--text-primary);
+  }
+  .tab-btn.active {
+      color: var(--accent-blue);
+      border-bottom-color: var(--accent-blue);
+  }
+  .tab-pane {
+      display: none;
+  }
+  .tab-pane.active {
+      display: block;
+  }
   @media (max-width: 900px) {
       .grid-3, .grid-2 { grid-template-columns: 1fr !important; }
-      .dashboard-container { padding: 15px 10px !important; border: none !important; box-shadow: none !important; }
+      .grid-2 > div {
+          border-left: none !important;
+          border-right: none !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          border-bottom: 1.5px dashed var(--border-color);
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+      }
+      .grid-2 > div:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+          margin-bottom: 0;
+      }
+      .charts-container { grid-template-columns: 1fr !important; }
+      .chart-box { height: 210px !important; }
+      .dashboard-container { padding: 0 !important; border: none !important; box-shadow: none !important; }
       table { font-size: 0.75em !important; }
       th, td { padding: 6px 6px !important; }
       .price-val { font-size: 1.6em !important; }

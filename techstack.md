@@ -26,7 +26,7 @@ Arsitektur backend berjalan secara asinkron menggunakan bahasa pemrograman Rust 
 | **Bot A** (Trend/Scalper) | `8087` | Trend Crossover (EMA-13/34) & Mean Reversion (Bollinger Bands 50-Period) dengan konfirmasi volume (VWAP). | `bot_` | `rust_bot/` |
 | **Bot B** (SmartDCA) | `8088` | Akumulasi bertahap (3-layer DCA) dengan filter zona diskon RSI < 30 dan penundaan Panic Dump. | `dca_` | `smartdca/` |
 | **Bot C** (OKX Spot) | `8091` | Mesin trading spot mandiri khusus API Publik OKX. | `okx_` | `OKX_trading/` |
-| **Bot D** (Altcoin Engine)| `8092` | Kloning Bot A yang dioptimalkan untuk multi-koin Futures/Spot Binance. | `alt_` | `Bot_d_Altcoin/` |
+| **Bot D** (Funding/Arb Engine)| `8092` | Funding Rate Arbitrage (Cash-and-Carry) delta-neutral engine. | `alt_` | `funding/` |
 | **Bot E** (statARB Engine)| `8093` | Mesin Statistical Arbitrage (ETH/BTC co-integration spread) dengan dual-leg execution. | `starb_` | `statARB/` |
 
 ---

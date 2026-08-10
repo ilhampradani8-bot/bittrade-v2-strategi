@@ -9,7 +9,9 @@ import Layout from '../../layouts/Layout.astro';
   <div class="dashboard-container">
     <!-- System Status Bar -->
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-        <h1 style="margin: 0; font-size: 1.8em; font-weight: bold; border-bottom: none; padding-bottom: 0;">SmartDCA Engine Real-time <span class="en-sub">SmartDCA Real-time Trading Engine</span></h1>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h1 style="margin: 0; font-size: 1.8em; font-weight: bold; border-bottom: none; padding-bottom: 0;">SmartDCA Engine Real-time <span class="en-sub">SmartDCA Real-time Trading Engine</span></h1>
+        </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
             <div class="uptime-badge">Masa Aktif Bot: <span id="uptime-counter">00:00:00</span> <span class="en-sub" style="color: inherit; display: inline; font-size: 0.9em; margin-left: 3px;">(Bot Uptime)</span></div>
             <div class="uptime-badge" style="border-color: var(--accent-green); color: var(--accent-green); font-weight: bold;">Winrate Bot: <span id="winrate-counter">0.0%</span> <span class="en-sub" style="color: inherit; display: inline; font-size: 0.9em; margin-left: 3px;">(Bot Winrate)</span></div>
@@ -22,6 +24,9 @@ import Layout from '../../layouts/Layout.astro';
     <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; margin-bottom: 25px; flex-wrap: wrap;">
       <button id="btn-page-overview" class="page-tab-btn active" onclick="switchPageTab('overview')">
         Overview <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Ringkasan</span>
+      </button>
+      <button id="btn-page-scanner" class="page-tab-btn" onclick="switchPageTab('scanner')">
+        Volatility Scanner <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Pemindai Koin Volatil</span>
       </button>
       <button id="btn-page-cycles" class="page-tab-btn" onclick="switchPageTab('cycles')">
         DCA Cycle History <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.8;">Riwayat Siklus DCA</span>
@@ -52,26 +57,24 @@ import Layout from '../../layouts/Layout.astro';
       <!-- Metrics Grid -->
       <div class="metrics-grid">
           <div class="metric-card">
-              <h3>Total Equity <span class="en-sub">Total Ekuitas</span></h3>
+              <h3>Total Saldo Asli <span class="en-sub">Original Net Worth</span></h3>
               <div class="metric-value" id="equity-val">$0.00</div>
-              <div class="metric-subtext">USDT + BTC Value</div>
+              <div class="metric-subtext">Cash + Floating Value</div>
           </div>
           <div class="metric-card">
-              <h3>Simulated Balance <span class="en-sub">Sisa Modal</span></h3>
+              <h3>Daya Beli Leverage (3x) <span class="en-sub">Leveraged Buying Power</span></h3>
+              <div class="metric-value" id="leveraged-equity-val">$0.00</div>
+              <div class="metric-subtext">Original Net Worth x 3</div>
+          </div>
+          <div class="metric-card">
+              <h3>Modal Terpakai (Margin) <span class="en-sub">Margin Spent</span></h3>
+              <div class="metric-value" id="margin-spent-val">$0.00</div>
+              <div class="metric-subtext">In Active Positions</div>
+          </div>
+          <div class="metric-card">
+              <h3>Modal Bebas / Tak Terpakai <span class="en-sub">Available USDT</span></h3>
               <div class="metric-value" id="balance-val">$0.00</div>
-              <div class="metric-subtext">Remaining USDT Cash</div>
-          </div>
-          <div class="metric-card">
-              <h3>BTC Holdings <span class="en-sub">Saldo Aset BTC</span></h3>
-              <div class="metric-value" id="btc-val">0.000000</div>
-              <div class="metric-subtext" id="btc-value-usd">$0.00 USD</div>
-          </div>
-          <div class="metric-card">
-              <h3>DCA Layers Filled <span class="en-sub">Lapisan DCA Terisi</span></h3>
-              <div class="metric-value" id="layers-val">0 / 3</div>
-              <div class="metric-subtext">
-                  <span id="layer-dots" style="letter-spacing: 3px; font-weight: bold; color: var(--accent-blue);">○○○</span>
-              </div>
+              <div class="metric-subtext">Free USDT remaining</div>
           </div>
       </div>
 
@@ -90,29 +93,45 @@ import Layout from '../../layouts/Layout.astro';
               </div>
           </div>
 
-          <!-- Right Panel: Active Position Summary -->
+          <!-- Right Panel: Active Position Summary Table -->
           <div class="panel-box" style="display: flex; flex-direction: column; justify-content: space-between;">
               <div>
-                  <h2 class="panel-title">💼 Posisi Aktif Saat Ini <span class="en-sub">Current Active Position</span></h2>
-                  <div style="margin-bottom: 12px; font-size: 0.95em;">
-                      <strong>Siklus Aktif <span class="en-sub" style="display: inline; font-size: 0.9em; font-weight: normal; color: inherit; font-style: italic;">(Active Cycle)</span>:</strong> <span id="cycle-id">#0</span>
-                  </div>
-                  <div style="margin-bottom: 12px; font-size: 0.95em;">
-                      <strong>Rerata Harga Masuk <span class="en-sub" style="display: inline; font-size: 0.9em; font-weight: normal; color: inherit; font-style: italic;">(Avg Entry Price)</span>:</strong> <span id="avg-entry-val">$0.00</span>
-                  </div>
-                  <div style="margin-bottom: 12px; font-size: 0.95em;">
-                      <strong>Harga BTC Saat Ini <span class="en-sub" style="display: inline; font-size: 0.9em; font-weight: normal; color: inherit; font-style: italic;">(Current BTC Price)</span>:</strong> <span id="btc-price-val" style="font-weight: bold;">$0.00</span>
-                  </div>
-                  <div style="margin-bottom: 12px; font-size: 0.95em;">
-                      <strong>High Water Mark Siklus <span class="en-sub" style="display: inline; font-size: 0.9em; font-weight: normal; color: inherit; font-style: italic;">(Cycle HWM)</span>:</strong> <span id="hwm-val">$0.00</span>
-                  </div>
-                  <div style="margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); text-align: center;">
-                      <div style="font-size: 0.85em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 5px;">PNL Real-time</div>
-                      <div id="pnl-pct-val" style="font-size: 1.8em; font-weight: bold;">+0.00%</div>
+                  <h2 class="panel-title">💼 Posisi Aktif Saat Ini <span class="en-sub">Current Active Positions</span></h2>
+                  <div style="overflow-x: auto;">
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>Symbol</th>
+                                  <th>Cycle</th>
+                                  <th>Layers</th>
+                                  <th>Avg Entry</th>
+                                  <th>Current</th>
+                                  <th>PnL</th>
+                                  <th>Chart</th>
+                              </tr>
+                          </thead>
+                          <tbody id="active-positions-table-body">
+                              <tr>
+                                  <td colspan="7" style="text-align: center; color: var(--text-secondary);">Tidak ada posisi aktif</td>
+                              </tr>
+                          </tbody>
+                      </table>
                   </div>
               </div>
-              <div>
-                  <button class="btn btn-danger" onclick="triggerManualSell()" style="width: 100%; padding: 12px;">🚨 EMERGENCY MANUAL SELL <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.85;">Jual Manual Darurat</span></button>
+              <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                  <div style="font-size: 0.85em; color: var(--text-secondary); text-align: center;">Leverage: <span style="font-weight: bold; color: var(--accent-green);">Futures (3x Leverage)</span></div>
+                  <button class="btn btn-danger" onclick="triggerManualSell()" style="width: 100%; padding: 10px;">🚨 EMERGENCY MANUAL SELL <span style="font-size: 0.8em; font-style: italic; display: block; font-weight: normal; opacity: 0.85;">Jual Manual Darurat</span></button>
+              </div>
+              
+              <!-- Strategy Rules Documentation Box -->
+              <div style="margin-top: 20px; border-top: 1.5px dashed var(--border-color); padding-top: 15px; font-size: 0.8em; color: var(--text-secondary);">
+                  <h4 style="margin: 0 0 8px 0; font-weight: bold; color: var(--text-primary); font-size: 1.05em;">Parameter SmartDCA Teroptimasi:</h4>
+                  <ul style="margin: 0; padding-left: 15px; display: flex; flex-direction: column; gap: 6px; line-height: 1.4;">
+                      <li><strong>Layer 1 (40%):</strong> Drop &le; -2.5%, RSI &lt; 50, lolos RSI Allowed &amp; EMA-750.</li>
+                      <li><strong>Layer 2 (30%):</strong> Drop &le; -5.0%, RSI &lt; 50 (Bebas filter RSI Allowed).</li>
+                      <li><strong>Layer 3 (30%):</strong> Drop &le; -8.0%, RSI &lt; 40 (Bebas filter RSI Allowed).</li>
+                      <li><strong>Exit Logic:</strong> TP Hard +2.5% | Trailing TP (pullback 0.8% dari +1.5% HWM) | Stop Loss -5.0%.</li>
+                  </ul>
               </div>
           </div>
       </div>
@@ -121,6 +140,33 @@ import Layout from '../../layouts/Layout.astro';
       <div class="panel-box" style="margin-top: 25px; border: none; border-top: 1.5px solid var(--border-color);">
           <h2 class="panel-title" style="margin-bottom: 10px; border: none;">📋 Catatan Aktivitas Real-time <span class="en-sub">Real-time Activity Logs</span></h2>
           <div class="log-console" id="log-box">Loading logs...</div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Volatility Scanner Section -->
+    <div id="section-scanner" class="page-section" style="display: none;">
+      <div style="border-bottom: 2px solid var(--border-color); padding-bottom: 12px; margin-bottom: 20px;">
+        <h1 style="margin: 0; border: none; font-size: 1.6em; padding-bottom: 0;">Pemindai Volatilitas <span class="en-sub">Volatility Scanner (Top 100 Binance)</span></h1>
+      </div>
+      <div class="scroller" style="max-height: 600px; overflow-y: auto; position: relative;">
+          <table>
+              <thead>
+                  <tr>
+                      <th>Rank <span class="en-sub">Peringkat</span></th>
+                      <th>Simbol <span class="en-sub">Symbol</span></th>
+                      <th>Volatilitas (24j) <span class="en-sub">24h Volatility</span></th>
+                      <th>Volume (24j) <span class="en-sub">24h Volume</span></th>
+                      <th>Status <span class="en-sub">State</span></th>
+                      <th>Lapisan Aktif <span class="en-sub">Active Layers</span></th>
+                      <th>Aksi <span class="en-sub">Action</span></th>
+                  </tr>
+              </thead>
+              <tbody id="scanner-table-body">
+                  <tr>
+                      <td colspan="7" style="text-align: center; color: var(--text-secondary);">Loading scanner data...</td>
+                  </tr>
+              </tbody>
+          </table>
       </div>
     </div>
 
@@ -133,6 +179,7 @@ import Layout from '../../layouts/Layout.astro';
           <table>
               <thead>
                   <tr>
+                      <th>Simbol <span class="en-sub">Symbol</span></th>
                       <th>Siklus <span class="en-sub">Cycle</span></th>
                       <th>Rerata Masuk <span class="en-sub">Entry Avg</span></th>
                       <th>Harga Keluar <span class="en-sub">Exit Price</span></th>
@@ -143,7 +190,7 @@ import Layout from '../../layouts/Layout.astro';
               </thead>
               <tbody id="cycles-table-body">
                   <tr>
-                      <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading cycles...</td>
+                      <td colspan="7" style="text-align: center; color: var(--text-secondary);">Loading cycles...</td>
                   </tr>
               </tbody>
           </table>
@@ -160,17 +207,19 @@ import Layout from '../../layouts/Layout.astro';
               <thead>
                   <tr>
                       <th>Waktu <span class="en-sub">Time</span></th>
+                      <th>Simbol <span class="en-sub">Symbol</span></th>
                       <th>Siklus <span class="en-sub">Cycle</span></th>
                       <th>Aksi <span class="en-sub">Action</span></th>
                       <th>Lapisan <span class="en-sub">Layer</span></th>
                       <th>Harga <span class="en-sub">Price</span></th>
                       <th>Jumlah <span class="en-sub">Amount</span></th>
-                      <th>Untung/Rugi <span class="en-sub">P&amp;L</span></th>
+                      <th>Modal <span class="en-sub">Capital</span></th>
+                      <th>Biaya/PNL <span class="en-sub">Cost/PnL</span></th>
                   </tr>
               </thead>
               <tbody id="history-table-body">
                   <tr>
-                      <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading trades...</td>
+                      <td colspan="9" style="text-align: center; color: var(--text-secondary);">Loading trades...</td>
                   </tr>
               </tbody>
           </table>

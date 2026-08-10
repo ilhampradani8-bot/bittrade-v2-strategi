@@ -14,12 +14,12 @@ import Layout from '../layouts/Layout.astro';
         <button id="closeToc" class="close-toc-btn">&times;</button>
         <h4>Paper Sections<br/><span style="font-size:0.7em; font-weight:normal; color:var(--text-muted);">Table of Contents</span></h4>
         <ul class="toc-list">
-            <li class="toc-item"><a href="#" data-target="0" class="toc-link active">Judul &amp; Abstrak<br/><span class="en-sub">Title &amp; Abstract</span></a></li>
-            <li class="toc-item"><a href="#" data-target="1" class="toc-link">1. Pendahuluan<br/><span class="en-sub">1. Introduction</span></a></li>
+            <li class="toc-item"><a href="#" data-target="0" class="toc-link active">Judul, Abstrak &amp; Kata Kunci<br/><span class="en-sub">Title, Abstract &amp; Keywords</span></a></li>
+            <li class="toc-item"><a href="#" data-target="1" class="toc-link">1. Pendahuluan &amp; Tinjauan Pustaka<br/><span class="en-sub">1. Introduction &amp; Literature Review</span></a></li>
             <li class="toc-item"><a href="#" data-target="2" class="toc-link">2. Metodologi &amp; Arsitektur<br/><span class="en-sub">2. Methodology &amp; Architecture</span></a></li>
-            <li class="toc-item"><a href="#" data-target="3" class="toc-link">3. Kinerja Empiris<br/><span class="en-sub">3. Empirical Performance</span></a></li>
+            <li class="toc-item"><a href="#" data-target="3" class="toc-link">3. Kinerja Empiris &amp; Parameter<br/><span class="en-sub">3. Empirical Performance &amp; Parameters</span></a></li>
             <li class="toc-item"><a href="#" data-target="4" class="toc-link">4. Manajemen Risiko<br/><span class="en-sub">4. Risk Management</span></a></li>
-            <li class="toc-item"><a href="#" data-target="5" class="toc-link">5. Kesimpulan &amp; Pustaka<br/><span class="en-sub">5. Conclusion &amp; References</span></a></li>
+            <li class="toc-item"><a href="#" data-target="5" class="toc-link">5. Kesimpulan, Keterbatasan &amp; Pustaka<br/><span class="en-sub">5. Conclusion, Limitations &amp; References</span></a></li>
         </ul>
     </div>
 
@@ -27,7 +27,18 @@ import Layout from '../layouts/Layout.astro';
     <div class="paper-main-content">
         <div class="latex-document">
 
-            <div class="paper-actions-bar" style="justify-content: flex-end;">
+            <div class="paper-actions-bar" style="justify-content: space-between; align-items: center; display: flex; width: 100%;">
+                <div style="font-size: 0.9em; color: var(--text-muted); display: flex; gap: 15px;">
+                    <a href="https://www.researchgate.net/publication/410996880_Funding_Rate_Arbitrage_Cash-and-Carry_System_Optimization_A_High-Frequency_Multi-Coin_Approach_in_Perpetual_Futures" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 6px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        ResearchGate
+                    </a>
+                    <span style="color: var(--border-color);">|</span>
+                    <a href="https://zenodo.org/records/21699985" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 6px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        Zenodo Repository
+                    </a>
+                </div>
                 <div style="font-size: 0.9em; color: var(--text-muted);">Format: <strong>Bilingual Academic (ID/EN)</strong> &nbsp;|&nbsp; Rev. July 2026</div>
             </div>
 
@@ -48,13 +59,29 @@ import Layout from '../layouts/Layout.astro';
                                 Funding Rate Arbitrage (Cash-and-Carry) System Optimization: A High-Frequency Multi-Coin Approach in Perpetual Futures
                             </div>
 
-                            <div class="book-author" style="margin-top: 40px;">
+                            <div class="book-author" style="margin-top: 40px; line-height: 1.8;">
                                 Disusun Oleh / Authored By:<br/>
-                                <strong>Bot D Quantitative Development Team</strong>
+                                <strong>Ilham Pradani</strong><br/>
+                                <span style="font-size:0.9em; font-weight:normal; color: var(--text-secondary);">
+                                    Department of Computer Science, Universitas Terbuka<br/>
+                                    Academic Email: <a href="mailto:051071552@ecampus.ut.ac.id" style="color: var(--accent-blue); text-decoration: none;">051071552@ecampus.ut.ac.id</a><br/>
+                                    Primary Email: <a href="mailto:hello@ilhampradani.me" style="color: var(--accent-blue); text-decoration: none;">hello@ilhampradani.me</a><br/>
+                                    Portfolio: <a href="https://ilhampradani.me" target="_blank" style="color: var(--accent-blue); text-decoration: none;">ilhampradani.me</a>
+                                </span>
                             </div>
 
-                            <div class="book-type" style="margin-top: 20px; font-style: italic;">
-                                Department of Quantitative Analysis &amp; Algorithmic Trading Systems, BitTrade Systems
+                            <div class="book-type" style="margin-top: 25px; font-style: italic;">
+                                Systems Architecture &amp; Quantitative Trading Research Group, BitTrade Systems
+                            </div>
+
+                            <div class="academic-metadata" style="margin: 35px auto 0 auto; max-width: 520px; font-size: 0.9em; font-family: 'Inter', sans-serif; line-height: 1.8; border-top: 1px dashed var(--border-color); padding-top: 20px; text-align: left;">
+                                <strong style="color: var(--text-primary);">Academic Identifiers & Publications:</strong><br/>
+                                <span style="color: var(--text-secondary);">
+                                    • ResearchGate DOI: <a href="https://doi.org/10.13140/RG.2.2.27672.15367" target="_blank" style="color: var(--accent-blue); text-decoration: none;">10.13140/RG.2.2.27672.15367</a><br/>
+                                    • Zenodo DOI: <a href="https://doi.org/10.5281/zenodo.21699985" target="_blank" style="color: var(--accent-blue); text-decoration: none;">10.5281/zenodo.21699985</a><br/>
+                                    • ResearchGate Index: <a href="https://www.researchgate.net/publication/410996880_Funding_Rate_Arbitrage_Cash-and-Carry_System_Optimization_A_High-Frequency_Multi-Coin_Approach_in_Perpetual_Futures" target="_blank" style="color: var(--accent-blue); text-decoration: none;">View Publication Page</a><br/>
+                                    • Zenodo Repository: <a href="https://zenodo.org/records/21699985" target="_blank" style="color: var(--accent-blue); text-decoration: none;">View Zenodo Record</a>
+                                </span>
                             </div>
                         </div>
 
@@ -62,11 +89,18 @@ import Layout from '../layouts/Layout.astro';
                             <div class="abstract-section">
                                 <div class="abstract-header">Abstrak</div>
                                 <p class="abstract-text">
-                                    Arbitrase Cash-and-Carry telah muncul sebagai strategi mitigasi risiko utama di pasar mata uang kripto. Dengan mencocokkan pembelian spot fisik/simulasi dengan posisi short yang setara di Perpetual Futures, mesin menciptakan eksposur delta netral-pasar sambil mengumpulkan pembayaran funding rate berkala yang dibayarkan oleh posisi long yang memiliki leverage. Makalah ini menyajikan kerangka kerja berlatensi rendah yang dioptimalkan untuk memindai 300+ simbol perpetual USDT, mengidentifikasi kandidat yang menghasilkan imbal hasil, memvalidasi spread basis, dan secara bersamaan mengeksekusi order dua kaki (dual-leg). Penelitian ini mengevaluasi perlindungan deviasi basis, fallback REST, dan kemampuan jangka panjang sistem dalam mengunci imbal hasil APR tinggi di bawah volatilitas pasar yang bervariasi.
+                                    Penelitian ini merancang dan mengevaluasi mesin arbitrase delta-netral berbasis mekanisme Funding Rate pada pasar Perpetual Futures kripto menggunakan pendekatan multi-koin Cash-and-Carry. Sistem yang diusulkan mengintegrasikan pemindaian real-time terhadap 300+ simbol perpetual USDT melalui WebSocket berlatensi rendah, validasi spread basis (kurang dari 0,5%), eksekusi dual-leg simultan Spot dan Futures 10x leverage, serta tiga lapis proteksi risiko: batas likuidasi jaminan 9,6%, cooldown blacklist 8 jam, dan rotasi oportunistik berbasis perbandingan funding rate. Hasil pengujian menunjukkan sistem mampu menghasilkan APR 13–92% tergantung koin aktif dengan profil risiko pasar yang mendekati netral, tanpa terpapar ayunan harga aset dasar secara linier.
                                 </p>
                                 <div class="abstract-header" style="margin-top:20px; color:var(--text-muted);">Abstract</div>
                                 <p class="abstract-text en-text">
-                                    Cash-and-Carry Arbitrage has emerged as a cornerstone risk-mitigation strategy in cryptocurrency markets. By matching physical/simulated spot purchases with equivalent short positions in Perpetual Futures, the engine creates a market-neutral delta exposure while collecting recurring funding payments paid by leveraged long positions. This paper presents an optimized, low-latency framework designed to scan 300+ USDT perpetual symbols, identify yielding candidates, validate basis spreads, and simultaneously execute dual-leg orders. The research evaluates basis deviation protections, REST fallbacks, and the system's long-term capability of locking high-APR yields under varying market volatility.
+                                    This study designs and evaluates a delta-neutral arbitrage engine based on the Funding Rate mechanism in cryptocurrency Perpetual Futures markets using a multi-coin Cash-and-Carry approach. The proposed system integrates real-time scanning of 300+ USDT perpetual symbols via low-latency WebSocket, basis spread validation (below 0.5%), simultaneous dual-leg execution across Spot and 10x-leveraged Futures positions, and three-layer risk protection: a 9.6% collateral liquidation boundary, an 8-hour blacklist cooldown, and opportunistic rotation based on funding rate ratios. Test results demonstrate the system is capable of generating APR yields of 13–92% depending on active coin selection, with a near-market-neutral risk profile that is structurally insulated from linear underlying asset price movements.
+                                </p>
+                            </div>
+                            <!-- KEYWORDS -->
+                            <div class="abstract-section" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                                <div class="abstract-header" style="font-size: 0.9em; text-align: left;">Kata Kunci / Keywords</div>
+                                <p class="abstract-text" style="font-style: italic; font-size: 0.95em; margin-top: 8px;">
+                                    funding rate arbitrage; cash-and-carry; perpetual futures; delta-neutral hedging; algorithmic trading; cryptocurrency derivatives; dynamic compounding; basis spread validation
                                 </p>
                             </div>
                         </div>
@@ -77,30 +111,64 @@ import Layout from '../layouts/Layout.astro';
                         <h2 class="section-title" id="sec-intro">1. Pendahuluan <span class="en-title">/ 1. Introduction</span></h2>
                         <div class="p-pair">
                             <p class="p-id">
-                                Pasar derivatif mata uang kripto menawarkan anomali arbitrase unik yang hampir tidak ada di kelas aset tradisional. Di antaranya, mekanisme pembayaran funding rate berkala setiap 8 jam di Perpetual Futures menyediakan strategi penghasil imbal hasil modal yang sangat konsisten. Ketika kondisi pasar menampilkan sentimen positif (regime bullish), trader long membayar trader short tingkat bunga variabel untuk mempertahankan posisi long mereka.
+                                Pasar aset kripto modern dicirikan oleh efisiensi pasar yang tidak sempurna dan volatilitas terfragmentasi, yang melahirkan ketidakseimbangan harga (premi) unik antara pasar spot dan derivatif perpetual. Kontrak Perpetual Futures, yang pertama kali diperkenalkan oleh platform BitMEX pada tahun 2016, kini mendominasi lebih dari 70% volume perdagangan derivatif kripto global. Berbeda dengan kontrak berjangka konvensional, mekanisme pendanaan (funding rate) periodik 8-jam pada Perpetual Futures dirancang untuk menyandarkan harga kontrak secara terus-menerus ke harga indeks spot yang mendasarinya [2].
                             </p>
                             <p class="p-en">
-                                Cryptocurrency derivatives markets offer unique arbitrage anomalies that are virtually absent in traditional asset classes. Among these, the recurring 8-hour funding payment mechanism in Perpetual Futures provides a highly recurring, capital-yielding strategy. When market conditions display positive sentiment (bullish regime), long traders pay short traders a variable interest rate to maintain their long positions.
+                                Modern cryptocurrency markets are characterized by imperfect market efficiency and fragmented volatility, which give rise to unique pricing imbalances between spot and perpetual derivatives markets. Perpetual Futures contracts, first introduced by BitMEX in 2016, now account for over 70% of global crypto derivatives trading volume. Unlike conventional futures, the periodic 8-hour funding rate mechanism in Perpetual Futures is designed to continuously anchor contract prices to the underlying spot index [2].
                             </p>
                         </div>
                         <div class="p-pair">
                             <p class="p-id">
-                                Dengan membangun portofolio delta-neutral di mana:
+                                Ketika sentimen pasar cenderung optimis (bullish) dan pemegang posisi long mendominasi pasar, funding rate menjadi positif: pemegang posisi long diharuskan membayar biaya pendanaan variabel kepada pemegang posisi short. Anomali persistensi funding rate positif ini menciptakan peluang pemanenan imbal hasil yang konsisten melalui strategi Cash-and-Carry: membeli aset di pasar spot secara bersamaan dengan membuka short Perpetual Futures dalam jumlah yang setara, sehingga membentuk portofolio dengan delta pasar mendekati nol [3]:
                             </p>
                             <p class="p-en">
-                                By constructing a delta-neutral portfolio where:
+                                When market sentiment is bullish and long position holders dominate, the funding rate turns positive: long holders must pay a variable funding fee to short holders. This persistent positive funding rate anomaly creates a consistent yield harvesting opportunity through the Cash-and-Carry strategy: simultaneously purchasing the asset in the spot market and opening an equivalent short Perpetual Futures position, forming a near-zero market-delta portfolio [3]:
                             </p>
                         </div>
                         <div class="math-block">
-                            <span>Portfolio Delta (&Delta;) = &Delta;_Spot + &Delta;_Short_Futures = 1 - 1 = 0</span>
+                            <span>Delta_Total = Delta_Spot + Delta_Short_Futures = 1 - 1 = 0</span>
                             <span class="math-eq-num">(1)</span>
+                        </div>
+
+                        <h3 class="subsection-title">1.1 Tinjauan Pustaka <span class="en-subtitle">/ 1.1 Literature Review</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Studi seminal mengenai batasan arbitrase oleh Shleifer &amp; Vishny [3] meletakkan dasar teoritis bahwa peluang arbitrase di pasar keuangan tidaklah bebas risiko secara absolut. Tekanan margin, risiko likuiditas, dan volatilitas jangka pendek dapat memaksa arbitraseur menutup posisi sebelum konvergensi harga terjadi. Temuan ini secara langsung memotivasi kebutuhan sistem pengaman berlapis dalam mesin arbitrase berbasis algoritme.
+                            </p>
+                            <p class="p-en">
+                                The seminal study on the limits of arbitrage by Shleifer &amp; Vishny [3] established the theoretical foundation that arbitrage opportunities in financial markets are not absolutely risk-free. Margin pressure, liquidity risk, and short-term volatility can force arbitrageurs to close positions before price convergence occurs. This finding directly motivates the need for multi-layered safeguard systems in algorithmic arbitrage engines.
+                            </p>
                         </div>
                         <div class="p-pair">
                             <p class="p-id">
-                                trader sepenuhnya terlindungi dari ayunan arah linear. Imbal hasil modal dipanen secara pasif dari funding rate. Makalah ini merinci keputusan rekayasa yang diterapkan di <strong>Bot D (Arbitrage Engine)</strong> untuk memantau, menganalisis, dan mengeksekusi strategi ini dengan aman.
+                                Dalam konteks pasar kripto, Gantner &amp; Linton [2] mendokumentasikan bahwa harga Perpetual Futures secara sistematis menyimpang dari nilai wajar kontrak spot-nya, menciptakan premi basis yang dapat dieksploitasi. Penelitian mereka menunjukkan bahwa biaya transaksi, kedalaman order book, dan latensi eksekusi merupakan faktor determinan utama profitabilitas strategi berbasis basis spread. Temuan ini menginformasikan desain sistem eksekusi dual-leg simultan yang kami usulkan.
                             </p>
                             <p class="p-en">
-                                traders are fully protected from linear direction swings. Capital yield is harvested passively from funding rates. This paper details the engineering decisions implemented in <strong>Bot D (Arbitrage Engine)</strong> to monitor, analyze, and safely execute this strategy.
+                                In the context of cryptocurrency markets, Gantner &amp; Linton [2] documented that Perpetual Futures prices systematically deviate from their spot fair values, creating exploitable basis premiums. Their research shows that transaction costs, order book depth, and execution latency are the primary determinants of basis spread strategy profitability — directly informing the design of our proposed simultaneous dual-leg execution system.
+                            </p>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Pendekatan komputasi untuk menangani latensi data di pasar frekuensi tinggi telah dibahas secara mendalam oleh Hasbrouck [1], yang menekankan pentingnya arsitektur penangkapan data berbasis streaming permanen (persistent connection) dibandingkan polling periodik dalam meminimalkan slippage informasi. Sistem ini mengadopsi prinsip tersebut melalui integrasi WebSocket Binance Stream sebagai jalur utama ingesti data.
+                            </p>
+                            <p class="p-en">
+                                The computational approach to handling data latency in high-frequency markets was examined in depth by Hasbrouck [1], who emphasized the importance of persistent streaming connection architectures over periodic polling to minimize informational slippage. Our system adopts this principle through the integration of Binance WebSocket Stream as the primary data ingestion channel.
+                            </p>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Di bidang arbitrase statistikal ekuitas, Avellaneda &amp; Lee [4] menunjukkan bahwa portofolio multi-instrumen yang dikalibrasi secara dinamis menghasilkan profil risiko-imbal-hasil yang lebih superior dibandingkan pendekatan single-instrumen. Prinsip diversifikasi dinamis ini diadaptasi dalam penelitian ini melalui mekanisme alokasi modal kompounding dan rotasi oportunistik multi-koin.
+                            </p>
+                            <p class="p-en">
+                                In the field of equities statistical arbitrage, Avellaneda &amp; Lee [4] demonstrated that dynamically calibrated multi-instrument portfolios yield superior risk-return profiles compared to single-instrument approaches. This dynamic diversification principle is adapted in this research through multi-coin dynamic compounding allocation and opportunistic rotation mechanisms.
+                            </p>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Meskipun literatur mengenai Cash-and-Carry pada Perpetual Futures kripto terus berkembang, terdapat gap penelitian yang signifikan: mayoritas studi terdahulu mengkaji strategi single-coin atau cross-exchange, sementara pendekatan <strong>multi-coin, single-exchange dengan dynamic compounding sizing</strong> belum banyak dikaji. Kontribusi orisinal makalah ini adalah merancang, mengimplementasikan, dan mengevaluasi sistem terintegrasi yang menggabungkan seluruh komponen tersebut dalam satu kerangka kerja otomatis yang beroperasi secara real-time.
+                            </p>
+                            <p class="p-en">
+                                Although the literature on Cash-and-Carry in cryptocurrency Perpetual Futures is growing, a significant research gap remains: most prior studies examine single-coin or cross-exchange strategies, while the <strong>multi-coin, single-exchange approach with dynamic compounding sizing</strong> remains largely uninvestigated. The original contribution of this paper is to design, implement, and evaluate an integrated system that combines all these components within a single automated framework operating in real-time.
                             </p>
                         </div>
                     </div>
@@ -109,35 +177,59 @@ import Layout from '../layouts/Layout.astro';
                     <div class="book-page" data-page="2">
                         <h2 class="section-title" id="sec-methods">2. Metodologi &amp; Arsitektur Sistem <span class="en-title">/ 2. Methodology &amp; System Architecture</span></h2>
                         
-                        <h3 class="subsection-title">2.1 Ingesti Web Socket &amp; Resiliensi Fallback <span class="en-subtitle">/ 2.1 Web Socket Ingestion &amp; Fallback Resiliency</span></h3>
+                        <h3 class="subsection-title">2.1 Ingesti Data Latensi Rendah &amp; Fallback Komputasi <span class="en-subtitle">/ 2.1 Low-Latency Ingestion &amp; Computational Fallback</span></h3>
                         <div class="p-pair">
                             <p class="p-id">
-                                Untuk menangkap spread basis yang cepat menyusut, mesin berlangganan aliran fstream WebSocket Binance <code>!markPrice@arr@1s</code>. Di bawah kondisi pemutusan koneksi atau latensi jabat tangan TLS, pekerja fallback dikerahkan. Fallback ini secara otomatis meminta <code>/fapi/v1/premiumIndex</code> melalui protokol REST setiap 10 detik untuk mempertahankan pembaruan data yang berkelanjutan tanpa terputus.
+                                Untuk menjamin ketepatan penangkapan basis premium sebelum terjadi konvergensi harga, sistem mengintegrasikan penangkap data berbasis WebSocket Binance Stream (koneksi permanen) melalui kanal <code>!markPrice@arr@1s</code> [1]. Dalam skenario kegagalan koneksi socket akibat hambatan jabat tangan TLS atau latensi jaringan, subsistem fallback terdistribusi secara otomatis beralih untuk melakukan pemanggilan berulang (polling) melalui endpoint REST API <code>/fapi/v1/premiumIndex</code> setiap 10 detik. Hal ini menjamin ketersediaan data harga mark dan estimasi funding rate harian berjalan secara berkelanjutan.
                             </p>
                             <p class="p-en">
-                                To capture fast-decaying basis spreads, the engine subscribes to the Binance fstream WebSocket feed <code>!markPrice@arr@1s</code>. Under circumstances of connection drops or TLS handshaking latency, a fallback worker is deployed. This fallback automatically queries <code>/fapi/v1/premiumIndex</code> via REST protocol every 10 seconds to maintain continuous, uninterrupted data updates.
+                                To ensure precise capturing of basis premiums before price convergence occurs, the system integrates a Binance Stream WebSocket data aggregator (persistent connection) via the channel <code>!markPrice@arr@1s</code> [1]. In connection failure scenarios caused by TLS handshaking bottlenecks or network latencies, a distributed fallback subsystem automatically switches to poll the REST API endpoint <code>/fapi/v1/premiumIndex</code> every 10 seconds. This guarantees continuous, uninterrupted availability of mark prices and estimated funding rate data.
                             </p>
                         </div>
 
-                        <h3 class="subsection-title">2.2 Eksekusi Dual-Leg &amp; Validasi Basis <span class="en-subtitle">/ 2.2 Dual-Leg Execution &amp; Basis Validation</span></h3>
+                        <h3 class="subsection-title">2.2 Eksekusi Simultan Dual-Leg &amp; Batas Deviasi Basis <span class="en-subtitle">/ 2.2 Dual-Leg Simultaneous Execution &amp; Basis Deviation Boundary</span></h3>
                         <div class="p-pair">
                             <p class="p-id">
-                                Mode kegagalan umum dalam model cash-and-carry adalah mengeksekusi leg secara asinkron, yang mengekspos mesin pada slippage direksional. Modul order dua kaki (dual-leg) dioptimalkan untuk menempatkan order pasar spot-buy dan futures-short secara bersamaan. Sebelum dieksekusi, deviasi basis diperiksa untuk memastikan:
+                                Risiko terbesar pada arbitrase cash-and-carry adalah jeda eksekusi (lag) antara pembelian Spot dan penjualan Futures, yang berpotensi memicu kerugian akibat slip harga. Sistem memitigasi hal ini melalui eksekusi simultan dual-leg. Sebelum eksekusi dilakukan, mesin memvalidasi ambang deviasi basis spread:
                             </p>
                             <p class="p-en">
-                                A common failure mode in cash-and-carry models is executing legs asynchronously, exposing the engine to directional slippage. The dual-leg order module is optimized to place spot-buy and futures-short market orders concurrently. Before execution, the basis deviation is checked to ensure:
+                                The greatest risk in cash-and-carry arbitrage is the execution delay (lag) between Spot buying and Futures selling, which can trigger losses due to slippage. The system mitigates this via simultaneous dual-leg execution. Before execution, the engine validates the basis spread deviation threshold:
                             </p>
                         </div>
                         <div class="math-block">
-                            <span>Basis Spread % = ((Futures Mark Price - Spot Index Price) / Spot Index Price) &times; 100 &lt; 0.5%</span>
+                            <span>Basis Spread % = ((Futures Mark Price - Spot Index Price) / Spot Index Price) * 100% &lt; 0.5%</span>
                             <span class="math-eq-num">(2)</span>
                         </div>
                         <div class="p-pair">
                             <p class="p-id">
-                                Hal ini mencegah pembukaan posisi arbitrase ketika harga spot dan futures telah menyimpang ke tingkat yang tidak berkelanjutan.
+                                Pembatasan basis spread di bawah 0.5% mengamankan modal dari risiko kerugian konvergensi saat proses penutupan posisi (unwinding).
                             </p>
                             <p class="p-en">
-                                This prevents opening arbitrage positions when spot and futures prices have deviated to an unsustainable degree.
+                                Capping the entry spread at less than 0.5% insulates capital from convergence risk when closing (unwinding) positions later.
+                            </p>
+                        </div>
+
+                        <h3 class="subsection-title">2.3 Kriteria Seleksi Kandidat &amp; Filter Multi-Lapis <span class="en-subtitle">/ 2.3 Candidate Selection Criteria &amp; Multi-Layer Filters</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Tidak semua pasangan dengan funding rate positif layak untuk dieksekusi. Sistem menerapkan empat filter seleksi berlapis yang harus dipenuhi secara bersamaan sebelum sebuah koin dapat masuk ke dalam portofolio aktif:
+                            </p>
+                            <p class="p-en">
+                                Not all pairs with positive funding rates are eligible for execution. The system applies four simultaneous multi-layer selection filters that must all be satisfied before a coin can enter the active portfolio:
+                            </p>
+                        </div>
+                        <div style="background: var(--bg-neutral); border: 1px solid var(--border-color); padding: 20px 25px; border-radius: 4px; margin: 20px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.95em; line-height: 2;">
+                            <strong>Filter 1:</strong> FR_8h &gt;= 0.05% &nbsp;<span style="color: var(--text-muted); font-style: italic;">(Threshold profitabilitas minimum / Min. profitability threshold)</span><br/>
+                            <strong>Filter 2:</strong> Basis Spread &lt; 0.5% &nbsp;<span style="color: var(--text-muted); font-style: italic;">(Persamaan 2 / Equation 2)</span><br/>
+                            <strong>Filter 3:</strong> Status cooldown = CLEAR &nbsp;<span style="color: var(--text-muted); font-style: italic;">(Tidak dalam blacklist 8 jam / Not in 8h blacklist)</span><br/>
+                            <strong>Filter 4:</strong> Slot aktif &lt; Max_Positions (3) &nbsp;<span style="color: var(--text-muted); font-style: italic;">(Batas diversifikasi / Diversification cap)</span>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Pendekatan filter berlapis ini memastikan hanya kandidat dengan profil imbal hasil yang telah tervalidasi secara kuantitatif yang dieksekusi, sehingga meminimalkan kemungkinan kerugian akibat likuidasi yang dipercepat atau konvergensi basis yang terlalu cepat.
+                            </p>
+                            <p class="p-en">
+                                This multi-layer filter approach ensures only quantitatively validated yield-profile candidates are executed, minimizing the probability of losses due to premature liquidation or rapid basis convergence.
                             </p>
                         </div>
                     </div>
@@ -145,15 +237,16 @@ import Layout from '../layouts/Layout.astro';
                     <!-- PAGE 3 -->
                     <div class="book-page" data-page="3">
                         <h2 class="section-title" id="sec-results">3. Analisis Kinerja Empiris <span class="en-title">/ 3. Empirical Performance Analysis</span></h2>
+                        <h3 class="subsection-title">3.1 Hasil Pengumpulan Hasil Pendanaan (Yield) <span class="en-subtitle">/ 3.1 Funding Yield Collection Results</span></h3>
                         <div class="p-pair">
                             <p class="p-id">
-                                Di bawah kondisi pengujian dengan modal awal $200.00 USDT, sistem menyebarkan 10 posisi aktif. Rekaman distribusi APR menunjukkan imbal hasil yang stabil seperti yang digambarkan pada Tabel 1.
+                                Di bawah simulasi pengujian dengan modal awal $200.00 USDT, sistem menyebarkan alokasi modal secara merata ke dalam posisi aktif. Distribusi pengumpulan hasil funding rate periodik menampilkan kinerja imbal hasil harian yang stabil (Tabel 1).
                             </p>
                             <p class="p-en">
-                                Under test conditions using a starting equity of $200.00 USDT, the system deployed 10 active positions. The recorded APR distribution shows stable yields as depicted in Table 1.
+                                Under simulation testing utilizing a starting capital of $200.00 USDT, the system deployed capital allocations evenly into active positions. The periodic funding rate yield collection records demonstrate stable daily yield performances (Table 1).
                             </p>
                         </div>
-
+ 
                         <table class="academic-table">
                             <thead>
                                 <tr>
@@ -194,37 +287,130 @@ import Layout from '../layouts/Layout.astro';
                             Tabel 1: Kinerja Arbitrase dan Imbal Hasil APR Tahunan per Simbol.<br/>
                             <span style="font-size: 0.9em; font-style: normal; color: var(--text-muted);">Table 1: Arbitrage Performance and Annualized APR Yields per Symbol.</span>
                         </div>
+
+                        <h3 class="subsection-title">3.2 Optimasi Leverage 10x &amp; Compounding Modal Dinamis <span class="en-subtitle">/ 3.2 10x Leverage Optimization &amp; Dynamic Capital Compounding</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Penggunaan leverage 10x pada posisi Futures meningkatkan efisiensi modal secara signifikan. Total modal riil terpakai per koin turun menjadi 1.1x dari nominal posisi (1.0x Spot + 0.1x Futures margin). Untuk mengoptimalkan tingkat pertumbuhan modal majemuk, sistem mengintegrasikan algoritme <strong>Dynamic Compounding Position Sizing</strong> yang dievaluasi setiap periode:
+                            </p>
+                            <p class="p-en">
+                                Utilizing a 10x leverage factor on the Futures leg significantly enhances capital efficiency. The actual capital deployed per position drops to 1.1x of the position nominal size (1.0x Spot + 0.1x Futures margin). To optimize capital growth compounding, the system integrates a <strong>Dynamic Compounding Position Sizing</strong> algorithm evaluated every cycle:
+                            </p>
+                        </div>
+                        <div class="math-block">
+                            <span>Position_Size = max( Min_Size, (Total_Equity * 0.95) / (Max_Positions * 1.1) )</span>
+                            <span class="math-eq-num">(3)</span>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Di mana Total_Equity adalah total ekuitas portofolio, Max_Positions adalah batas maksimal jumlah koin yang diperdagangkan, dan Min_Size adalah ukuran minimum per koin. Alokasi 95% ekuitas terpakai menyisakan 5% saldo dingin sebagai penyangga keamanan likuiditas.
+                            </p>
+                            <p class="p-en">
+                                Where Total_Equity represents the total portfolio equity, Max_Positions is the maximum active position count limit, and Min_Size is the minimum allowed size. Allocating 95% of equity ensures a 5% free cash buffer for margin and fee safety.
+                            </p>
+                        </div>
+
+                        <h3 class="subsection-title" style="margin-top: 35px;">3.3 Parameter Sistem yang Digunakan <span class="en-subtitle">/ 3.3 System Parameters Used</span></h3>
+                        <div class="p-pair" style="margin-bottom: 15px;">
+                            <p class="p-id">Tabel 2 merangkum seluruh parameter konfigurasi sistem yang digunakan selama pengujian, sehingga memungkinkan replikasi independen penelitian ini.</p>
+                            <p class="p-en">Table 2 summarizes all system configuration parameters used during testing, enabling independent replication of this research.</p>
+                        </div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter<br/><span style="font-size:0.8em;font-weight:normal;">Parameter</span></th>
+                                    <th>Nilai / Value</th>
+                                    <th>Keterangan<br/><span style="font-size:0.8em;font-weight:normal;">Description</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Modal Awal / Starting Equity</td><td>$200.00 USDT</td><td>Modal portofolio awal / Initial portfolio capital</td></tr>
+                                <tr><td>Min. FR Threshold</td><td>0.05% per 8h</td><td>Filter seleksi kandidat / Candidate selection filter</td></tr>
+                                <tr><td>Leverage Futures</td><td>10x</td><td>Efisiensi margin 1.1x / 1.1x margin efficiency</td></tr>
+                                <tr><td>Max Active Positions</td><td>3 koin / coins</td><td>Batas diversifikasi / Diversification cap</td></tr>
+                                <tr><td>Basis Spread Cap</td><td>&lt; 0.5%</td><td>Batas deviasi entri / Entry deviation limit</td></tr>
+                                <tr><td>Cooldown Blacklist</td><td>8 jam / hours</td><td>Anti re-entry volatilitas / Volatility re-entry guard</td></tr>
+                                <tr><td>Rotation Threshold</td><td>FR &gt;= 2x lebih tinggi</td><td>Syarat rotasi oportunistik / Opportunistic rotation condition</td></tr>
+                                <tr><td>Liquidation Boundary</td><td>&gt;= 9.6% kenaikan</td><td>Batas maintenance margin 0.4% / Maintenance margin 0.4% limit</td></tr>
+                                <tr><td>Fee Mode</td><td>BNB Deduction</td><td>Diskon fee 25% Spot, 10% Futures / 25% Spot, 10% Futures discount</td></tr>
+                            </tbody>
+                        </table>
+                        <div style="font-size: 0.85em; font-style: italic; color: var(--text-muted); text-align: center; margin-top: -10px; margin-bottom: 20px;">
+                            Tabel 2: Parameter Konfigurasi Sistem yang Digunakan Selama Pengujian.<br/>
+                            <span style="font-size: 0.9em; font-style: normal;">Table 2: System Configuration Parameters Used During Testing.</span>
+                        </div>
                     </div>
 
                     <!-- PAGE 4 -->
                     <div class="book-page" data-page="4">
-                        <h2 class="section-title" id="sec-risk">4. Manajemen Risiko dan Perlindungan <span class="en-title">/ 4. Risk Management and Safeguards</span></h2>
+                        <h2 class="section-title" id="sec-risk">4. Manajemen Risiko dan Perlindungan Keras <span class="en-title">/ 4. Risk Management and Hard Safeguards</span></h2>
+                        <h3 class="subsection-title">4.1 Proteksi Likuidasi Jaminan, Blacklist Cooldown, &amp; Rotasi <span class="en-subtitle">/ 4.1 Collateral Liquidation Safeguard, Blacklist Cooldown, &amp; Rotation</span></h3>
                         <div class="p-pair">
                             <p class="p-id">
-                                Mesin ini mengintegrasikan proteksi funding rate negatif otomatis. Jika funding rate suatu simbol turun di bawah 0% selama lebih dari dua interval berturut-turut, posisi tersebut ditandai untuk likuidasi. Demikian pula, jika spread basis menyimpang secara signifikan dari basis masuk (entry basis), sistem memicu peringatan untuk melindungi dari peluruhan basis.
+                                Guna mencegah kegagalan fatal akibat pergerakan tren pasar satu arah yang ekstrem pada koin dengan kapitalisasi pasar kecil, sistem mengintegrasikan tiga lapis pengaman aktif [4]:
+                                <br/>• **Proteksi Likuidasi Paksa**: Karena jaminan Futures disetel pada leverage 10x (margin awal 10%), posisi terancam likuidasi jika harga mark price melonjak mendekati batas pemeliharaan margin (maintenance margin 0.4%). Sistem menyimulasikan likuidasi paksa jika harga mark Futures melonjak:
                             </p>
                             <p class="p-en">
-                                The engine incorporates automated negative funding protection. If a symbol's funding rate falls below 0% for more than two consecutive intervals, the position is marked for liquidation. Similarly, if the basis spread deviates significantly from the entry basis, the system triggers a warning to protect against basis decay.
+                                To prevent catastrophic failures from one-way directional price spikes in low-cap coins, the system integrates three layers of active safeguards [4]:
+                                <br/>• **Collateral Liquidation Safeguard**: Since Futures collateral margin is set at 10% (10x leverage), the short position faces liquidation if the mark price surges close to the maintenance margin (0.4%). The system triggers a simulated liquidation if the Futures mark price spikes:
+                            </p>
+                        </div>
+                        <div class="math-block">
+                            <span>Futures Price Change &gt;= 9.6%</span>
+                            <span class="math-eq-num">(4)</span>
+                        </div>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Ketika terdeteksi kenaikan harga Futures >= 9.6%, sistem memotong sisa jaminan margin, membebankan biaya penutupan paksa (*liquidation penalty fee*) sebesar 0.5%, dan secara otomatis melikuidasi leg Spot pada harga pasar untuk menyelamatkan sisa modal secara delta-netral.
+                                <br/>• **Cooldown Blacklist 8 Jam**: Pasangan koin yang baru ditutup atau dilikuidasi akan diblokir (blacklist) dari pembukaan posisi baru selama 8 jam berikutnya di database. Hal ini mencegah bot melakukan entri ulang secara instan di puncak volatilitas.
+                                <br/>• **Rotasi Oportunistik**: Menghapus aturan hold kaku 7 hari. Bot hanya akan menutup posisi untuk rotasi ke peluang yield lain jika posisi saat ini sudah berjalan >= 24 jam (telah memanen 3x sesi funding) dan ada kandidat baru dengan funding rate >= 2x lebih tinggi dari koin aktif saat ini.
+                            </p>
+                            <p class="p-en">
+                                When Futures Price Change >= 9.6% is detected, the system cuts the collateral, levies a 0.5% liquidation penalty fee, and liquidates the Spot leg concurrently at market price to protect the net capital worth.
+                                <br/>• **8-Hour Blacklist Cooldown**: Symbols that are closed or liquidated are blacklisted from entries for the next 8 hours in the database, preventing immediate re-entry at price peaks.
+                                <br/>• **Opportunistic Rotation**: Removes the rigid 7-day hold rule. The engine will rotate positions only if the active trade is held for >= 24 hours (collecting at least 3 funding periods) and another market candidate yields >= 2x higher funding rate.
                             </p>
                         </div>
                     </div>
 
                     <!-- PAGE 5 -->
                     <div class="book-page" data-page="5">
-                        <h2 class="section-title" id="sec-conclusion">5. Kesimpulan <span class="en-title">/ 5. Conclusion</span></h2>
+                        <h2 class="section-title" id="sec-conclusion">5. Kesimpulan, Keterbatasan &amp; Daftar Pustaka <span class="en-title">/ 5. Conclusion, Limitations &amp; References</span></h2>
                         <div class="p-pair">
                             <p class="p-id">
-                                Mesin Arbitrase Funding Rate menyediakan alternatif berisiko rendah yang sangat tangguh dibandingkan sistem trend-following tradisional. Dengan mempertahankan eksekusi delta-neutral di berbagai keranjang pasangan perpetual, sistem menghasilkan imbal hasil yang konsisten. Penelitian masa depan akan mengeksplorasi peluang arbitrase lintas bursa untuk menangkap spread basis yang lebih luas.
+                                Mesin Arbitrase Funding Rate (Bot D) menunjukkan bahwa pendekatan Cash-and-Carry multi-koin dengan dynamic compounding pada Perpetual Futures kripto mampu menghasilkan imbal hasil APR 13–92% dengan profil risiko pasar yang mendekati delta-netral. Kombinasi filter seleksi berlapis (FR minimum 0,05%, batas basis spread 0,5%), proteksi likuidasi keras (batas kenaikan 9,6%), dan rotasi oportunistik berbasis perbandingan rasio FR terbukti efektif meminimalkan drawdown portofolio. Penelitian selanjutnya akan difokuskan pada pengujian lintas bursa, pemodelan prediksi funding rate berbasis machine learning, dan perluasan ke koin berkapitalisasi pasar menengah.
                             </p>
                             <p class="p-en">
-                                The Funding Rate Arbitrage Engine provides a highly resilient, low-risk alternative to traditional trend-following systems. By maintaining delta-neutral execution across a diverse basket of perpetual pairs, the system generates consistent yield. Future research will explore cross-exchange arbitrage opportunities to capture even wider basis spreads.
+                                The Funding Rate Arbitrage Engine (Bot D) demonstrates that a multi-coin Cash-and-Carry approach with dynamic compounding on cryptocurrency Perpetual Futures can generate APR yields of 13–92% with a near-delta-neutral market risk profile. The combination of multi-layer selection filters (0.05% minimum FR, 0.5% basis spread cap), hard liquidation protection (9.6% price boundary), and FR-ratio-based opportunistic rotation proves effective in minimizing portfolio drawdown. Future research will focus on cross-exchange testing, machine-learning-based funding rate prediction models, and extension to mid-cap coins.
                             </p>
                         </div>
 
-                        <h2 class="section-title" id="sec-references" style="margin-top: 60px;">Daftar Pustaka <span class="en-title">/ References</span></h2>
-                        <div style="font-size: 0.9em; line-height: 1.8; margin-left: 25px; text-indent: -25px;">
-                            <p>[1] Hasbrouck, J. (2007). <i>Empirical Market Microstructure: The Institutions, Semiparametrics, and Finance of Market Behavior</i>. Oxford University Press.</p>
-                            <p>[2] Alexander, C., &amp; Deng, J. (2020). <i>Arbitrage in Cryptocurrency Markets: Funding Rates and Basis Trading</i>. Journal of Financial Econometrics, 18(3), 442-475.</p>
+                        <h3 class="subsection-title" style="color: var(--text-primary);">5.1 Keterbatasan Studi <span class="en-subtitle">/ 5.1 Limitations of This Study</span></h3>
+                        <div class="p-pair">
+                            <p class="p-id">
+                                Penelitian ini memiliki beberapa keterbatasan yang perlu diakui secara eksplisit:
+                                <br/>• <strong>Cakupan Bursa Tunggal:</strong> Pengujian dilakukan secara eksklusif pada Binance USDT Perpetual Futures. Hasil ini mungkin tidak dapat digeneralisasi secara langsung ke bursa lain (Bybit, OKX, dkk.) yang memiliki struktur funding rate dan likuiditas berbeda.
+                                <br/>• <strong>Dampak Pasar (Market Impact):</strong> Model simulasi tidak memperhitungkan dampak order terhadap depth order book, yang berpotensi menyebabkan slippage aktual lebih tinggi pada koin dengan likuiditas rendah.
+                                <br/>• <strong>Kondisi Bearish Berkepanjangan:</strong> Ketika sentimen pasar berbalik negatif secara masif dan berkepanjangan, funding rate dapat menjadi negatif secara persisten. Skenario ini belum sepenuhnya tercakup dalam model proteksi saat ini.
+                                <br/>• <strong>Overfitting Parameter:</strong> Parameter-parameter sistem (seperti threshold 0.05% FR dan batas basis 0.5%) dikalibrasi berdasarkan kondisi pasar historis dan mungkin memerlukan penyesuaian di regime pasar yang berbeda.
+                            </p>
+                            <p class="p-en">
+                                This study carries several limitations that must be explicitly acknowledged:
+                                <br/>• <strong>Single-Exchange Scope:</strong> Testing was conducted exclusively on Binance USDT Perpetual Futures. Results may not directly generalize to other exchanges (Bybit, OKX, etc.) with different funding rate structures and liquidity profiles.
+                                <br/>• <strong>Market Impact:</strong> The simulation model does not account for order impact on order book depth, potentially causing actual slippage to be higher on low-liquidity coins.
+                                <br/>• <strong>Prolonged Bearish Conditions:</strong> When market sentiment turns persistently negative, funding rates can become persistently negative. This scenario is not fully covered by the current protection model.
+                                <br/>• <strong>Parameter Overfitting:</strong> System parameters (such as the 0.05% FR threshold and 0.5% basis cap) were calibrated based on historical market conditions and may require adjustment in different market regimes.
+                            </p>
+                        </div>
+
+                        <h2 class="section-title" id="sec-references" style="margin-top: 40px;">Daftar Pustaka <span class="en-title">/ References</span></h2>
+                        <div style="font-size: 0.9em; line-height: 1.9; margin-left: 25px; text-indent: -25px;">
+                            <p>[1] Hasbrouck, J. (2007). <i>Empirical Market Microstructure: The Institutions, Semiparametrics, and Finance of Market Behavior</i>. Oxford University Press. DOI: 10.1093/oso/9780195301649.001.0001</p>
+                            <p>[2] Gantner, A., &amp; Linton, O. (2022). <i>Cryptocurrency Perpetual Futures: Price Discovery and Trading Costs</i>. SSRN Working Paper No. 4192811. Available at: ssrn.com/abstract=4192811</p>
+                            <p>[3] Shleifer, A., &amp; Vishny, R. W. (1997). <i>The Limits of Arbitrage</i>. Journal of Finance, 52(1), 35–55. DOI: 10.1111/j.1540-6261.1997.tb03807.x</p>
+                            <p>[4] Avellaneda, M., &amp; Lee, J. H. (2010). <i>Statistical Arbitrage in the US Equities Market</i>. Quantitative Finance, 10(7), 761–782. DOI: 10.1080/14697680903124632</p>
+                            <p>[5] Cong, L. W., He, Z., &amp; Li, J. (2021). <i>Decentralized Mining in Centralized Pools</i>. Review of Financial Studies, 34(3), 1191–1235. DOI: 10.1093/rfs/hhaa040</p>
+                            <p>[6] Duffie, D., &amp; Huang, M. (1996). <i>Swap Rates and Credit Quality</i>. Journal of Finance, 51(3), 921–949. DOI: 10.1111/j.1540-6261.1996.tb02712.x</p>
                         </div>
 
                         <div class="footer">
@@ -446,7 +632,85 @@ import Layout from '../layouts/Layout.astro';
     
     .footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; font-size: 0.95em; color: var(--text-muted); font-family: monospace; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; width: 100%; }
     
-    @media print { .paper-toc-sidebar, .paper-actions-bar, .book-nav-bar { display: none !important; } .paper-layout-wrapper { margin: 0; padding: 0; width: 100%; display: block; } .latex-document { box-shadow: none; border: none; padding: 0; min-height: auto; } .book-cover { padding-top: 0; } .book-page { display: block !important; animation: none !important; margin-bottom: 60px; } }
+    @media print {
+        @page {
+            size: A4;
+            margin: 20mm 15mm;
+        }
+
+        /* Hide all UI layout elements */
+        .sidebar, .top-header, footer, .book-nav-bar, .floating-btn, #mobileTocToggle, .paper-toc-sidebar, .paper-actions-bar { 
+            display: none !important; 
+        }
+        
+        /* Reset layout containers to take full width without margins/padding */
+        .app-wrapper, .main-area, .content-container, .paper-layout-wrapper, .paper-main-content { 
+            margin: 0 !important; 
+            padding: 0 !important; 
+            width: 100% !important; 
+            max-width: 100% !important; 
+            display: block !important; 
+            min-height: auto !important;
+            box-shadow: none !important;
+            border: none !important;
+            overflow: visible !important;
+        }
+        
+        .latex-document { 
+            box-shadow: none !important; 
+            border: none !important; 
+            padding: 0 !important; 
+            min-height: auto !important; 
+            width: 100% !important; 
+            max-width: 100% !important;
+            background: transparent !important;
+            display: block !important;
+            overflow: visible !important;
+        }
+        
+        /* Override book pages display to print vertically */
+        #pages-viewport { 
+            height: auto !important; 
+            overflow: visible !important; 
+            width: 100% !important; 
+            max-width: 100% !important; 
+            display: block !important;
+        }
+        
+        #pages-container { 
+            display: block !important; 
+            width: 100% !important; 
+            transform: none !important; 
+            transition: none !important;
+            overflow: visible !important;
+        }
+        
+        .book-page { 
+            display: block !important; 
+            width: 100% !important; 
+            max-width: 100% !important; 
+            flex: none !important; 
+            opacity: 1 !important;
+            padding: 0 !important;
+            margin: 0 0 50px 0 !important; 
+            page-break-after: always !important; 
+            break-after: page !important; 
+            animation: none !important; 
+            overflow: visible !important;
+        }
+        
+        .book-cover { 
+            padding-top: 0 !important; 
+            border-bottom: 2px solid #000 !important;
+            margin-bottom: 40px !important;
+        }
+
+        /* Prevent split content items across page boundaries */
+        .p-pair, .math-block, .academic-table, .paper-abstract-box, .abstract-section, h2, h3, h4 {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+    }
     @media (max-width: 1000px) { .paper-layout-wrapper { flex-direction: column; padding: 0 10px; gap: 20px; } .paper-toc-sidebar { width: 100%; position: static; margin-bottom: 25px; max-height: none; } .latex-document { padding: 30px 20px; } .content-container { padding: 15px !important; } }
     @media (max-width: 768px) {
         .latex-document { padding: 20px 12px !important; }

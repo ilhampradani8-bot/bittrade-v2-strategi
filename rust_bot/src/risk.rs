@@ -57,13 +57,13 @@ pub async fn calculate_dynamic_budget(state: &AppState, default_pct: f64) -> f64
                 sharpe_ratio, full_kelly * 100.0, quarter_kelly * 100.0);
 
             if quarter_kelly <= 0.0 {
-                return 0.0;
+                return -1.0; // Sinyal: gunakan modal minimum pemulihan
             }
             return quarter_kelly.clamp(0.05, 0.35);
         } else if mean_return > 0.0 {
              return 0.30;
         } else {
-             return 0.0;
+             return -1.0; // Sinyal: gunakan modal minimum pemulihan
         }
     }
 

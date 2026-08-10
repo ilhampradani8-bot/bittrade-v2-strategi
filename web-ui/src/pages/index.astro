@@ -9,33 +9,32 @@ import Layout from '../layouts/Layout.astro';
         <!-- Row 1: Bot Summary Cards -->
         <div class="grid-3 section-container">
             
-            <!-- Bot A Card -->
             <div class="card" id="card-bot-a" onclick="window.location.href='/bota/'" style="cursor: pointer;">
                 <div class="bot-header">
                     <div class="bot-title">
                         <span class="led-light" id="bot-a-status-led"></span>
-                        <span>Bot A: Trend & Scalper</span>
+                        <span>Bot A: Multi-Coin Scalper</span>
                     </div>
                     <span class="bot-status-badge">BINANCE SPOT</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">BTC Price</span>
-                    <span class="value" id="bot-a-btc-price">$-</span>
-                </div>
-                <div class="stat-row">
-                    <span class="label">Total Equity</span>
+                    <span class="label">Total Account Equity</span>
                     <span class="value-large" id="bot-a-equity">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">USDT Balance</span>
+                    <span class="label">Remaining Cash (USDT)</span>
                     <span class="value" id="bot-a-usdt">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">BTC Asset</span>
-                    <span class="value" id="bot-a-btc">0.000000</span>
+                    <span class="label">Invested in Coins</span>
+                    <span class="value" id="bot-a-invested">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Winrate / P&L %</span>
+                    <span class="label">Active Trade Positions</span>
+                    <span class="value" id="bot-a-positions">0 / 40</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Overall Winrate / P&L %</span>
                     <span class="value" id="bot-a-winrate">-% (-%)</span>
                 </div>
                 <div class="stat-row">
@@ -56,40 +55,39 @@ import Layout from '../layouts/Layout.astro';
                 <div class="bot-header">
                     <div class="bot-title">
                         <span class="led-light" id="bot-b-status-led"></span>
-                        <span>Bot B: SmartDCA</span>
+                        <span>Bot B: SmartDCA (Multi-Coin)</span>
                     </div>
-                    <span class="bot-status-badge">DCA SYSTEM</span>
+                    <span class="bot-status-badge">FUTURES 3X</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">BTC Price</span>
-                    <span class="value" id="bot-b-btc-price">$-</span>
+                    <span class="label">Monitored Coins</span>
+                    <span class="value" id="bot-b-monitored-coins" style="font-size: 0.85em; color: var(--accent-blue);">Loading...</span>
                 </div>
                 <div class="stat-row">
                     <span class="label">Total Equity</span>
                     <span class="value-large" id="bot-b-equity">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">USDT Balance</span>
+                    <span class="label">USDT Balance (Free)</span>
                     <span class="value" id="bot-b-usdt">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">BTC Asset / Layer</span>
-                    <span class="value" id="bot-b-btc">0.000000 (0)</span>
+                    <span class="label">Active Positions</span>
+                    <span class="value" id="bot-b-active-positions">0 / 5</span>
                 </div>
                 <div class="stat-row">
                     <span class="label">Winrate / P&L %</span>
                     <span class="value" id="bot-b-winrate">-% (-%)</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Panic Detector Status</span>
-                    <span class="value" id="bot-b-panic">SLEEPING</span>
+                    <span class="label">Total Margin Spent</span>
+                    <span class="value" id="bot-b-margin-spent">$-</span>
                 </div>
                 <div class="pipeline-status">
                     <div class="pipeline-item"><span class="led-light" id="bot-b-led-ws"></span><span>WS</span></div>
                     <div class="pipeline-item"><span class="led-light" id="bot-b-led-conclude"></span><span>Anls</span></div>
                     <div class="pipeline-item"><span class="led-light" id="bot-b-led-validate"></span><span>Val</span></div>
                     <div class="pipeline-item"><span class="led-light" id="bot-b-led-executor"></span><span>Exec</span></div>
-                    <div class="pipeline-item"><span class="led-light" id="bot-b-led-panic"></span><span>Pnic</span></div>
                 </div>
             </div>
 
@@ -149,23 +147,27 @@ import Layout from '../layouts/Layout.astro';
                     <span class="value" id="bot-d-btc-price">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Total Equity</span>
+                    <span class="label">Total Portfolio Value (Net)</span>
                     <span class="value-large" id="bot-d-equity">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">USDT Balance</span>
+                    <span class="label">Available Cash (Free)</span>
                     <span class="value" id="bot-d-usdt">$-</span>
                 </div>
-                <div class="stat-row">
-                    <span class="label">Deployed Size</span>
+                <div class="stat-row" style="border-top: 1px dashed var(--border-color); padding-top: 4px; margin-top: 4px;">
+                    <span class="label" style="font-size: 0.9em; padding-left: 5px;">↳ Active Spot Capital (1x)</span>
                     <span class="value" id="bot-d-btc">$-</span>
                 </div>
                 <div class="stat-row">
+                    <span class="label" style="font-size: 0.9em; padding-left: 5px;">↳ Active Futures Capital (10x)</span>
+                    <span class="value" id="bot-d-futures-capital">$-</span>
+                </div>
+                <div class="stat-row" style="border-top: 1px dashed var(--border-color); padding-top: 4px;">
                     <span class="label">Total Funding Collected</span>
                     <span class="value" id="bot-d-winrate">-$ (-%)</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Monitored Pairs</span>
+                    <span class="label">Active Arbitrage Pairs</span>
                     <span class="value" id="bot-d-regime">WAIT</span>
                 </div>
                 <div class="pipeline-status">
@@ -232,7 +234,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <script is:inline src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script is:inline src="/js/dashboard_main.js?v=20260707_STATARB_ONLY"></script>
+    <script is:inline src="/js/dashboard_main.js?v=20260810_1132"></script>
 </Layout>
 
 <style is:global>

@@ -11,9 +11,9 @@ Sistem ini terdiri dari **empat bot independen** yang berjalan di background, ma
 | Bot / Modul | Port | Deskripsi Engine | Prefix Tabel DB | Direktori Kerja |
 | :--- | :---: | :--- | :---: | :--- |
 | **Bot A** (Trend/Scalper) | `8087` | Bot Binance BTC/USDT berbasis tren EMA-13/34 & VWAP | `bot_` | `rust_bot/` |
-| **Bot B** (SmartDCA) | `8088` | Akumulasi bertahap (DCA 3-layer) di zona diskon RSI < 30 | `dca_` | `smartdca/` |
+| **Bot B** (SmartDCA) | `8088` | Akumulasi bertahap (DCA 3-layer) dengan RSI < 50 & 3x leverage | `dca_` | `smartdca/` |
 | **Bot C** (OKX Engine) | `8091` | Mesin trading spot mandiri khusus API Publik OKX | `okx_` | `OKX_trading/` |
-| **Bot D** (Altcoin Engine)| `8092` | Kloning Bot A untuk target altcoin Binance | `alt_` | `Bot_d_Altcoin/` |
+| **Bot D** (Funding Engine)| `8092` | Funding Rate Arbitrage (Cash-and-Carry) delta-neutral engine | `alt_` | `funding/` |
 | **Bot E** (statARB Engine)| `8093` | Mesin statistical arbitrage (ETH/BTC co-integration spread) | `starb_` | `statARB/` |
 
 ---
@@ -28,10 +28,12 @@ Sistem ini terdiri dari **empat bot independen** yang berjalan di background, ma
 *   **Emergency Protection**: Stop Loss mutlak diperketat pada 1.2% dan diabaikan dari cooldown.
 
 ### 2. Bot B: SmartDCA (Discount-Zone Accumulation)
-*   **Layer Entry**: Membuka Layer 1 saat RSI-14 jenuh jual (< 30).
-*   **Perlindungan Tambahan**: Mengeksekusi Layer 2 (-1.5%) dan Layer 3 (-3.0%) untuk menurunkan basis harga rata-rata.
-*   **Panic Dump Delay**: Menangguhkan pembelian selama 15 menit jika terjadi Volume Surge > 5.0x dengan penurunan tajam > 0.5%.
-*   **Exit**: Target keuntungan +1.2% bersih, dilengkapi Trailing Exit (pullback 0.5% dari HWM) dan Hard SL 5.0%.
+*   **Mode Perdagangan**: Perdagangan multi-koin dengan simulasi **Leverage Futures 3x**.
+*   **Layer 1 (40% Alokasi)**: Masuk saat harga turun &le; -2.5% dari tertinggi 4 jam ($High_{4h}$), RSI-14 &lt; 50.0, lolos `rsi_allowed` (falling knife), dan harga di atas EMA-750 (`trend_ok`).
+*   **Layer 2 (30% Alokasi)**: Masuk saat harga turun &le; -5.0% dari $High_{4h}$ dan RSI-14 &lt; 50.0 (Tanpa `rsi_allowed` agar DCA tidak terblokir).
+*   **Layer 3 (30% Alokasi)**: Masuk saat harga turun &le; -8.0% dari $High_{4h}$ dan RSI-14 &lt; 40.0 (Tanpa `rsi_allowed` agar DCA tidak terblokir).
+*   **Panic Dump Protection**: Menangguhkan eksekusi masuk selama menit tersebut jika volume kline terakhir melesat &gt; 3.0x dari rata-rata volume 20 menit sebelumnya (VSR &gt; 3.0).
+*   **Exit**: Target keuntungan +1.5% (diikuti Trailing Exit dengan pullback 0.8% dari HWM), Hard Take Profit di +2.5%, dan Hard Stop Loss darurat di -5.0% dari harga rata-rata tertimbang (WAEP). Proteksi batas likuidasi otomatis jika nilai posisi mengambang turun ke atau di bawah nilai utang pinjaman leverage ($PV(t) \le D$).
 
 ### 3. Bot C: OKX Engine
 *   Engine terisolasi yang berjalan dengan arsitektur menyerupai Bot A tetapi dioptimalkan secara asinkron untuk berinteraksi langsung dengan orderbook dan data pasar OKX.
@@ -120,7 +122,7 @@ cd /root/bittrade-v2-strategi/smartdca && cargo build --release
 cd /root/bittrade-v2-strategi/OKX_trading && cargo build --release
 
 # Bot D
-cd /root/bittrade-v2-strategi/Bot_d_Altcoin && cargo build --release
+cd /root/bittrade-v2-strategi/funding && cargo build --release
 
 # Bot E
 cd /root/bittrade-v2-strategi/statARB && cargo build --release
@@ -142,7 +144,7 @@ cd /root/bittrade-v2-strategi/OKX_trading
 nohup ./target/release/okx_trading > okx.log 2>&1 &
 
 # Jalankan Bot D (Port 8092)
-cd /root/bittrade-v2-strategi/Bot_d_Altcoin
+cd /root/bittrade-v2-strategi/funding
 nohup ./target/release/bot_d_altcoin > bot_d.log 2>&1 &
 
 # Jalankan Bot E (Port 8093)
@@ -155,7 +157,7 @@ nohup ./target/release/stat_arb_engine > statarb.log 2>&1 &
     *   Bot A: `tail -n 100 -f /root/bittrade-v2-strategi/rust_bot/bot.log`
     *   Bot B: `tail -n 100 -f /root/bittrade-v2-strategi/smartdca/dca.log`
     *   Bot C: `tail -n 100 -f /root/bittrade-v2-strategi/OKX_trading/okx.log`
-    *   Bot D: `tail -n 100 -f /root/bittrade-v2-strategi/Bot_d_Altcoin/bot_d.log`
+    *   Bot D: `tail -n 100 -f /root/bittrade-v2-strategi/funding/bot_d.log`
     *   Bot E: `tail -n 100 -f /root/bittrade-v2-strategi/statARB/statarb.log`
 *   **Menghentikan Proses Bot**:
     *   Bot A: `fuser -k 8087/tcp`

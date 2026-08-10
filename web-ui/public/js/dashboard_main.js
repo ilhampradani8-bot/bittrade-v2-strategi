@@ -186,37 +186,62 @@ function renderBotACard() {
     if (!s) {
         // Offline
         updateLED('bot-a-status-led', true, 'active-red');
-        const _a1=document.getElementById('bot-a-btc-price');if(_a1)_a1.innerText = 'OFFLINE';
-        const _a2=document.getElementById('bot-a-equity');if(_a2)_a2.innerText = 'OFFLINE';
+        const _e = document.getElementById('bot-a-equity'); if (_e) _e.innerText = 'OFFLINE';
         return;
     }
 
-    const totalEquity = s.simulated_balance + (s.btc_balance * s.current_btc_price);
-    const pnl = totalEquity - 1000.0;
-    const pnlPct = (pnl / 1000.0) * 100;
+    let invested = 0;
+    let activePositionsCount = 0;
+    if (s.coin_states) {
+        for (const coin of s.coin_states) {
+            if (coin.position) {
+                invested += coin.position.buy_price * coin.position.amount;
+                activePositionsCount++;
+            }
+        }
+    }
 
-    // Calculate daily winrate (from today's history data)
-    const todayStr = new Date().toDateString();
-    const todaySells = ((botAData.history)||[]).filter(t => new Date(t.timestamp).toDateString() === todayStr && t.action === 'SELL');
-    const winSells = todaySells.filter(t => t.notes && (t.notes.includes('+') || t.notes.includes('profit') || t.notes.includes('WIN')));
-    const dailyWinrate = todaySells.length > 0 ? (winSells.length / todaySells.length * 100) : 0.0;
+    const totalEquity = s.simulated_balance + invested;
+    const pnl = totalEquity - 200.0;
+    const pnlPct = (pnl / 200.0) * 100.0;
 
     const pnlColor = pnl >= 0 ? '#2ecc71' : '#e74c3c';
-    const wrColor = todaySells.length > 0 ? (dailyWinrate >= 50.0 ? '#2ecc71' : '#e74c3c') : 'var(--text-secondary)';
+    const wrColor = s.winrate >= 50.0 ? '#2ecc71' : '#e74c3c';
     const pnlSign = pnl >= 0 ? '+' : '';
 
     updateLED('bot-a-status-led', true, 'active-green');
-    const _a1=document.getElementById('bot-a-btc-price');if(_a1)_a1.innerText = formatUSD(s.current_btc_price);
-    document.getElementById('bot-a-equity').innerHTML = `<span style="color: ${pnlColor}; font-weight: bold;">${formatUSD(totalEquity)}</span>`;
-    (function(){var _n=document.getElementById('bot-a-usdt');if(_n)_n.innerText = formatUSD(s.simulated_balance);;})();
-    (function(){var _n=document.getElementById('bot-a-btc');if(_n)_n.innerText = (s.btc_balance||0).toFixed(6);;})();
     
-    document.getElementById('bot-a-winrate').innerHTML = `
-        <span style="color: ${wrColor}; font-weight: bold;">${dailyWinrate.toFixed(1)}%</span> 
-        (<span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlPct.toFixed(2)}%</span>) 
-        <span style="font-size: 0.8em; color: var(--text-secondary); display: block; margin-top: 2px;">[Daily: ${todaySells.length} sells]</span>
-    `;
-    (function(){var _n=document.getElementById('bot-a-regime');if(_n)_n.innerText = `${s.market_regime} (${(s.market_volatility||0).toFixed(4)}%)`;;})();
+    // Total Equity
+    const elEquity = document.getElementById('bot-a-equity');
+    if (elEquity) elEquity.innerHTML = `<span style="color: ${pnlColor}; font-weight: bold;">${formatUSD(totalEquity)}</span>`;
+    
+    // Remaining Cash (USDT)
+    const elUsdt = document.getElementById('bot-a-usdt');
+    if (elUsdt) elUsdt.innerText = formatUSD(s.simulated_balance);
+    
+    // Invested Value
+    const elInvested = document.getElementById('bot-a-invested');
+    if (elInvested) elInvested.innerText = formatUSD(invested);
+    
+    // Active Positions Count
+    const elPositions = document.getElementById('bot-a-positions');
+    if (elPositions) elPositions.innerText = `${activePositionsCount} / 40`;
+    
+    // Overall Winrate / P&L
+    const totalWins = s.win_sells || 0;
+    const totalLosses = (s.total_sells || 0) - totalWins;
+    const elWinrate = document.getElementById('bot-a-winrate');
+    if (elWinrate) {
+        elWinrate.innerHTML = `
+            <span style="color: ${wrColor}; font-weight: bold;">${(s.winrate || 0.0).toFixed(1)}%</span> 
+            (<span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlPct.toFixed(2)}%</span>)
+            <span style="font-size: 0.8em; color: var(--text-secondary); display: block; margin-top: 2px;">(${totalWins}W / ${totalLosses}L)</span>
+        `;
+    }
+    
+    // Market Condition
+    const elRegime = document.getElementById('bot-a-regime');
+    if (elRegime) elRegime.innerText = `${s.market_regime} (${(s.market_volatility||0).toFixed(4)}%)`;
 
     // Pipeline
     updateLED('bot-a-led-ws', s.ws_active, 'active-green');
@@ -233,14 +258,14 @@ function renderBotBCard() {
 
     if (!s) {
         updateLED('bot-b-status-led', true, 'active-red');
-        const p = document.getElementById('bot-b-btc-price'); if(p) p.innerText = 'OFFLINE';
+        const coinsEl = document.getElementById('bot-b-monitored-coins'); if (coinsEl) coinsEl.innerText = 'OFFLINE';
         const e = document.getElementById('bot-b-equity'); if(e) e.innerText = 'OFFLINE';
         return;
     }
 
     const totalEquity = s.total_equity;
-    const pnl = totalEquity - 700.0;
-    const pnlPct = (pnl / 700.0) * 100;
+    const pnl = totalEquity - 200.0;
+    const pnlPct = (pnl / 200.0) * 100;
 
     // Calculate daily winrate (from today's history data)
     const todayStr = new Date().toDateString();
@@ -253,24 +278,42 @@ function renderBotBCard() {
     const pnlSign = pnl >= 0 ? '+' : '';
 
     updateLED('bot-b-status-led', true, 'active-green');
-    (function(){var _n=document.getElementById('bot-b-btc-price');if(_n)_n.innerText = formatUSD(s.current_price);;})();
+    
+    const coinsEl = document.getElementById('bot-b-monitored-coins');
+    if (coinsEl) {
+        if (s.active_symbols && s.active_symbols.length > 0) {
+            const cleanSymbols = s.active_symbols.map(sym => sym.replace('USDT', ''));
+            coinsEl.innerText = cleanSymbols.join(', ');
+        } else {
+            coinsEl.innerText = 'None';
+        }
+    }
+    
     document.getElementById('bot-b-equity').innerHTML = `<span style="color: ${pnlColor}; font-weight: bold;">${formatUSD(totalEquity)}</span>`;
     (function(){var _n=document.getElementById('bot-b-usdt');if(_n)_n.innerText = formatUSD(s.simulated_balance);;})();
-    (function(){var _n=document.getElementById('bot-b-btc');if(_n)_n.innerText = `${(s.btc_balance||0).toFixed(6)} (${s.layers_filled || 0}/3)`;;})();
+    
+    const posEl = document.getElementById('bot-b-active-positions');
+    if (posEl) {
+        const activeCount = s.active_positions ? s.active_positions.length : 0;
+        posEl.innerText = `${activeCount} / ${s.active_symbols ? s.active_symbols.length : 5}`;
+    }
     
     document.getElementById('bot-b-winrate').innerHTML = `
         <span style="color: ${wrColor}; font-weight: bold;">${dailyWinrate.toFixed(1)}%</span> 
         (<span style="color: ${pnlColor}; font-weight: bold;">${pnlSign}${pnlPct.toFixed(2)}%</span>) 
         <span style="font-size: 0.8em; color: var(--text-secondary); display: block; margin-top: 2px;">[Daily: ${todaySells.length} sells]</span>
     `;
-    (function(){var _n=document.getElementById('bot-b-panic');if(_n)_n.innerText = s.ws_active ? 'RUNNING' : 'STOPPED';;})();
+    
+    const marginEl = document.getElementById('bot-b-margin-spent');
+    if (marginEl) {
+        marginEl.innerText = formatUSD(s.total_margin_spent);
+    }
 
     // Pipeline
     updateLED('bot-b-led-ws', s.ws_active, 'active-green');
     updateLED('bot-b-led-conclude', s.conclude_active, 'active-green');
     updateLED('bot-b-led-validate', s.validate_active, 'active-green');
     updateLED('bot-b-led-executor', s.executor_active, 'active-green');
-    updateLED('bot-b-led-panic', s.conclude_active, 'active-green');
 }
 
 function renderBotCCard() {
@@ -346,6 +389,7 @@ function renderBotDCard() {
         updateLED('bot-d-status-led', true, 'active-red');
         const p = document.getElementById('bot-d-btc-price'); if(p) p.innerText = 'OFFLINE';
         const e = document.getElementById('bot-d-equity'); if(e) e.innerText = 'OFFLINE';
+        const f = document.getElementById('bot-d-futures-capital'); if(f) f.innerText = 'OFFLINE';
         return;
     }
 
@@ -353,7 +397,7 @@ function renderBotDCard() {
     const altCoins = botDData.alt_coins || [];
     const totalRemainingCash = s.simulated_balance || 45120.18;
     const totalAssetValue = altCoins.reduce((sum, pos) => sum + pos.position_size_usdt, 0.0);
-    const totalEquity = totalRemainingCash + totalAssetValue;
+    const totalEquity = totalRemainingCash + (totalAssetValue * 1.1);
     const totalFunding = s.total_funding_collected || 0.0;
     const totalStartingCapital = s.total_equity - totalFunding;
     const pnlPct = totalStartingCapital > 0 ? (totalFunding / totalStartingCapital) * 100.0 : 0.0;
@@ -365,7 +409,8 @@ function renderBotDCard() {
     const elDPrice  = document.getElementById('bot-d-btc-price'); if(elDPrice)  elDPrice.innerText  = formatUSD(s.current_btc_price || 96000.0);
     const elDEq     = document.getElementById('bot-d-equity');    if(elDEq)     elDEq.innerHTML     = `<span style="color:${pnlColor};font-weight:bold">${formatUSD(totalEquity)}</span>`;
     const elDUsdt   = document.getElementById('bot-d-usdt');      if(elDUsdt)   elDUsdt.innerText   = formatUSD(totalRemainingCash);
-    const elDBtc    = document.getElementById('bot-d-btc');       if(elDBtc)    elDBtc.innerText    = formatUSD(totalAssetValue); // Deployed Size
+    const elDBtc    = document.getElementById('bot-d-btc');       if(elDBtc)    elDBtc.innerText    = formatUSD(totalAssetValue); 
+    const elDFutures = document.getElementById('bot-d-futures-capital'); if(elDFutures) elDFutures.innerText = formatUSD(totalAssetValue * 0.1);
     const elDWr     = document.getElementById('bot-d-winrate');   if(elDWr)     elDWr.innerHTML     = `<span style="color:${pnlColor};font-weight:bold">${pnlSign}${formatUSD(totalFunding)}</span> (<span style="color:${pnlColor};font-weight:bold">${pnlSign}${pnlPct.toFixed(4)}%</span>)`;
     const elDRegime = document.getElementById('bot-d-regime');    if(elDRegime) elDRegime.innerText = `${altCoins.length} pairs`;
 

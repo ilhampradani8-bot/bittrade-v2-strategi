@@ -320,6 +320,30 @@
             from { background-color: transparent; }
             to { background-color: #fdf2f2; }
         }
+
+        .page-tab-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            font-family: inherit;
+            font-size: 0.95em;
+            font-weight: bold;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            text-align: center;
+            flex-grow: 1;
+            max-width: 250px;
+        }
+        .page-tab-btn:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        .page-tab-btn.active {
+            background: var(--text-primary);
+            color: var(--card-bg);
+            border-color: var(--text-primary);
+        }
     </style>
 </head>
 <body>
@@ -328,7 +352,9 @@
 
         <!-- System Status Bar -->
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-            <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 1.5em; font-weight: bold;">SmartDCA Engine Real-time</h2>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <h2 style="margin: 0; font-family: 'Playfair Display', serif; font-size: 1.5em; font-weight: bold;">SmartDCA Engine Real-time</h2>
+            </div>
             <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
                 <div class="uptime-badge">Uptime: <span id="uptime-counter">00:00:00</span></div>
                 <div class="uptime-badge" style="border-color: var(--accent-green); color: var(--accent-green); font-weight: bold;">Winrate: <span id="winrate-counter">0.0%</span></div>
@@ -337,132 +363,188 @@
             </div>
         </div>
 
-        <!-- Pipeline Status Indicators -->
-        <div class="indicator-row">
-            <div class="indicator-badge">
-                <span class="led-light" id="led-ws"></span> WebSocket
-            </div>
-            <div class="indicator-badge">
-                <span class="led-light" id="led-conclude"></span> Conclude (DCA)
-            </div>
-            <div class="indicator-badge">
-                <span class="led-light" id="led-validate"></span> Validate
-            </div>
-            <div class="indicator-badge">
-                <span class="led-light" id="led-executor"></span> Executor
-            </div>
+        <!-- Page Navigation Tabs -->
+        <div style="display: flex; gap: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; margin-bottom: 25px; flex-wrap: wrap;">
+            <button id="btn-page-overview" class="page-tab-btn active" onclick="switchPageTab('overview')">
+                Overview &amp; Position
+            </button>
+            <button id="btn-page-scanner" class="page-tab-btn" onclick="switchPageTab('scanner')">
+                Volatility Scanner (Top 100)
+            </button>
+            <button id="btn-page-history" class="page-tab-btn" onclick="switchPageTab('history')">
+                History &amp; Logs
+            </button>
         </div>
 
-        <!-- Metrics Grid -->
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>Total Equity</h3>
-                <div class="metric-value" id="equity-val">$0.00</div>
-                <div class="metric-subtext">USDT + BTC Value</div>
+        <!-- Tab 1: Overview & Active Position -->
+        <div id="section-overview" class="page-section">
+            <!-- Pipeline Status Indicators -->
+            <div class="indicator-row">
+                <div class="indicator-badge">
+                    <span class="led-light" id="led-ws"></span> WebSocket
+                </div>
+                <div class="indicator-badge">
+                    <span class="led-light" id="led-conclude"></span> Conclude (DCA)
+                </div>
+                <div class="indicator-badge">
+                    <span class="led-light" id="led-validate"></span> Validate
+                </div>
+                <div class="indicator-badge">
+                    <span class="led-light" id="led-executor"></span> Executor
+                </div>
             </div>
-            <div class="metric-card">
-                <h3>Simulated Balance</h3>
-                <div class="metric-value" id="balance-val">$0.00</div>
-                <div class="metric-subtext">Remaining USDT Cash</div>
+
+            <!-- Metrics Grid -->
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Total Saldo Asli</h3>
+                    <div class="metric-value" id="equity-val">$0.00</div>
+                    <div class="metric-subtext">Cash + Floating Value</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Daya Beli Leverage (3x)</h3>
+                    <div class="metric-value" id="leveraged-equity-val">$0.00</div>
+                    <div class="metric-subtext">Original Net Worth x 3</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Modal Terpakai (Margin)</h3>
+                    <div class="metric-value" id="margin-spent-val">$0.00</div>
+                    <div class="metric-subtext">In Active Positions</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Modal Bebas / Tak Terpakai</h3>
+                    <div class="metric-value" id="balance-val">$0.00</div>
+                    <div class="metric-subtext">Free USDT remaining</div>
+                </div>
             </div>
-            <div class="metric-card">
-                <h3>BTC Holdings</h3>
-                <div class="metric-value" id="btc-val">0.000000</div>
-                <div class="metric-subtext" id="btc-value-usd">$0.00 USD</div>
-            </div>
-            <div class="metric-card">
-                <h3>DCA Layers Filled</h3>
-                <div class="metric-value" id="layers-val">0 / 3</div>
-                <div class="metric-subtext">
-                    <span id="layer-dots" style="letter-spacing: 3px; font-weight: bold; color: var(--accent-blue);">○○○</span>
+
+            <!-- Main Panel Grid -->
+            <div class="main-panel-grid">
+                <!-- Left Panel: Equity Chart -->
+                <div class="panel-box">
+                    <h2 class="panel-title">📈 Equity Curve (DCA Simulation)</h2>
+                    <div class="chart-container">
+                        <canvas id="equityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Active Position Summary -->
+                <!-- Right Panel: Active Position Summary Table -->
+                <div class="panel-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h2 class="panel-title">💼 Current Active Positions</h2>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Cycle</th>
+                                        <th>Layers</th>
+                                        <th>Avg Entry</th>
+                                        <th>Current</th>
+                                        <th>PnL</th>
+                                        <th>Chart</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="active-positions-table-body">
+                                    <tr>
+                                        <td colspan="7" style="text-align: center; color: var(--text-secondary);">No active positions</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">
+                        <div style="font-size: 0.85em; color: var(--text-secondary); text-align: center;">Leverage: <span style="font-weight: bold; color: var(--accent-green);">Futures (3x Leverage)</span></div>
+                        <button class="btn btn-danger" onclick="triggerManualSell()" style="width: 100%; padding: 10px;">🚨 EMERGENCY MANUAL SELL</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Panel Grid -->
-        <div class="main-panel-grid">
-            <!-- Left Panel: Equity Chart -->
+        <!-- Tab 2: Volatility Scanner Section -->
+        <div id="section-scanner" class="page-section" style="display: none;">
             <div class="panel-box">
-                <h2 class="panel-title">📈 Equity Curve (DCA Simulation)</h2>
-                <div class="chart-container">
-                    <canvas id="equityChart"></canvas>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;">
+                    <h2 class="panel-title" style="margin: 0; border: none; padding-bottom: 0;">🔍 Volatility Scanner (Top 100 Volume Tickers)</h2>
+                    <span style="font-size: 0.85em; color: var(--text-secondary); font-family: monospace;">Diperbarui berkala (Periodik 1 Jam)</span>
                 </div>
-            </div>
-
-            <!-- Right Panel: Active Position Summary -->
-            <div class="panel-box" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <div>
-                    <h2 class="panel-title">💼 Current Active Position</h2>
-                    <div style="margin-bottom: 12px; font-size: 0.95em;">
-                        <strong>Active Cycle:</strong> <span id="cycle-id">#0</span>
-                    </div>
-                    <div style="margin-bottom: 12px; font-size: 0.95em;">
-                        <strong>Weighted Avg Entry:</strong> <span id="avg-entry-val">$0.00</span>
-                    </div>
-                    <div style="margin-bottom: 12px; font-size: 0.95em;">
-                        <strong>Current BTC Price:</strong> <span id="btc-price-val" style="font-weight: bold;">$0.00</span>
-                    </div>
-                    <div style="margin-bottom: 12px; font-size: 0.95em;">
-                        <strong>Cycle HWM:</strong> <span id="hwm-val">$0.00</span>
-                    </div>
-                    <div style="margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); text-align: center;">
-                        <div style="font-size: 0.85em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 5px;">Real-time P&L</div>
-                        <div id="pnl-pct-val" style="font-size: 1.8em; font-weight: bold; font-family: 'Playfair Display', serif;">+0.00%</div>
-                    </div>
-                </div>
-                <div>
-                    <button class="btn btn-danger" onclick="triggerManualSell()" style="width: 100%; padding: 12px;">🚨 EMERGENCY MANUAL SELL</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tables section -->
-        <div class="main-panel-grid" style="grid-template-columns: 1fr 1fr;">
-            <!-- Cycles Table -->
-            <div class="panel-box">
-                <h2 class="panel-title">📜 DCA Cycle History</h2>
-                <div style="overflow-x: auto;">
+                <div style="overflow-x: auto; max-height: 600px; overflow-y: auto;">
                     <table>
                         <thead>
                             <tr>
-                                <th>Cycle</th>
-                                <th>Entry Avg</th>
-                                <th>Exit Price</th>
-                                <th>Net P&L ($)</th>
-                                <th>P&L %</th>
+                                <th>Rank</th>
+                                <th>Symbol</th>
+                                <th>24h Volatility</th>
+                                <th>24h Volume (USDT)</th>
                                 <th>Status</th>
+                                <th>Active Layers</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody id="cycles-table-body">
+                        <tbody id="scanner-table-body">
                             <tr>
-                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading cycles...</td>
+                                <td colspan="7" style="text-align: center; color: var(--text-secondary);">Loading scanner data...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Trade History Table -->
-            <div class="panel-box">
-                <h2 class="panel-title">📝 Recent Trade History</h2>
-                <div style="overflow-x: auto;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Cycle</th>
-                                <th>Action</th>
-                                <th>Layer</th>
-                                <th>Price</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body">
-                            <tr>
-                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">Loading trades...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <!-- Tab 3: History & Logs Section -->
+        <div id="section-history" class="page-section" style="display: none;">
+            <div class="main-panel-grid" style="grid-template-columns: 1fr 1fr;">
+                <!-- Cycles Table -->
+                <div class="panel-box">
+                    <h2 class="panel-title">📜 DCA Cycle History</h2>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Symbol</th>
+                                    <th>Cycle</th>
+                                    <th>Entry Avg</th>
+                                    <th>Exit Price</th>
+                                    <th>Net P&amp;L ($)</th>
+                                    <th>P&amp;L %</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cycles-table-body">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: var(--text-secondary);">Loading cycles...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Trade History Table -->
+                <div class="panel-box">
+                    <h2 class="panel-title">📝 Recent Trade History</h2>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Symbol</th>
+                                    <th>Cycle</th>
+                                    <th>Action</th>
+                                    <th>Layer</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                    <th>Cost / PnL</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <tr>
+                                    <td colspan="8" style="text-align: center; color: var(--text-secondary);">Loading trades...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

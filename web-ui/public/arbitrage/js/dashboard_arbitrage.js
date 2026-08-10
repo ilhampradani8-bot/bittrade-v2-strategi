@@ -1,4 +1,9 @@
+let currentProfile = 'retail'; // 'retail' or 'institutional'
+
 function getApiPrefix() {
+    if (currentProfile === 'institutional') {
+        return '/arbitrage_inst/';
+    }
     const path = window.location.pathname;
     if (path.startsWith('/arbitrage') || path.indexOf('/arbitrage/') !== -1 || path.indexOf('/dashboard_arbitrage') !== -1) {
         return '/arbitrage/';
@@ -229,21 +234,89 @@ async function fetchHistory() {
         const historyBody = document.getElementById('history-body');
         if (historyBody) {
             if (list.length === 0) {
-                historyBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">Tidak ada transaksi arbitrage aktif</td></tr>`;
+                historyBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">Tidak ada transaksi arbitrage aktif</td></tr>`;
             } else {
-                historyBody.innerHTML = list.map(item => {
-                    const actClass = item.action.includes('OPEN') ? 'text-open-arb' : 'text-close-arb';
+                let rowsHtml = '';
+                list.forEach(item => {
                     const time = new Date(item.timestamp).toLocaleString('id-ID');
-                    return `
-                        <tr>
+                    
+                    if (item.action === 'OPEN_ARB') {
+                        const openRegex = /\[FR Arb\] Open (\w+) \| Spot: \$([\d\.-]+), Futures: \$([\d\.-]+) \| Fee: \$([\d\.-]+)/;
+                        const match = item.notes.match(openRegex);
+                        if (match) {
+                            const symbol = match[1];
+                            const spot = parseFloat(match[2]);
+                            const futures = parseFloat(match[3]);
+                            const fee = parseFloat(match[4]);
+                            
+                            rowsHtml += `
+                                <tr style="border-left: 4px solid var(--accent-green);">
+                                     <td>${time}</td>
+                                     <td><span class="text-buy">BUY (Spot)</span></td>
+                                     <td style="font-weight: bold; color: var(--accent-blue);">${symbol}</td>
+                                     <td>${fmtUSD(spot)}</td>
+                                     <td>${item.amount.toFixed(4)} (${fmtUSD(item.amount * spot)})</td>
+                                     <td style="color: var(--text-muted); font-size: 0.95em;">[Leg 1/2] Beli aset spot | Est Fee: ${fmtUSD(fee/2)}</td>
+                                </tr>
+                                <tr style="border-left: 4px solid var(--accent-red); border-bottom: 2px solid var(--border-color);">
+                                     <td>${time}</td>
+                                     <td><span class="text-sell">SELL SHORT (Futures)</span></td>
+                                     <td style="font-weight: bold; color: var(--accent-blue);">${symbol}</td>
+                                     <td>${fmtUSD(futures)}</td>
+                                     <td>${item.amount.toFixed(4)} (${fmtUSD(item.amount * futures)})</td>
+                                     <td style="color: var(--text-muted); font-size: 0.95em;">[Leg 2/2] Jual short perp hedging | Est Fee: ${fmtUSD(fee/2)}</td>
+                                </tr>
+                            `;
+                            return;
+                        }
+                    } else if (item.action === 'CLOSE_ARB') {
+                        const closeRegex = /\[FR Arb\] Close (\w+) \| Spot Exit: \$([\d\.-]+), Futures Exit: \$([\d\.-]+) \| Net P&L: \$([\+\-\d\.-]+) \| Reason: (.*)/;
+                        const match = item.notes.match(closeRegex);
+                        if (match) {
+                            const symbol = match[1];
+                            const spot = parseFloat(match[2]);
+                            const futures = parseFloat(match[3]);
+                            const pnl = parseFloat(match[4]);
+                            const reason = match[5];
+                            const pnlColor = pnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+                            const pnlSign = pnl >= 0 ? '+' : '';
+                            
+                            rowsHtml += `
+                                <tr style="border-left: 4px solid var(--accent-red);">
+                                     <td>${time}</td>
+                                     <td><span class="text-sell">SELL (Spot Close)</span></td>
+                                     <td style="font-weight: bold; color: var(--accent-blue);">${symbol}</td>
+                                     <td>${fmtUSD(spot)}</td>
+                                     <td>${item.amount.toFixed(4)} (${fmtUSD(item.amount * spot)})</td>
+                                     <td style="color: var(--text-muted); font-size: 0.95em;">[Leg 1/2] Jual/lepas aset spot | Reason: ${reason}</td>
+                                </tr>
+                                <tr style="border-left: 4px solid var(--accent-green); border-bottom: 2px solid var(--border-color);">
+                                     <td>${time}</td>
+                                     <td><span class="text-buy">BUY (Futures Cover)</span></td>
+                                     <td style="font-weight: bold; color: var(--accent-blue);">${symbol}</td>
+                                     <td>${fmtUSD(futures)}</td>
+                                     <td>${item.amount.toFixed(4)} (${fmtUSD(item.amount * futures)})</td>
+                                     <td style="font-weight: bold; color: ${pnlColor}; font-size: 0.95em;">[Leg 2/2] Tutup short perp | Net P&L: ${pnlSign}${fmtUSD(pnl)}</td>
+                                </tr>
+                            `;
+                            return;
+                        }
+                    }
+                    
+                    // Fallback
+                    const actClass = item.action.includes('OPEN') ? 'text-open-arb' : 'text-close-arb';
+                    rowsHtml += `
+                        <tr style="border-bottom: 2px solid var(--border-color);">
                              <td>${time}</td>
                              <td class="${actClass}">${item.action}</td>
+                             <td style="font-weight: bold; color: var(--accent-blue);">-</td>
                              <td>${fmtUSD(item.price)}</td>
                              <td>${item.amount.toFixed(4)} (${fmtUSD(item.amount * item.price)})</td>
                              <td>${item.notes || '-'}</td>
                         </tr>
                     `;
-                }).join('');
+                });
+                historyBody.innerHTML = rowsHtml;
             }
         }
     } catch (e) {
@@ -311,9 +384,13 @@ async function fetchBalanceHistory() {
     try {
         const res = await fetch(getApiPrefix() + 'api/balance_history');
         const list = await res.json();
-        if (balanceChart && list.length > 0) {
-            balanceChart.data.labels = list.map(item => new Date(item.timestamp).toLocaleTimeString('id-ID'));
-            balanceChart.data.datasets[0].data = list.map(item => item.total_value);
+        if (balanceChart && list && list.length > 0) {
+            const slicedList = list.slice(-150);
+            balanceChart.data.labels = slicedList.map(item => {
+                const cleanTime = item.timestamp.includes('.') ? (item.timestamp.split('.')[0] + 'Z') : item.timestamp;
+                return new Date(cleanTime).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            });
+            balanceChart.data.datasets[0].data = slicedList.map(item => item.total_value);
             balanceChart.update();
             isBalanceHistoryInitialized = true;
         }
@@ -359,6 +436,9 @@ async function fetchArbPositions() {
         // Update balances elements
         const startCapitalEl = document.getElementById('starting-capital-val');
         if (startCapitalEl) startCapitalEl.innerText = fmtUSD(totalStartingCapital);
+
+        const levPowerEl = document.getElementById('leverage-power-val');
+        if (levPowerEl) levPowerEl.innerText = fmtUSD(totalStartingCapital * 10);
 
         const usdtEl = document.getElementById('usdt-balance');
         if (usdtEl) usdtEl.innerText = fmtUSD(totalRemainingCash);
@@ -575,3 +655,57 @@ document.querySelectorAll('.sidebar-link').forEach(link => {
         link.classList.remove('active');
     }
 });
+
+// Profile Switcher Event Listeners
+const retailBtn = document.getElementById('profile-retail-btn');
+const instBtn = document.getElementById('profile-inst-btn');
+
+if (retailBtn && instBtn) {
+    retailBtn.addEventListener('click', function() {
+        if (currentProfile === 'retail') return;
+        currentProfile = 'retail';
+        retailBtn.classList.add('active');
+        instBtn.classList.remove('active');
+        
+        // Reset state and chart
+        isBalanceHistoryInitialized = false;
+        botStartTime = null;
+        if (balanceChart) {
+            balanceChart.data.labels = [];
+            balanceChart.data.datasets[0].data = [];
+            balanceChart.update();
+        }
+        
+        // Fetch fresh data
+        fetchStatus();
+        fetchArbPositions();
+        fetchHistory();
+        fetchCorrections();
+        fetchBalanceHistory();
+        fetchJournal();
+    });
+
+    instBtn.addEventListener('click', function() {
+        if (currentProfile === 'institutional') return;
+        currentProfile = 'institutional';
+        instBtn.classList.add('active');
+        retailBtn.classList.remove('active');
+        
+        // Reset state and chart
+        isBalanceHistoryInitialized = false;
+        botStartTime = null;
+        if (balanceChart) {
+            balanceChart.data.labels = [];
+            balanceChart.data.datasets[0].data = [];
+            balanceChart.update();
+        }
+        
+        // Fetch fresh data
+        fetchStatus();
+        fetchArbPositions();
+        fetchHistory();
+        fetchCorrections();
+        fetchBalanceHistory();
+        fetchJournal();
+    });
+}

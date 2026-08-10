@@ -138,9 +138,15 @@ const scholarMetaTags = `
                   Grid Engine v2.0 — Edisi Juli 2026
                 </div>
 
-                <div class="book-author">
+                <div class="book-author" style="margin-top: 25px; line-height: 1.8;">
                   Disusun Oleh / Authored By:<br/>
-                  <strong>Tim Peneliti BitTrade-v2 Grid Engine</strong>
+                  <strong>Ilham Pradani</strong><br/>
+                  <span style="font-size:0.9em; font-weight:normal; color: var(--text-secondary);">
+                      Department of Computer Science, Universitas Terbuka<br/>
+                      Academic Email: <a href="mailto:051071552@ecampus.ut.ac.id" style="color: var(--accent-blue); text-decoration: none;">051071552@ecampus.ut.ac.id</a><br/>
+                      Primary Email: <a href="mailto:hello@ilhampradani.me" style="color: var(--accent-blue); text-decoration: none;">hello@ilhampradani.me</a><br/>
+                      Portfolio: <a href="https://ilhampradani.me" target="_blank" style="color: var(--accent-blue); text-decoration: none;">ilhampradani.me</a>
+                  </span>
                 </div>
               </div>
 
@@ -661,10 +667,83 @@ const scholarMetaTags = `
   .footer { margin-top: 80px; border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; font-size: 0.95em; color: var(--text-muted); font-family: monospace; line-height: 1.6; word-break: break-word; overflow-wrap: break-word; width: 100%; }
 
   @media print {
-    .paper-toc-sidebar, .paper-actions-bar, .book-nav-bar, .floating-btn { display: none !important; }
-    .paper-layout-wrapper { margin: 0; padding: 0; width: 100%; display: block; }
-    .latex-document { box-shadow: none; border: none; padding: 0; min-height: auto; }
-    .book-page { display: block !important; animation: none !important; margin-bottom: 60px; }
+      @page {
+          size: A4;
+          margin: 20mm 15mm;
+      }
+
+      /* Hide all UI layout elements */
+      .sidebar, .top-header, footer, .book-nav-bar, .floating-btn, #mobileTocToggle, .paper-toc-sidebar, .paper-actions-bar { 
+          display: none !important; 
+      }
+      
+      /* Reset layout containers to take full width without margins/padding */
+      .app-wrapper, .main-area, .content-container, .paper-layout-wrapper, .paper-main-content { 
+          margin: 0 !important; 
+          padding: 0 !important; 
+          width: 100% !important; 
+          max-width: 100% !important; 
+          display: block !important; 
+          min-height: auto !important;
+          box-shadow: none !important;
+          border: none !important;
+          overflow: visible !important;
+      }
+      
+      .latex-document { 
+          box-shadow: none !important; 
+          border: none !important; 
+          padding: 0 !important; 
+          min-height: auto !important; 
+          width: 100% !important; 
+          max-width: 100% !important;
+          background: transparent !important;
+          display: block !important;
+          overflow: visible !important;
+      }
+      
+      /* Override book pages display to print vertically */
+      #pages-viewport { 
+          height: auto !important; 
+          overflow: visible !important; 
+          width: 100% !important; 
+          max-width: 100% !important; 
+          display: block !important;
+      }
+      
+      #pages-container { 
+          display: block !important; 
+          width: 100% !important; 
+          transform: none !important; 
+          transition: none !important;
+          overflow: visible !important;
+      }
+      
+      .book-page { 
+          display: block !important; 
+          width: 100% !important; 
+          max-width: 100% !important; 
+          flex: none !important; 
+          opacity: 1 !important;
+          padding: 0 !important;
+          margin: 0 0 50px 0 !important; 
+          page-break-after: always !important; 
+          break-after: page !important; 
+          animation: none !important; 
+          overflow: visible !important;
+      }
+      
+      .book-cover { 
+          padding-top: 0 !important; 
+          border-bottom: 2px solid #000 !important;
+          margin-bottom: 40px !important;
+      }
+
+      /* Prevent split content items across page boundaries */
+      .p-pair, .math-block, .academic-table, .paper-abstract-box, .abstract-section, h2, h3, h4 {
+          page-break-inside: avoid !important;
+          break-inside: avoid !important;
+      }
   }
   @media (max-width: 768px) {
     .latex-document { padding: 20px 12px !important; }

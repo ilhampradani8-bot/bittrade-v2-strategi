@@ -3,30 +3,64 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer style="border-top: 1px solid var(--border-color); padding: 40px 30px; margin-top: auto; font-family: 'Georgia', serif; color: var(--text-secondary); font-size: 0.9em; background: var(--paper-bg);">
-  <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-bottom: 30px;">
-    <div>
-      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">BitTrade Q-Lab</h4>
-      <p style="line-height: 1.6; font-size: 0.85em; color: var(--text-muted);">
-        Quantitative Research &amp; Algorithm Automation Division. Developing institutional-scale trading systems based on advanced mathematical models for systematic digital asset market navigation.
-      </p>
+  <div style="max-width: 1300px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 40px; margin-bottom: 30px; align-items: flex-start;">
+    
+    <!-- Left Logo & Partner Info -->
+    <div style="flex: 0 0 280px; min-width: 250px; display: flex; flex-direction: column; gap: 15px;">
+      <img src="/mij-logo-4x4-fullwidht.jpeg" alt="MIJ Digital Logo" style="max-height: 70px; max-width: 100%; border-radius: 4px; object-fit: contain; align-self: flex-start;" />
+      <div style="font-size: 0.85em; line-height: 1.6; color: var(--text-muted); font-family: 'Inter', sans-serif;">
+        <span style="font-weight: 700; color: var(--text-primary); font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px;">Research Partnership</span>
+        <div style="margin-top: 8px;">
+          Dr. Mohamad Ikhwan bin Jamaludin (UTM)<br />
+          Ilham Pradani (UT)
+        </div>
+        <div style="margin-top: 8px; font-weight: 600;">
+          Partner Portal: <a href="https://mijdigital.my" target="_blank" style="color: var(--accent-blue); text-decoration: none;">mijdigital.my</a>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">Document Classification</h4>
-      <p style="line-height: 1.6; font-size: 0.85em; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
-        STATUS: INTERNAL DOCUMENT (PROPRIETARY)<br />
-        LEVEL: RESTRICTED (CONFIDENTIAL)<br />
-        VERSION: 3.0.0 (ASTRO ENTERPRISE)<br />
-        GROUP: ADVANCED AGENTIC TRADING
-      </p>
+
+    <!-- Middle: Contact -->
+    <div style="flex: 1 1 300px; font-family: 'Inter', sans-serif;">
+      <h4 style="color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px;">Email Contacts</h4>
+      <div style="font-size: 0.85em; color: var(--text-muted); line-height: 1.8; display: flex; flex-direction: column; gap: 6px; margin-top: 5px;">
+        <a href="mailto:info@mijdigital.my" style="color: var(--accent-blue); text-decoration: none;">info@mijdigital.my</a>
+        <a href="mailto:mohamad.ikhwan@utm.my" style="color: var(--accent-blue); text-decoration: none;">mohamad.ikhwan@utm.my</a>
+        <a href="mailto:info@ilhampradani.me" style="color: var(--accent-blue); text-decoration: none;">info@ilhampradani.me</a>
+      </div>
     </div>
-    <div>
-      <h4 style="font-family: 'Inter', sans-serif; color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">Risk Notice</h4>
-      <p style="line-height: 1.6; font-size: 0.85em; font-style: italic; color: var(--text-muted);">
-        Past performance does not guarantee future results. All cryptocurrency trading involves high volatility risks and potential for significant capital loss. Use simulations wisely.
-      </p>
+
+    <!-- Right: Quick Navigation -->
+    <div style="flex: 1 1 280px; font-family: 'Inter', sans-serif;">
+      <h4 style="color: var(--text-primary); margin-bottom: 12px; font-weight: 600; border-bottom: 1px solid var(--border-color); padding-bottom: 6px; text-transform: uppercase; font-size: 0.9em; letter-spacing: 0.5px;">Quick Navigation</h4>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 15px;">
+        <a href="/" class="footer-nav-link">Home Dashboard</a>
+        <a href="/backtest" class="footer-nav-link">Simulator Backtest</a>
+        <a href="/paper_a" class="footer-nav-link">Paper Bot A (Trend)</a>
+        <a href="/paper_b" class="footer-nav-link">Paper Bot B (DCA)</a>
+        <a href="/paper_grid" class="footer-nav-link">Paper Bot C (Grid)</a>
+        <a href="/paper_arbitrage" class="footer-nav-link">Paper Bot D (Arb)</a>
+        <a href="/paper_statarb" class="footer-nav-link">Paper Bot E (statARB)</a>
+        <a href="https://tradingsafe.mijdigital.my/bota/" target="_blank" class="footer-nav-link" style="color: var(--accent-green); font-weight: bold;">Live Trade Bot A</a>
+      </div>
     </div>
+
   </div>
+  
   <div style="max-width: 1300px; margin: 0 auto; border-top: 1px dashed var(--border-color); padding-top: 20px; text-align: center; font-size: 0.8em; font-family: 'JetBrains Mono', monospace; color: var(--text-muted);">
     &copy; {currentYear} BitTrade Q-Grade Laboratory. All Rights Reserved. Powered by Astro &amp; Rust Tokio.
   </div>
 </footer>
+
+<style>
+  .footer-nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.2s ease;
+  }
+  .footer-nav-link:hover {
+      color: var(--accent-blue) !important;
+      padding-left: 4px;
+  }
+</style>
