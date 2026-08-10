@@ -166,13 +166,13 @@ pub async fn evaluate_entry(
             let base_pct = if rsi_slope_15m >= 8.0 { 0.40 } else { 0.10 };
             let dynamic_pct = crate::risk::calculate_dynamic_budget(state, base_pct).await;
             let budget = if dynamic_pct == -1.0 {
-                println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($5.05) berjalan.", symbol);
-                5.05
+                println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($10.00) berjalan.", symbol);
+                10.00
             } else if dynamic_pct <= 0.0 {
                 println!("[{}] Sharpe negatif. Memblokir entry Trending.", symbol);
                 return Some(Decision::Wait);
             } else {
-                sim_bal * dynamic_pct
+                (sim_bal * dynamic_pct).max(10.00)
             };
             return Some(Decision::Buy(budget / price, format!("[Trending] Adaptive EMA{}/{} Buy (RSI Slope +{:.2}, Vol {:.1}x, VWAP Dist: {:.2}%)", ema_fast_len, ema_slow_len, rsi_slope, vol_surge, vwap_dist_pct)));
         }

@@ -112,13 +112,13 @@ pub async fn evaluate_entry(
 
             let dynamic_pct = crate::risk::calculate_dynamic_budget(state, 0.25).await;
             let budget = if dynamic_pct == -1.0 {
-                println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($5.05) berjalan.", symbol);
-                5.05
+                println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($10.00) berjalan.", symbol);
+                10.00
             } else if dynamic_pct <= 0.0 {
                 println!("[{}] Sharpe negatif. Memblokir entry Breakout.", symbol);
                 return Some(Decision::Wait);
             } else {
-                sim_bal * dynamic_pct
+                (sim_bal * dynamic_pct).max(10.00)
             };
             return Some(Decision::Buy(budget / price, format!("[Breakout] Pump Mendadak (Vol {:.1}x, VWAP Dist {:.2}%, Spike {:.2}%)", vol_surge, vwap_dist_bo, spike_pct_bo)));
         }

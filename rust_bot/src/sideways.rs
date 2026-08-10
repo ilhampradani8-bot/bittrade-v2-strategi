@@ -98,13 +98,13 @@ pub async fn evaluate_entry(
                     let base_pct = params.sideways_flat_budget_pct.unwrap_or(0.10);
                     let dynamic_pct = crate::risk::calculate_dynamic_budget(state, base_pct).await;
                     let budget = if dynamic_pct == -1.0 {
-                        println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($5.05) berjalan.", symbol);
-                        5.05
+                        println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($10.00) berjalan.", symbol);
+                        10.00
                     } else if dynamic_pct <= 0.0 {
                         println!("[{}] Sharpe negatif. Memblokir entry Sideways.", symbol);
                         return Some(Decision::Wait);
                     } else {
-                        sim_bal * dynamic_pct
+                        (sim_bal * dynamic_pct).max(10.00)
                     };
                     return Some(Decision::Buy(budget / price, format!("[Sideways] Sentuh Bawah BB{} (Vol {:.1}x, VWAP Dist {:.2}%)", params.sideways_bb_period, vol_surge, vwap_dist_sw)));
                 }

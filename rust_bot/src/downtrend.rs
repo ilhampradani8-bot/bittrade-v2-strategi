@@ -81,16 +81,16 @@ pub async fn evaluate_entry(
 
         // Ditambah filter VWAP diskon <= downtrend_max_vwap_dist
         if rsi_oversold && vol_surge >= params.downtrend_vol_surge_limit && is_green_streak && bb_width_pct > 0.5 && vwap_dist_dt <= params.downtrend_max_vwap_dist {
-            if sim_bal > 5.0 {
+            if sim_bal > 10.00 {
                 let dynamic_pct = crate::risk::calculate_dynamic_budget(state, 0.30).await;
                 let budget = if dynamic_pct == -1.0 {
-                    println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($5.05) berjalan.", symbol);
-                    5.05
+                    println!("[{}] QPS Aktif: Mode Pemulihan Modal Minimum ($10.00) berjalan.", symbol);
+                    10.00
                 } else if dynamic_pct <= 0.0 {
                     println!("[{}] Sharpe negatif. Memblokir entry Downtrend.", symbol);
                     return None;
                 } else {
-                    sim_bal * dynamic_pct
+                    (sim_bal * dynamic_pct).max(10.00)
                 };
                 println!("[{}] ⚡ BEARISH CLIMAX REBOUND TERDETEKSI! RSI Oversold ({:.1}), Vol Surge ({:.1}x), VWAP Dist {:.2}% (Diskon >= {:.2}%).", symbol, rsi, vol_surge, vwap_dist_dt, params.downtrend_max_vwap_dist.abs());
                 return Some(Decision::Buy(budget / price, format!("[Downtrend] Bearish Climax Rebound (RSI {:.1}, VWAP Dist {:.2}%)", rsi, vwap_dist_dt)));
