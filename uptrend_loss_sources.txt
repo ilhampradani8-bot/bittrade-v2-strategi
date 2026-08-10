@@ -1,0 +1,43 @@
+Uptrend (Trending) Loss Source Data
+===================================
+Time | Buy Price | P&L % | Exit Reason | EMA Spread | VWAP Dist | Vol Surge
+2025-04-02 20:14:00 | $87776.20 | -1.61% | Stop Loss | Spread: 0.153% | VWAP Dist: 2.076% | Vol Surge: 42.65x
+2025-04-02 20:19:00 | $87922.00 | -1.61% | Stop Loss | Spread: 0.491% | VWAP Dist: 2.126% | Vol Surge: 1.84x
+2025-04-02 13:46:00 | $85858.27 | -0.91% | Death Cross | Spread: 0.264% | VWAP Dist: 1.252% | Vol Surge: 9.11x
+2025-04-02 13:51:00 | $85959.46 | -0.91% | Death Cross | Spread: 0.380% | VWAP Dist: 1.284% | Vol Surge: 2.77x
+2025-04-09 13:41:00 | $77789.04 | -0.82% | Death Cross | Spread: 0.306% | VWAP Dist: 1.720% | Vol Surge: 2.88x
+2025-04-02 20:26:00 | $86521.37 | -0.76% | Death Cross | Spread: 0.230% | VWAP Dist: 0.465% | Vol Surge: 3.13x
+2025-04-07 14:50:00 | $79104.00 | -0.76% | Death Cross | Spread: 0.059% | VWAP Dist: 2.380% | Vol Surge: 0.38x
+2025-04-07 14:55:00 | $79223.05 | -0.76% | Death Cross | Spread: 0.244% | VWAP Dist: 2.513% | Vol Surge: 0.40x
+2025-04-09 13:56:00 | $77800.01 | -0.72% | Death Cross | Spread: 0.250% | VWAP Dist: 1.705% | Vol Surge: 1.09x
+2025-04-09 14:01:00 | $78252.78 | -0.72% | Death Cross | Spread: 0.338% | VWAP Dist: 2.263% | Vol Surge: 2.75x
+2025-06-22 00:03:00 | $102519.86 | -0.70% | Death Cross | Spread: 0.302% | VWAP Dist: 0.173% | Vol Surge: 1.46x
+2026-06-07 22:14:00 | $63586.98 | -0.70% | Death Cross | Spread: 0.416% | VWAP Dist: 2.487% | Vol Surge: 56.61x
+2026-06-07 22:19:00 | $63163.52 | -0.70% | Death Cross | Spread: 0.815% | VWAP Dist: 1.670% | Vol Surge: 7.44x
+2025-04-07 12:30:00 | $77579.90 | -0.68% | Death Cross | Spread: 0.276% | VWAP Dist: 1.326% | Vol Surge: 3.04x
+2025-04-07 12:35:00 | $77235.95 | -0.68% | Death Cross | Spread: 0.268% | VWAP Dist: 0.868% | Vol Surge: 1.30x
+2026-05-08 14:25:00 | $80278.46 | -0.67% | Death Cross | Spread: 0.221% | VWAP Dist: 0.607% | Vol Surge: 0.19x
+2025-04-09 18:41:00 | $82740.60 | -0.67% | Death Cross | Spread: 0.212% | VWAP Dist: 5.911% | Vol Surge: 0.49x
+2026-05-26 14:22:00 | $77746.11 | -0.63% | Death Cross | Spread: 0.213% | VWAP Dist: 1.056% | Vol Surge: 1.78x
+2026-05-26 14:27:00 | $78040.00 | -0.63% | Death Cross | Spread: 0.321% | VWAP Dist: 1.377% | Vol Surge: 1.85x
+2025-04-25 14:19:00 | $95190.44 | -0.63% | Death Cross | Spread: 0.246% | VWAP Dist: 1.213% | Vol Surge: 1.65x
+2026-06-17 16:29:00 | $66258.00 | -0.62% | Death Cross | Spread: 0.251% | VWAP Dist: 1.290% | Vol Surge: 1.00x
+2026-06-24 20:49:00 | $61173.47 | -0.58% | Death Cross | Spread: 0.244% | VWAP Dist: 0.264% | Vol Surge: 2.31x
+2025-04-22 21:49:00 | $93417.73 | -0.57% | Death Cross | Spread: 0.303% | VWAP Dist: 3.694% | Vol Surge: 36.17x
+2025-04-22 21:54:00 | $93102.94 | -0.57% | Death Cross | Spread: 0.554% | VWAP Dist: 3.268% | Vol Surge: 0.86x
+2025-05-08 01:02:00 | $98211.45 | -0.53% | Death Cross | Spread: 0.320% | VWAP Dist: 0.445% | Vol Surge: 2.59x
+2025-05-08 01:07:00 | $97989.50 | -0.53% | Death Cross | Spread: 0.359% | VWAP Dist: 0.169% | Vol Surge: 1.23x
+2026-06-04 17:54:00 | $63598.00 | -0.53% | Death Cross | Spread: 0.071% | VWAP Dist: 0.506% | Vol Surge: 0.65x
+2026-06-04 17:59:00 | $63540.97 | -0.53% | Death Cross | Spread: 0.159% | VWAP Dist: 0.414% | Vol Surge: 0.58x
+2026-06-05 05:28:00 | $63490.92 | -0.52% | Death Cross | Spread: 0.101% | VWAP Dist: 0.632% | Vol Surge: 0.39x
+2026-07-01 15:23:00 | $60498.90 | -0.51% | Death Cross | Spread: 0.254% | VWAP Dist: 2.501% | Vol Surge: 20.46x
+2026-07-01 15:28:00 | $60314.01 | -0.51% | Death Cross | Spread: 0.347% | VWAP Dist: 2.150% | Vol Surge: 0.70x
+2025-04-07 00:30:00 | $78265.34 | -0.51% | Death Cross | Spread: 0.069% | VWAP Dist: 0.392% | Vol Surge: 1.71x
+2026-06-26 14:16:00 | $60066.52 | -0.51% | Death Cross | Spread: 0.277% | VWAP Dist: 0.780% | Vol Surge: 0.43x
+2025-04-09 17:03:00 | $78577.48 | -0.50% | Death Cross | Spread: 0.301% | VWAP Dist: 2.456% | Vol Surge: 1.74x
+2025-04-09 17:08:00 | $78334.65 | -0.50% | Death Cross | Spread: 0.296% | VWAP Dist: 2.126% | Vol Surge: 0.68x
+2025-04-11 13:59:00 | $82930.67 | -0.50% | Death Cross | Spread: 0.182% | VWAP Dist: 1.740% | Vol Surge: 0.75x
+2025-04-07 09:49:00 | $76714.19 | -0.49% | Death Cross | Spread: 0.181% | VWAP Dist: 0.281% | Vol Surge: 1.00x
+2026-05-29 15:33:00 | $74046.00 | -0.49% | Death Cross | Spread: 0.262% | VWAP Dist: 0.797% | Vol Surge: 3.00x
+2026-05-29 15:38:00 | $74119.99 | -0.49% | Death Cross | Spread: 0.330% | VWAP Dist: 0.882% | Vol Surge: 0.88x
+2025-04-04 13:05:00 | $83232.00 | -0.49% | Death Cross | Spread: 0.235% | VWAP Dist: 0.124% | Vol Surge: 0.58x

@@ -1,0 +1,9 @@
+=== DOWNTREND STATS (7 cycles) ===
+Wins: 1 | Losses: 6
+  Cycle #208: P&L: $-1.00 (LOSS) | Exit: [Downtrend] Timeout Exit
+  Cycle #256: P&L: $-1.49 (LOSS) | Exit: [Downtrend] Timeout Exit
+  Cycle #331: P&L: $-0.93 (LOSS) | Exit: [Downtrend] Timeout Exit
+  Cycle #521: P&L: $-0.27 (LOSS) | Exit: [Downtrend] Timeout Exit
+  Cycle #549: P&L: $0.35 (WIN) | Exit: [Downtrend] Timeout Exit
+  Cycle #555: P&L: $-0.07 (LOSS) | Exit: [Downtrend] Timeout Exit
+  Cycle #645: P&L: $-0.12 (LOSS) | Exit: [Downtrend] Timeout Exit

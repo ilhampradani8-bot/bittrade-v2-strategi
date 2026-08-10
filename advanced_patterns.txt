@@ -1,0 +1,72 @@
+ADVANCED PATTERN MINING REPORT
+==============================
+
+=== TRENDING STRATEGY ===
+Base Trades: 143 | Base Win Rate: 29.37%
+
+--- 100% PURE WIN PATTERNS (MIN SUPPORT: 8) ---
+No 100% win patterns found with support >= 8.
+
+--- HIGH WIN / LOW LOSS PATTERNS (WIN RATE >= 75%, FUZZY) ---
+No high-win fuzzy patterns found.
+
+--- PURE LOSS PATTERNS (LOSS RATE >= 90%) ---
+Rule: 0<=RSI<=55 | 0.2<=VWAP_dist<=5% | 0.0<=Vol_surge<=999x
+  Loss Rate: 91.67% | Trades: 12 | Avg Loss: -0.43%
+
+Rule: 0<=RSI<=70 | -5<=VWAP_dist<=1.2% | 1.0<=Vol_surge<=2.0x
+  Loss Rate: 90.91% | Trades: 11 | Avg Loss: -0.38%
+
+Rule: 0<=RSI<=55 | 0.2<=VWAP_dist<=1.2% | 0.0<=Vol_surge<=999x
+  Loss Rate: 90.00% | Trades: 10 | Avg Loss: -0.31%
+
+Rule: 50<=RSI<=55 | 0.2<=VWAP_dist<=5% | 0.0<=Vol_surge<=999x
+  Loss Rate: 100.00% | Trades: 10 | Avg Loss: -0.51%
+
+Rule: 50<=RSI<=55 | 0.2<=VWAP_dist<=1.2% | 0.0<=Vol_surge<=999x
+  Loss Rate: 100.00% | Trades: 8 | Avg Loss: -0.38%
+
+========================================
+
+=== SIDEWAYS STRATEGY ===
+Base Trades: 110 | Base Win Rate: 55.45%
+
+--- 100% PURE WIN PATTERNS (MIN SUPPORT: 8) ---
+No 100% win patterns found with support >= 8.
+
+--- HIGH WIN / LOW LOSS PATTERNS (WIN RATE >= 75%, FUZZY) ---
+Rule: 0<=RSI<=100 | -0.5<=VWAP_dist<=0.5% | 1.0<=Vol_surge<=999x
+  Win Rate: 75.00% | Trades: 16 | Avg Profit: +-0.07%
+
+--- PURE LOSS PATTERNS (LOSS RATE >= 90%) ---
+No pure loss patterns found.
+
+========================================
+
+=== BREAKOUT STRATEGY ===
+Base Trades: 196 | Base Win Rate: 31.63%
+
+--- 100% PURE WIN PATTERNS (MIN SUPPORT: 8) ---
+No 100% win patterns found with support >= 8.
+
+--- HIGH WIN / LOW LOSS PATTERNS (WIN RATE >= 75%, FUZZY) ---
+No high-win fuzzy patterns found.
+
+--- PURE LOSS PATTERNS (LOSS RATE >= 90%) ---
+Rule: 0<=RSI<=100 | -5<=VWAP_dist<=0.8% | 1.0<=Vol_surge<=3.0x
+  Loss Rate: 90.00% | Trades: 40 | Avg Loss: -0.57%
+
+Rule: 0<=RSI<=70 | -5<=VWAP_dist<=0.8% | 1.0<=Vol_surge<=3.0x
+  Loss Rate: 90.32% | Trades: 31 | Avg Loss: -0.58%
+
+Rule: 0<=RSI<=70 | -5<=VWAP_dist<=0.5% | 1.0<=Vol_surge<=3.0x
+  Loss Rate: 90.00% | Trades: 30 | Avg Loss: -0.55%
+
+Rule: 0<=RSI<=100 | -0.5<=VWAP_dist<=0.8% | 0.5<=Vol_surge<=2.0x
+  Loss Rate: 91.30% | Trades: 23 | Avg Loss: -0.44%
+
+Rule: 0<=RSI<=100 | -0.5<=VWAP_dist<=0.5% | 0.5<=Vol_surge<=2.0x
+  Loss Rate: 90.91% | Trades: 22 | Avg Loss: -0.42%
+
+========================================
+
