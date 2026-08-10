@@ -842,7 +842,7 @@ async fn get_status(Extension(state): Extension<AppState>) -> impl IntoResponse 
             });
     }
 
-    let coin_states_list: Vec<CoinStateResponse> = {
+    let mut coin_states_list: Vec<CoinStateResponse> = {
         let map = state.coin_states.read().await;
         map.values()
             .map(|c| {
@@ -861,6 +861,33 @@ async fn get_status(Extension(state): Extension<AppState>) -> impl IntoResponse 
                 }
             }).collect()
     };
+
+    // Tambahkan koin yang sedang di-hold tetapi belum sempat menerima update WS
+    for (sym, pos) in pos_map {
+        if !coin_states_list.iter().any(|c| c.symbol == sym) {
+            let last_price: f64 = sqlx::query_scalar(
+                "SELECT close_price FROM crypto_klines WHERE symbol = $1 ORDER BY open_time DESC LIMIT 1"
+            )
+            .bind(&sym)
+            .fetch_optional(&state.db)
+            .await
+            .unwrap_or(None)
+            .unwrap_or(pos.buy_price);
+
+            coin_states_list.push(CoinStateResponse {
+                symbol: sym.clone(),
+                price: last_price,
+                change_24h: 0.0,
+                order_book_imbalance: 0.5,
+                market_regime: "SIDEWAYS".to_string(),
+                volatility_category: "LOW".to_string(),
+                trend_status: "SIDEWAYS".to_string(),
+                quote_volume: 0.0,
+                daily_volatility: 0.0,
+                position: Some(pos),
+            });
+        }
+    }
 
     Json(StatusResponse {
         simulated_balance: *sim_bal,
