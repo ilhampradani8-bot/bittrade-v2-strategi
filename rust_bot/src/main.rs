@@ -497,6 +497,31 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 for (sym, amount) in active_positions {
                     if let Some(c) = map.get(&sym) {
                         total_holdings_value += amount * c.price;
+                    } else {
+                        // Jika koin belum ada di memory pasca restart, ambil harga close terakhir dari DB
+                        let last_db_price: Option<f64> = sqlx::query_scalar(
+                            "SELECT close_price FROM crypto_klines WHERE symbol = $1 ORDER BY open_time DESC LIMIT 1"
+                        )
+                        .bind(&sym)
+                        .fetch_optional(&worker_state.db)
+                        .await
+                        .unwrap_or(None);
+                        
+                        if let Some(db_price) = last_db_price {
+                            total_holdings_value += amount * db_price;
+                        } else {
+                            // Fallback akhir: gunakan buy_price awal dari tabel posisi aktif
+                            let buy_price: f64 = sqlx::query_scalar(
+                                "SELECT buy_price FROM bot_active_positions WHERE symbol = $1 LIMIT 1"
+                            )
+                            .bind(&sym)
+                            .fetch_optional(&worker_state.db)
+                            .await
+                            .unwrap_or(None)
+                            .unwrap_or(0.0);
+                            
+                            total_holdings_value += amount * buy_price;
+                        }
                     }
                 }
             }
