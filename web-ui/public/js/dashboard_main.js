@@ -190,18 +190,20 @@ function renderBotACard() {
         return;
     }
 
-    let invested = 0;
+    let investedCost = 0;
+    let investedCurrent = 0;
     let activePositionsCount = 0;
     if (s.coin_states) {
         for (const coin of s.coin_states) {
             if (coin.position) {
-                invested += coin.position.buy_price * coin.position.amount;
+                investedCost += coin.position.buy_price * coin.position.amount;
+                investedCurrent += coin.price * coin.position.amount;
                 activePositionsCount++;
             }
         }
     }
 
-    const totalEquity = s.simulated_balance + invested;
+    const totalEquity = s.simulated_balance + investedCurrent;
     const pnl = totalEquity - 200.0;
     const pnlPct = (pnl / 200.0) * 100.0;
 
@@ -219,9 +221,22 @@ function renderBotACard() {
     const elUsdt = document.getElementById('bot-a-usdt');
     if (elUsdt) elUsdt.innerText = formatUSD(s.simulated_balance);
     
-    // Invested Value
+    // Invested Value (Cost Basis)
     const elInvested = document.getElementById('bot-a-invested');
-    if (elInvested) elInvested.innerText = formatUSD(invested);
+    if (elInvested) elInvested.innerText = formatUSD(investedCost);
+
+    // Invested Value (Real-time)
+    const elInvestedCurrent = document.getElementById('bot-a-invested-current');
+    if (elInvestedCurrent) elInvestedCurrent.innerText = formatUSD(investedCurrent);
+
+    // Floating P&L
+    const elFloatingPnl = document.getElementById('bot-a-floating-pnl');
+    if (elFloatingPnl) {
+        const unrealized = investedCurrent - investedCost;
+        const color = unrealized >= 0 ? '#2ecc71' : '#e74c3c';
+        const sign = unrealized >= 0 ? '+' : '';
+        elFloatingPnl.innerHTML = `<span style="color: ${color}; font-weight: bold;">${sign}${formatUSD(unrealized)}</span>`;
+    }
     
     // Active Positions Count
     const elPositions = document.getElementById('bot-a-positions');

@@ -79,15 +79,23 @@ import Layout from '../../layouts/Layout.astro';
               <span class="value" id="usdt-balance">$200.00</span>
             </div>
             <div class="stat-row">
-              <span class="label">Invested in Coins</span>
+              <span class="label">Invested in Coins (Cost Basis)</span>
               <span class="value" id="invested-balance">$0.00</span>
             </div>
+            <div class="stat-row">
+              <span class="label">Invested in Coins (Real-time Value)</span>
+              <span class="value" id="invested-current-balance" style="font-weight: bold; color: var(--accent-blue);">$0.00</span>
+            </div>
+            <div class="stat-row">
+              <span class="label">Floating P&amp;L (Mengambang)</span>
+              <span class="value" id="floating-pnl-val" style="font-weight: bold;">$0.00</span>
+            </div>
             <div class="stat-row" style="border-top: 1.5px solid var(--border-color); padding-top: 8px; margin-top: 8px;">
-              <span class="label" style="font-weight: bold; color: var(--text-primary);">Total Account Equity</span>
+              <span class="label" style="font-weight: bold; color: var(--text-primary);">Total Account Equity (Real-time)</span>
               <span class="value" id="total-equity-val" style="font-weight: bold; font-size: 1.1em;">$200.00</span>
             </div>
             <div class="stat-row">
-              <span class="label" style="font-weight: bold; color: var(--text-primary);">Overall Net P&amp;L</span>
+              <span class="label" style="font-weight: bold; color: var(--text-primary);">Overall Net P&amp;L (Real-time)</span>
               <span class="value" id="pnl-value" style="font-weight: bold; font-size: 1.1em;">$0.00 (0.00%)</span>
             </div>
           </div>
@@ -517,30 +525,41 @@ import Layout from '../../layouts/Layout.astro';
 
             // Update account balance details dynamically
             const usdt = data.simulated_balance || 0;
-            let invested = 0;
+            let investedCost = 0;
+            let investedCurrent = 0;
             let unrealizedPnl = 0;
 
             if (data.coin_states) {
                 for (const coin of data.coin_states) {
                     if (coin.position) {
                         const cost = coin.position.buy_price * coin.position.amount;
-                        invested += cost;
-                        unrealizedPnl += (coin.price - coin.position.buy_price) * coin.position.amount;
+                        const currentVal = coin.price * coin.position.amount;
+                        investedCost += cost;
+                        investedCurrent += currentVal;
+                        unrealizedPnl += (currentVal - cost);
                     }
                 }
             }
 
-            const totalEquity = usdt + invested;
+            const totalEquity = usdt + investedCurrent;
             const pnlAbsolute = totalEquity - 200.0;
             const pnlPercentage = (pnlAbsolute / 200.0) * 100.0;
 
             const elUsdt = document.getElementById('usdt-balance');
             const elInvested = document.getElementById('invested-balance');
+            const elInvestedCurrent = document.getElementById('invested-current-balance');
+            const elFloatingPnl = document.getElementById('floating-pnl-val');
             const elTotal = document.getElementById('total-equity-val');
             const elPnl = document.getElementById('pnl-value');
 
             if (elUsdt) elUsdt.innerText = fmtUSD(usdt);
-            if (elInvested) elInvested.innerText = fmtUSD(invested);
+            if (elInvested) elInvested.innerText = fmtUSD(investedCost);
+            if (elInvestedCurrent) elInvestedCurrent.innerText = fmtUSD(investedCurrent);
+            if (elFloatingPnl) {
+                const prefix = unrealizedPnl >= 0 ? '+' : '';
+                elFloatingPnl.innerText = `${prefix}${fmtUSD(unrealizedPnl)}`;
+                elFloatingPnl.style.color = unrealizedPnl >= 0 ? 'var(--accent-green)' : 'var(--accent-red)';
+            }
             if (elTotal) elTotal.innerText = fmtUSD(totalEquity);
             if (elPnl) {
                 const prefix = pnlAbsolute >= 0 ? '+' : '';

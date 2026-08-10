@@ -18,7 +18,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="bot-status-badge">BINANCE SPOT</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Total Account Equity</span>
+                    <span class="label">Total Account Equity (Real-time)</span>
                     <span class="value-large" id="bot-a-equity">$-</span>
                 </div>
                 <div class="stat-row">
@@ -26,8 +26,16 @@ import Layout from '../layouts/Layout.astro';
                     <span class="value" id="bot-a-usdt">$-</span>
                 </div>
                 <div class="stat-row">
-                    <span class="label">Invested in Coins</span>
+                    <span class="label">Invested in Coins (Cost Basis)</span>
                     <span class="value" id="bot-a-invested">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Invested in Coins (Real-time)</span>
+                    <span class="value" id="bot-a-invested-current" style="font-weight: bold; color: var(--accent-blue);">$-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">Floating P&amp;L (Mengambang)</span>
+                    <span class="value" id="bot-a-floating-pnl" style="font-weight: bold;">$-</span>
                 </div>
                 <div class="stat-row">
                     <span class="label">Active Trade Positions</span>
