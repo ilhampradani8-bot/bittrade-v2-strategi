@@ -414,7 +414,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
 
             // Kita kumpulkan koin yang harganya valid (> 0.0)
-            let coins_to_analyze: Vec<(String, f64, String)> = {
+            let mut coins_to_analyze: Vec<(String, f64, String)> = {
                 let map = worker_state.coin_states.read().await;
                 let mut list: Vec<CoinState> = map.values().cloned().collect();
                 // Filter volume >= 1,000,000 USDT
@@ -427,6 +427,25 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     .map(|c| (c.symbol, c.price, c.volatility_category))
                     .collect()
             };
+
+            // Tambahkan semua koin yang sedang di-hold agar dijamin terpantau untuk EXIT
+            let held_symbols: Vec<String> = sqlx::query_scalar(
+                "SELECT DISTINCT symbol FROM bot_active_positions"
+            )
+            .fetch_all(&worker_state.db)
+            .await
+            .unwrap_or_default();
+
+            {
+                let map = worker_state.coin_states.read().await;
+                for sym in held_symbols {
+                    if !coins_to_analyze.iter().any(|(s, _, _)| s == &sym) {
+                        if let Some(c) = map.get(&sym) {
+                            coins_to_analyze.push((c.symbol.clone(), c.price, c.volatility_category.clone()));
+                        }
+                    }
+                }
+            }
 
             *worker_state.last_conclude_activity.write().await = chrono::Utc::now();
             *worker_state.last_validate_activity.write().await = chrono::Utc::now();
